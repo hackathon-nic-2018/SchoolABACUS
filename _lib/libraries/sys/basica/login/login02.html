@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        
+        <title>Iniciar</title>
+        
+        
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="{SC_LIB_CURRENT}login/css/login.css">
+		<!--SC_JS_LIB-->
+		<!--SC_PAGE_CHARSET-->
+    </head>
+
+	<body class="page-background" style="background-image:url('{SC_LIB_CURRENT}login/img/bg_tropical.jpg');">
+        <div class="page">
+            <div class="container">
+                
+                <form class="form form-center" action="" {SC_FORM_ATTR}>
+                    <!--SC_FORM_HIDDEN-->
+                    <h2>
+                        
+                    </h2>
+                    <div class="control">
+                        <label class="label" for="name">Usuario</label>
+                        <input class="input {SC_FIELD_CLASS}" type="text" placeholder="Usuario" {SC_FIELD_INFO_login}>
+                    </div>
+                    <div class="control">
+                        <label class="label" for="pass">Contraseña</label>
+                        <input class="input {SC_FIELD_CLASS}" type="password" placeholder="Contraseña" {SC_FIELD_INFO_pswd}>
+                    </div>
+                    <div class="submit">
+                        <input class="button" type="submit" {SC_FORM_SUBMIT_CALL} value="Aceptar"  />
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+        </div>
+    </body>
+</html>
