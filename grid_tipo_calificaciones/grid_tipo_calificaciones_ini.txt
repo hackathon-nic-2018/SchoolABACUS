@@ -1,0 +1,7 @@
+index.php
+school_abacus
+grid_tipo_calificaciones
+NAO
+cons
+grid_tipo_calificaciones
+LigMd5
