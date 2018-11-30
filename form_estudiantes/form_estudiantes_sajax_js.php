@@ -2643,6 +2643,43 @@ sajax_show_javascript();
     scAjaxSetFocus();
   } // do_ajax_form_estudiantes_validate_fotografia_cb
 
+  // ---------- Validate usuario
+  function do_ajax_form_estudiantes_validate_usuario()
+  {
+    var nomeCampo_usuario = "usuario";
+    var var_usuario = scAjaxGetFieldText(nomeCampo_usuario);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_estudiantes_validate_usuario(var_usuario, var_script_case_init, do_ajax_form_estudiantes_validate_usuario_cb);
+  } // do_ajax_form_estudiantes_validate_usuario
+
+  function do_ajax_form_estudiantes_validate_usuario_cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    sFieldValid = "usuario";
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_estudiantes_validate_usuario_cb
+
   // ---------- Validate codigo_estudiante
   function do_ajax_form_estudiantes_validate_codigo_estudiante()
   {
@@ -3280,6 +3317,7 @@ sajax_show_javascript();
     }
     scAjaxHideMessage();
     var var_fotografia = scAjaxGetFieldText("fotografia");
+    var var_usuario = scAjaxGetFieldText("usuario");
     var var_codigo_estudiante = scAjaxGetFieldText("codigo_estudiante");
     var var_numero_carnet = scAjaxGetFieldText("numero_carnet");
     var var_estatus = scAjaxGetFieldSelect("estatus");
@@ -3309,7 +3347,7 @@ sajax_show_javascript();
     var var_script_case_init = document.F1.script_case_init.value;
     var var_csrf_token = scAjaxGetFieldText("csrf_token");
     scAjaxProcOn();
-    x_ajax_form_estudiantes_submit_form(var_fotografia, var_codigo_estudiante, var_numero_carnet, var_estatus, var_primer_apellido, var_segundo_apellido, var_nombres, var_sexo, var_grado_id, var_fecha_nacimiento, var_fecha_ingreso, var_direccion_linea1, var_direccion_linea2, var_telefono, var_nombre_padre, var_nombre_madre, var_comentarios, var_fotografia_ul_name, var_fotografia_ul_type, var_fotografia_salva, var_fotografia_limpa, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_estudiantes_submit_form_cb);
+    x_ajax_form_estudiantes_submit_form(var_fotografia, var_usuario, var_codigo_estudiante, var_numero_carnet, var_estatus, var_primer_apellido, var_segundo_apellido, var_nombres, var_sexo, var_grado_id, var_fecha_nacimiento, var_fecha_ingreso, var_direccion_linea1, var_direccion_linea2, var_telefono, var_nombre_padre, var_nombre_madre, var_comentarios, var_fotografia_ul_name, var_fotografia_ul_type, var_fotografia_salva, var_fotografia_limpa, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_estudiantes_submit_form_cb);
   } // do_ajax_form_estudiantes_submit_form
 
   function do_ajax_form_estudiantes_submit_form_cb(sResp)
@@ -3333,6 +3371,7 @@ sajax_show_javascript();
       scAjaxShowMessage();
       scAjaxHideErrorDisplay("table");
       scAjaxHideErrorDisplay("fotografia");
+      scAjaxHideErrorDisplay("usuario");
       scAjaxHideErrorDisplay("codigo_estudiante");
       scAjaxHideErrorDisplay("numero_carnet");
       scAjaxHideErrorDisplay("estatus");
@@ -3408,6 +3447,7 @@ if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_estudiantes']['dash
     scAjaxHideMessage();
     scAjaxHideErrorDisplay("table");
     scAjaxHideErrorDisplay("fotografia");
+    scAjaxHideErrorDisplay("usuario");
     scAjaxHideErrorDisplay("codigo_estudiante");
     scAjaxHideErrorDisplay("numero_carnet");
     scAjaxHideErrorDisplay("estatus");
@@ -3573,23 +3613,24 @@ if ($this->Embutida_form)
   var ajax_field_list = new Array();
   var ajax_field_Dt_Hr = new Array();
   ajax_field_list[0] = "fotografia";
-  ajax_field_list[1] = "codigo_estudiante";
-  ajax_field_list[2] = "numero_carnet";
-  ajax_field_list[3] = "estatus";
-  ajax_field_list[4] = "primer_apellido";
-  ajax_field_list[5] = "segundo_apellido";
-  ajax_field_list[6] = "nombres";
-  ajax_field_list[7] = "sexo";
-  ajax_field_list[8] = "grado_id";
-  ajax_field_list[9] = "fecha_nacimiento";
-  ajax_field_list[10] = "fecha_ingreso";
-  ajax_field_list[11] = "direccion_linea1";
-  ajax_field_list[12] = "direccion_linea2";
-  ajax_field_list[13] = "telefono";
-  ajax_field_list[14] = "nombre_padre";
-  ajax_field_list[15] = "nombre_madre";
-  ajax_field_list[16] = "comentarios";
-  ajax_field_list[17] = "padres_estudiante";
+  ajax_field_list[1] = "usuario";
+  ajax_field_list[2] = "codigo_estudiante";
+  ajax_field_list[3] = "numero_carnet";
+  ajax_field_list[4] = "estatus";
+  ajax_field_list[5] = "primer_apellido";
+  ajax_field_list[6] = "segundo_apellido";
+  ajax_field_list[7] = "nombres";
+  ajax_field_list[8] = "sexo";
+  ajax_field_list[9] = "grado_id";
+  ajax_field_list[10] = "fecha_nacimiento";
+  ajax_field_list[11] = "fecha_ingreso";
+  ajax_field_list[12] = "direccion_linea1";
+  ajax_field_list[13] = "direccion_linea2";
+  ajax_field_list[14] = "telefono";
+  ajax_field_list[15] = "nombre_padre";
+  ajax_field_list[16] = "nombre_madre";
+  ajax_field_list[17] = "comentarios";
+  ajax_field_list[18] = "padres_estudiante";
 
   var ajax_block_list = new Array();
   ajax_block_list[0] = "0";
@@ -3598,6 +3639,7 @@ if ($this->Embutida_form)
 
   var ajax_error_list = {
     "fotografia": {"label": "Fotografia", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
+    "usuario": {"label": "Usuario", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "codigo_estudiante": {"label": "Codigo Estudiante", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "numero_carnet": {"label": "Numero Carnet", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
     "estatus": {"label": "Estatus", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5},
@@ -3632,6 +3674,7 @@ if ($this->Embutida_form)
 
   var ajax_field_mult = {
     "fotografia": new Array(),
+    "usuario": new Array(),
     "codigo_estudiante": new Array(),
     "numero_carnet": new Array(),
     "estatus": new Array(),
@@ -3651,6 +3694,7 @@ if ($this->Embutida_form)
     "padres_estudiante": new Array()
   };
   ajax_field_mult["fotografia"][1] = "fotografia";
+  ajax_field_mult["usuario"][1] = "usuario";
   ajax_field_mult["codigo_estudiante"][1] = "codigo_estudiante";
   ajax_field_mult["numero_carnet"][1] = "numero_carnet";
   ajax_field_mult["estatus"][1] = "estatus";
@@ -3671,6 +3715,7 @@ if ($this->Embutida_form)
 
   var ajax_field_id = {
     "fotografia": new Array("hidden_field_label_fotografia", "hidden_field_data_fotografia"),
+    "usuario": new Array("hidden_field_label_usuario", "hidden_field_data_usuario"),
     "codigo_estudiante": new Array("hidden_field_label_codigo_estudiante", "hidden_field_data_codigo_estudiante"),
     "numero_carnet": new Array("hidden_field_label_numero_carnet", "hidden_field_data_numero_carnet"),
     "estatus": new Array("hidden_field_label_estatus", "hidden_field_data_estatus"),
@@ -3692,6 +3737,7 @@ if ($this->Embutida_form)
 
   var ajax_read_only = {
     "fotografia": "off",
+    "usuario": "off",
     "codigo_estudiante": "off",
     "numero_carnet": "off",
     "estatus": "off",
@@ -3722,6 +3768,23 @@ if ($this->Embutida_form)
     aValue[0] = {"value" : sValue};
     if ("fotografia" == sIndex)
     {
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("usuario" == sIndex)
+    {
+      scAjaxSetFieldText(sIndex, aValue, "", "", true);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {

@@ -282,7 +282,7 @@ class form_estudiantes_mob_ini
       $this->nm_hr_criacao   = "201453"; 
       $this->nm_autor_alt    = "erick"; 
       $this->nm_dt_ult_alt   = "20181130"; 
-      $this->nm_hr_ult_alt   = "014848"; 
+      $this->nm_hr_ult_alt   = "041811"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -833,7 +833,7 @@ class form_estudiantes_mob_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBiDQFGHANKV5BqHgrKVcFCDWXCHIBiHQNmH9B/HAzGD5BqDMzGHArCDuJeHIJwHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoX7HQJmZ1F7Z1vmD5rqDEBOHArCDWF/DoraHQNmZ9XGDSBYD5F7DMBYV9FeDuFqDoraD9XOZkBiHABYZMXGDMveVkJ3V5FqZuJsHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDoraD9XOZ1X7Z1BeD5F7DErKVkXeV5FaVoBiD9FYH9X7HABYHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BqDEBOZSJGDWr/VoFGDcXOZSX7HABYV5BqHuBYVcrsDWFYDoNUD9JmZ1B/HABYV5FUDEvsHEFiDWFqDoXGDcXOZSX7Z1BYV5JwHgvsZSrCV5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHINaVWJsHuvmVIBODuX7VEX7D9BiZ1BiHABYHuFUHgrKZSXeDWFqZuFaHQXsZSFGHAN7HuFaHuNOZSrCH5FqDoXGHQJmZ1FGZ1vOZMJwHgNOHEJqDuJeHIJwHQXOH9BiHAvCD5F7DMBOV9FeH5FqHMBODcFYZ1BiHAvCV5X7DMveHEJqDWr/HIJeHQNmDuFaHAvCD5F7DMrYVIBsDuX7HMraDcFYZkBiHAvCD5rqDEBOHEFiHEFqDoF7DcJUZSBiHIvsVWFaDMBYVcFeV5X/VEraDcNmZSBqDSBOV5X7HgBOZSJqH5F/HIrqHQBiZSFUHANKD5F7DMBYVcFeV5BmVoFGDcFYZ1FGHINaV5X7HgBeHArsDWrGZuFaHQXsZSBiHAvOV5FGHuNOVcFKHEFYVoBqDcBwH9BqDSvOZMJwHgNOZSJqDWXCHMBqHQXsZSFUHAvmD5F7DMvsVcB/H5FqHINUHQBqZ1BiHAvCV5X7HgNOVkJ3DWX7HIBOHQJKZ9F7DSzGD5F7HgvOV9FeDur/HIJeDcFYZ1X7HAzGD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgBeDkB/HEB3DoB/HQNmH9X7HABYVWJsDMBYVcBODWFaDoFUDcJUZkFUZ1BeZMBqHgBYHAFKV5FaZuBqD9NmZSFGHIrwV5BOHuNODkBOV5X7VENUHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/HIBeD5XGDEvsHEJGDWF/DoB/DcJeDQX7HANOV5FUHgvsDkFCDWFYVoFGHQJmZ1F7Z1vmD5rqDEBOHArCDWBmDoJeHQBiDQBqHAvOVWBODMvOV9BUDWXKVoFGHQNmZ1FGHArKV5FUDMrYZSXeV5FqHIJsD9NmDuFaD1veV5FGHuNOVcFCDWFaHIJeD9XGZ1F7DSvOZMJeHgBeHEFiV5B3DoF7D9XsDuFaHAveHuBiHuzGVIBODWFaDoJsDcBqH9B/DSrYD5JeDMBYZSXeV5XKDoNUHQFYDQJsHABYD5NUHgvsV9FeDWXCDoJsDcBwH9B/Z1rYHQJwHgBYHAFKV5B3DoBO";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXGZSFGHAveHQXGDMNOVIB/DWXCHMFaD9BsH9FaHArKD5XGDErKZSJGDWr/ZuJsD9XsH9FUDSN7HuFaHuNOZSrCH5FqDoXGHQJmZ1BiHABYHuBOHgBYVkJqDWX7HIJeHQJKDuBqHAN7HuBiDMrwVcB/DWFaHMXGHQXOZ1X7D1vsD5XGHgvCHEJqHEFqHMX7DcBiDQFaZ1BYHuBiDMrwV9BUDWF/HMB/DcFYZ1BOD1zGD5XGDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuX7DMvsVIBsDuFqHIF7HQNwZ1BODSNOHuFaHgvCHArCDuFaHMBiHQNwDQBqD1BeHQFaDMrwV9FeDuFqHIX7HQNmH9BOD1rKHuBqHgvCHArCDWFGDoJeHQXODQFaHIrwHuB/HgNKDkBODuFqDoFGDcBqVIJwD1rwHQrqHgBYVkJqH5FYHIBOHQNmDuFaHIrwHQrqDMrwV9BUHEFYHIXGHQXOVINUHINKD5XGHgvCHEJqDWr/HIJwDcXGH9BiD1BOVWBqDMrwVcB/HEFYHMBOHQXGZSBOD1rKHuJsDMrYZSXeDuFYVoXGDcJeZ9rqD1BeV5BqHgvsDkB/V5X7VorqDcBqZ1FaD1rKV5XGDMNKZSJ3H5X/ZuJsHQXGZSBiZ1N7D5JwHuBYVcFeV5FYVoB/D9JmH9B/D1zGD5FaDEvsDkXKHEB7DoB/D9NmZSFGHIrwVWXGHuzGVIBOV5X7VoraD9BiZ1FUZ1BeD5JeDMBYZSJGDWr/VoXGD9NwDQJwD1veV5FGHgvsVcFCH5FqDoraHQFYVIJwD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuvmVcFKV5X7VoFGD9BiZ1X7Z1BeV5BODErKVkJGDWFqDoBOD9XsZSX7HArYV5X7HgvsVcBOH5FqVEraD9XOH9BqHArKV5FUDMrYZSXeV5FqHIJsDcJeH9FUHAveV5FUDMBYVIBsDWFaVoBODcJUZkBiHAN7HuXGHgBOVkJqDWr/VoBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcJUZSB/Z1BeD5XGDEBOHEJqV5FaVoB/D9NwZSFGD1veVWJwHgrKVcFKHEFYVoB/D9BsZSFaD1rKV5FaDErKZSJqV5FaVoFGD9XsZSX7HAvmD5NUHuzGVcFKDur/VorqHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFKDuB7VEX7D9JmH9BqDSNOV5JeDEBOVkJ3V5FqVoXGHQXsDQFaDSrwHQJwDMrYV9FeHEFGVorqHQJmZSB/HABYHQJwDEBODkFeH5FYVoFGHQJKDQJsHABYV5JeHgrYDkBODWJeVoX7D9BsH9B/Z1NOZMJwDMzGHArCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOZSNiDWB3VoF7HQBqZ1BiHAzGD5BOHgveDkB/DWF/HIJsD9XsZ9JeD1BeD5F7DMvmVcFeDuX7VEFGHQNwZSFaHArYD5XGHgNOVkXeHEXCHINUHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMFaD9XOZSB/HABYV5FUDMBYZSXeHEFqDoXGDcJeZSX7Z1NaV5BiDMBOVcFKDWFYDoJsDcBqZkFGHArKV5FUDMrYZSXeV5FqHIJsHQJeDuBOZ1vCV5Je";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1458,6 +1458,11 @@ ob_start();
             $fotografia = NM_utf8_urldecode($_POST['rsargs'][0]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
         }
+        if ('ajax_form_estudiantes_mob_validate_usuario' == $_POST['rs'])
+        {
+            $usuario = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][1]);
+        }
         if ('ajax_form_estudiantes_mob_validate_codigo_estudiante' == $_POST['rs'])
         {
             $codigo_estudiante = NM_utf8_urldecode($_POST['rsargs'][0]);
@@ -1546,36 +1551,37 @@ ob_start();
         if ('ajax_form_estudiantes_mob_submit_form' == $_POST['rs'])
         {
             $fotografia = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $codigo_estudiante = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $numero_carnet = NM_utf8_urldecode($_POST['rsargs'][2]);
-            $estatus = NM_utf8_urldecode($_POST['rsargs'][3]);
-            $primer_apellido = NM_utf8_urldecode($_POST['rsargs'][4]);
-            $segundo_apellido = NM_utf8_urldecode($_POST['rsargs'][5]);
-            $nombres = NM_utf8_urldecode($_POST['rsargs'][6]);
-            $sexo = NM_utf8_urldecode($_POST['rsargs'][7]);
-            $grado_id = NM_utf8_urldecode($_POST['rsargs'][8]);
-            $fecha_nacimiento = NM_utf8_urldecode($_POST['rsargs'][9]);
-            $fecha_ingreso = NM_utf8_urldecode($_POST['rsargs'][10]);
-            $direccion_linea1 = NM_utf8_urldecode($_POST['rsargs'][11]);
-            $direccion_linea2 = NM_utf8_urldecode($_POST['rsargs'][12]);
-            $telefono = NM_utf8_urldecode($_POST['rsargs'][13]);
-            $nombre_padre = NM_utf8_urldecode($_POST['rsargs'][14]);
-            $nombre_madre = NM_utf8_urldecode($_POST['rsargs'][15]);
-            $comentarios = NM_utf8_urldecode($_POST['rsargs'][16]);
-            $colegio_id = NM_utf8_urldecode($_POST['rsargs'][17]);
-            $estudiante_id = NM_utf8_urldecode($_POST['rsargs'][18]);
-            $fotografia_ul_name = NM_utf8_urldecode($_POST['rsargs'][19]);
-            $fotografia_ul_type = NM_utf8_urldecode($_POST['rsargs'][20]);
-            $fotografia_salva = NM_utf8_urldecode($_POST['rsargs'][21]);
-            $fotografia_limpa = NM_utf8_urldecode($_POST['rsargs'][22]);
-            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][23]);
-            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][24]);
-            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][25]);
-            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][26]);
-            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][27]);
-            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][28]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][29]);
-            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][30]);
+            $usuario = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $codigo_estudiante = NM_utf8_urldecode($_POST['rsargs'][2]);
+            $numero_carnet = NM_utf8_urldecode($_POST['rsargs'][3]);
+            $estatus = NM_utf8_urldecode($_POST['rsargs'][4]);
+            $primer_apellido = NM_utf8_urldecode($_POST['rsargs'][5]);
+            $segundo_apellido = NM_utf8_urldecode($_POST['rsargs'][6]);
+            $nombres = NM_utf8_urldecode($_POST['rsargs'][7]);
+            $sexo = NM_utf8_urldecode($_POST['rsargs'][8]);
+            $grado_id = NM_utf8_urldecode($_POST['rsargs'][9]);
+            $fecha_nacimiento = NM_utf8_urldecode($_POST['rsargs'][10]);
+            $fecha_ingreso = NM_utf8_urldecode($_POST['rsargs'][11]);
+            $direccion_linea1 = NM_utf8_urldecode($_POST['rsargs'][12]);
+            $direccion_linea2 = NM_utf8_urldecode($_POST['rsargs'][13]);
+            $telefono = NM_utf8_urldecode($_POST['rsargs'][14]);
+            $nombre_padre = NM_utf8_urldecode($_POST['rsargs'][15]);
+            $nombre_madre = NM_utf8_urldecode($_POST['rsargs'][16]);
+            $comentarios = NM_utf8_urldecode($_POST['rsargs'][17]);
+            $colegio_id = NM_utf8_urldecode($_POST['rsargs'][18]);
+            $estudiante_id = NM_utf8_urldecode($_POST['rsargs'][19]);
+            $fotografia_ul_name = NM_utf8_urldecode($_POST['rsargs'][20]);
+            $fotografia_ul_type = NM_utf8_urldecode($_POST['rsargs'][21]);
+            $fotografia_salva = NM_utf8_urldecode($_POST['rsargs'][22]);
+            $fotografia_limpa = NM_utf8_urldecode($_POST['rsargs'][23]);
+            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][24]);
+            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][25]);
+            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][26]);
+            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][27]);
+            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][28]);
+            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][29]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][30]);
+            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][31]);
         }
         if ('ajax_form_estudiantes_mob_navigate_form' == $_POST['rs'])
         {
@@ -2064,6 +2070,7 @@ ob_start();
     sajax_init();
     //$sajax_debug_mode = 1;
     sajax_export("ajax_form_estudiantes_mob_validate_fotografia");
+    sajax_export("ajax_form_estudiantes_mob_validate_usuario");
     sajax_export("ajax_form_estudiantes_mob_validate_codigo_estudiante");
     sajax_export("ajax_form_estudiantes_mob_validate_numero_carnet");
     sajax_export("ajax_form_estudiantes_mob_validate_estatus");
@@ -2125,6 +2132,25 @@ ob_start();
         $inicial_form_estudiantes_mob->contr_form_estudiantes_mob->controle();
         exit;
     } // ajax_validate_fotografia
+
+    function ajax_form_estudiantes_mob_validate_usuario($usuario, $script_case_init)
+    {
+        global $inicial_form_estudiantes_mob;
+        //register_shutdown_function("form_estudiantes_mob_pack_ajax_response");
+        $inicial_form_estudiantes_mob->contr_form_estudiantes_mob->NM_ajax_flag          = true;
+        $inicial_form_estudiantes_mob->contr_form_estudiantes_mob->NM_ajax_opcao         = 'validate_usuario';
+        $inicial_form_estudiantes_mob->contr_form_estudiantes_mob->NM_ajax_info['param'] = array(
+                  'usuario' => NM_utf8_urldecode($usuario),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_estudiantes_mob->contr_form_estudiantes_mob->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_estudiantes_mob->contr_form_estudiantes_mob->controle();
+        exit;
+    } // ajax_validate_usuario
 
     function ajax_form_estudiantes_mob_validate_codigo_estudiante($codigo_estudiante, $script_case_init)
     {
@@ -2449,7 +2475,7 @@ ob_start();
         exit;
     } // ajax_validate_padres_estudiante
 
-    function ajax_form_estudiantes_mob_submit_form($fotografia, $codigo_estudiante, $numero_carnet, $estatus, $primer_apellido, $segundo_apellido, $nombres, $sexo, $grado_id, $fecha_nacimiento, $fecha_ingreso, $direccion_linea1, $direccion_linea2, $telefono, $nombre_padre, $nombre_madre, $comentarios, $colegio_id, $estudiante_id, $fotografia_ul_name, $fotografia_ul_type, $fotografia_salva, $fotografia_limpa, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
+    function ajax_form_estudiantes_mob_submit_form($fotografia, $usuario, $codigo_estudiante, $numero_carnet, $estatus, $primer_apellido, $segundo_apellido, $nombres, $sexo, $grado_id, $fecha_nacimiento, $fecha_ingreso, $direccion_linea1, $direccion_linea2, $telefono, $nombre_padre, $nombre_madre, $comentarios, $colegio_id, $estudiante_id, $fotografia_ul_name, $fotografia_ul_type, $fotografia_salva, $fotografia_limpa, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
     {
         global $inicial_form_estudiantes_mob;
         //register_shutdown_function("form_estudiantes_mob_pack_ajax_response");
@@ -2457,6 +2483,7 @@ ob_start();
         $inicial_form_estudiantes_mob->contr_form_estudiantes_mob->NM_ajax_opcao         = 'submit_form';
         $inicial_form_estudiantes_mob->contr_form_estudiantes_mob->NM_ajax_info['param'] = array(
                   'fotografia' => NM_utf8_urldecode($fotografia),
+                  'usuario' => NM_utf8_urldecode($usuario),
                   'codigo_estudiante' => NM_utf8_urldecode($codigo_estudiante),
                   'numero_carnet' => NM_utf8_urldecode($numero_carnet),
                   'estatus' => NM_utf8_urldecode($estatus),

@@ -77,6 +77,7 @@ class form_estudiantes_mob_apl
    var $nombre_padre;
    var $nombre_madre;
    var $comentarios;
+   var $usuario;
    var $padres_estudiante;
    var $nm_data;
    var $nmgp_opcao;
@@ -268,6 +269,10 @@ class form_estudiantes_mob_apl
           if (isset($this->NM_ajax_info['param']['telefono']))
           {
               $this->telefono = $this->NM_ajax_info['param']['telefono'];
+          }
+          if (isset($this->NM_ajax_info['param']['usuario']))
+          {
+              $this->usuario = $this->NM_ajax_info['param']['usuario'];
           }
           if (isset($this->nmgp_refresh_fields))
           {
@@ -1187,6 +1192,7 @@ class form_estudiantes_mob_apl
       if (isset($this->telefono)) { $this->nm_limpa_alfa($this->telefono); }
       if (isset($this->nombre_padre)) { $this->nm_limpa_alfa($this->nombre_padre); }
       if (isset($this->nombre_madre)) { $this->nm_limpa_alfa($this->nombre_madre); }
+      if (isset($this->usuario)) { $this->nm_limpa_alfa($this->usuario); }
       if (isset($this->padres_estudiante)) { $this->nm_limpa_alfa($this->padres_estudiante); }
       $Campos_Crit       = "";
       $Campos_erro       = "";
@@ -1267,6 +1273,10 @@ class form_estudiantes_mob_apl
           if ('validate_fotografia' == $this->NM_ajax_opcao)
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'fotografia');
+          }
+          if ('validate_usuario' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'usuario');
           }
           if ('validate_codigo_estudiante' == $this->NM_ajax_opcao)
           {
@@ -1670,6 +1680,9 @@ class form_estudiantes_mob_apl
            case 'fotografia':
                return "Fotografia";
                break;
+           case 'usuario':
+               return "Usuario";
+               break;
            case 'codigo_estudiante':
                return "Codigo Estudiante";
                break;
@@ -1774,6 +1787,8 @@ class form_estudiantes_mob_apl
      }
       if ('' == $filtro || 'fotografia' == $filtro)
         $this->ValidateField_fotografia($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ('' == $filtro || 'usuario' == $filtro)
+        $this->ValidateField_usuario($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $filtro || 'codigo_estudiante' == $filtro)
         $this->ValidateField_codigo_estudiante($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $filtro || 'numero_carnet' == $filtro)
@@ -1848,6 +1863,28 @@ class form_estudiantes_mob_apl
         }
     } // ValidateField_fotografia
 
+    function ValidateField_usuario(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          if (NM_utf8_strlen($this->usuario) > 100) 
+          { 
+              $Campos_Crit .= "Usuario " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 100 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['usuario']))
+              {
+                  $Campos_Erros['usuario'] = array();
+              }
+              $Campos_Erros['usuario'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 100 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['usuario']) || !is_array($this->NM_ajax_info['errList']['usuario']))
+              {
+                  $this->NM_ajax_info['errList']['usuario'] = array();
+              }
+              $this->NM_ajax_info['errList']['usuario'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 100 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+          } 
+      } 
+    } // ValidateField_usuario
+
     function ValidateField_codigo_estudiante(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
@@ -1870,19 +1907,19 @@ class form_estudiantes_mob_apl
       } 
       if ($this->nmgp_opcao != "excluir") 
       { 
-          if (NM_utf8_strlen($this->codigo_estudiante) > 15) 
+          if (NM_utf8_strlen($this->codigo_estudiante) > 25) 
           { 
-              $Campos_Crit .= "Codigo Estudiante " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 15 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              $Campos_Crit .= "Codigo Estudiante " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 25 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
               if (!isset($Campos_Erros['codigo_estudiante']))
               {
                   $Campos_Erros['codigo_estudiante'] = array();
               }
-              $Campos_Erros['codigo_estudiante'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 15 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              $Campos_Erros['codigo_estudiante'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 25 " . $this->Ini->Nm_lang['lang_errm_nchr'];
               if (!isset($this->NM_ajax_info['errList']['codigo_estudiante']) || !is_array($this->NM_ajax_info['errList']['codigo_estudiante']))
               {
                   $this->NM_ajax_info['errList']['codigo_estudiante'] = array();
               }
-              $this->NM_ajax_info['errList']['codigo_estudiante'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 15 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              $this->NM_ajax_info['errList']['codigo_estudiante'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 25 " . $this->Ini->Nm_lang['lang_errm_nchr'];
           } 
       } 
     } // ValidateField_codigo_estudiante
@@ -2489,6 +2526,7 @@ class form_estudiantes_mob_apl
     }
     $this->nmgp_dados_form['fotografia'] = $this->fotografia;
     $this->nmgp_dados_form['fotografia_limpa'] = $this->fotografia_limpa;
+    $this->nmgp_dados_form['usuario'] = $this->usuario;
     $this->nmgp_dados_form['codigo_estudiante'] = $this->codigo_estudiante;
     $this->nmgp_dados_form['numero_carnet'] = $this->numero_carnet;
     $this->nmgp_dados_form['estatus'] = $this->estatus;
@@ -3052,6 +3090,7 @@ class form_estudiantes_mob_apl
    function ajax_return_values()
    {
           $this->ajax_return_values_fotografia();
+          $this->ajax_return_values_usuario();
           $this->ajax_return_values_codigo_estudiante();
           $this->ajax_return_values_numero_carnet();
           $this->ajax_return_values_estatus();
@@ -3170,6 +3209,22 @@ class form_estudiantes_mob_apl
                'imgOrig' => $out1_fotografia,
                'keepImg' => $sKeepImage,
                'hideName' => 'S',
+              );
+          }
+   }
+
+          //----- usuario
+   function ajax_return_values_usuario($bForce = false)
+   {
+          if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("usuario", $this->nmgp_refresh_fields)) || $bForce)
+          {
+              $sTmpValue = NM_charset_to_utf8($this->usuario);
+              $aLookup = array();
+          $aLookupOrig = $aLookup;
+          $this->NM_ajax_info['fldList']['usuario'] = array(
+                       'row'    => '',
+               'type'    => 'text',
+               'valList' => array($this->form_encode_input($sTmpValue)),
               );
           }
    }
@@ -3962,6 +4017,7 @@ $_SESSION['scriptcase']['form_estudiantes_mob']['contr_erro'] = 'off';
       } 
       if ('incluir' == $this->nmgp_opcao && empty($this->colegio_id)) {$this->colegio_id = "" . $_SESSION['vglo_colegio'] . ""; $NM_val_null[] = "colegio_id";}  
       $NM_val_form['fotografia'] = $this->fotografia;
+      $NM_val_form['usuario'] = $this->usuario;
       $NM_val_form['codigo_estudiante'] = $this->codigo_estudiante;
       $NM_val_form['numero_carnet'] = $this->numero_carnet;
       $NM_val_form['estatus'] = $this->estatus;
@@ -4105,6 +4161,13 @@ $_SESSION['scriptcase']['form_estudiantes_mob']['contr_erro'] = 'off';
               $this->comentarios = "null"; 
               $NM_val_null[] = "comentarios";
           } 
+          $this->usuario_before_qstr = $this->usuario;
+          $this->usuario = substr($this->Db->qstr($this->usuario), 1, -1); 
+          if ($this->usuario == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
+          { 
+              $this->usuario = "null"; 
+              $NM_val_null[] = "usuario";
+          } 
           $this->padres_estudiante_before_qstr = $this->padres_estudiante;
           $this->padres_estudiante = substr($this->Db->qstr($this->padres_estudiante), 1, -1); 
           if ($this->padres_estudiante == "" && in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))  
@@ -4178,31 +4241,31 @@ $_SESSION['scriptcase']['form_estudiantes_mob']['contr_erro'] = 'off';
               $rs1->Close(); 
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
-                  $comando = "UPDATE " . $this->Ini->nm_tabela . " SET codigo_estudiante = '$this->codigo_estudiante', numero_carnet = '$this->numero_carnet', estatus = '$this->estatus', primer_apellido = '$this->primer_apellido', segundo_apellido = '$this->segundo_apellido', nombres = '$this->nombres', sexo = '$this->sexo', fecha_nacimiento = #$this->fecha_nacimiento#, fecha_ingreso = #$this->fecha_ingreso#, grado_id = $this->grado_id, direccion_linea1 = '$this->direccion_linea1', direccion_linea2 = '$this->direccion_linea2', telefono = '$this->telefono', nombre_padre = '$this->nombre_padre', nombre_madre = '$this->nombre_madre', comentarios = '$this->comentarios'";  
+                  $comando = "UPDATE " . $this->Ini->nm_tabela . " SET codigo_estudiante = '$this->codigo_estudiante', numero_carnet = '$this->numero_carnet', estatus = '$this->estatus', primer_apellido = '$this->primer_apellido', segundo_apellido = '$this->segundo_apellido', nombres = '$this->nombres', sexo = '$this->sexo', fecha_nacimiento = #$this->fecha_nacimiento#, fecha_ingreso = #$this->fecha_ingreso#, grado_id = $this->grado_id, direccion_linea1 = '$this->direccion_linea1', direccion_linea2 = '$this->direccion_linea2', telefono = '$this->telefono', nombre_padre = '$this->nombre_padre', nombre_madre = '$this->nombre_madre', comentarios = '$this->comentarios', usuario = '$this->usuario'";  
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
-                  $comando = "UPDATE " . $this->Ini->nm_tabela . " SET codigo_estudiante = '$this->codigo_estudiante', numero_carnet = '$this->numero_carnet', estatus = '$this->estatus', primer_apellido = '$this->primer_apellido', segundo_apellido = '$this->segundo_apellido', nombres = '$this->nombres', sexo = '$this->sexo', fecha_nacimiento = " . $this->Ini->date_delim . $this->fecha_nacimiento . $this->Ini->date_delim1 . ", fecha_ingreso = " . $this->Ini->date_delim . $this->fecha_ingreso . $this->Ini->date_delim1 . ", grado_id = $this->grado_id, direccion_linea1 = '$this->direccion_linea1', direccion_linea2 = '$this->direccion_linea2', telefono = '$this->telefono', nombre_padre = '$this->nombre_padre', nombre_madre = '$this->nombre_madre', comentarios = '$this->comentarios'";  
+                  $comando = "UPDATE " . $this->Ini->nm_tabela . " SET codigo_estudiante = '$this->codigo_estudiante', numero_carnet = '$this->numero_carnet', estatus = '$this->estatus', primer_apellido = '$this->primer_apellido', segundo_apellido = '$this->segundo_apellido', nombres = '$this->nombres', sexo = '$this->sexo', fecha_nacimiento = " . $this->Ini->date_delim . $this->fecha_nacimiento . $this->Ini->date_delim1 . ", fecha_ingreso = " . $this->Ini->date_delim . $this->fecha_ingreso . $this->Ini->date_delim1 . ", grado_id = $this->grado_id, direccion_linea1 = '$this->direccion_linea1', direccion_linea2 = '$this->direccion_linea2', telefono = '$this->telefono', nombre_padre = '$this->nombre_padre', nombre_madre = '$this->nombre_madre', comentarios = '$this->comentarios', usuario = '$this->usuario'";  
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               { 
-                  $comando_oracle = "UPDATE " . $this->Ini->nm_tabela . " SET codigo_estudiante = '$this->codigo_estudiante', numero_carnet = '$this->numero_carnet', estatus = '$this->estatus', primer_apellido = '$this->primer_apellido', segundo_apellido = '$this->segundo_apellido', nombres = '$this->nombres', sexo = '$this->sexo', fecha_nacimiento = " . $this->Ini->date_delim . $this->fecha_nacimiento . $this->Ini->date_delim1 . ", fecha_ingreso = " . $this->Ini->date_delim . $this->fecha_ingreso . $this->Ini->date_delim1 . ", grado_id = $this->grado_id, direccion_linea1 = '$this->direccion_linea1', direccion_linea2 = '$this->direccion_linea2', telefono = '$this->telefono', nombre_padre = '$this->nombre_padre', nombre_madre = '$this->nombre_madre', comentarios = '$this->comentarios'";  
+                  $comando_oracle = "UPDATE " . $this->Ini->nm_tabela . " SET codigo_estudiante = '$this->codigo_estudiante', numero_carnet = '$this->numero_carnet', estatus = '$this->estatus', primer_apellido = '$this->primer_apellido', segundo_apellido = '$this->segundo_apellido', nombres = '$this->nombres', sexo = '$this->sexo', fecha_nacimiento = " . $this->Ini->date_delim . $this->fecha_nacimiento . $this->Ini->date_delim1 . ", fecha_ingreso = " . $this->Ini->date_delim . $this->fecha_ingreso . $this->Ini->date_delim1 . ", grado_id = $this->grado_id, direccion_linea1 = '$this->direccion_linea1', direccion_linea2 = '$this->direccion_linea2', telefono = '$this->telefono', nombre_padre = '$this->nombre_padre', nombre_madre = '$this->nombre_madre', comentarios = '$this->comentarios', usuario = '$this->usuario'";  
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               { 
-                  $comando_oracle = "UPDATE " . $this->Ini->nm_tabela . " SET codigo_estudiante = '$this->codigo_estudiante', numero_carnet = '$this->numero_carnet', estatus = '$this->estatus', primer_apellido = '$this->primer_apellido', segundo_apellido = '$this->segundo_apellido', nombres = '$this->nombres', sexo = '$this->sexo', fecha_nacimiento = EXTEND('$this->fecha_nacimiento', YEAR TO DAY), fecha_ingreso = EXTEND('$this->fecha_ingreso', YEAR TO DAY), grado_id = $this->grado_id, direccion_linea1 = '$this->direccion_linea1', direccion_linea2 = '$this->direccion_linea2', telefono = '$this->telefono', nombre_padre = '$this->nombre_padre', nombre_madre = '$this->nombre_madre', comentarios = '$this->comentarios'";  
+                  $comando_oracle = "UPDATE " . $this->Ini->nm_tabela . " SET codigo_estudiante = '$this->codigo_estudiante', numero_carnet = '$this->numero_carnet', estatus = '$this->estatus', primer_apellido = '$this->primer_apellido', segundo_apellido = '$this->segundo_apellido', nombres = '$this->nombres', sexo = '$this->sexo', fecha_nacimiento = EXTEND('$this->fecha_nacimiento', YEAR TO DAY), fecha_ingreso = EXTEND('$this->fecha_ingreso', YEAR TO DAY), grado_id = $this->grado_id, direccion_linea1 = '$this->direccion_linea1', direccion_linea2 = '$this->direccion_linea2', telefono = '$this->telefono', nombre_padre = '$this->nombre_padre', nombre_madre = '$this->nombre_madre', comentarios = '$this->comentarios', usuario = '$this->usuario'";  
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               { 
-                  $comando_oracle = "UPDATE " . $this->Ini->nm_tabela . " SET codigo_estudiante = '$this->codigo_estudiante', numero_carnet = '$this->numero_carnet', estatus = '$this->estatus', primer_apellido = '$this->primer_apellido', segundo_apellido = '$this->segundo_apellido', nombres = '$this->nombres', sexo = '$this->sexo', fecha_nacimiento = " . $this->Ini->date_delim . $this->fecha_nacimiento . $this->Ini->date_delim1 . ", fecha_ingreso = " . $this->Ini->date_delim . $this->fecha_ingreso . $this->Ini->date_delim1 . ", grado_id = $this->grado_id, direccion_linea1 = '$this->direccion_linea1', direccion_linea2 = '$this->direccion_linea2', telefono = '$this->telefono', nombre_padre = '$this->nombre_padre', nombre_madre = '$this->nombre_madre', comentarios = '$this->comentarios'";  
+                  $comando_oracle = "UPDATE " . $this->Ini->nm_tabela . " SET codigo_estudiante = '$this->codigo_estudiante', numero_carnet = '$this->numero_carnet', estatus = '$this->estatus', primer_apellido = '$this->primer_apellido', segundo_apellido = '$this->segundo_apellido', nombres = '$this->nombres', sexo = '$this->sexo', fecha_nacimiento = " . $this->Ini->date_delim . $this->fecha_nacimiento . $this->Ini->date_delim1 . ", fecha_ingreso = " . $this->Ini->date_delim . $this->fecha_ingreso . $this->Ini->date_delim1 . ", grado_id = $this->grado_id, direccion_linea1 = '$this->direccion_linea1', direccion_linea2 = '$this->direccion_linea2', telefono = '$this->telefono', nombre_padre = '$this->nombre_padre', nombre_madre = '$this->nombre_madre', comentarios = '$this->comentarios', usuario = '$this->usuario'";  
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
               { 
-                  $comando_oracle = "UPDATE " . $this->Ini->nm_tabela . " SET codigo_estudiante = '$this->codigo_estudiante', numero_carnet = '$this->numero_carnet', estatus = '$this->estatus', primer_apellido = '$this->primer_apellido', segundo_apellido = '$this->segundo_apellido', nombres = '$this->nombres', sexo = '$this->sexo', fecha_nacimiento = " . $this->Ini->date_delim . $this->fecha_nacimiento . $this->Ini->date_delim1 . ", fecha_ingreso = " . $this->Ini->date_delim . $this->fecha_ingreso . $this->Ini->date_delim1 . ", grado_id = $this->grado_id, direccion_linea1 = '$this->direccion_linea1', direccion_linea2 = '$this->direccion_linea2', telefono = '$this->telefono', nombre_padre = '$this->nombre_padre', nombre_madre = '$this->nombre_madre', comentarios = '$this->comentarios'";  
+                  $comando_oracle = "UPDATE " . $this->Ini->nm_tabela . " SET codigo_estudiante = '$this->codigo_estudiante', numero_carnet = '$this->numero_carnet', estatus = '$this->estatus', primer_apellido = '$this->primer_apellido', segundo_apellido = '$this->segundo_apellido', nombres = '$this->nombres', sexo = '$this->sexo', fecha_nacimiento = " . $this->Ini->date_delim . $this->fecha_nacimiento . $this->Ini->date_delim1 . ", fecha_ingreso = " . $this->Ini->date_delim . $this->fecha_ingreso . $this->Ini->date_delim1 . ", grado_id = $this->grado_id, direccion_linea1 = '$this->direccion_linea1', direccion_linea2 = '$this->direccion_linea2', telefono = '$this->telefono', nombre_padre = '$this->nombre_padre', nombre_madre = '$this->nombre_madre', comentarios = '$this->comentarios', usuario = '$this->usuario'";  
               } 
               else 
               { 
-                  $comando = "UPDATE " . $this->Ini->nm_tabela . " SET codigo_estudiante = '$this->codigo_estudiante', numero_carnet = '$this->numero_carnet', estatus = '$this->estatus', primer_apellido = '$this->primer_apellido', segundo_apellido = '$this->segundo_apellido', nombres = '$this->nombres', sexo = '$this->sexo', fecha_nacimiento = " . $this->Ini->date_delim . $this->fecha_nacimiento . $this->Ini->date_delim1 . ", fecha_ingreso = " . $this->Ini->date_delim . $this->fecha_ingreso . $this->Ini->date_delim1 . ", grado_id = $this->grado_id, direccion_linea1 = '$this->direccion_linea1', direccion_linea2 = '$this->direccion_linea2', telefono = '$this->telefono', nombre_padre = '$this->nombre_padre', nombre_madre = '$this->nombre_madre', comentarios = '$this->comentarios'";  
+                  $comando = "UPDATE " . $this->Ini->nm_tabela . " SET codigo_estudiante = '$this->codigo_estudiante', numero_carnet = '$this->numero_carnet', estatus = '$this->estatus', primer_apellido = '$this->primer_apellido', segundo_apellido = '$this->segundo_apellido', nombres = '$this->nombres', sexo = '$this->sexo', fecha_nacimiento = " . $this->Ini->date_delim . $this->fecha_nacimiento . $this->Ini->date_delim1 . ", fecha_ingreso = " . $this->Ini->date_delim . $this->fecha_ingreso . $this->Ini->date_delim1 . ", grado_id = $this->grado_id, direccion_linea1 = '$this->direccion_linea1', direccion_linea2 = '$this->direccion_linea2', telefono = '$this->telefono', nombre_padre = '$this->nombre_padre', nombre_madre = '$this->nombre_madre', comentarios = '$this->comentarios', usuario = '$this->usuario'";  
               } 
               $aDoNotUpdate = array();
               $temp_cmd_sql = "";
@@ -4215,10 +4278,13 @@ $_SESSION['scriptcase']['form_estudiantes_mob']['contr_erro'] = 'off';
                   if ($SC_ex_update || $SC_tem_cmp_update || $SC_ex_upd_or) 
                   { 
                       $temp_cmd_sql .= ", fotografia = '" . $this->fotografia . "'"; 
+                      $comando_oracle .= ", fotografia = '" . $this->fotografia . "'"; 
                   } 
                   else 
                   { 
                      $temp_cmd_sql .= " fotografia = '" . $this->fotografia . "'"; 
+                     $comando_oracle .= " fotografia = '" . $this->fotografia . "'"; 
+                     $SC_ex_upd_or = true; 
                      $SC_ex_update = true; 
                   } 
                   $this->fotografia = "";
@@ -4231,10 +4297,13 @@ $_SESSION['scriptcase']['form_estudiantes_mob']['contr_erro'] = 'off';
                       if ($SC_ex_update || $SC_tem_cmp_update || $SC_ex_upd_or) 
                       { 
                           $temp_cmd_sql .= ", fotografia = '$NM_conteudo'" ; 
+                          $comando_oracle .= ", fotografia = '$NM_conteudo'" ; 
                       } 
                       else 
                       { 
                           $temp_cmd_sql .= " fotografia = '$NM_conteudo'" ; 
+                          $comando_oracle .= " fotografia = '$NM_conteudo'" ; 
+                          $SC_ex_upd_or = true; 
                           $SC_ex_update = true; 
                       } 
                   } 
@@ -4246,48 +4315,6 @@ $_SESSION['scriptcase']['form_estudiantes_mob']['contr_erro'] = 'off';
               if (!empty($temp_cmd_sql)) 
               { 
                   $comando .= $temp_cmd_sql;
-              } 
-              if ($this->fotografia_limpa == "S" || ($this->fotografia != "none" && $this->fotografia != "")) 
-              { 
-                  if ($SC_ex_upd_or) 
-                  { 
-                      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase)) 
-                      { 
-                          $comando_oracle .= ", fotografia = ''"; 
-                      } 
-                      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql)) 
-                      { 
-                          $comando_oracle .= ", fotografia = ''"; 
-                      } 
-                      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix)) 
-                      { 
-                          $comando_oracle .= ", fotografia = null"; 
-                      } 
-                      else 
-                      { 
-                          $comando_oracle .= ", fotografia = empty_blob()"; 
-                      } 
-                  } 
-                  else 
-                  { 
-                      $SC_ex_upd_or = true; 
-                      if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase)) 
-                      { 
-                          $comando_oracle .= " fotografia = ''"; 
-                      } 
-                      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql)) 
-                      { 
-                          $comando_oracle .= " fotografia = ''"; 
-                      } 
-                      elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix)) 
-                      { 
-                          $comando_oracle .= " fotografia = null"; 
-                      } 
-                      else 
-                      { 
-                          $comando_oracle .= " fotografia = empty_blob()"; 
-                      } 
-                  } 
               } 
               if (in_array(strtolower($this->Ini->nm_tpbanco), $nm_bases_lob_geral))
               { 
@@ -4352,29 +4379,6 @@ $_SESSION['scriptcase']['form_estudiantes_mob']['contr_erro'] = 'off';
               }   
               if (in_array(strtolower($this->Ini->nm_tpbanco), $nm_bases_lob_geral))
               { 
-                  if ($this->fotografia_limpa == "S" && !in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle) && !in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix)) 
-                  { 
-                      $_SESSION['scriptcase']['sc_sql_ult_comando'] = "UpdateBlob($this->Ini->nm_tabela, \"fotografia\", \"\",  \"colegio_id = $this->colegio_id and estudiante_id = $this->estudiante_id\")"; 
-                      $rs = $this->Db->UpdateBlob($this->Ini->nm_tabela, "fotografia", "",  "colegio_id = $this->colegio_id and estudiante_id = $this->estudiante_id"); 
-                  } 
-                  else 
-                  { 
-                      if ($this->fotografia != "none" && $this->fotografia != "") 
-                      { 
-                          $_SESSION['scriptcase']['sc_sql_ult_comando'] = "UpdateBlob($this->Ini->nm_tabela, \"fotografia\", $this->fotografia,  \"colegio_id = $this->colegio_id and estudiante_id = $this->estudiante_id\")"; 
-                          $rs = $this->Db->UpdateBlob($this->Ini->nm_tabela, "fotografia", $this->fotografia,  "colegio_id = $this->colegio_id and estudiante_id = $this->estudiante_id"); 
-                      } 
-                  } 
-                  if ($rs === false) 
-                  { 
-                      $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_updt'], $this->Db->ErrorMsg()); 
-                      $this->NM_rollback_db(); 
-                      if ($this->NM_ajax_flag)
-                      {
-                          form_estudiantes_mob_pack_ajax_response();
-                      }
-                      exit;  
-                  }   
               }   
               if ($this->fotografia_limpa == "S")
               {
@@ -4398,6 +4402,7 @@ $_SESSION['scriptcase']['form_estudiantes_mob']['contr_erro'] = 'off';
           $this->nombre_padre = $this->nombre_padre_before_qstr;
           $this->nombre_madre = $this->nombre_madre_before_qstr;
           $this->comentarios = $this->comentarios_before_qstr;
+          $this->usuario = $this->usuario_before_qstr;
           $this->padres_estudiante = $this->padres_estudiante_before_qstr;
               $this->sc_evento = "update"; 
               $this->nmgp_opcao = "igual"; 
@@ -4440,6 +4445,8 @@ $_SESSION['scriptcase']['form_estudiantes_mob']['contr_erro'] = 'off';
               elseif (isset($this->nombre_padre)) { $this->nm_limpa_alfa($this->nombre_padre); }
               if     (isset($NM_val_form) && isset($NM_val_form['nombre_madre'])) { $this->nombre_madre = $NM_val_form['nombre_madre']; }
               elseif (isset($this->nombre_madre)) { $this->nm_limpa_alfa($this->nombre_madre); }
+              if     (isset($NM_val_form) && isset($NM_val_form['usuario'])) { $this->usuario = $NM_val_form['usuario']; }
+              elseif (isset($this->usuario)) { $this->nm_limpa_alfa($this->usuario); }
               if     (isset($NM_val_form) && isset($NM_val_form['padres_estudiante'])) { $this->padres_estudiante = $NM_val_form['padres_estudiante']; }
               elseif (isset($this->padres_estudiante)) { $this->nm_limpa_alfa($this->padres_estudiante); }
 
@@ -4449,7 +4456,7 @@ $_SESSION['scriptcase']['form_estudiantes_mob']['contr_erro'] = 'off';
               }
 
               $aOldRefresh               = $this->nmgp_refresh_fields;
-              $this->nmgp_refresh_fields = array_diff(array('fotografia', 'codigo_estudiante', 'numero_carnet', 'estatus', 'primer_apellido', 'segundo_apellido', 'nombres', 'sexo', 'grado_id', 'fecha_nacimiento', 'fecha_ingreso', 'direccion_linea1', 'direccion_linea2', 'telefono', 'nombre_padre', 'nombre_madre', 'comentarios', 'padres_estudiante'), $aDoNotUpdate);
+              $this->nmgp_refresh_fields = array_diff(array('fotografia', 'usuario', 'codigo_estudiante', 'numero_carnet', 'estatus', 'primer_apellido', 'segundo_apellido', 'nombres', 'sexo', 'grado_id', 'fecha_nacimiento', 'fecha_ingreso', 'direccion_linea1', 'direccion_linea2', 'telefono', 'nombre_padre', 'nombre_madre', 'comentarios', 'padres_estudiante'), $aDoNotUpdate);
               $this->ajax_return_values();
               $this->nmgp_refresh_fields = $aOldRefresh;
 
@@ -4540,35 +4547,31 @@ $_SESSION['scriptcase']['form_estudiantes_mob']['contr_erro'] = 'off';
               }
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (colegio_id, estudiante_id, codigo_estudiante, numero_carnet, estatus, primer_apellido, segundo_apellido, nombres, sexo, fecha_nacimiento, fecha_ingreso, grado_id, direccion_linea1, direccion_linea2, telefono, fotografia, nombre_padre, nombre_madre, comentarios) VALUES ($this->colegio_id, $this->estudiante_id, '$this->codigo_estudiante', '$this->numero_carnet', '$this->estatus', '$this->primer_apellido', '$this->segundo_apellido', '$this->nombres', '$this->sexo', #$this->fecha_nacimiento#, #$this->fecha_ingreso#, $this->grado_id, '$this->direccion_linea1', '$this->direccion_linea2', '$this->telefono', '$this->fotografia', '$this->nombre_padre', '$this->nombre_madre', '$this->comentarios')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (colegio_id, estudiante_id, codigo_estudiante, numero_carnet, estatus, primer_apellido, segundo_apellido, nombres, sexo, fecha_nacimiento, fecha_ingreso, grado_id, direccion_linea1, direccion_linea2, telefono, fotografia, nombre_padre, nombre_madre, comentarios, usuario) VALUES ($this->colegio_id, $this->estudiante_id, '$this->codigo_estudiante', '$this->numero_carnet', '$this->estatus', '$this->primer_apellido', '$this->segundo_apellido', '$this->nombres', '$this->sexo', #$this->fecha_nacimiento#, #$this->fecha_ingreso#, $this->grado_id, '$this->direccion_linea1', '$this->direccion_linea2', '$this->telefono', '$this->fotografia', '$this->nombre_padre', '$this->nombre_madre', '$this->comentarios', '$this->usuario')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (colegio_id, estudiante_id, codigo_estudiante, numero_carnet, estatus, primer_apellido, segundo_apellido, nombres, sexo, fecha_nacimiento, fecha_ingreso, grado_id, direccion_linea1, direccion_linea2, telefono, fotografia, nombre_padre, nombre_madre, comentarios) VALUES ($this->colegio_id, $this->estudiante_id, '$this->codigo_estudiante', '$this->numero_carnet', '$this->estatus', '$this->primer_apellido', '$this->segundo_apellido', '$this->nombres', '$this->sexo', " . $this->Ini->date_delim . $this->fecha_nacimiento . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->fecha_ingreso . $this->Ini->date_delim1 . ", $this->grado_id, '$this->direccion_linea1', '$this->direccion_linea2', '$this->telefono', '$this->fotografia', '$this->nombre_padre', '$this->nombre_madre', '$this->comentarios')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "colegio_id, estudiante_id, codigo_estudiante, numero_carnet, estatus, primer_apellido, segundo_apellido, nombres, sexo, fecha_nacimiento, fecha_ingreso, grado_id, direccion_linea1, direccion_linea2, telefono, fotografia, nombre_padre, nombre_madre, comentarios, usuario) VALUES (" . $NM_seq_auto . "$this->colegio_id, $this->estudiante_id, '$this->codigo_estudiante', '$this->numero_carnet', '$this->estatus', '$this->primer_apellido', '$this->segundo_apellido', '$this->nombres', '$this->sexo', " . $this->Ini->date_delim . $this->fecha_nacimiento . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->fecha_ingreso . $this->Ini->date_delim1 . ", $this->grado_id, '$this->direccion_linea1', '$this->direccion_linea2', '$this->telefono', '$this->fotografia', '$this->nombre_padre', '$this->nombre_madre', '$this->comentarios', '$this->usuario')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
               { 
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (colegio_id, estudiante_id, codigo_estudiante, numero_carnet, estatus, primer_apellido, segundo_apellido, nombres, sexo, fecha_nacimiento, fecha_ingreso, grado_id, direccion_linea1, direccion_linea2, telefono, fotografia, nombre_padre, nombre_madre, comentarios) VALUES ($this->colegio_id, $this->estudiante_id, '$this->codigo_estudiante', '$this->numero_carnet', '$this->estatus', '$this->primer_apellido', '$this->segundo_apellido', '$this->nombres', '$this->sexo', " . $this->Ini->date_delim . $this->fecha_nacimiento . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->fecha_ingreso . $this->Ini->date_delim1 . ", $this->grado_id, '$this->direccion_linea1', '$this->direccion_linea2', '$this->telefono', '$this->fotografia', '$this->nombre_padre', '$this->nombre_madre', '$this->comentarios')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "colegio_id, estudiante_id, codigo_estudiante, numero_carnet, estatus, primer_apellido, segundo_apellido, nombres, sexo, fecha_nacimiento, fecha_ingreso, grado_id, direccion_linea1, direccion_linea2, telefono, fotografia, nombre_padre, nombre_madre, comentarios, usuario) VALUES (" . $NM_seq_auto . "$this->colegio_id, $this->estudiante_id, '$this->codigo_estudiante', '$this->numero_carnet', '$this->estatus', '$this->primer_apellido', '$this->segundo_apellido', '$this->nombres', '$this->sexo', " . $this->Ini->date_delim . $this->fecha_nacimiento . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->fecha_ingreso . $this->Ini->date_delim1 . ", $this->grado_id, '$this->direccion_linea1', '$this->direccion_linea2', '$this->telefono', '$this->fotografia', '$this->nombre_padre', '$this->nombre_madre', '$this->comentarios', '$this->usuario')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "colegio_id, estudiante_id, codigo_estudiante, numero_carnet, estatus, primer_apellido, segundo_apellido, nombres, sexo, fecha_nacimiento, fecha_ingreso, grado_id, direccion_linea1, direccion_linea2, telefono, fotografia, nombre_padre, nombre_madre, comentarios) VALUES (" . $NM_seq_auto . "$this->colegio_id, $this->estudiante_id, '$this->codigo_estudiante', '$this->numero_carnet', '$this->estatus', '$this->primer_apellido', '$this->segundo_apellido', '$this->nombres', '$this->sexo', " . $this->Ini->date_delim . $this->fecha_nacimiento . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->fecha_ingreso . $this->Ini->date_delim1 . ", $this->grado_id, '$this->direccion_linea1', '$this->direccion_linea2', '$this->telefono', EMPTY_BLOB(), '$this->nombre_padre', '$this->nombre_madre', '$this->comentarios')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "colegio_id, estudiante_id, codigo_estudiante, numero_carnet, estatus, primer_apellido, segundo_apellido, nombres, sexo, fecha_nacimiento, fecha_ingreso, grado_id, direccion_linea1, direccion_linea2, telefono, fotografia, nombre_padre, nombre_madre, comentarios, usuario) VALUES (" . $NM_seq_auto . "$this->colegio_id, $this->estudiante_id, '$this->codigo_estudiante', '$this->numero_carnet', '$this->estatus', '$this->primer_apellido', '$this->segundo_apellido', '$this->nombres', '$this->sexo', " . $this->Ini->date_delim . $this->fecha_nacimiento . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->fecha_ingreso . $this->Ini->date_delim1 . ", $this->grado_id, '$this->direccion_linea1', '$this->direccion_linea2', '$this->telefono', '$this->fotografia', '$this->nombre_padre', '$this->nombre_madre', '$this->comentarios', '$this->usuario')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "colegio_id, estudiante_id, codigo_estudiante, numero_carnet, estatus, primer_apellido, segundo_apellido, nombres, sexo, fecha_nacimiento, fecha_ingreso, grado_id, direccion_linea1, direccion_linea2, telefono, fotografia, nombre_padre, nombre_madre, comentarios) VALUES (" . $NM_seq_auto . "$this->colegio_id, $this->estudiante_id, '$this->codigo_estudiante', '$this->numero_carnet', '$this->estatus', '$this->primer_apellido', '$this->segundo_apellido', '$this->nombres', '$this->sexo', EXTEND('$this->fecha_nacimiento', YEAR TO DAY), EXTEND('$this->fecha_ingreso', YEAR TO DAY), $this->grado_id, '$this->direccion_linea1', '$this->direccion_linea2', '$this->telefono', null, '$this->nombre_padre', '$this->nombre_madre', '$this->comentarios')"; 
-              }
-              elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-              {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "colegio_id, estudiante_id, codigo_estudiante, numero_carnet, estatus, primer_apellido, segundo_apellido, nombres, sexo, fecha_nacimiento, fecha_ingreso, grado_id, direccion_linea1, direccion_linea2, telefono, fotografia, nombre_padre, nombre_madre, comentarios) VALUES (" . $NM_seq_auto . "$this->colegio_id, $this->estudiante_id, '$this->codigo_estudiante', '$this->numero_carnet', '$this->estatus', '$this->primer_apellido', '$this->segundo_apellido', '$this->nombres', '$this->sexo', " . $this->Ini->date_delim . $this->fecha_nacimiento . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->fecha_ingreso . $this->Ini->date_delim1 . ", $this->grado_id, '$this->direccion_linea1', '$this->direccion_linea2', '$this->telefono', '', '$this->nombre_padre', '$this->nombre_madre', '$this->comentarios')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "colegio_id, estudiante_id, codigo_estudiante, numero_carnet, estatus, primer_apellido, segundo_apellido, nombres, sexo, fecha_nacimiento, fecha_ingreso, grado_id, direccion_linea1, direccion_linea2, telefono, fotografia, nombre_padre, nombre_madre, comentarios, usuario) VALUES (" . $NM_seq_auto . "$this->colegio_id, $this->estudiante_id, '$this->codigo_estudiante', '$this->numero_carnet', '$this->estatus', '$this->primer_apellido', '$this->segundo_apellido', '$this->nombres', '$this->sexo', EXTEND('$this->fecha_nacimiento', YEAR TO DAY), EXTEND('$this->fecha_ingreso', YEAR TO DAY), $this->grado_id, '$this->direccion_linea1', '$this->direccion_linea2', '$this->telefono', '$this->fotografia', '$this->nombre_padre', '$this->nombre_madre', '$this->comentarios', '$this->usuario')"; 
               }
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "colegio_id, estudiante_id, codigo_estudiante, numero_carnet, estatus, primer_apellido, segundo_apellido, nombres, sexo, fecha_nacimiento, fecha_ingreso, grado_id, direccion_linea1, direccion_linea2, telefono, fotografia, nombre_padre, nombre_madre, comentarios) VALUES (" . $NM_seq_auto . "$this->colegio_id, $this->estudiante_id, '$this->codigo_estudiante', '$this->numero_carnet', '$this->estatus', '$this->primer_apellido', '$this->segundo_apellido', '$this->nombres', '$this->sexo', " . $this->Ini->date_delim . $this->fecha_nacimiento . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->fecha_ingreso . $this->Ini->date_delim1 . ", $this->grado_id, '$this->direccion_linea1', '$this->direccion_linea2', '$this->telefono', '', '$this->nombre_padre', '$this->nombre_madre', '$this->comentarios')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "colegio_id, estudiante_id, codigo_estudiante, numero_carnet, estatus, primer_apellido, segundo_apellido, nombres, sexo, fecha_nacimiento, fecha_ingreso, grado_id, direccion_linea1, direccion_linea2, telefono, fotografia, nombre_padre, nombre_madre, comentarios, usuario) VALUES (" . $NM_seq_auto . "$this->colegio_id, $this->estudiante_id, '$this->codigo_estudiante', '$this->numero_carnet', '$this->estatus', '$this->primer_apellido', '$this->segundo_apellido', '$this->nombres', '$this->sexo', " . $this->Ini->date_delim . $this->fecha_nacimiento . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->fecha_ingreso . $this->Ini->date_delim1 . ", $this->grado_id, '$this->direccion_linea1', '$this->direccion_linea2', '$this->telefono', '$this->fotografia', '$this->nombre_padre', '$this->nombre_madre', '$this->comentarios', '$this->usuario')"; 
               }
               else
               {
-                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "colegio_id, estudiante_id, codigo_estudiante, numero_carnet, estatus, primer_apellido, segundo_apellido, nombres, sexo, fecha_nacimiento, fecha_ingreso, grado_id, direccion_linea1, direccion_linea2, telefono, fotografia, nombre_padre, nombre_madre, comentarios) VALUES (" . $NM_seq_auto . "$this->colegio_id, $this->estudiante_id, '$this->codigo_estudiante', '$this->numero_carnet', '$this->estatus', '$this->primer_apellido', '$this->segundo_apellido', '$this->nombres', '$this->sexo', " . $this->Ini->date_delim . $this->fecha_nacimiento . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->fecha_ingreso . $this->Ini->date_delim1 . ", $this->grado_id, '$this->direccion_linea1', '$this->direccion_linea2', '$this->telefono', '$this->fotografia', '$this->nombre_padre', '$this->nombre_madre', '$this->comentarios')"; 
+                  $comando = "INSERT INTO " . $this->Ini->nm_tabela . " (" . $NM_cmp_auto . "colegio_id, estudiante_id, codigo_estudiante, numero_carnet, estatus, primer_apellido, segundo_apellido, nombres, sexo, fecha_nacimiento, fecha_ingreso, grado_id, direccion_linea1, direccion_linea2, telefono, fotografia, nombre_padre, nombre_madre, comentarios, usuario) VALUES (" . $NM_seq_auto . "$this->colegio_id, $this->estudiante_id, '$this->codigo_estudiante', '$this->numero_carnet', '$this->estatus', '$this->primer_apellido', '$this->segundo_apellido', '$this->nombres', '$this->sexo', " . $this->Ini->date_delim . $this->fecha_nacimiento . $this->Ini->date_delim1 . ", " . $this->Ini->date_delim . $this->fecha_ingreso . $this->Ini->date_delim1 . ", $this->grado_id, '$this->direccion_linea1', '$this->direccion_linea2', '$this->telefono', '$this->fotografia', '$this->nombre_padre', '$this->nombre_madre', '$this->comentarios', '$this->usuario')"; 
               }
               $comando = str_replace("N'null'", "null", $comando) ; 
               $comando = str_replace("'null'", "null", $comando) ; 
@@ -4606,24 +4609,6 @@ $_SESSION['scriptcase']['form_estudiantes_mob']['contr_erro'] = 'off';
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql)) 
               { 
               }   
-              if (in_array(strtolower($this->Ini->nm_tpbanco), $nm_bases_lob_geral))
-              { 
-                  if (trim($this->fotografia ) != "") 
-                  { 
-                      $_SESSION['scriptcase']['sc_sql_ult_comando'] = "UpdateBlob(" . $this->Ini->nm_tabela . ",  fotografia , $this->fotografia,  \"colegio_id = $this->colegio_id and estudiante_id = $this->estudiante_id\")"; 
-                      $rs = $this->Db->UpdateBlob($this->Ini->nm_tabela, "fotografia", $this->fotografia,  "colegio_id = $this->colegio_id and estudiante_id = $this->estudiante_id"); 
-                      if ($rs === false)  
-                      { 
-                          $this->Erro->mensagem (__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_inst'], $this->Db->ErrorMsg()); 
-                          $this->NM_rollback_db(); 
-                          if ($this->NM_ajax_flag)
-                          {
-                              form_estudiantes_mob_pack_ajax_response();
-                          }
-                          exit; 
-                      }  
-                  }  
-              }  
               }
 
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_estudiantes_mob']['db_changed'] = true;
@@ -4999,23 +4984,23 @@ $_SESSION['scriptcase']['form_estudiantes_mob']['contr_erro'] = 'off';
           } 
           if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
           { 
-              $nmgp_select = "SELECT colegio_id, estudiante_id, codigo_estudiante, numero_carnet, estatus, primer_apellido, segundo_apellido, nombres, sexo, str_replace (convert(char(10),fecha_nacimiento,102), '.', '-') + ' ' + convert(char(8),fecha_nacimiento,20), str_replace (convert(char(10),fecha_ingreso,102), '.', '-') + ' ' + convert(char(8),fecha_ingreso,20), grado_id, direccion_linea1, direccion_linea2, telefono, fotografia, nombre_padre, nombre_madre, comentarios from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT colegio_id, estudiante_id, codigo_estudiante, numero_carnet, estatus, primer_apellido, segundo_apellido, nombres, sexo, str_replace (convert(char(10),fecha_nacimiento,102), '.', '-') + ' ' + convert(char(8),fecha_nacimiento,20), str_replace (convert(char(10),fecha_ingreso,102), '.', '-') + ' ' + convert(char(8),fecha_ingreso,20), grado_id, direccion_linea1, direccion_linea2, telefono, fotografia, nombre_padre, nombre_madre, comentarios, usuario from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
           { 
-              $nmgp_select = "SELECT colegio_id, estudiante_id, codigo_estudiante, numero_carnet, estatus, primer_apellido, segundo_apellido, nombres, sexo, convert(char(23),fecha_nacimiento,121), convert(char(23),fecha_ingreso,121), grado_id, direccion_linea1, direccion_linea2, telefono, fotografia, nombre_padre, nombre_madre, comentarios from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT colegio_id, estudiante_id, codigo_estudiante, numero_carnet, estatus, primer_apellido, segundo_apellido, nombres, sexo, convert(char(23),fecha_nacimiento,121), convert(char(23),fecha_ingreso,121), grado_id, direccion_linea1, direccion_linea2, telefono, fotografia, nombre_padre, nombre_madre, comentarios, usuario from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
           { 
-              $nmgp_select = "SELECT colegio_id, estudiante_id, codigo_estudiante, numero_carnet, estatus, primer_apellido, segundo_apellido, nombres, sexo, fecha_nacimiento, fecha_ingreso, grado_id, direccion_linea1, direccion_linea2, telefono, fotografia, nombre_padre, nombre_madre, comentarios from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT colegio_id, estudiante_id, codigo_estudiante, numero_carnet, estatus, primer_apellido, segundo_apellido, nombres, sexo, fecha_nacimiento, fecha_ingreso, grado_id, direccion_linea1, direccion_linea2, telefono, fotografia, nombre_padre, nombre_madre, comentarios, usuario from " . $this->Ini->nm_tabela ; 
           } 
           elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
           { 
-              $nmgp_select = "SELECT colegio_id, estudiante_id, codigo_estudiante, numero_carnet, estatus, primer_apellido, segundo_apellido, nombres, sexo, EXTEND(fecha_nacimiento, YEAR TO DAY), EXTEND(fecha_ingreso, YEAR TO DAY), grado_id, direccion_linea1, direccion_linea2, telefono, LOTOFILE(fotografia, '" . $this->Ini->root . $this->Ini->path_imag_temp . "/sc_blob_fotografia', 'client'), nombre_padre, nombre_madre, comentarios from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT colegio_id, estudiante_id, codigo_estudiante, numero_carnet, estatus, primer_apellido, segundo_apellido, nombres, sexo, EXTEND(fecha_nacimiento, YEAR TO DAY), EXTEND(fecha_ingreso, YEAR TO DAY), grado_id, direccion_linea1, direccion_linea2, telefono, fotografia, nombre_padre, nombre_madre, comentarios, usuario from " . $this->Ini->nm_tabela ; 
           } 
           else 
           { 
-              $nmgp_select = "SELECT colegio_id, estudiante_id, codigo_estudiante, numero_carnet, estatus, primer_apellido, segundo_apellido, nombres, sexo, fecha_nacimiento, fecha_ingreso, grado_id, direccion_linea1, direccion_linea2, telefono, fotografia, nombre_padre, nombre_madre, comentarios from " . $this->Ini->nm_tabela ; 
+              $nmgp_select = "SELECT colegio_id, estudiante_id, codigo_estudiante, numero_carnet, estatus, primer_apellido, segundo_apellido, nombres, sexo, fecha_nacimiento, fecha_ingreso, grado_id, direccion_linea1, direccion_linea2, telefono, fotografia, nombre_padre, nombre_madre, comentarios, usuario from " . $this->Ini->nm_tabela ; 
           } 
           $aWhere = array();
           $aWhere[] = "colegio_id = " . $_SESSION['vglo_colegio'] . "";
@@ -5195,24 +5180,7 @@ $_SESSION['scriptcase']['form_estudiantes_mob']['contr_erro'] = 'off';
               $this->nmgp_dados_select['direccion_linea2'] = $this->direccion_linea2;
               $this->telefono = $rs->fields[14] ; 
               $this->nmgp_dados_select['telefono'] = $this->telefono;
-              if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-              { 
-                  $this->fotografia = $this->Db->BlobDecode($rs->fields[15]) ; 
-              } 
-              elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
-              { 
-                  if(isset($rs->fields[15]) && !empty($rs->fields[15]) && is_file($rs->fields[15])) 
-                  { 
-                     $this->fotografia = file_get_contents($rs->fields[15]);
-                  }else 
-                  { 
-                     $this->fotografia = ''; 
-                  } 
-              } 
-              else
-              { 
-                  $this->fotografia = $rs->fields[15] ; 
-              } 
+              $this->fotografia = $rs->fields[15] ; 
               $this->nmgp_dados_select['fotografia'] = $this->fotografia;
               $this->nombre_padre = $rs->fields[16] ; 
               $this->nmgp_dados_select['nombre_padre'] = $this->nombre_padre;
@@ -5220,7 +5188,9 @@ $_SESSION['scriptcase']['form_estudiantes_mob']['contr_erro'] = 'off';
               $this->nmgp_dados_select['nombre_madre'] = $this->nombre_madre;
               $this->comentarios = $rs->fields[18] ; 
               $this->nmgp_dados_select['comentarios'] = $this->comentarios;
-              $this->padres_estudiante = $rs->fields[19] ; 
+              $this->usuario = $rs->fields[19] ; 
+              $this->nmgp_dados_select['usuario'] = $this->usuario;
+              $this->padres_estudiante = $rs->fields[20] ; 
               $this->nmgp_dados_select['padres_estudiante'] = $this->padres_estudiante;
           $GLOBALS["NM_ERRO_IBASE"] = 0; 
               $this->colegio_id = (string)$this->colegio_id; 
@@ -5290,6 +5260,8 @@ $_SESSION['scriptcase']['form_estudiantes_mob']['contr_erro'] = 'off';
               $this->nmgp_dados_form["nombre_madre"] = $this->nombre_madre;
               $this->comentarios = "";  
               $this->nmgp_dados_form["comentarios"] = $this->comentarios;
+              $this->usuario = "";  
+              $this->nmgp_dados_form["usuario"] = $this->usuario;
               $this->padres_estudiante = "";  
               $this->nmgp_dados_form["padres_estudiante"] = $this->padres_estudiante;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_estudiantes_mob']['dados_form'] = $this->nmgp_dados_form;
@@ -5317,6 +5289,7 @@ $_SESSION['scriptcase']['form_estudiantes_mob']['contr_erro'] = 'off';
                   $this->nombre_padre = $this->nmgp_dados_select['nombre_padre'];  
                   $this->nombre_madre = $this->nmgp_dados_select['nombre_madre'];  
                   $this->comentarios = $this->nmgp_dados_select['comentarios'];  
+                  $this->usuario = $this->nmgp_dados_select['usuario'];  
                   $this->padres_estudiante = $this->nmgp_dados_select['padres_estudiante'];  
               }
           }

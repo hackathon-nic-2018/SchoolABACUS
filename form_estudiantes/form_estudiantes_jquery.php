@@ -40,6 +40,7 @@ function scSetFocusOnField($oField) {
 
 function scEventControl_init(iSeqRow) {
   scEventControl_data["fotografia" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["usuario" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["codigo_estudiante" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["numero_carnet" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["estatus" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
@@ -60,6 +61,12 @@ function scEventControl_init(iSeqRow) {
 }
 
 function scEventControl_active(iSeqRow) {
+  if (scEventControl_data["usuario" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["usuario" + iSeqRow]["change"]) {
+    return true;
+  }
   if (scEventControl_data["codigo_estudiante" + iSeqRow]["blur"]) {
     return true;
   }
@@ -239,6 +246,8 @@ function scJQEventsAdd(iSeqRow) {
                                           .bind('focus', function() { sc_form_estudiantes_nombre_madre_onfocus(this, iSeqRow) });
   $('#id_sc_field_comentarios' + iSeqRow).bind('blur', function() { sc_form_estudiantes_comentarios_onblur(this, iSeqRow) })
                                          .bind('focus', function() { sc_form_estudiantes_comentarios_onfocus(this, iSeqRow) });
+  $('#id_sc_field_usuario' + iSeqRow).bind('blur', function() { sc_form_estudiantes_usuario_onblur(this, iSeqRow) })
+                                     .bind('focus', function() { sc_form_estudiantes_usuario_onfocus(this, iSeqRow) });
   $('#id_sc_field_padres_estudiante' + iSeqRow).bind('blur', function() { sc_form_estudiantes_padres_estudiante_onblur(this, iSeqRow) })
                                                .bind('focus', function() { sc_form_estudiantes_padres_estudiante_onfocus(this, iSeqRow) });
 } // scJQEventsAdd
@@ -411,6 +420,16 @@ function sc_form_estudiantes_comentarios_onfocus(oThis, iSeqRow) {
   scCssFocus(oThis);
 }
 
+function sc_form_estudiantes_usuario_onblur(oThis, iSeqRow) {
+  do_ajax_form_estudiantes_validate_usuario();
+  scCssBlur(oThis);
+}
+
+function sc_form_estudiantes_usuario_onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis);
+}
+
 function sc_form_estudiantes_padres_estudiante_onblur(oThis, iSeqRow) {
   do_ajax_form_estudiantes_validate_padres_estudiante();
   scCssBlur(oThis);
@@ -435,6 +454,7 @@ function displayChange_block(block, status) {
 
 function displayChange_block_0(status) {
 	displayChange_field("fotografia", "", status);
+	displayChange_field("usuario", "", status);
 }
 
 function displayChange_block_1(status) {
@@ -462,6 +482,7 @@ function displayChange_block_2(status) {
 
 function displayChange_row(row, status) {
 	displayChange_field_fotografia(row, status);
+	displayChange_field_usuario(row, status);
 	displayChange_field_codigo_estudiante(row, status);
 	displayChange_field_numero_carnet(row, status);
 	displayChange_field_estatus(row, status);
@@ -484,6 +505,9 @@ function displayChange_row(row, status) {
 function displayChange_field(field, row, status) {
 	if ("fotografia" == field) {
 		displayChange_field_fotografia(row, status);
+	}
+	if ("usuario" == field) {
+		displayChange_field_usuario(row, status);
 	}
 	if ("codigo_estudiante" == field) {
 		displayChange_field_codigo_estudiante(row, status);
@@ -539,6 +563,9 @@ function displayChange_field(field, row, status) {
 }
 
 function displayChange_field_fotografia(row, status) {
+}
+
+function displayChange_field_usuario(row, status) {
 }
 
 function displayChange_field_codigo_estudiante(row, status) {

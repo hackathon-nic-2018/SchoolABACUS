@@ -1045,14 +1045,75 @@ unset($NM_ult_sep);
 
 <?php } 
 ?> 
+<?php if ($sc_hidden_no > 0) { echo "<tr>"; }; 
+      $sc_hidden_yes = 0; $sc_hidden_no = 0; ?>
+
+
+   <?php
+    if (!isset($this->nm_new_label['usuario']))
+    {
+        $this->nm_new_label['usuario'] = "Usuario";
+    }
+?>
+<?php
+   $nm_cor_fun_cel  = ($nm_cor_fun_cel  == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
+   $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
+   $usuario = $this->usuario;
+   $sStyleHidden_usuario = '';
+   if (isset($this->nmgp_cmp_hidden['usuario']) && $this->nmgp_cmp_hidden['usuario'] == 'off')
+   {
+       unset($this->nmgp_cmp_hidden['usuario']);
+       $sStyleHidden_usuario = 'display: none;';
+   }
+   $bTestReadOnly = true;
+   $sStyleReadLab_usuario = 'display: none;';
+   $sStyleReadInp_usuario = '';
+   if (/*$this->nmgp_opcao != "novo" && */isset($this->nmgp_cmp_readonly['usuario']) && $this->nmgp_cmp_readonly['usuario'] == 'on')
+   {
+       $bTestReadOnly = false;
+       unset($this->nmgp_cmp_readonly['usuario']);
+       $sStyleReadLab_usuario = '';
+       $sStyleReadInp_usuario = 'display: none;';
+   }
+?>
+<?php if (isset($this->nmgp_cmp_hidden['usuario']) && $this->nmgp_cmp_hidden['usuario'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="usuario" value="<?php echo $this->form_encode_input($usuario) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOdd css_usuario_line" id="hidden_field_data_usuario" style="<?php echo $sStyleHidden_usuario; ?>vertical-align: top;"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOdd css_usuario_line" style="vertical-align: top;padding: 0px"><span class="scFormLabelOddFormat css_usuario_label"><span id="id_label_usuario"><?php echo $this->nm_new_label['usuario']; ?></span></span><br>
+<?php if ($bTestReadOnly && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["usuario"]) &&  $this->nmgp_cmp_readonly["usuario"] == "on") { 
+
+ ?>
+<input type="hidden" name="usuario" value="<?php echo $this->form_encode_input($usuario) . "\">" . $usuario . ""; ?>
+<?php } else { ?>
+<span id="id_read_on_usuario" class="sc-ui-readonly-usuario css_usuario_line" style="<?php echo $sStyleReadLab_usuario; ?>"><?php echo $this->form_encode_input($this->usuario); ?></span><span id="id_read_off_usuario" style="white-space: nowrap;<?php echo $sStyleReadInp_usuario; ?>">
+ <input class="sc-js-input scFormObjectOdd css_usuario_obj" style="" id="id_sc_field_usuario" type=text name="usuario" value="<?php echo $this->form_encode_input($usuario) ?>"
+ size=50 maxlength=100 alt="{datatype: 'text', maxLength: 100, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_usuario_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_usuario_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+
+
+
+
+<?php if ($sc_hidden_yes > 0 && $sc_hidden_no > 0) { ?>
+
+
+    <TD class="scFormDataOdd" colspan="<?php echo $sc_hidden_yes * 1; ?>" >&nbsp;</TD>
+
+
+
+
+<?php } 
+?> 
 
 
 
 
 
 
-<?php $sStyleHidden_fotografia_dumb = ('' == $sStyleHidden_fotografia) ? 'display: none' : ''; ?>
-    <TD class="scFormDataOdd" id="hidden_field_data_fotografia_dumb" style="<?php echo $sStyleHidden_fotografia_dumb; ?>"></TD>
+<?php $sStyleHidden_usuario_dumb = ('' == $sStyleHidden_usuario) ? 'display: none' : ''; ?>
+    <TD class="scFormDataOdd" id="hidden_field_data_usuario_dumb" style="<?php echo $sStyleHidden_usuario_dumb; ?>"></TD>
    </tr>
 <?php $sc_hidden_no = 1; ?>
 </TABLE></div><!-- bloco_f -->
@@ -1104,7 +1165,7 @@ unset($NM_ult_sep);
 <?php } else { ?>
 <span id="id_read_on_codigo_estudiante" class="sc-ui-readonly-codigo_estudiante css_codigo_estudiante_line" style="<?php echo $sStyleReadLab_codigo_estudiante; ?>"><?php echo $this->form_encode_input($this->codigo_estudiante); ?></span><span id="id_read_off_codigo_estudiante" style="white-space: nowrap;<?php echo $sStyleReadInp_codigo_estudiante; ?>">
  <input class="sc-js-input scFormObjectOdd css_codigo_estudiante_obj" style="" id="id_sc_field_codigo_estudiante" type=text name="codigo_estudiante" value="<?php echo $this->form_encode_input($codigo_estudiante) ?>"
- size=15 maxlength=15 alt="{datatype: 'text', maxLength: 15, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+ size=25 maxlength=25 alt="{datatype: 'text', maxLength: 25, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_codigo_estudiante_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_codigo_estudiante_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
