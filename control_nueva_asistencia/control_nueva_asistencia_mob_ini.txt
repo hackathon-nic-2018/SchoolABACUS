@@ -1,7 +1,7 @@
 control_nueva_asistencia_mob.php
 school_abacus
 control_nueva_asistencia_mob
-NAO
+SIM
 contr
 control_nueva_asistencia
 LigMd5

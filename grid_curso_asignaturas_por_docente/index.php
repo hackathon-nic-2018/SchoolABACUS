@@ -218,7 +218,7 @@ class grid_curso_asignaturas_por_docente_ini
       $this->nm_hr_criacao   = "073123"; 
       $this->nm_autor_alt    = "alvarado"; 
       $this->nm_dt_ult_alt   = "20181130"; 
-      $this->nm_hr_ult_alt   = "081203"; 
+      $this->nm_hr_ult_alt   = "102125"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -786,7 +786,7 @@ class grid_curso_asignaturas_por_docente_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_curso_asignaturas_por_docente']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_curso_asignaturas_por_docente']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQNwDQB/HAN7V5JwDMrYVcFeDuFGVErqHQBsVIJsHAvCZMFaHgBeVkXeHEFqDoXGDcBwH9X7HANOHuX7DMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgBeHEFiV5B3DoF7D9XsDuFaHAveVWJsHgvOZSNiDWFYHIFUHQBiZ1FGHIBeZMB/DMvCZSXeH5F/HMBiHQXODQJwD1veHQrqHgvsVcB/DWFYHIJeHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/D9NwDQB/Z1rwV5X7HuzGVIBOV5X7DoJsD9XGZSB/HArYHQJwDEBODkFeH5FYVoFGHQJKDQBOZ1rwD5XGHuzGVIBOHEFYDoNUDcNwH9B/D1rwZMFaDErKVkJGH5FYDoB/DcXOZSX7HArYV5BqHuvmVcBODuX7DoJsDcBqZ1FaD1rKZMFaDErKVkXeDWX7DoXGDcXOZSFGHAveV5JwHuzGVIB/V5X7DoNUD9BsH9B/D1rwV5FaDEBOVkJGH5F/VoB/HQXGH9FGHAveD5BOHuzGVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgBOZSJGDuFaDorqDcXGZSX7HANOHurqDMBYZSNiDWFYDoBiHQBsZ1X7HAvCZMB/HgBeHEFiV5B3DoF7D9XsDuFaHAveHQXGDMvsVIB/DWFaHMX7HQJmZkBiHANOHQraHgvCHEJqDWX7HIFGHQNwDQB/D1NKV5BODMrwVcB/HEFYHIJeDcNmZ1FGZ1rYHQraHgvCHArsDWXCHIraDcXGDQFUD1vOV5BOHgNKDkBODuFqDoFGDcBqVIJwD1rwHQF7HgBYVkJ3DuFYHMBqHQXODQFUDSN7HQJwDMrwV9FeDuX7HIJsHQXOZ1BiD1rwHuJwHgvCHArCDuFYHMJeHQBiZSFUD1veHQJeDMrwV9FeDWXKVoX7HQNwZ1FGHIBeHQJsDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsVIB/H5FqHMrqHQBiZkFGHIBeHuFGHgvCHArsHEFqHMFGHQNwZ9XGHIvsV5BODMrwVcB/DWJeHMFUDcFYZSBqD1NaZMJeHgvCHEJqHEFqHIrqHQFYH9FUD1veHQB/HgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaDoBODcJeDQFGD1veD5BOHgrYDkBsH5B7VEBiHQFYH9BqZ1NOV5FaDEvsHErCV5FqDoraD9JKZSX7D1vOV5JwHuBYZSNiHEX/VoraD9BiH9FaHIBeZMBODErKVkXeV5FaDoB/D9NmDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5XGHuzGVIFCDWFYVorqD9BsH9B/HABYD5F7DMBYHEXeH5FYZuB/D9NwZSBiHAveD5NUHgNKDkBOV5FYHMBiHQNmVINUHAvsD5BOHgBYHErsDWFGDoBqHQBiZ9F7HAveHuFaHuNOZSrCH5FqDoXGHQJmZ1FGHANOHuJeHgNKHEBUDuJeHIFUHQXsDuBqHAN7HuBOHgvsZSrCV5FYHMBiD9BsVIraD1rwV5X7HgBeHErCDWXCDoJeDcJeDQX7Z1N7V5FGHuvmVcFCH5FqVoBqD9BsVIJwHArKHuJwDMzGHEXeV5XCDoraHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcXGZSX7HIrwHuFUDMvODkFCH5FqHIraHQXOZ1F7DSBOD5XGHgNOVkXeV5XCHMXGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoF7HQBiZkBiDSNOHuJsDMveHErCDWFGZuBOHQXsZ9JeZ1BYHQB/DMvmDkBsDur/HIJsHQNmVIraZ1rYHQJeHgNOVkJqDuJeHMBqHQXsZ9JeZ1zGVWJeDMNODkB/DWFYHMraHQNmVIraD1rwV5FGDEBeHEXeH5X/DoF7HQNwDQBqDSN7HQJeDMBYV9BUDWFYVoBiHQXOVIJwZ1rYHQNUDMvCHErCDurmDoXGHQFYDQBOZ1BYHQJeDMBYZSNiH5FqHIJsHQBiZ1FUZ1rYHQJsHgveDkXKH5F/HIraHQJKDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQXOZkBiDSNOHuX7DMvCVkJ3V5FqHIraHQFYZ9JeZ1zGVWBqDMBODkBsHEBmVEX7HQNmVIraZ1rYHuFGHgBeHEJqDWXCHIFGHQJeDuBOZ1BYHuBqDMzGVcXKDWJeHIJsHQXGZkFUD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BeHQX7HgBYDkFeV5FaHMJeDcBwDQFGD1veHQXGHgvsVcBOHEX7DoraHQFYH9FaHAvmZMJeHgvCZSJGDuFaZuBqD9NmZSFGHANOV5JwHuNODkFCH5B3VoraD9XOH9B/D1rwD5XGDEBeHEJGDWF/ZuFaDcJeZSX7HArYV5BqHgrKV9FiV5FGVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSX7HIrKV5JwHuzGDkFCH5XCVoJwDcJUH9FaHAN7ZMFaDErKHEFiV5FaDoraDcJeH9X7HArYV5FGHuBYVcFCH5FqHMBiD9BsVIraD1rwV5X7HgBeHEFiDuJeZuBqHQNwDQFUD1BeHuJeDMrYVcrsH5B7VEF7HQXOZSBqDSNOD5XGDMvCZSXeHEFqHIJsD9XsZ9JeD1BeD5F7DMvmVcFiV5X7DoF7D9XOZSB/DSrYV5B/DMNKZSXeH5FYZuB/D9NwH9FGD1BeV5JwHgrYDkBODWFaVoFGD9JmZ1B/HIBeV5FUDMBYHEJGH5F/ZuB/D9NwH9X7HArYV5BqHgrYDkFCDWXCVoraD9XOZSBOZ1BeV5B/DEBOZSXeH5FYVoB/D9XsH9FGD1veD5JwDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQJKDQJsZ1vCV5FGHuNOV9FeDWXCDorqD9JmZ1BiD1rwZMXGHgvsZSJ3HEXCHMBOHQNwH9BiZ1vCVWJwHgrKVcrsH5FqVEX7D9BsZ1FGHArKV5FUDMrYZSXeV5FqHIJsDcBwDQFGHAveV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWXKVEX7HQNmZkBiHAzGD5JeHgveHErCDWF/VoBiDcJUZSX7Z1BYHuFaHuBOV9FeHEF/HMFGHQBsH9B/DSNOV5BqDMvCHArCV5FaDoBOHQXsZSBiDSrwV5BqHuvmZSNiHEX/VorqD9XOZSBqHArKV5FUDMrYZSXeV5FqHIJsHQXsH9FGHANOV5FUHuNOVIBOH5FqDoFGD9XOH9B/D1rwD5FaDMrYHENiDWF/VoB/D9XsH9X7HArYHuFaHuNOZSrCH5FqDoXGHQJmZ1BiDSvOV5FUHgveHEBOV5JeZura";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -4283,6 +4283,33 @@ if ($_SESSION['scriptcase']['proc_mobile'])
    {
        $_SESSION['sc_session'][$script_case_init]['grid_curso_asignaturas_por_docente']['b_sair'] = true;
    }
+   $STR_lang    = (isset($_SESSION['scriptcase']['str_lang']) && !empty($_SESSION['scriptcase']['str_lang'])) ? $_SESSION['scriptcase']['str_lang'] : "es";
+   if (isset($_SESSION['scriptcase']['grid_curso_asignaturas_por_docente']['session_timeout']['lang'])) {
+       $STR_lang = $_SESSION['scriptcase']['grid_curso_asignaturas_por_docente']['session_timeout']['lang'];
+   }
+   $STR_schema_all = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_Meadow/Sc9_Meadow";
+   $NM_arq_lang = "../_lib/lang/" . $STR_lang . ".lang.php";
+   $Nm_lang = array();
+   if (is_file($NM_arq_lang))
+   {
+       $Lixo = file($NM_arq_lang);
+       foreach ($Lixo as $Cada_lin) 
+       {
+           if (strpos($Cada_lin, "array()") === false && (trim($Cada_lin) != "<?php")  && (trim($Cada_lin) != "?" . ">"))
+           {
+               eval (str_replace("\$this->", "\$", $Cada_lin));
+           }
+       }
+   }
+   $_SESSION['scriptcase']['charset'] = (isset($Nm_lang['Nm_charset']) && !empty($Nm_lang['Nm_charset'])) ? $Nm_lang['Nm_charset'] : "UTF-8";
+   ini_set('default_charset', $_SESSION['scriptcase']['charset']);
+   foreach ($Nm_lang as $ind => $dados)
+   {
+      if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($dados))
+      {
+          $Nm_lang[$ind] = sc_convert_encoding($dados, $_SESSION['scriptcase']['charset'], "UTF-8");
+      }
+   }
    if (isset($_SESSION['scriptcase']['sc_outra_jan']) && $_SESSION['scriptcase']['sc_outra_jan'] == 'grid_curso_asignaturas_por_docente')
    {
        $_SESSION['sc_session'][$script_case_init]['grid_curso_asignaturas_por_docente']['sc_outra_jan'] = true;
@@ -4477,6 +4504,99 @@ if ($_SESSION['scriptcase']['proc_mobile'])
            $_SESSION['scriptcase']['sc_url_saida'][$script_case_init] = $salva_url_saida;
        } 
        $GLOBALS["NM_ERRO_IBASE"] = 0;  
+       if (isset($_SESSION['nm_session']['user']['sec']['flag']) && $_SESSION['nm_session']['user']['sec']['flag'] == "N") 
+       { 
+           $_SESSION['scriptcase']['sc_apl_seg']['grid_curso_asignaturas_por_docente'] = "on";
+       } 
+       if (isset($_GET['SC_Link_View']) && !empty($_GET['SC_Link_View']) && is_numeric($_GET['SC_Link_View']))
+       { 
+           $_SESSION['scriptcase']['sc_apl_seg']['grid_curso_asignaturas_por_docente'] = "on";
+       } 
+       if (!$_SESSION['sc_session'][$script_case_init]['grid_curso_asignaturas_por_docente']['opc_psq'] && !isset($_SESSION['scriptcase']['grid_curso_asignaturas_por_docente']['session_timeout']['redir'])) 
+       { 
+          if (!isset($_SESSION['scriptcase']['sc_apl_seg']['grid_curso_asignaturas_por_docente']) || $_SESSION['scriptcase']['sc_apl_seg']['grid_curso_asignaturas_por_docente'] != "on")
+          { 
+              $NM_Mens_Erro = $Nm_lang['lang_errm_unth_user'];
+              $nm_botao_ok = ($_SESSION['sc_session'][$script_case_init]['grid_curso_asignaturas_por_docente']['iframe_menu']) ? false : true;
+              if (isset($_SESSION['scriptcase']['sc_aba_iframe']))
+              {
+                  foreach ($_SESSION['scriptcase']['sc_aba_iframe'] as $aba => $apls_aba)
+                  {
+                      if (in_array("grid_curso_asignaturas_por_docente", $apls_aba))
+                      {
+                          $nm_botao_ok = false;
+                           break;
+                      }
+                  }
+              }
+              if ((isset($_SESSION['sc_session'][$script_case_init]['grid_curso_asignaturas_por_docente']['embutida']) && $_SESSION['sc_session'][$script_case_init]['grid_curso_asignaturas_por_docente']['embutida']) || (isset($_SESSION['sc_session'][$script_case_init]['grid_curso_asignaturas_por_docente']['embutida_form']) && $_SESSION['sc_session'][$script_case_init]['grid_curso_asignaturas_por_docente']['embutida_form']))
+              {
+                   $nm_botao_ok = false;
+              }
+?>
+             <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+              <HTML>
+               <HEAD>
+                <TITLE></TITLE>
+               <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+<?php
+if ($_SESSION['scriptcase']['proc_mobile'])
+{
+?>
+   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<?php
+}
+?>
+                <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>                <META http-equiv="Pragma" content="no-cache"/>
+                <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+                <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $STR_schema_all ?>_grid.css" /> 
+                <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $STR_schema_all ?>_grid<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" /> 
+               </HEAD>
+               <body class="scGridPage">
+                <table align="center"><tr><td style="padding: 0"><div class="scGridBorder">
+                <table class="scGridTabela" width='100%' cellspacing=0 cellpadding=0><tr class="scGridFieldOdd"><td class="scGridFieldOddFont" style="padding: 15px 30px; text-align: center">
+                 <?php echo $NM_Mens_Erro; ?>
+<?php
+              if ($nm_botao_ok)
+              {
+?>
+                <br />
+                <form name="Fseg" method="post" 
+                                    action="<?php echo $nm_url_saida; ?>" 
+                                    target="_self"> 
+                 <input type="hidden" name="script_case_init" value="<?php echo NM_encode_input($script_case_init) ?>"/> 
+                 <input type="hidden" name="script_case_session" value="<?php echo NM_encode_input(session_id());?>"/>
+                 <input type="submit" name="sc_sai_seg" value="OK"> 
+                </form> 
+<?php
+              }
+?>
+                </td></tr></table>
+                </div></td></tr></table>
+<?php
+              if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']))
+              {
+?>
+<br /><br /><br />
+<table align="center" style="width: 450px"><tr><td style="padding: 0"><div class="scGridBorder">
+ <table style="width: 100%" class="scGridTabela">
+  <tr class="scGridFieldOdd">
+   <td class="scGridFieldOddFont" style="padding: 15px 30px">
+    <?php echo $Nm_lang['lang_errm_unth_hwto']; ?>
+   </td>
+  </tr>
+ </table>
+</div></td></tr></table>
+<?php
+              }
+?>
+               </body>
+              </HTML>
+<?php
+              exit;
+          } 
+       } 
        if (isset($_SESSION['sc_session'][$script_case_init]['grid_curso_asignaturas_por_docente']['sc_outra_jan']) && $_SESSION['sc_session'][$script_case_init]['grid_curso_asignaturas_por_docente']['sc_outra_jan'])
        {
            $nm_apl_dependente = 0;
