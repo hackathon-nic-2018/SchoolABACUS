@@ -215,8 +215,8 @@ class grid_periodos_lectivo_ini
       $this->nm_dt_criacao   = "20181129"; 
       $this->nm_hr_criacao   = "145514"; 
       $this->nm_autor_alt    = "alvarado"; 
-      $this->nm_dt_ult_alt   = "20181129"; 
-      $this->nm_hr_ult_alt   = "211051"; 
+      $this->nm_dt_ult_alt   = "20181130"; 
+      $this->nm_hr_ult_alt   = "001035"; 
       $this->Apl_paginacao   = "PARCIAL"; 
       $temp_bug_list         = explode(" ", microtime()); 
       list($NM_usec, $NM_sec) = $temp_bug_list; 
@@ -770,7 +770,7 @@ class grid_periodos_lectivo_ini
       $this->nm_ttf_chi  = array("zh_cn", "zh_hk", "ko");
       $_SESSION['sc_session'][$this->sc_page]['grid_periodos_lectivo']['seq_dir'] = 0; 
       $_SESSION['sc_session'][$this->sc_page]['grid_periodos_lectivo']['sub_dir'] = array(); 
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1D9NwDQFGHIrKHuBiHuzGVcBUDuX7DoNUDcJUZ1BOHArYV5JsDMvCZSJ3HEXCDoBqHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoF7HQBiZkBiDSNOHuJsDMveHErCDWFGZuBOHQXsZ9JeZ1BYHQB/DMvmDkBsDur/HIJsHQNmVIraZ1rYHQJeHgNOVkJqDuJeHMBqHQXsZ9JeZ1zGVWJeDMNODkB/DWFYHMraHQNmVIraD1rwV5FGDEBeHEXeH5X/DoF7HQNwDQBqDSN7HQJeDMBYV9BUDWFYVoBiHQXOVIJwZ1rYHQNUDMvCHErCDurmDoXGHQFYDQBOZ1BYHQJeDMBYZSNiH5FqHIJsHQBiZ1FUZ1rYHQJsHgveDkXKH5F/HIraHQJKDuBOD1BeD5rqHuvmVcBOH5B7VoBqHQXOZkBiDSNOHuX7DMvCVkJ3V5FqHIraHQFYZ9JeZ1zGVWBqDMBODkBsHEBmVEX7HQNmVIraZ1rYHuFGHgBeHEJqDWXCHIFGHQJeDuBOZ1BYHuBqDMzGVcXKDWJeHIJsHQXGZkFUD1rwV5FGDEBeHEXeH5X/DoF7D9NwZSX7D1BeV5raHuzGVcFKDWFaVENUD9JmZ1X7Z1BeHQX7HgBYDkFeV5FaHMJeDcBwDQFGD1veHQXGHgvsVcBOHEX7DoraHQFYH9FaHAvmZMJeHgvCZSJGDuFaZuBqD9NmZSFGHANOV5JwHuNODkFCH5B3VoraD9XOH9B/D1rwD5XGDEBeHEJGDWF/ZuFaDcJeZSX7HArYV5BqHgrKV9FiV5FGVoBqD9BsZ1F7DSrYD5rqDMrYZSJGH5FYDoF7DcXOZSX7HIrKV5JwHuzGDkFCH5XCVoJwDcJUH9FaHAN7ZMFaDErKHEFiV5FaDoraDcJeH9X7HArYV5FGHuBYVcFCH5FqHMBiD9BsVIraD1rwV5X7HgBeHEFiV5XCVoBiD9NmDQFaHIBeV5FGHgrKVcFKDWFaHMF7HQBiVIJsHIBeHQX7DENOHENiDWXCHIXGHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcJUH9FaHAN7V5JeDMzGHENiV5FaDoBODcBwDQFGHANOD5BqHuNODkBOH5XCVoraD9XOH9BOZ1BeV5FGDMzGHEXeH5FYZuFaD9JKDQFGHAN7V5JwDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHMraD9JmVINUD1vsD5BqHgrKZSJGDuFaHMJsD9NwZSBiHINaVWJeHuzGZSNiDuX7HMXGHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/D9NwDQB/Z1rwV5X7HuzGVIBOV5X7DoJsD9XGZSB/HArYHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOV9BUDurGVoF7HQNmZkBiHAvCZMJeHgBeHEFiV5B3DoF7D9XsDuFaHAveHQJsDMvOVcB/V5X7HINUDcBqH9FaHANOV5JsHgBOHErCDuFaHINUDcBwDQFaHAveD5NUHgNKDkBOV5FYHMBiHQBsZSFaHAN7D5NUDEBOVkXeH5FYVoXGD9NwZSX7D1BeV5JwHgNKVcXKDWXCDoraD9BsZSB/HABYHQJwDEBODkFeH5FYVoFGHQJKDQBqDSzGD5NUDMvOVcXeV5r/VEB/";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1DcBwDQFaHArYHQJsDMBYZSNiH5XCHINUDcBqVIJsD1rwD5BqHgrKZSJqDuJeDoraD9NmDQFaHAveD5NUHgNKDkBOV5FYHMBiHQNmZkFGZ1vOZMJwHgNOHEJqDuJeHIJwHQXOH9BiHAvCD5F7DMBOV9FeH5FqHMBODcFYZ1BiHAvCV5X7DMveHEJqDWr/HIJeHQNmDuFaHAvCD5F7DMrYVIBsDuX7HMraDcFYZkBiHAvCD5rqDEBOHEFiHEFqDoF7DcJUZSBiHIvsVWFaDMBYVcFeV5X/VEraDcNmZSBqDSBOV5X7HgBOZSJqH5F/HIrqHQBiZSFUHANKD5F7DMBYVcFeV5BmVoFGDcFYZ1FGHINaV5X7HgBeHArsDWrGZuFaHQXsZSBiHAvOV5FGHuNOVcFKHEFYVoBqDcBwH9BqDSvOZMJwHgNOZSJqDWXCHMBqHQXsZSFUHAvmD5F7DMvsVcB/H5FqHINUHQBqZ1BiHAvCV5X7HgNOVkJ3DWX7HIBOHQJKZ9F7DSzGD5F7HgvOV9FeDur/HIJeDcFYZ1X7HAzGD5rqDEBOHEFiHEFqDoF7DcJUZSFGD1BeV5FGHgrYDkFCDWXCVoB/D9BiZ1F7HIveD5BiHgBeDkB/HEB3DoB/HQNmH9X7HABYVWJsDMBYVcBODWFaDoFUDcJUZkFUZ1BeZMBqHgBYHAFKV5FaZuBqD9NmZSFGHIrwV5BOHuNODkBOV5X7VENUHQFYH9FaD1rwD5rqDErKVkXeHEFqDoBOD9NmDQJsD1BeV5FUHuzGDkBOH5XKVoraDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwD5BOHuNODkFCH5FqVENUDcNwH9B/HIBeD5XGDEvsHEJGDWF/DoB/DcJeDQX7HANOV5FUHgvsDkFCDWFYVoFGHQJmZ1F7Z1vmD5rqDEBOHArCDWF/HMJeD9NmZSFUHANOVWBqDMrwVcBOV5FYDoNUDcBqZ1B/Z1BeV5BOHgBODkXKH5FYHIF7D9FYDQFaHAveD5NUHgNKDkBOV5FYHMBiHQFYH9B/HIBeD5XGDEBeHEXeH5F/DoFUD9NwDQJsHABYV5BOHuvmVcBOV5X7DoNUD9BsH9FaD1rwD5BiDEBOHEFiDWFqDoF7D9NmDQJsDSBYVWJeHuNOZSJ3V5F/VorqD9JmZ1rqHArKHQJwDEBODkFeH5FYVoFGHQJKDQFaHAveD5NUHgNKDkBOV5FYHMBiD9BsZ1rqHABYHQraHgNKZSXeDuJeHMB/HQXsZSX7HIrKHuJwDMvODkBsH5XCDoXGHQJmZ1F7Z1vmD5rqDEBOHArCDWF/VoB/D9NwDQB/Z1rwV5X7HuzGVIBOV5X7DoJsD9XGZSB/HArYHQJwDEBODkFeH5FYVoFGHQJKDQBqHAvmV5JeDMvOV9BUDurGVoF7HQNmZkBiD1NaD5BqHgBeHEFiV5B3DoF7D9XsDuFaHAveHQrqHgvOVcrsDWXKVoX7HQXOH9BqD1rwHQNUHgBOHErsDWXCHIF7D9NmDQX7HIrKD5JwDMvOVcFCDWFYHMBiD9BsVIraD1rwV5X7HgBeHErCDWXCDoJeDcJeDQX7Z1N7V5FGHuvmVcFCH5FqVoBqD9BsVIJwHArKHuJwDMzGHEXeV5XCDoraHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VEFGHQFYVINUHAvsZMNU";
       $this->prep_conect();
       $this->conectDB();
       if (!in_array(strtolower($this->nm_tpbanco), $this->nm_bases_all))
@@ -1564,10 +1564,6 @@ class grid_periodos_lectivo_apl
    var $Res;
    var $Graf;
    var $pdf;
-   var $xls;
-   var $xml;
-   var $csv;
-   var $rtf;
 //
 //----- 
    function prep_modulos($modulo)
@@ -1881,56 +1877,6 @@ class grid_periodos_lectivo_apl
       $this->Ini->Str_btn_grid    = trim($str_button) . "/" . trim($str_button) . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".php";
       $this->Ini->Str_btn_css     = trim($str_button) . "/" . trim($str_button) . ".css";
       include($this->Ini->path_btn . $this->Ini->Str_btn_grid);
-      $this->arr_buttons['group_group_2']= array(
-          'value'            => "" . $this->Ini->Nm_lang['lang_btns_expt_email_title'] . "",
-          'hint'             => "" . $this->Ini->Nm_lang['lang_btns_expt_email'] . "",
-          'type'             => "button",
-          'display'          => "text_img",
-          'display_position' => "text_right",
-          'image'            => "scriptcase__NM__envelope.png",
-          'style'            => "default",
-      );
-
-      $this->arr_buttons['group_group_1']= array(
-          'value'            => "" . $this->Ini->Nm_lang['lang_btns_expt'] . "",
-          'hint'             => "" . $this->Ini->Nm_lang['lang_btns_expt'] . "",
-          'type'             => "button",
-          'display'          => "text_img",
-          'display_position' => "text_right",
-          'image'            => "scriptcase__NM__export.png",
-          'style'            => "default",
-      );
-
-      $this->arr_buttons['group_group_3']= array(
-          'value'            => "" . $this->Ini->Nm_lang['lang_btns_expt_email_title'] . "",
-          'hint'             => "" . $this->Ini->Nm_lang['lang_btns_expt_email'] . "",
-          'type'             => "button",
-          'display'          => "text_img",
-          'display_position' => "text_right",
-          'image'            => "scriptcase__NM__envelope.png",
-          'style'            => "default",
-      );
-
-      $this->arr_buttons['group_group_4']= array(
-          'value'            => "" . $this->Ini->Nm_lang['lang_btns_expt'] . "",
-          'hint'             => "" . $this->Ini->Nm_lang['lang_btns_expt'] . "",
-          'type'             => "button",
-          'display'          => "text_img",
-          'display_position' => "text_right",
-          'image'            => "scriptcase__NM__export.png",
-          'style'            => "default",
-      );
-
-      $this->arr_buttons['group_group_5']= array(
-          'value'            => "" . $this->Ini->Nm_lang['lang_btns_settings'] . "",
-          'hint'             => "" . $this->Ini->Nm_lang['lang_btns_settings'] . "",
-          'type'             => "button",
-          'display'          => "text_img",
-          'display_position' => "text_right",
-          'image'            => "scriptcase__NM__gear.png",
-          'style'            => "default",
-      );
-
       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['embutida']) || !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['embutida'])
       { 
       $this->Ini->Color_bg_ajax            = (!isset($str_ajax_bg)       || "" == trim($str_ajax_bg))         ? "#000" : $str_ajax_bg;
@@ -1979,9 +1925,9 @@ class grid_periodos_lectivo_apl
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['field_order'][] = "desde";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['field_order'][] = "hasta";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['field_order'][] = "tipo_periodo_id";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['field_order'][] = "estatus_id";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['field_order'][] = "colegio_id";
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['field_order'][] = "periodo_id";
-          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['field_order_orig'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['field_order'];
           if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['usr_cmp_sel']))
           { 
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['usr_cmp_sel'] = array();
@@ -2242,7 +2188,19 @@ class grid_periodos_lectivo_apl
               unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['tot_geral']);
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opcao'] = 'pesq';
               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['orig_pesq'] = 'grid';
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['interativ_refresh'] = true;
           } 
+      } 
+      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opcao'] == "interativ_search")
+      { 
+          $this->SC_proc_interativ_search($_POST['parm']);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq_ant'] = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq'];
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['contr_array_resumo'] = "NAO";
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['contr_total_geral']  = "NAO";
+          unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['tot_geral']);
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opcao'] = 'inicio';
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_int_search'] = true;
+          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['interativ_refresh'] = true;
       } 
       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opcao'] == 'pesq' && isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['orig_pesq']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['orig_pesq']))  
       { 
@@ -2266,6 +2224,7 @@ class grid_periodos_lectivo_apl
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['cond_pesq'] = ""; 
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq_filtro'] = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq_fast'] = "";
+         $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq_interativ'] = "";
          $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['contr_total_geral'] = "NAO";
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['sc_total']);
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['tot_geral']);
@@ -2327,66 +2286,6 @@ class grid_periodos_lectivo_apl
           $this->Ini->nm_limite_lin_res_prt = 0;
           $GLOBALS['nmgp_cor_print']        = $nmgp_cor_word;
       } 
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opcao'] == "xls")  
-      { 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['embutida'])
-          { 
-              require_once($this->Ini->path_embutida . "grid_periodos_lectivo/grid_periodos_lectivo_xls.class.php"); 
-          } 
-          else 
-          { 
-              require_once($this->Ini->path_aplicacao . "grid_periodos_lectivo_xls.class.php"); 
-          } 
-          $this->xls  = new grid_periodos_lectivo_xls();
-          $this->prep_modulos("xls");
-          $this->xls->monta_xls();
-      }
-      else
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opcao'] == "xml")  
-      { 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['embutida'])
-          { 
-              require_once($this->Ini->path_embutida . "grid_periodos_lectivo/grid_periodos_lectivo_xml.class.php"); 
-          } 
-          else 
-          { 
-              require_once($this->Ini->path_aplicacao . "grid_periodos_lectivo_xml.class.php"); 
-          } 
-          $this->xml  = new grid_periodos_lectivo_xml();
-          $this->prep_modulos("xml");
-          $this->xml->monta_xml();
-      }
-      else
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opcao'] == "csv")  
-      { 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['embutida'])
-          { 
-              require_once($this->Ini->path_embutida . "grid_periodos_lectivo/grid_periodos_lectivo_csv.class.php"); 
-          } 
-          else 
-          { 
-              require_once($this->Ini->path_aplicacao . "grid_periodos_lectivo_csv.class.php"); 
-          } 
-          $this->csv  = new grid_periodos_lectivo_csv();
-          $this->prep_modulos("csv");
-          $this->csv->monta_csv();
-      }
-      else   
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opcao'] == "rtf")  
-      { 
-          if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['embutida'])
-          { 
-              require_once($this->Ini->path_embutida . "grid_periodos_lectivo/grid_periodos_lectivo_rtf.class.php"); 
-          } 
-          else 
-          { 
-              require_once($this->Ini->path_aplicacao . "grid_periodos_lectivo_rtf.class.php"); 
-          } 
-          $this->rtf  = new grid_periodos_lectivo_rtf();
-          $this->prep_modulos("rtf");
-          $this->rtf->monta_rtf();
-      }
-      else
       if (substr($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opcao'], 0, 7) == "grafico")  
       { 
           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['embutida'])
@@ -2771,6 +2670,17 @@ else
                   $tmp_cmd = " where (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq_filtro'] . ")"; 
               }
           }
+          if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq_interativ'])) 
+          {
+              if (!empty($tmp_cmd)) 
+              {
+                  $tmp_cmd .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq_interativ'] . ")"; 
+              }
+              else
+              {
+                  $tmp_cmd = " where (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq_interativ'] . ")"; 
+              }
+          }
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq'] = $tmp_cmd;
           unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['fast_search']);
           return;
@@ -2803,7 +2713,11 @@ else
       }
       if ($field == "SC_all_Cmp") 
       {
-          $this->SC_monta_condicao($comando, "estatus_id", $arg_search, $data_search);
+          $data_lookup = $this->SC_lookup_estatus_id($arg_search, $data_search);
+          if (is_array($data_lookup) && !empty($data_lookup)) 
+          {
+              $this->SC_monta_condicao($comando, "estatus_id", $arg_search, $data_lookup);
+          }
       }
       if (empty($comando)) 
       {
@@ -2833,6 +2747,10 @@ else
       else
       {
           $comando = " where (" . $comando . ")"; 
+      }
+      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq_interativ'])) 
+      {
+          $comando .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq_interativ'] . ")";
       }
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq'] = $comando;
       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['fast_search'][0] = $field;
@@ -3106,6 +3024,270 @@ else
            $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
            exit; 
        } 
+   }
+   function SC_lookup_estatus_id($condicao, $campo)
+   {
+       $result     = array();
+       $campo_orig = $campo;
+       $campo      = substr($this->Db->qstr($campo), 1, -1);
+       $nm_comando = "SELECT descripcion, estatus_id FROM estatus_periodos WHERE (descripcion LIKE '%$campo%') AND (colegio_id=" . $_SESSION['vglo_colegio'] . ")" ; 
+       if ($condicao == "ii")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "LIKE '$campo%'", $nm_comando);
+       }
+       if ($condicao == "df" || $condicao == "np")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "NOT LIKE '%$campo%'", $nm_comando);
+       }
+       if ($condicao == "gt")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "> '$campo'", $nm_comando);
+       }
+       if ($condicao == "ge")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", ">= '$campo'", $nm_comando);
+       }
+       if ($condicao == "lt")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "< '$campo'", $nm_comando);
+       }
+       if ($condicao == "le")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "<= '$campo'", $nm_comando);
+       }
+       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
+       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+       if ($rx = $this->Db->Execute($nm_comando)) 
+       { 
+           $campo = $campo_orig;
+           while (!$rx->EOF) 
+           { 
+               $chave = (isset($rx->fields[1])) ? $rx->fields[1] : $rx->fields[0];
+               $label = $rx->fields[0];
+               if ($condicao == "eq" && $campo == $label)
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "ii" && $campo == substr($label, 0, strlen($campo)))
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "qp" && strstr($label, $campo))
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "np" && !strstr($label, $campo))
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "df" && $campo != $label)
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "gt" && $label > $campo )
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "ge" && $label >= $campo)
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "lt" && $label < $campo)
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "le" && $label <= $campo)
+               {
+                   $result[] = $chave;
+               }
+               $rx->MoveNext() ;
+           }  
+           return $result;
+       }  
+       elseif ($GLOBALS["NM_ERRO_IBASE"] != 1)  
+       { 
+           $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+           exit; 
+       } 
+   }
+   function SC_proc_interativ_search($Parms)
+   {
+       $Parms = str_replace("__NM_PLUS__", "+", $Parms);
+       $Parms = str_replace("__NM_AMP__", "&", $Parms);
+       $Parms = str_replace("__NM_PRC__", "%", $Parms);
+       $cmps_numeric = array();
+       $cmps_numeric[] = "estatus_id";
+       $cmps_numeric[] = "tipo_periodo_id";
+       $range_bw = array();
+       if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($Parms))
+       {
+           $Parms = NM_conv_charset($Parms, $_SESSION['scriptcase']['charset'], "UTF-8");
+       }
+       $tmp     = explode("__DL__", $Parms);
+       $cmd_sql = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['int_search_sql'][$tmp[0]];
+       $vls     = "";
+       $bol_numeric = false;
+       if ($tmp[3] != "clear_interativ")
+       {
+           $vls  = explode("_VLS_", $tmp[3]);
+           if($tmp[2] == "nn" || $tmp[2] == "bw")
+           {
+               $bol_numeric = true;
+               $delim  = "";
+               $delim1 = "";
+           }
+           else
+           {
+               $delim  = "'";
+               $delim1 = "'";
+           }
+           if ($tmp[2] == "dt" || $tmp[2] == "dh" || $tmp[2] == "hh")
+           {
+               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
+               {
+                   $delim  = "#";
+                   $delim1 = "#";
+               }
+               if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['SC_sep_date']) && !empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['SC_sep_date']))
+               {
+                   $delim  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['SC_sep_date'];
+                   $delim1 = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['SC_sep_date1'];
+               }
+           }
+       }
+       unset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['interativ_search'][$tmp[0]]);
+       if (!empty($vls))
+       {
+           $prep = "";
+           $bol_has_empty = false;
+           foreach ($vls as $cada_val)
+           {
+               $cada_val = NM_charset_decode($cada_val);
+               $descr = $cada_val;
+               $tmp_pos = strpos($cada_val, "##@@");
+               if ($tmp_pos !== false)
+               {
+                   $descr    = substr($cada_val, $tmp_pos + 4);
+                   $cada_val = substr($cada_val, 0, $tmp_pos);
+               }
+               $cada_val = substr($this->Db->qstr($cada_val), 1, -1);
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['interativ_search'][$tmp[0]]['lab'][$tmp[1]][] = $descr;
+               if ($cada_val == "")
+               {
+                   $bol_has_empty = true;
+               }
+               if (in_array($tmp[0], $cmps_numeric))
+               {
+                  if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['decimal_db'] == ".")
+                  {
+                      $cada_val  = str_replace(",", ".", $cada_val);
+                  }
+                  else
+                  {
+                      $delim  = "'";
+                      $delim1 = "'";
+                      $cada_val  = str_replace(".", ",", $cada_val);
+                  }
+                   $prep .= ($prep != "") ? "," : "";
+                   $prep .= $delim . $cada_val . $delim1;
+               }
+               else
+               {
+                   $prep .= ($prep != "") ? "," : "";
+                   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access) && $cada_val == "")
+                   {
+                       $prep .= 'null';
+                   }
+                   else
+                   $prep .= $delim . $cada_val . $delim1;
+               }
+               $range_bw[] = $cada_val;
+           }
+               $str_add_null    = '';
+               $str_add_null_or = '';
+               if($bol_has_empty)
+               {
+                   $str_add_null    = ' ' . $cmd_sql . ' is null ';
+                   $str_add_null_or = ' OR ' . $cmd_sql . ' is null ';
+               }
+           if ($prep == "" && $bol_numeric)
+           {
+               if (in_array(strtolower($this->nm_tpbanco), $this->nm_bases_postgres))
+               {
+                   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['interativ_search'][$tmp[0]]['val'] = $cmd_sql . " is null";
+               }
+               else
+               {
+                   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['interativ_search'][$tmp[0]]['val'] = $cmd_sql . " = '' or " . $cmd_sql . " is null";
+               }
+           }
+           elseif ($prep == "" && $delim != "")
+           {
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['interativ_search'][$tmp[0]]['val'] = $cmd_sql . " = '' or " . $cmd_sql . " is null";
+           }
+           elseif ( $tmp[2] == "bw")
+           {
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['interativ_search'][$tmp[0]]['val'] = $cmd_sql . " between " . $delim . $range_bw[0] .  $delim1 . " and " . $delim . $range_bw[1] .  $delim1 . $str_add_null_or;
+           }
+           else
+           {
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['interativ_search'][$tmp[0]]['val'] = $cmd_sql . " IN (" . $prep . ")" . $str_add_null_or;
+           }
+       }
+      $tmp_cmd = "";
+      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_orig'])) 
+      {
+          $tmp_cmd = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_orig']; 
+      }
+      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq_filtro'])) 
+      {
+          if (!empty($tmp_cmd)) 
+          {
+              $tmp_cmd .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq_filtro'] . ")"; 
+          }
+          else
+          {
+              $tmp_cmd = " where (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq_filtro'] . ")"; 
+          }
+      }
+      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq_fast'])) 
+      {
+          if (!empty($tmp_cmd)) 
+          {
+              $tmp_cmd .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq_fast'] . ")";
+          }
+          else 
+          {
+              $tmp_cmd = " where (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq_fast'] . ")";
+          }
+      }
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq_interativ'] = "";
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_sem_interativ']  = $tmp_cmd;
+      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['interativ_search'])) 
+      {
+          $prim = true;
+          foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['interativ_search'] as $cmp => $val) 
+          {
+              if (!$prim)
+              {
+                 $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq_interativ'] .= " and ";
+              }
+              $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq_interativ'] .= "(" . $val['val'] . ")";
+              $prim = false;
+          }
+      }
+      if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq_interativ'])) 
+      {
+          if (!empty($tmp_cmd)) 
+          {
+              $tmp_cmd .= " and (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq_interativ'] . ")"; 
+          }
+          else
+          {
+              $tmp_cmd = " where (" . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq_interativ'] . ")"; 
+          }
+      }
+      $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq'] = $tmp_cmd;
    }
   function html_doc_word($nm_arquivo_doc_word)
   {

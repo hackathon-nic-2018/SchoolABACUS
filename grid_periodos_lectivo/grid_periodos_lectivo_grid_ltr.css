@@ -6,6 +6,8 @@
 .css_hasta_grid_line {vertical-align: top;text-align: center;}
 .css_tipo_periodo_id_label {text-align:left;vertical-align:middle;font-weight:bold;}
 .css_tipo_periodo_id_grid_line {vertical-align: top;text-align: left;}
+.css_estatus_id_label {text-align:left;vertical-align:middle;font-weight:bold;}
+.css_estatus_id_grid_line {vertical-align: top;text-align: left;}
 .css_colegio_id_label {text-align:right;vertical-align:middle;font-weight:bold;}
 .css_colegio_id_grid_line {vertical-align: top;text-align: right;}
 .css_periodo_id_label {text-align:right;vertical-align:middle;font-weight:bold;}

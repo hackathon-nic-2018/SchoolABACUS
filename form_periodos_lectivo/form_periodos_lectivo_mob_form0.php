@@ -1548,7 +1548,7 @@ else
  else {
      $_SESSION['sc_session'][$this->Ini->sc_page]['form_periodos_lectivo_mob']['grid_cursos_script_case_init'] = $this->Ini->sc_page;
  }
- $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_periodos_lectivo_mob']['grid_cursos_script_case_init'] ]['grid_cursos']['embutida_form_full']  = true;
+ $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_periodos_lectivo_mob']['grid_cursos_script_case_init'] ]['grid_cursos']['embutida_form_full']  = false;
  $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_periodos_lectivo_mob']['grid_cursos_script_case_init'] ]['grid_cursos']['embutida_form']       = true;
  $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_periodos_lectivo_mob']['grid_cursos_script_case_init'] ]['grid_cursos']['embutida_pai']        = "form_periodos_lectivo_mob";
  $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_periodos_lectivo_mob']['grid_cursos_script_case_init'] ]['grid_cursos']['embutida_form_parms'] = "SC_glo_par_vglo_colegio*scinvglo_colegio*scoutvglo_periodo*scin" . $this->nmgp_dados_form['periodo_id'] . "*scoutNMSC_cab*scinN*scout";

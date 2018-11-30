@@ -2425,7 +2425,7 @@ class form_periodos_lectivo_mob_apl
               $this->NM_ajax_info['navStatus']['ava'] = $this->Nav_permite_ava ? 'S' : 'N';
               $this->NM_ajax_info['fldList']['colegio_id']['keyVal'] = form_periodos_lectivo_mob_pack_protect_string($this->nmgp_dados_form['colegio_id']);
               $this->NM_ajax_info['fldList']['periodo_id']['keyVal'] = form_periodos_lectivo_mob_pack_protect_string($this->nmgp_dados_form['periodo_id']);
-              $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_periodos_lectivo_mob']['grid_cursos_script_case_init'] ]['grid_cursos']['embutida_form_full'] = true;
+              $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_periodos_lectivo_mob']['grid_cursos_script_case_init'] ]['grid_cursos']['embutida_form_full'] = false;
               $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_periodos_lectivo_mob']['grid_cursos_script_case_init'] ]['grid_cursos']['embutida_form']       = true;
               $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_periodos_lectivo_mob']['grid_cursos_script_case_init'] ]['grid_cursos']['embutida_pai']        = "form_periodos_lectivo_mob";
               $_SESSION['sc_session'][ $_SESSION['sc_session'][$this->Ini->sc_page]['form_periodos_lectivo_mob']['grid_cursos_script_case_init'] ]['grid_cursos']['embutida_form_parms'] = "SC_glo_par_vglo_colegio*scinvglo_colegio*scoutvglo_periodo*scin" . $this->nmgp_dados_form['periodo_id'] . "*scoutNMSC_cab*scinN*scout";

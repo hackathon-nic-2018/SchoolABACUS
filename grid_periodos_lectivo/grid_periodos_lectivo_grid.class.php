@@ -54,6 +54,7 @@ class grid_periodos_lectivo_grid
    var $desde;
    var $hasta;
    var $tipo_periodo_id;
+   var $estatus_id;
    var $colegio_id;
    var $periodo_id;
 //--- 
@@ -102,6 +103,21 @@ class grid_periodos_lectivo_grid
        $nm_saida->saida(" <TR>\r\n");
        $nm_saida->saida("  <TD id='sc_grid_content' style='padding: 0px;' colspan=3>\r\n");
        $nm_saida->saida("    <table width='100%' cellspacing=0 cellpadding=0>\r\n");
+       $nm_saida->saida("     <TR>\r\n");
+       $nm_saida->saida("      <TD class=\"scGridRefinedSearchPadding\" valign='top'>\r\n");
+       if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opcao'] != "pdf" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opcao_print'] != 'print')
+       { 
+           $this->html_interativ_search();
+           if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['ajax_nav'])
+           { 
+               $tb_disp = (!empty($this->nm_grid_sem_reg) && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_int_search']) ? 'none' : '';
+               $this->Ini->Arr_result['setDisplay'][] = array('field' => 'TB_Interativ_Search', 'value' => $tb_disp);
+           } 
+       } 
+       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_int_search'] = false;
+       $nm_saida->saida("      </TD>\r\n");
+       $nm_saida->saida("      <TD valign='top'>\r\n");
+       $nm_saida->saida("       <table width='100%' cellspacing=0 cellpadding=0>\r\n");
        $nmgrp_apl_opcao= (isset($_SESSION['sc_session']['scriptcase']['embutida_form_pdf']['grid_periodos_lectivo'])) ? "pdf" : $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opcao'];
        if ($nmgrp_apl_opcao != "pdf")
        { 
@@ -114,6 +130,9 @@ class grid_periodos_lectivo_grid
            $this->nmgp_embbed_placeholder_bot();
            $this->nmgp_barra_bot();
        } 
+       $nm_saida->saida("       </table>\r\n");
+       $nm_saida->saida("      </TD>\r\n");
+       $nm_saida->saida("     </TR>\r\n");
        $nm_saida->saida("   </table>\r\n");
        $nm_saida->saida("  </TD>\r\n");
        $nm_saida->saida(" </TR>\r\n");
@@ -246,26 +265,12 @@ class grid_periodos_lectivo_grid
    {
        $this->aba_iframe = true;
    }
-   $this->nmgp_botoes['group_2'] = "on";
-   $this->nmgp_botoes['group_1'] = "on";
-   $this->nmgp_botoes['group_3'] = "on";
-   $this->nmgp_botoes['group_4'] = "on";
-   $this->nmgp_botoes['group_5'] = "on";
    $this->nmgp_botoes['exit'] = "on";
    $this->nmgp_botoes['first'] = "on";
    $this->nmgp_botoes['back'] = "on";
    $this->nmgp_botoes['forward'] = "on";
    $this->nmgp_botoes['last'] = "on";
    $this->nmgp_botoes['pdf'] = "on";
-   $this->nmgp_botoes['xls'] = "on";
-   $this->nmgp_botoes['xml'] = "on";
-   $this->nmgp_botoes['csv'] = "on";
-   $this->nmgp_botoes['rtf'] = "on";
-   $this->nmgp_botoes['word'] = "on";
-   $this->nmgp_botoes['doc'] = "on";
-   $this->nmgp_botoes['export'] = "on";
-   $this->nmgp_botoes['print'] = "on";
-   $this->nmgp_botoes['html'] = "on";
    $this->nmgp_botoes['goto'] = "on";
    $this->nmgp_botoes['qtline'] = "on";
    $this->nmgp_botoes['navpage'] = "on";
@@ -273,11 +278,7 @@ class grid_periodos_lectivo_grid
    $this->nmgp_botoes['summary'] = "on";
    $this->nmgp_botoes['new']    = "on";
    $this->nmgp_botoes['insert'] = "on";
-   $this->nmgp_botoes['sel_col'] = "on";
-   $this->nmgp_botoes['sort_col'] = "on";
    $this->nmgp_botoes['qsearch'] = "on";
-   $this->nmgp_botoes['gantt'] = "on";
-   $this->nmgp_botoes['groupby'] = "on";
    $this->nmgp_botoes['gridsave'] = "on";
    $this->Cmps_ord_def['periodo_descripcion'] = " asc";
    $this->Cmps_ord_def['desde'] = " desc";
@@ -703,27 +704,27 @@ class grid_periodos_lectivo_grid
 //----- 
    if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_sybase))
    { 
-       $nmgp_select = "SELECT periodo_descripcion, str_replace (convert(char(10),desde,102), '.', '-') + ' ' + convert(char(8),desde,20), str_replace (convert(char(10),hasta,102), '.', '-') + ' ' + convert(char(8),hasta,20), tipo_periodo_id, colegio_id, periodo_id from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT periodo_descripcion, str_replace (convert(char(10),desde,102), '.', '-') + ' ' + convert(char(8),desde,20), str_replace (convert(char(10),hasta,102), '.', '-') + ' ' + convert(char(8),hasta,20), tipo_periodo_id, estatus_id, colegio_id, periodo_id from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
    { 
-       $nmgp_select = "SELECT periodo_descripcion, desde, hasta, tipo_periodo_id, colegio_id, periodo_id from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT periodo_descripcion, desde, hasta, tipo_periodo_id, estatus_id, colegio_id, periodo_id from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
    { 
-       $nmgp_select = "SELECT periodo_descripcion, convert(char(23),desde,121), convert(char(23),hasta,121), tipo_periodo_id, colegio_id, periodo_id from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT periodo_descripcion, convert(char(23),desde,121), convert(char(23),hasta,121), tipo_periodo_id, estatus_id, colegio_id, periodo_id from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
    { 
-       $nmgp_select = "SELECT periodo_descripcion, desde, hasta, tipo_periodo_id, colegio_id, periodo_id from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT periodo_descripcion, desde, hasta, tipo_periodo_id, estatus_id, colegio_id, periodo_id from " . $this->Ini->nm_tabela; 
    } 
    elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
    { 
-       $nmgp_select = "SELECT periodo_descripcion, EXTEND(desde, YEAR TO DAY), EXTEND(hasta, YEAR TO DAY), tipo_periodo_id, colegio_id, periodo_id from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT periodo_descripcion, EXTEND(desde, YEAR TO DAY), EXTEND(hasta, YEAR TO DAY), tipo_periodo_id, estatus_id, colegio_id, periodo_id from " . $this->Ini->nm_tabela; 
    } 
    else 
    { 
-       $nmgp_select = "SELECT periodo_descripcion, desde, hasta, tipo_periodo_id, colegio_id, periodo_id from " . $this->Ini->nm_tabela; 
+       $nmgp_select = "SELECT periodo_descripcion, desde, hasta, tipo_periodo_id, estatus_id, colegio_id, periodo_id from " . $this->Ini->nm_tabela; 
    } 
    $nmgp_select .= " " . $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq']; 
    $nmgp_order_by = ""; 
@@ -805,12 +806,16 @@ class grid_periodos_lectivo_grid
        $this->hasta = $this->rs_grid->fields[2] ;  
        $this->tipo_periodo_id = $this->rs_grid->fields[3] ;  
        $this->tipo_periodo_id = (string)$this->tipo_periodo_id;
-       $this->colegio_id = $this->rs_grid->fields[4] ;  
+       $this->estatus_id = $this->rs_grid->fields[4] ;  
+       $this->estatus_id = (string)$this->estatus_id;
+       $this->colegio_id = $this->rs_grid->fields[5] ;  
        $this->colegio_id = (string)$this->colegio_id;
-       $this->periodo_id = $this->rs_grid->fields[5] ;  
+       $this->periodo_id = $this->rs_grid->fields[6] ;  
        $this->periodo_id = (string)$this->periodo_id;
        $GLOBALS["tipo_periodo_id"] = $this->rs_grid->fields[3] ;  
        $GLOBALS["tipo_periodo_id"] = (string)$GLOBALS["tipo_periodo_id"] ;
+       $GLOBALS["estatus_id"] = $this->rs_grid->fields[4] ;  
+       $GLOBALS["estatus_id"] = (string)$GLOBALS["estatus_id"] ;
        $this->SC_seq_register = $this->nmgp_reg_start ; 
        $this->SC_seq_page = 0;
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['final'] = $this->nmgp_reg_start ; 
@@ -823,8 +828,9 @@ class grid_periodos_lectivo_grid
            $this->desde = $this->rs_grid->fields[1] ;  
            $this->hasta = $this->rs_grid->fields[2] ;  
            $this->tipo_periodo_id = $this->rs_grid->fields[3] ;  
-           $this->colegio_id = $this->rs_grid->fields[4] ;  
-           $this->periodo_id = $this->rs_grid->fields[5] ;  
+           $this->estatus_id = $this->rs_grid->fields[4] ;  
+           $this->colegio_id = $this->rs_grid->fields[5] ;  
+           $this->periodo_id = $this->rs_grid->fields[6] ;  
        } 
    } 
    $this->nmgp_reg_inicial = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['final'] + 1;
@@ -1145,7 +1151,6 @@ class grid_periodos_lectivo_grid
                $nm_saida->saida("       }\r\n");
                $nm_saida->saida("   }\r\n");
            }
-           $nm_saida->saida("   var scBtnGrpStatus = {};\r\n");
            $nm_saida->saida("   var SC_Link_View = false;\r\n");
            if ($this->Ini->SC_Link_View)
            {
@@ -1277,18 +1282,6 @@ class grid_periodos_lectivo_grid
            $nm_saida->saida("       if (13 == keyPressed) {\r\n");
            $nm_saida->saida("          return false; \r\n");
            $nm_saida->saida("       }\r\n");
-           $nm_saida->saida("     });\r\n");
-           $nm_saida->saida("     $(\".scBtnGrpText\").mouseover(function() { $(this).addClass(\"scBtnGrpTextOver\"); }).mouseout(function() { $(this).removeClass(\"scBtnGrpTextOver\"); });\r\n");
-           $nm_saida->saida("     $(\".scBtnGrpClick\").mouseup(function(event){\r\n");
-           $nm_saida->saida("          event.preventDefault();\r\n");
-           $nm_saida->saida("          if($(this).find(\"a\").prop('href') != '')\r\n");
-           $nm_saida->saida("          {\r\n");
-           $nm_saida->saida("              $(this).find(\"a\").click();\r\n");
-           $nm_saida->saida("          }\r\n");
-           $nm_saida->saida("          else\r\n");
-           $nm_saida->saida("          {\r\n");
-           $nm_saida->saida("              eval($(this).find(\"a\").prop('onclick'));\r\n");
-           $nm_saida->saida("          }\r\n");
            $nm_saida->saida("     });\r\n");
            $nm_saida->saida("   }); \r\n");
            $nm_saida->saida("  }\r\n");
@@ -1425,41 +1418,6 @@ class grid_periodos_lectivo_grid
            $nm_saida->saida("   function scBtnOrderCamposHide(sPos) {\r\n");
            $nm_saida->saida("     $(\"#sc_id_order_campos_placeholder_\" + sPos).hide();\r\n");
            $nm_saida->saida("     $(\"#sc_id_order_campos_placeholder_\" + sPos).find(\"td\").html(\"\");\r\n");
-           $nm_saida->saida("   }\r\n");
-           $nm_saida->saida("   function scBtnGrpShow(sGroup) {\r\n");
-           $nm_saida->saida("     if (typeof(scBtnGrpShowMobile) === typeof(function(){})) { return scBtnGrpShowMobile(sGroup); };\r\n");
-           $nm_saida->saida("     var btnPos = $('#sc_btgp_btn_' + sGroup).offset();\r\n");
-           $nm_saida->saida("     scBtnGrpStatus[sGroup] = 'open';\r\n");
-           $nm_saida->saida("     $('#sc_btgp_btn_' + sGroup).mouseout(function() {\r\n");
-           $nm_saida->saida("       scBtnGrpStatus[sGroup] = '';\r\n");
-           $nm_saida->saida("       setTimeout(function() {\r\n");
-           $nm_saida->saida("         scBtnGrpHide(sGroup);\r\n");
-           $nm_saida->saida("       }, 1000);\r\n");
-           $nm_saida->saida("     }).mouseover(function() {\r\n");
-           $nm_saida->saida("       scBtnGrpStatus[sGroup] = 'over';\r\n");
-           $nm_saida->saida("     });\r\n");
-           $nm_saida->saida("     $('#sc_btgp_div_' + sGroup + ' span a').click(function() {\r\n");
-           $nm_saida->saida("       scBtnGrpStatus[sGroup] = 'out';\r\n");
-           $nm_saida->saida("       scBtnGrpHide(sGroup);\r\n");
-           $nm_saida->saida("     });\r\n");
-           $nm_saida->saida("     $('#sc_btgp_div_' + sGroup).css({\r\n");
-           $nm_saida->saida("       'left': btnPos.left\r\n");
-           $nm_saida->saida("     })\r\n");
-           $nm_saida->saida("     .mouseover(function() {\r\n");
-           $nm_saida->saida("       scBtnGrpStatus[sGroup] = 'over';\r\n");
-           $nm_saida->saida("     })\r\n");
-           $nm_saida->saida("     .mouseleave(function() {\r\n");
-           $nm_saida->saida("       scBtnGrpStatus[sGroup] = 'out';\r\n");
-           $nm_saida->saida("       setTimeout(function() {\r\n");
-           $nm_saida->saida("         scBtnGrpHide(sGroup);\r\n");
-           $nm_saida->saida("       }, 1000);\r\n");
-           $nm_saida->saida("     })\r\n");
-           $nm_saida->saida("     .show('fast');\r\n");
-           $nm_saida->saida("   }\r\n");
-           $nm_saida->saida("   function scBtnGrpHide(sGroup) {\r\n");
-           $nm_saida->saida("     if ('over' != scBtnGrpStatus[sGroup]) {\r\n");
-           $nm_saida->saida("       $('#sc_btgp_div_' + sGroup).hide('fast');\r\n");
-           $nm_saida->saida("     }\r\n");
            $nm_saida->saida("   }\r\n");
            $nm_saida->saida("   </script> \r\n");
        } 
@@ -1599,8 +1557,6 @@ class grid_periodos_lectivo_grid
            $nm_saida->saida("       .ttip {border:1px solid black;font-size:12px;layer-background-color:lightyellow;background-color:lightyellow;color:black;}\r\n");
        } 
        $nm_saida->saida("  </style>\r\n");
-           $nm_saida->saida("   <link rel=\"stylesheet\" href=\"../_lib/css/" . $this->Ini->str_schema_all . "_btngrp.css\" type=\"text/css\" media=\"screen\" />\r\n");
-           $nm_saida->saida("   <link rel=\"stylesheet\" href=\"../_lib/css/" . $this->Ini->str_schema_all . "_btngrp" . $_SESSION['scriptcase']['reg_conf']['css_dir'] . ".css\" type=\"text/css\" media=\"screen\" />\r\n");
        if (!$write_css)
        {
            $nm_saida->saida("   <link rel=\"stylesheet\" type=\"text/css\" href=\"" . $this->Ini->path_link . "grid_periodos_lectivo/grid_periodos_lectivo_grid_" . strtolower($_SESSION['scriptcase']['reg_conf']['css_dir']) . ".css\" />\r\n");
@@ -1631,37 +1587,7 @@ class grid_periodos_lectivo_grid
    }
    if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['embutida'])
    { 
-       if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['doc_word'] && ($this->Print_All || $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opcao_print'] == "print")) 
-       {
-           if ($this->Print_All) 
-           {
-               $nm_saida->saida(" <link rel=\"stylesheet\" type=\"text/css\" href=\"../_lib/buttons/" . $this->Ini->Str_btn_css . "\" /> \r\n");
-           }
-           $nm_saida->saida("  <body class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"-webkit-print-color-adjust: exact;" . $css_body . "\">\r\n");
-           $nm_saida->saida("   <TABLE id=\"sc_table_print\" cellspacing=0 cellpadding=0 align=\"center\" valign=\"top\" " . $this->Tab_width . ">\r\n");
-           $nm_saida->saida("     <TR>\r\n");
-           $nm_saida->saida("       <TD>\r\n");
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "prit_web_page()", "prit_web_page()", "Bprint_print", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
-           $nm_saida->saida("           $Cod_Btn \r\n");
-           $nm_saida->saida("       </TD>\r\n");
-           $nm_saida->saida("     </TR>\r\n");
-           $nm_saida->saida("   </TABLE>\r\n");
-           $nm_saida->saida("  <script type=\"text/javascript\">\r\n");
-           $nm_saida->saida("     function prit_web_page()\r\n");
-           $nm_saida->saida("     {\r\n");
-           $nm_saida->saida("        document.getElementById('sc_table_print').style.display = 'none';\r\n");
-           $nm_saida->saida("        var is_safari = navigator.userAgent.indexOf(\"Safari\") > -1;\r\n");
-           $nm_saida->saida("        var is_chrome = navigator.userAgent.indexOf('Chrome') > -1\r\n");
-           $nm_saida->saida("        if ((is_chrome) && (is_safari)) {is_safari=false;}\r\n");
-           $nm_saida->saida("        window.print();\r\n");
-           $nm_saida->saida("        if (is_safari) {setTimeout(\"window.close()\", 1000);} else {window.close();}\r\n");
-           $nm_saida->saida("     }\r\n");
-           $nm_saida->saida("  </script>\r\n");
-       }
-       else
-       {
-           $nm_saida->saida("  <body class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"" . $css_body . "\">\r\n");
-       }
+       $nm_saida->saida("  <body class=\"" . $this->css_scGridPage . "\" " . $str_iframe_body . " style=\"" . $css_body . "\">\r\n");
        $nm_saida->saida("  " . $this->Ini->Ajax_result_set . "\r\n");
        if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['embutida'] && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opcao'] != "pdf" && !$this->Print_All)
        { 
@@ -1803,6 +1729,8 @@ class grid_periodos_lectivo_grid
    $this->css_hasta_grid_line = $compl_css_emb . "css_hasta_grid_line";
    $this->css_tipo_periodo_id_label = $compl_css_emb . "css_tipo_periodo_id_label";
    $this->css_tipo_periodo_id_grid_line = $compl_css_emb . "css_tipo_periodo_id_grid_line";
+   $this->css_estatus_id_label = $compl_css_emb . "css_estatus_id_label";
+   $this->css_estatus_id_grid_line = $compl_css_emb . "css_estatus_id_grid_line";
    $this->css_colegio_id_label = $compl_css_emb . "css_colegio_id_label";
    $this->css_colegio_id_grid_line = $compl_css_emb . "css_colegio_id_grid_line";
    $this->css_periodo_id_label = $compl_css_emb . "css_periodo_id_label";
@@ -1902,15 +1830,6 @@ class grid_periodos_lectivo_grid
                  $_SESSION['scriptcase']['saida_html'] = $salva_htm_emb . $Cod_Html;
              } 
          } 
-     } 
-     $NM_seq_lab = 1;
-     foreach ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['labels'] as $NM_cmp => $NM_lab)
-     {
-         if (empty($NM_lab) || $NM_lab == "&nbsp;")
-         {
-             $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['labels'][$NM_cmp] = "No_Label" . $NM_seq_lab;
-             $NM_seq_lab++;
-         }
      } 
    } 
  }
@@ -2130,6 +2049,14 @@ class grid_periodos_lectivo_grid
    $nm_saida->saida("</TD>\r\n");
    } 
  }
+ function NM_label_estatus_id()
+ {
+   global $nm_saida;
+   $SC_Label = (isset($this->New_label['estatus_id'])) ? $this->New_label['estatus_id'] : "Estatus"; 
+   if (!isset($this->NM_cmp_hidden['estatus_id']) || $this->NM_cmp_hidden['estatus_id'] != "off") { 
+   $nm_saida->saida("     <TD class=\"" . $this->css_scGridLabelFont . $this->css_sep . $this->css_estatus_id_label . "\"  style=\"" . $this->css_scGridLabelNowrap . "" . $this->Css_Cmp['css_estatus_id_label'] . "\" >" . nl2br($SC_Label) . "</TD>\r\n");
+   } 
+ }
  function NM_label_colegio_id()
  {
    global $nm_saida;
@@ -2267,22 +2194,14 @@ class grid_periodos_lectivo_grid
    $this->sc_where_orig    = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_orig'];
    $this->sc_where_atual   = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq'];
    $this->sc_where_filtro  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq_filtro'];
-// 
-   $SC_Label = (isset($this->New_label['periodo_descripcion'])) ? $this->New_label['periodo_descripcion'] : "Descripcion"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['labels']['periodo_descripcion'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['desde'])) ? $this->New_label['desde'] : "Desde"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['labels']['desde'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['hasta'])) ? $this->New_label['hasta'] : "Hasta"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['labels']['hasta'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['tipo_periodo_id'])) ? $this->New_label['tipo_periodo_id'] : "Tipo Periodo"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['labels']['tipo_periodo_id'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['colegio_id'])) ? $this->New_label['colegio_id'] : "Colegio Id"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['labels']['colegio_id'] = $SC_Label; 
-   $SC_Label = (isset($this->New_label['periodo_id'])) ? $this->New_label['periodo_id'] : "Periodo Id"; 
-   $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['labels']['periodo_id'] = $SC_Label; 
    if (!$this->grid_emb_form && isset($_SESSION['scriptcase']['sc_apl_conf']['grid_periodos_lectivo']['lig_edit']) && $_SESSION['scriptcase']['sc_apl_conf']['grid_periodos_lectivo']['lig_edit'] != '')
    {
        $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['mostra_edit'] = $_SESSION['scriptcase']['sc_apl_conf']['grid_periodos_lectivo']['lig_edit'];
+   }
+   if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['ajax_nav'] && isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['interativ_refresh']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['interativ_refresh'])
+   {
+       $this->refresh_interativ_search();
+       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['interativ_refresh'] = false;
    }
    if (!empty($this->nm_grid_sem_reg))
    {
@@ -2485,12 +2404,16 @@ class grid_periodos_lectivo_grid
           $this->hasta = $this->rs_grid->fields[2] ;  
           $this->tipo_periodo_id = $this->rs_grid->fields[3] ;  
           $this->tipo_periodo_id = (string)$this->tipo_periodo_id;
-          $this->colegio_id = $this->rs_grid->fields[4] ;  
+          $this->estatus_id = $this->rs_grid->fields[4] ;  
+          $this->estatus_id = (string)$this->estatus_id;
+          $this->colegio_id = $this->rs_grid->fields[5] ;  
           $this->colegio_id = (string)$this->colegio_id;
-          $this->periodo_id = $this->rs_grid->fields[5] ;  
+          $this->periodo_id = $this->rs_grid->fields[6] ;  
           $this->periodo_id = (string)$this->periodo_id;
           $GLOBALS["tipo_periodo_id"] = $this->rs_grid->fields[3] ;  
           $GLOBALS["tipo_periodo_id"] = (string)$GLOBALS["tipo_periodo_id"];
+          $GLOBALS["estatus_id"] = $this->rs_grid->fields[4] ;  
+          $GLOBALS["estatus_id"] = (string)$GLOBALS["estatus_id"];
           $this->SC_seq_page++; 
           $this->SC_seq_register = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['final'] + 1; 
           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['rows_emb']++;
@@ -2772,6 +2695,20 @@ class grid_periodos_lectivo_grid
    $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_tipo_periodo_id_grid_line . "\"  style=\"" . $this->Css_Cmp['css_tipo_periodo_id_grid_line'] . "\" NOWRAP align=\"\" valign=\"\"   HEIGHT=\"0px\"><span id=\"id_sc_field_tipo_periodo_id_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
       }
  }
+ function NM_grid_estatus_id()
+ {
+      global $nm_saida;
+      if (!isset($this->NM_cmp_hidden['estatus_id']) || $this->NM_cmp_hidden['estatus_id'] != "off") { 
+          $conteudo = NM_encode_input(sc_strip_script($this->estatus_id)); 
+          if ($conteudo === "") 
+          { 
+              $conteudo = "&nbsp;" ;  
+              $graf = "" ;  
+          } 
+          $this->Lookup->lookup_estatus_id($conteudo , $this->estatus_id, $_SESSION['vglo_colegio']) ; 
+   $nm_saida->saida("     <TD rowspan=\"" . $this->Rows_span . "\" class=\"" . $this->css_line_fonf . $this->css_sep . $this->css_estatus_id_grid_line . "\"  style=\"" . $this->Css_Cmp['css_estatus_id_grid_line'] . "\" NOWRAP align=\"\" valign=\"\"   HEIGHT=\"0px\"><span id=\"id_sc_field_estatus_id_" . $this->SC_seq_page . "\">" . $conteudo . "</span></TD>\r\n");
+      }
+ }
  function NM_grid_colegio_id()
  {
       global $nm_saida;
@@ -2808,7 +2745,7 @@ class grid_periodos_lectivo_grid
  }
  function NM_calc_span()
  {
-   $this->NM_colspan  = 8;
+   $this->NM_colspan  = 9;
    if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_psq'])
    {
        $this->NM_colspan++;
@@ -2882,8 +2819,6 @@ class grid_periodos_lectivo_grid
       $nm_saida->saida("        <table class=\"" . $this->css_scGridToolbar . "\" style=\"padding: 0px; border-spacing: 0px; border-width: 0px; vertical-align: top;\" width=\"100%\" valign=\"top\">\r\n");
       $nm_saida->saida("         <tr> \r\n");
       $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"left\" width=\"33%\"> \r\n");
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opcao_print'] != "print") 
-      {
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['qsearch'] == "on")
       {
           $OPC_cmp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['fast_search'])) ? $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['fast_search'][0] : "";
@@ -2918,141 +2853,6 @@ class grid_periodos_lectivo_grid
       }
           $nm_saida->saida("         </td> \r\n");
           $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"center\" width=\"33%\"> \r\n");
-      if ($this->nmgp_botoes['sel_col'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
-      {
-      $pos_path = strrpos($this->Ini->path_prod, "/");
-      $path_fields = $this->Ini->root . substr($this->Ini->path_prod, 0, $pos_path) . "/conf/fields/";
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcolumns", "scBtnSelCamposShow('" . $this->Ini->path_link . "grid_periodos_lectivo/grid_periodos_lectivo_sel_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&path_fields=" . $path_fields . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&script_case_session=" . session_id() . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnSelCamposShow('" . $this->Ini->path_link . "grid_periodos_lectivo/grid_periodos_lectivo_sel_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&path_fields=" . $path_fields . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&script_case_session=" . session_id() . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "selcmp_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
-              $nm_saida->saida("           $Cod_Btn \r\n");
-              $NM_btn = true;
-      }
-      if ($this->nmgp_botoes['sort_col'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
-      {
-          if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-          {
-              $UseAlias =  "N";
-          }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-          {
-              $UseAlias =  "N";
-          }
-          else
-          {
-              $UseAlias =  "S";
-          }
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bsort", "scBtnOrderCamposShow('" . $this->Ini->path_link . "grid_periodos_lectivo/grid_periodos_lectivo_order_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&script_case_session=" . session_id() . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnOrderCamposShow('" . $this->Ini->path_link . "grid_periodos_lectivo/grid_periodos_lectivo_order_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&script_case_session=" . session_id() . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "ordcmp_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
-              $nm_saida->saida("           $Cod_Btn \r\n");
-              $NM_btn = true;
-      }
-      if ($this->nmgp_botoes['group_2'] == "on" && !$this->grid_emb_form)
-      {
-          $nm_saida->saida("           <script type=\"text/javascript\">var sc_itens_btgp_group_2_top = false;</script>\r\n");
-          $Cod_Btn = nmButtonOutput($this->arr_buttons, "group_group_2", "scBtnGrpShow('group_2_top')", "scBtnGrpShow('group_2_top')", "sc_btgp_btn_group_2_top", "", "" . $this->Ini->Nm_lang['lang_btns_expt_email_title'] . "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "" . $this->Ini->Nm_lang['lang_btns_expt_email'] . "", "", "", "__sc_grp__", "text_img", "text_right", "", "", "", "", "", "");
-          $nm_saida->saida("           $Cod_Btn\r\n");
-          $NM_btn  = true;
-          $NM_Gbtn = false;
-          $nm_saida->saida("           <table style=\"border-collapse: collapse; border-width: 0; display: none; position: absolute; z-index: 1000\" class=\"SC_SubMenuButton\" id=\"sc_btgp_div_group_2_top\">\r\n");
-              $nm_saida->saida("           <tr><td class=\"scBtnGrpBackground\">\r\n");
-              $nm_saida->saida("           </td></tr>\r\n");
-          $nm_saida->saida("           </table>\r\n");
-          $nm_saida->saida("           <script type=\"text/javascript\">\r\n");
-          $nm_saida->saida("             if (!sc_itens_btgp_group_2_top) {\r\n");
-          $nm_saida->saida("                 document.getElementById('sc_btgp_btn_group_2_top').style.display='none'; }\r\n");
-          $nm_saida->saida("           </script>\r\n");
-      }
-      if ($this->nmgp_botoes['group_1'] == "on" && !$this->grid_emb_form)
-      {
-          $nm_saida->saida("           <script type=\"text/javascript\">var sc_itens_btgp_group_1_top = false;</script>\r\n");
-          $Cod_Btn = nmButtonOutput($this->arr_buttons, "group_group_1", "scBtnGrpShow('group_1_top')", "scBtnGrpShow('group_1_top')", "sc_btgp_btn_group_1_top", "", "" . $this->Ini->Nm_lang['lang_btns_expt'] . "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "" . $this->Ini->Nm_lang['lang_btns_expt'] . "", "", "", "__sc_grp__", "text_img", "text_right", "", "", "", "", "", "");
-          $nm_saida->saida("           $Cod_Btn\r\n");
-          $NM_btn  = true;
-          $NM_Gbtn = false;
-          $nm_saida->saida("           <table style=\"border-collapse: collapse; border-width: 0; display: none; position: absolute; z-index: 1000\" class=\"SC_SubMenuButton\" id=\"sc_btgp_div_group_1_top\">\r\n");
-              $nm_saida->saida("           <tr><td class=\"scBtnGrpBackground\">\r\n");
-      if ($this->nmgp_botoes['pdf'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
-      {
-          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpdf", "", "", "pdf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_periodos_lectivo/grid_periodos_lectivo_config_pdf.php?nm_opc=pdf&nm_target=0&nm_cor=cor&papel=1&lpapel=279&apapel=216&orientacao=1&bookmarks=1&largura=1200&conf_larg=S&conf_fonte=10&grafico=XX&language=es&conf_socor=N&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_periodos_lectivo&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "");
-              $nm_saida->saida("           $Cod_Btn \r\n");
-          $nm_saida->saida("            </div>\r\n");
-              $NM_Gbtn = true;
-      }
-      if ($this->nmgp_botoes['word'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
-      {
-          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bword", "", "", "word_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_periodos_lectivo/grid_periodos_lectivo_config_word.php?nm_cor=AM&language=es&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "");
-              $nm_saida->saida("           $Cod_Btn \r\n");
-          $nm_saida->saida("            </div>\r\n");
-              $NM_Gbtn = true;
-      }
-      if ($this->nmgp_botoes['xls'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
-      {
-          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bexcel", "nm_gp_move('xls', '0');", "nm_gp_move('xls', '0');", "xls_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "");
-              $nm_saida->saida("           $Cod_Btn \r\n");
-          $nm_saida->saida("            </div>\r\n");
-              $NM_Gbtn = true;
-      }
-      if ($this->nmgp_botoes['xml'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
-      {
-          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bxml", "nm_gp_move('xml', '0');", "nm_gp_move('xml', '0');", "xml_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "");
-              $nm_saida->saida("           $Cod_Btn \r\n");
-          $nm_saida->saida("            </div>\r\n");
-              $NM_Gbtn = true;
-      }
-      if ($this->nmgp_botoes['csv'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
-      {
-          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcsv", "nm_gp_move('csv', '0');", "nm_gp_move('csv', '0');", "csv_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "");
-              $nm_saida->saida("           $Cod_Btn \r\n");
-          $nm_saida->saida("            </div>\r\n");
-              $NM_Gbtn = true;
-      }
-      if ($this->nmgp_botoes['rtf'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
-      {
-          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "brtf", "nm_gp_move('rtf', '0');", "nm_gp_move('rtf', '0');", "rtf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_1", "only_text", "text_right", "", "", "", "", "", "");
-              $nm_saida->saida("           $Cod_Btn \r\n");
-          $nm_saida->saida("            </div>\r\n");
-              $NM_Gbtn = true;
-      }
-          if ($NM_Gbtn)
-          {
-                  $nm_saida->saida("           </td></tr><tr><td class=\"scBtnGrpBackground\">\r\n");
-              $NM_Gbtn = false;
-          }
-      if ($this->nmgp_botoes['print'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
-      {
-          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_1_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "", "", "print_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_periodos_lectivo/grid_periodos_lectivo_config_print.php?nm_opc=AM&nm_cor=AM&language=es&nm_page=" . NM_encode_input($this->Ini->sc_page) . "&KeepThis=true&TB_iframe=true&modal=true", "group_1", "only_text", "text_right", "", "", "", "", "", "");
-              $nm_saida->saida("           $Cod_Btn \r\n");
-          $nm_saida->saida("            </div>\r\n");
-              $NM_Gbtn = true;
-      }
-              $nm_saida->saida("           </td></tr>\r\n");
-          $nm_saida->saida("           </table>\r\n");
-          $nm_saida->saida("           <script type=\"text/javascript\">\r\n");
-          $nm_saida->saida("             if (!sc_itens_btgp_group_1_top) {\r\n");
-          $nm_saida->saida("                 document.getElementById('sc_btgp_btn_group_1_top').style.display='none'; }\r\n");
-          $nm_saida->saida("           </script>\r\n");
-      }
-      if (is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Img_sep_grid))
-      {
-          if ($NM_btn)
-          {
-              $NM_btn = false;
-              $NM_ult_sep = "NM_sep_1";
-              $nm_saida->saida("          <img id=\"NM_sep_1\" src=\"" . $this->Ini->path_img_global . $this->Ini->Img_sep_grid . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
-          }
-      }
           $nm_saida->saida("         </td> \r\n");
           $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"right\" width=\"33%\"> \r\n");
         if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['new'] == "on" && $this->nmgp_botoes['insert'] == "on" && !$this->grid_emb_form)
@@ -3084,7 +2884,7 @@ class grid_periodos_lectivo_grid
                      $Tmp1 = explode(":", $Cada_help); 
                      if (!empty($Tmp1[0]) && isset($Tmp1[1]) && !empty($Tmp1[1]) && $Tmp1[0] == "cons" && is_file($this->Ini->root . $this->Ini->path_help . $Tmp1[1]))
                      {
-                        $Cod_Btn = nmButtonOutput($this->arr_buttons, "bhelp", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "help_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+                        $Cod_Btn = nmButtonOutput($this->arr_buttons, "bhelp", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "help_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (F1)", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
                         $nm_saida->saida("           $Cod_Btn \r\n");
                         $NM_btn = true;
                      }
@@ -3099,13 +2899,13 @@ class grid_periodos_lectivo_grid
       {
          if ($nm_apl_dependente == 1 && $this->nmgp_botoes['exit'] == "on") 
          { 
-            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "document.F5.action='$nm_url_saida'; document.F5.submit();", "document.F5.action='$nm_url_saida'; document.F5.submit();", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "document.F5.action='$nm_url_saida'; document.F5.submit();", "document.F5.action='$nm_url_saida'; document.F5.submit();", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + Q)", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
             $nm_saida->saida("           $Cod_Btn \r\n");
             $NM_btn = true;
          } 
          elseif (!$this->Ini->SC_Link_View && !$this->aba_iframe && $this->nmgp_botoes['exit'] == "on") 
          { 
-            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bsair", "document.F5.action='$nm_url_saida'; document.F5.submit();", "document.F5.action='$nm_url_saida'; document.F5.submit();", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bsair", "document.F5.action='$nm_url_saida'; document.F5.submit();", "document.F5.action='$nm_url_saida'; document.F5.submit();", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + Q)", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
             $nm_saida->saida("           $Cod_Btn \r\n");
             $NM_btn = true;
          } 
@@ -3114,15 +2914,14 @@ class grid_periodos_lectivo_grid
       {
         if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['sc_modal']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['sc_modal'])
         {
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "self.parent.tb_remove()", "self.parent.tb_remove()", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "self.parent.tb_remove()", "self.parent.tb_remove()", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + Q)", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
         }
         else
         {
-           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "window.close();", "window.close();", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "window.close();", "window.close();", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + Q)", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
         }
          $nm_saida->saida("           $Cod_Btn \r\n");
          $NM_btn = true;
-      }
       }
       $nm_saida->saida("         </td> \r\n");
       $nm_saida->saida("        </tr> \r\n");
@@ -3173,8 +2972,6 @@ class grid_periodos_lectivo_grid
       $nm_saida->saida("        <table class=\"" . $this->css_scGridToolbar . "\" style=\"padding: 0px; border-spacing: 0px; border-width: 0px; vertical-align: top;\" width=\"100%\" valign=\"top\">\r\n");
       $nm_saida->saida("         <tr> \r\n");
       $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"left\" width=\"33%\"> \r\n");
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opcao_print'] != "print") 
-      {
           if (empty($this->nm_grid_sem_reg) && $this->nmgp_botoes['goto'] == "on" && $this->Ini->Apl_paginacao != "FULL" )
           {
               $Reg_Page  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['qt_lin_grid'];
@@ -3203,12 +3000,12 @@ class grid_periodos_lectivo_grid
           {
               if ($this->Rec_ini == 0)
               {
-                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_inicio_off", "nm_gp_submit_rec('ini');", "nm_gp_submit_rec('ini');", "first_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_inicio_off", "nm_gp_submit_rec('ini');", "nm_gp_submit_rec('ini');", "first_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + Shift + &#8592;)", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
                   $nm_saida->saida("           $Cod_Btn \r\n");
               }
               else
               {
-                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_inicio", "nm_gp_submit_rec('ini');", "nm_gp_submit_rec('ini');", "first_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_inicio", "nm_gp_submit_rec('ini');", "nm_gp_submit_rec('ini');", "first_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + Shift + &#8592;)", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
                   $nm_saida->saida("           $Cod_Btn \r\n");
               }
                   $NM_btn = true;
@@ -3217,12 +3014,12 @@ class grid_periodos_lectivo_grid
           {
               if ($this->Rec_ini == 0)
               {
-                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_retorna_off", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "back_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_retorna_off", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "back_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + &#8592;)", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
                   $nm_saida->saida("           $Cod_Btn \r\n");
               }
               else
               {
-                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_retorna", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "back_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_retorna", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "back_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + &#8592;)", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
                   $nm_saida->saida("           $Cod_Btn \r\n");
               }
                   $NM_btn = true;
@@ -3273,13 +3070,13 @@ class grid_periodos_lectivo_grid
           }
           if ($this->nmgp_botoes['forward'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_liga']['nav']))
           {
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_avanca", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "forward_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_avanca", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "forward_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + &#8594;)", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
           }
           if ($this->nmgp_botoes['last'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_liga']['nav']))
           {
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_final", "nm_gp_submit_rec('fim');", "nm_gp_submit_rec('fim');", "last_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_final", "nm_gp_submit_rec('fim');", "nm_gp_submit_rec('fim');", "last_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + Shift + &#8594;)", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
               $nm_saida->saida("           $Cod_Btn \r\n");
               $NM_btn = true;
           }
@@ -3313,14 +3110,13 @@ class grid_periodos_lectivo_grid
                      $Tmp1 = explode(":", $Cada_help); 
                      if (!empty($Tmp1[0]) && isset($Tmp1[1]) && !empty($Tmp1[1]) && $Tmp1[0] == "cons" && is_file($this->Ini->root . $this->Ini->path_help . $Tmp1[1]))
                      {
-                        $Cod_Btn = nmButtonOutput($this->arr_buttons, "bhelp", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "help_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+                        $Cod_Btn = nmButtonOutput($this->arr_buttons, "bhelp", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "help_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (F1)", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
                         $nm_saida->saida("           $Cod_Btn \r\n");
                         $NM_btn = true;
                      }
                  }
              }
           }
-      }
       $nm_saida->saida("         </td> \r\n");
       $nm_saida->saida("        </tr> \r\n");
       $nm_saida->saida("       </table> \r\n");
@@ -3369,8 +3165,6 @@ class grid_periodos_lectivo_grid
       $nm_saida->saida("        <table class=\"" . $this->css_scGridToolbar . "\" style=\"padding: 0px; border-spacing: 0px; border-width: 0px; vertical-align: top;\" width=\"100%\" valign=\"top\">\r\n");
       $nm_saida->saida("         <tr> \r\n");
       $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"left\" width=\"33%\"> \r\n");
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opcao_print'] != "print") 
-      {
       if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['qsearch'] == "on")
       {
           $OPC_cmp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['fast_search'])) ? $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['fast_search'][0] : "";
@@ -3403,191 +3197,27 @@ class grid_periodos_lectivo_grid
           $nm_saida->saida("          </span>\r\n");
           $NM_btn = true;
       }
-      if ($this->nmgp_botoes['group_3'] == "on" && !$this->grid_emb_form)
-      {
-          $nm_saida->saida("           <script type=\"text/javascript\">var sc_itens_btgp_group_3_top = false;</script>\r\n");
-          $Cod_Btn = nmButtonOutput($this->arr_buttons, "group_group_3", "scBtnGrpShow('group_3_top')", "scBtnGrpShow('group_3_top')", "sc_btgp_btn_group_3_top", "", "" . $this->Ini->Nm_lang['lang_btns_expt_email_title'] . "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "" . $this->Ini->Nm_lang['lang_btns_expt_email'] . "", "", "", "__sc_grp__", "text_img", "text_right", "", "", "", "", "", "");
-          $nm_saida->saida("           $Cod_Btn\r\n");
-          $NM_btn  = true;
-          $NM_Gbtn = false;
-          $nm_saida->saida("           <table style=\"border-collapse: collapse; border-width: 0; display: none; position: absolute; z-index: 1000\" class=\"SC_SubMenuButton\" id=\"sc_btgp_div_group_3_top\">\r\n");
-              $nm_saida->saida("           <tr><td class=\"scBtnGrpBackground\">\r\n");
-              $nm_saida->saida("           </td></tr>\r\n");
-          $nm_saida->saida("           </table>\r\n");
-          $nm_saida->saida("           <script type=\"text/javascript\">\r\n");
-          $nm_saida->saida("             if (!sc_itens_btgp_group_3_top) {\r\n");
-          $nm_saida->saida("                 document.getElementById('sc_btgp_btn_group_3_top').style.display='none'; }\r\n");
-          $nm_saida->saida("           </script>\r\n");
-      }
-      if ($this->nmgp_botoes['group_4'] == "on" && !$this->grid_emb_form)
-      {
-          $nm_saida->saida("           <script type=\"text/javascript\">var sc_itens_btgp_group_4_top = false;</script>\r\n");
-          $Cod_Btn = nmButtonOutput($this->arr_buttons, "group_group_4", "scBtnGrpShow('group_4_top')", "scBtnGrpShow('group_4_top')", "sc_btgp_btn_group_4_top", "", "" . $this->Ini->Nm_lang['lang_btns_expt'] . "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "" . $this->Ini->Nm_lang['lang_btns_expt'] . "", "", "", "__sc_grp__", "text_img", "text_right", "", "", "", "", "", "");
-          $nm_saida->saida("           $Cod_Btn\r\n");
-          $NM_btn  = true;
-          $NM_Gbtn = false;
-          $nm_saida->saida("           <table style=\"border-collapse: collapse; border-width: 0; display: none; position: absolute; z-index: 1000\" class=\"SC_SubMenuButton\" id=\"sc_btgp_div_group_4_top\">\r\n");
-              $nm_saida->saida("           <tr><td class=\"scBtnGrpBackground\">\r\n");
-      if ($this->nmgp_botoes['pdf'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
-      {
-          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_4_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bpdf", "", "", "pdf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_periodos_lectivo/grid_periodos_lectivo_config_pdf.php?nm_opc=pdf&nm_target=0&nm_cor=cor&papel=1&lpapel=279&apapel=216&orientacao=1&bookmarks=1&largura=1200&conf_larg=S&conf_fonte=10&grafico=XX&language=es&conf_socor=N&script_case_init=" . $this->Ini->sc_page . "&app_name=grid_periodos_lectivo&KeepThis=true&TB_iframe=true&modal=true", "group_4", "only_text", "text_right", "", "", "", "", "", "");
-              $nm_saida->saida("           $Cod_Btn \r\n");
-          $nm_saida->saida("            </div>\r\n");
-              $NM_Gbtn = true;
-      }
-          if ($NM_Gbtn)
-          {
-                  $nm_saida->saida("           </td></tr><tr><td class=\"scBtnGrpBackground\">\r\n");
-              $NM_Gbtn = false;
-          }
-      if ($this->nmgp_botoes['word'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
-      {
-          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_4_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bword", "", "", "word_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_periodos_lectivo/grid_periodos_lectivo_config_word.php?nm_cor=AM&language=es&KeepThis=true&TB_iframe=true&modal=true", "group_4", "only_text", "text_right", "", "", "", "", "", "");
-              $nm_saida->saida("           $Cod_Btn \r\n");
-          $nm_saida->saida("            </div>\r\n");
-              $NM_Gbtn = true;
-      }
-      if ($this->nmgp_botoes['xls'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
-      {
-          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_4_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bexcel", "nm_gp_move('xls', '0');", "nm_gp_move('xls', '0');", "xls_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_4", "only_text", "text_right", "", "", "", "", "", "");
-              $nm_saida->saida("           $Cod_Btn \r\n");
-          $nm_saida->saida("            </div>\r\n");
-              $NM_Gbtn = true;
-      }
-          if ($NM_Gbtn)
-          {
-                  $nm_saida->saida("           </td></tr><tr><td class=\"scBtnGrpBackground\">\r\n");
-              $NM_Gbtn = false;
-          }
-      if ($this->nmgp_botoes['xml'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
-      {
-          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_4_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bxml", "nm_gp_move('xml', '0');", "nm_gp_move('xml', '0');", "xml_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_4", "only_text", "text_right", "", "", "", "", "", "");
-              $nm_saida->saida("           $Cod_Btn \r\n");
-          $nm_saida->saida("            </div>\r\n");
-              $NM_Gbtn = true;
-      }
-      if ($this->nmgp_botoes['csv'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
-      {
-          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_4_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcsv", "nm_gp_move('csv', '0');", "nm_gp_move('csv', '0');", "csv_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_4", "only_text", "text_right", "", "", "", "", "", "");
-              $nm_saida->saida("           $Cod_Btn \r\n");
-          $nm_saida->saida("            </div>\r\n");
-              $NM_Gbtn = true;
-      }
-      if ($this->nmgp_botoes['rtf'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
-      {
-          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_4_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "brtf", "nm_gp_move('rtf', '0');", "nm_gp_move('rtf', '0');", "rtf_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_4", "only_text", "text_right", "", "", "", "", "", "");
-              $nm_saida->saida("           $Cod_Btn \r\n");
-          $nm_saida->saida("            </div>\r\n");
-              $NM_Gbtn = true;
-      }
-          if ($NM_Gbtn)
-          {
-                  $nm_saida->saida("           </td></tr><tr><td class=\"scBtnGrpBackground\">\r\n");
-              $NM_Gbtn = false;
-          }
-      if ($this->nmgp_botoes['print'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
-      {
-          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_4_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bprint", "", "", "print_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "thickbox", "" . $this->Ini->path_link . "grid_periodos_lectivo/grid_periodos_lectivo_config_print.php?nm_opc=AM&nm_cor=AM&language=es&nm_page=" . NM_encode_input($this->Ini->sc_page) . "&KeepThis=true&TB_iframe=true&modal=true", "group_4", "only_text", "text_right", "", "", "", "", "", "");
-              $nm_saida->saida("           $Cod_Btn \r\n");
-          $nm_saida->saida("            </div>\r\n");
-              $NM_Gbtn = true;
-      }
-              $nm_saida->saida("           </td></tr>\r\n");
-          $nm_saida->saida("           </table>\r\n");
-          $nm_saida->saida("           <script type=\"text/javascript\">\r\n");
-          $nm_saida->saida("             if (!sc_itens_btgp_group_4_top) {\r\n");
-          $nm_saida->saida("                 document.getElementById('sc_btgp_btn_group_4_top').style.display='none'; }\r\n");
-          $nm_saida->saida("           </script>\r\n");
-      }
-      if ($this->nmgp_botoes['group_5'] == "on" && !$this->grid_emb_form)
-      {
-          $nm_saida->saida("           <script type=\"text/javascript\">var sc_itens_btgp_group_5_top = false;</script>\r\n");
-          $Cod_Btn = nmButtonOutput($this->arr_buttons, "group_group_5", "scBtnGrpShow('group_5_top')", "scBtnGrpShow('group_5_top')", "sc_btgp_btn_group_5_top", "", "" . $this->Ini->Nm_lang['lang_btns_settings'] . "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "" . $this->Ini->Nm_lang['lang_btns_settings'] . "", "", "", "__sc_grp__", "text_img", "text_right", "", "", "", "", "", "");
-          $nm_saida->saida("           $Cod_Btn\r\n");
-          $NM_btn  = true;
-          $NM_Gbtn = false;
-          $nm_saida->saida("           <table style=\"border-collapse: collapse; border-width: 0; display: none; position: absolute; z-index: 1000\" class=\"SC_SubMenuButton\" id=\"sc_btgp_div_group_5_top\">\r\n");
-              $nm_saida->saida("           <tr><td class=\"scBtnGrpBackground\">\r\n");
-          if ($NM_Gbtn)
-          {
-                  $nm_saida->saida("           </td></tr><tr><td class=\"scBtnGrpBackground\">\r\n");
-              $NM_Gbtn = false;
-          }
-      if ($this->nmgp_botoes['sel_col'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
-      {
-          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_5_top = true;</script>\r\n");
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
-      $pos_path = strrpos($this->Ini->path_prod, "/");
-      $path_fields = $this->Ini->root . substr($this->Ini->path_prod, 0, $pos_path) . "/conf/fields/";
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcolumns", "scBtnSelCamposShow('" . $this->Ini->path_link . "grid_periodos_lectivo/grid_periodos_lectivo_sel_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&path_fields=" . $path_fields . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&script_case_session=" . session_id() . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnSelCamposShow('" . $this->Ini->path_link . "grid_periodos_lectivo/grid_periodos_lectivo_sel_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&path_fields=" . $path_fields . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&script_case_session=" . session_id() . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "selcmp_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_5", "only_text", "text_right", "", "", "", "", "", "");
-              $nm_saida->saida("           $Cod_Btn \r\n");
-          $nm_saida->saida("            </div>\r\n");
-              $NM_Gbtn = true;
-      }
-      if ($this->nmgp_botoes['sort_col'] == "on" && !$_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_psq'] && empty($this->nm_grid_sem_reg) && !$this->grid_emb_form)
-      {
-          $nm_saida->saida("           <script type=\"text/javascript\">sc_itens_btgp_group_5_top = true;</script>\r\n");
-          if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
-          {
-              $UseAlias =  "N";
-          }
-          elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
-          {
-              $UseAlias =  "N";
-          }
-          else
-          {
-              $UseAlias =  "S";
-          }
-          $nm_saida->saida("            <div class=\"scBtnGrpText scBtnGrpClick\">\r\n");
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bsort", "scBtnOrderCamposShow('" . $this->Ini->path_link . "grid_periodos_lectivo/grid_periodos_lectivo_order_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&script_case_session=" . session_id() . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "scBtnOrderCamposShow('" . $this->Ini->path_link . "grid_periodos_lectivo/grid_periodos_lectivo_order_campos.php?path_img=" . $this->Ini->path_img_global . "&path_btn=" . $this->Ini->path_botoes . "&script_case_init=" . NM_encode_input($this->Ini->sc_page) . "&script_case_session=" . session_id() . "&embbed_groupby=Y&toolbar_pos=top', 'top');", "ordcmp_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "group_5", "only_text", "text_right", "", "", "", "", "", "");
-              $nm_saida->saida("           $Cod_Btn \r\n");
-          $nm_saida->saida("            </div>\r\n");
-              $NM_Gbtn = true;
-      }
-          if ($NM_Gbtn)
-          {
-                  $nm_saida->saida("           </td></tr><tr><td class=\"scBtnGrpBackground\">\r\n");
-              $NM_Gbtn = false;
-          }
-        if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['SC_Ind_Groupby'] != "sc_free_total")
-        {
-        }
-          if ($NM_Gbtn)
-          {
-                  $nm_saida->saida("           </td></tr><tr><td class=\"scBtnGrpBackground\">\r\n");
-              $NM_Gbtn = false;
-          }
-          if ($NM_Gbtn)
-          {
-                  $nm_saida->saida("           </td></tr><tr><td class=\"scBtnGrpBackground\">\r\n");
-              $NM_Gbtn = false;
-          }
-              $nm_saida->saida("           </td></tr>\r\n");
-          $nm_saida->saida("           </table>\r\n");
-          $nm_saida->saida("           <script type=\"text/javascript\">\r\n");
-          $nm_saida->saida("             if (!sc_itens_btgp_group_5_top) {\r\n");
-          $nm_saida->saida("                 document.getElementById('sc_btgp_btn_group_5_top').style.display='none'; }\r\n");
-          $nm_saida->saida("           </script>\r\n");
-      }
           $nm_saida->saida("         </td> \r\n");
           $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"center\" width=\"33%\"> \r\n");
           $nm_saida->saida("         </td> \r\n");
           $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"right\" width=\"33%\"> \r\n");
+        if (!$this->Ini->SC_Link_View && $this->nmgp_botoes['new'] == "on" && $this->nmgp_botoes['insert'] == "on" && !$this->grid_emb_form)
+        {
+           $Sc_parent = ($this->grid_emb_form_full) ? "S" : "";
+           if (isset($this->Ini->sc_lig_md5["form_periodos_lectivo"]) && $this->Ini->sc_lig_md5["form_periodos_lectivo"] == "S") {
+               $Parms_Lig  = "NM_cancel_insert_new*scin1*scoutNM_cancel_return_new*scin1*scoutnmgp_opcao*scinnovo*scoutNM_btn_insert*scinS*scoutNM_btn_new*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scout";
+               $Md5_Lig    = "@SC_par@" . NM_encode_input($this->Ini->sc_page) . "@SC_par@grid_periodos_lectivo@SC_par@" . md5($Parms_Lig);
+               $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['Lig_Md5'][md5($Parms_Lig)] = $Parms_Lig;
+           } else {
+               $Md5_Lig  = "NM_cancel_insert_new*scin1*scoutNM_cancel_return_new*scin1*scoutnmgp_opcao*scinnovo*scoutNM_btn_insert*scinS*scoutNM_btn_new*scinS*scoutNM_btn_update*scinS*scoutNM_btn_delete*scinS*scoutNM_btn_navega*scinN*scout";
+           }
+         $Cod_Btn = nmButtonOutput($this->arr_buttons, "bnovo", "nm_gp_submit1('" .  $this->Ini->link_form_periodos_lectivo . "', '$this->nm_location', '$Md5_Lig', '_self', 'form_periodos_lectivo'); return false;;", "nm_gp_submit1('" .  $this->Ini->link_form_periodos_lectivo . "', '$this->nm_location', '$Md5_Lig', '_self', 'form_periodos_lectivo'); return false;;", "sc_b_new_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+         $nm_saida->saida("           $Cod_Btn \r\n");
+         $NM_btn = true;
+        }
+        if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['SC_Ind_Groupby'] != "sc_free_total")
+        {
+        }
           if (is_file("grid_periodos_lectivo_help.txt") && !$this->grid_emb_form)
           {
              $Arq_WebHelp = file("grid_periodos_lectivo_help.txt"); 
@@ -3600,13 +3230,44 @@ class grid_periodos_lectivo_grid
                      $Tmp1 = explode(":", $Cada_help); 
                      if (!empty($Tmp1[0]) && isset($Tmp1[1]) && !empty($Tmp1[1]) && $Tmp1[0] == "cons" && is_file($this->Ini->root . $this->Ini->path_help . $Tmp1[1]))
                      {
-                        $Cod_Btn = nmButtonOutput($this->arr_buttons, "bhelp", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "help_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+                        $Cod_Btn = nmButtonOutput($this->arr_buttons, "bhelp", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "help_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (F1)", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
                         $nm_saida->saida("           $Cod_Btn \r\n");
                         $NM_btn = true;
                      }
                  }
              }
           }
+      if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['b_sair'] || $this->grid_emb_form || $this->grid_emb_form_full || (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['dashboard_info']['under_dashboard']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['dashboard_info']['under_dashboard']))
+      {
+         $this->nmgp_botoes['exit'] = "off"; 
+      }
+      if (!$_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_psq'])
+      {
+         if ($nm_apl_dependente == 1 && $this->nmgp_botoes['exit'] == "on") 
+         { 
+            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "document.F5.action='$nm_url_saida'; document.F5.submit();", "document.F5.action='$nm_url_saida'; document.F5.submit();", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + Q)", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+            $nm_saida->saida("           $Cod_Btn \r\n");
+            $NM_btn = true;
+         } 
+         elseif (!$this->Ini->SC_Link_View && !$this->aba_iframe && $this->nmgp_botoes['exit'] == "on") 
+         { 
+            $Cod_Btn = nmButtonOutput($this->arr_buttons, "bsair", "document.F5.action='$nm_url_saida'; document.F5.submit();", "document.F5.action='$nm_url_saida'; document.F5.submit();", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + Q)", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+            $nm_saida->saida("           $Cod_Btn \r\n");
+            $NM_btn = true;
+         } 
+      }
+      elseif ($this->nmgp_botoes['exit'] == "on")
+      {
+        if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['sc_modal']) && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['sc_modal'])
+        {
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "self.parent.tb_remove()", "self.parent.tb_remove()", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + Q)", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+        }
+        else
+        {
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bvoltar", "window.close();", "window.close();", "sai_top", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Alt + Q)", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+        }
+         $nm_saida->saida("           $Cod_Btn \r\n");
+         $NM_btn = true;
       }
       $nm_saida->saida("         </td> \r\n");
       $nm_saida->saida("        </tr> \r\n");
@@ -3657,18 +3318,40 @@ class grid_periodos_lectivo_grid
       $nm_saida->saida("        <table class=\"" . $this->css_scGridToolbar . "\" style=\"padding: 0px; border-spacing: 0px; border-width: 0px; vertical-align: top;\" width=\"100%\" valign=\"top\">\r\n");
       $nm_saida->saida("         <tr> \r\n");
       $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"left\" width=\"33%\"> \r\n");
-      if ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opcao_print'] != "print") 
-      {
+          if (empty($this->nm_grid_sem_reg) && $this->nmgp_botoes['goto'] == "on" && $this->Ini->Apl_paginacao != "FULL" )
+          {
+              $Reg_Page  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['qt_lin_grid'];
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "birpara", "var rec_nav = ((document.getElementById('rec_f0_bot').value - 1) * " . NM_encode_input($Reg_Page) . ") + 1; nm_gp_submit_ajax('muda_rec_linhas', rec_nav);", "var rec_nav = ((document.getElementById('rec_f0_bot').value - 1) * " . NM_encode_input($Reg_Page) . ") + 1; nm_gp_submit_ajax('muda_rec_linhas', rec_nav);", "brec_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+              $Page_Atu   = ceil($this->nmgp_reg_inicial / $Reg_Page);
+              $nm_saida->saida("          <input id=\"rec_f0_bot\" type=\"text\" class=\"" . $this->css_css_toolbar_obj . "\" name=\"rec\" value=\"" . NM_encode_input($Page_Atu) . "\" style=\"width:25px;vertical-align: middle;\"/> \r\n");
+              $NM_btn = true;
+          }
+          if (empty($this->nm_grid_sem_reg) && $this->nmgp_botoes['qtline'] == "on" && $this->Ini->Apl_paginacao != "FULL")
+          {
+              $nm_saida->saida("          <span class=\"" . $this->css_css_toolbar_obj . "\" style=\"border: 0px;vertical-align: middle;\">" . $this->Ini->Nm_lang['lang_btns_rows'] . "</span>\r\n");
+              $nm_saida->saida("          <select class=\"" . $this->css_css_toolbar_obj . "\" style=\"vertical-align: middle;\" id=\"quant_linhas_f0_bot\" name=\"nmgp_quant_linhas\" onchange=\"sc_ind = document.getElementById('quant_linhas_f0_bot').selectedIndex; nm_gp_submit_ajax('muda_qt_linhas', document.getElementById('quant_linhas_f0_bot').options[sc_ind].value);\"> \r\n");
+              $obj_sel = ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['qt_lin_grid'] == 10) ? " selected" : "";
+              $nm_saida->saida("           <option value=\"10\" " . $obj_sel . ">10</option>\r\n");
+              $obj_sel = ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['qt_lin_grid'] == 20) ? " selected" : "";
+              $nm_saida->saida("           <option value=\"20\" " . $obj_sel . ">20</option>\r\n");
+              $obj_sel = ($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['qt_lin_grid'] == 50) ? " selected" : "";
+              $nm_saida->saida("           <option value=\"50\" " . $obj_sel . ">50</option>\r\n");
+              $nm_saida->saida("          </select>\r\n");
+              $NM_btn = true;
+          }
+          $nm_saida->saida("         </td> \r\n");
+          $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"center\" width=\"33%\"> \r\n");
           if ($this->nmgp_botoes['first'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_liga']['nav']))
           {
               if ($this->Rec_ini == 0)
               {
-                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_inicio_off", "nm_gp_submit_rec('ini');", "nm_gp_submit_rec('ini');", "first_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_inicio_off", "nm_gp_submit_rec('ini');", "nm_gp_submit_rec('ini');", "first_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + Shift + &#8592;)", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
                   $nm_saida->saida("           $Cod_Btn \r\n");
               }
               else
               {
-                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_inicio", "nm_gp_submit_rec('ini');", "nm_gp_submit_rec('ini');", "first_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_inicio", "nm_gp_submit_rec('ini');", "nm_gp_submit_rec('ini');", "first_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + Shift + &#8592;)", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
                   $nm_saida->saida("           $Cod_Btn \r\n");
               }
                   $NM_btn = true;
@@ -3677,16 +3360,74 @@ class grid_periodos_lectivo_grid
           {
               if ($this->Rec_ini == 0)
               {
-                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_retorna_off", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "back_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_retorna_off", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "back_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + &#8592;)", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
                   $nm_saida->saida("           $Cod_Btn \r\n");
               }
               else
               {
-                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_retorna", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "back_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+                  $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_retorna", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "nm_gp_submit_rec('" . $this->Rec_ini . "');", "back_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + &#8592;)", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
                   $nm_saida->saida("           $Cod_Btn \r\n");
               }
                   $NM_btn = true;
           }
+          if (empty($this->nm_grid_sem_reg) && $this->nmgp_botoes['navpage'] == "on" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_liga']['nav']) && $this->Ini->Apl_paginacao != "FULL" && $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['qt_lin_grid'] != "all")
+          {
+              $Reg_Page  = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['qt_lin_grid'];
+              $Max_link   = 5;
+              $Mid_link   = ceil($Max_link / 2);
+              $Corr_link  = (($Max_link % 2) == 0) ? 0 : 1;
+              $Qtd_Pages  = ceil($this->count_ger / $Reg_Page);
+              $Page_Atu   = ceil($this->nmgp_reg_final / $Reg_Page);
+              $Link_ini   = 1;
+              if ($Page_Atu > $Max_link)
+              {
+                  $Link_ini = $Page_Atu - $Mid_link + $Corr_link;
+              }
+              elseif ($Page_Atu > $Mid_link)
+              {
+                  $Link_ini = $Page_Atu - $Mid_link + $Corr_link;
+              }
+              if (($Qtd_Pages - $Link_ini) < $Max_link)
+              {
+                  $Link_ini = ($Qtd_Pages - $Max_link) + 1;
+              }
+              if ($Link_ini < 1)
+              {
+                  $Link_ini = 1;
+              }
+              for ($x = 0; $x < $Max_link && $Link_ini <= $Qtd_Pages; $x++)
+              {
+                  $rec = (($Link_ini - 1) * $Reg_Page) + 1;
+                  if ($Link_ini == $Page_Atu)
+                  {
+                      $nm_saida->saida("            <span class=\"scGridToolbarNavOpen\" style=\"vertical-align: middle;\">" . $Link_ini . "</span>\r\n");
+                  }
+                  else
+                  {
+                      $nm_saida->saida("            <a class=\"scGridToolbarNav\" style=\"vertical-align: middle;\" href=\"javascript: nm_gp_submit_rec(" . $rec . ");\">" . $Link_ini . "</a>\r\n");
+                  }
+                  $Link_ini++;
+                  if (($x + 1) < $Max_link && $Link_ini <= $Qtd_Pages && '' != $this->Ini->Str_toolbarnav_separator && @is_file($this->Ini->root . $this->Ini->path_img_global . $this->Ini->Str_toolbarnav_separator))
+                  {
+                      $nm_saida->saida("            <img src=\"" . $this->Ini->path_img_global . $this->Ini->Str_toolbarnav_separator . "\" align=\"absmiddle\" style=\"vertical-align: middle;\">\r\n");
+                  }
+              }
+              $NM_btn = true;
+          }
+          if ($this->nmgp_botoes['forward'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_liga']['nav']))
+          {
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_avanca", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "forward_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + &#8594;)", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+              $NM_btn = true;
+          }
+          if ($this->nmgp_botoes['last'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_liga']['nav']))
+          {
+              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_final", "nm_gp_submit_rec('fim');", "nm_gp_submit_rec('fim');", "last_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (Ctrl + Shift + &#8594;)", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+              $nm_saida->saida("           $Cod_Btn \r\n");
+              $NM_btn = true;
+          }
+          $nm_saida->saida("         </td> \r\n");
+          $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"right\" width=\"33%\"> \r\n");
           if ($this->nmgp_botoes['rows'] == "on" && empty($this->nm_grid_sem_reg))
           {
               $nm_sumario = "[" . $this->Ini->Nm_lang['lang_othr_smry_info'] . "]";
@@ -3703,22 +3444,6 @@ class grid_periodos_lectivo_grid
               $nm_saida->saida("           <span class=\"" . $this->css_css_toolbar_obj . "\" style=\"border:0px;\">" . $nm_sumario . "</span>\r\n");
               $NM_btn = true;
           }
-          if ($this->nmgp_botoes['forward'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_liga']['nav']))
-          {
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_avanca", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "nm_gp_submit_rec('" . $this->Rec_fim . "');", "forward_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
-              $nm_saida->saida("           $Cod_Btn \r\n");
-              $NM_btn = true;
-          }
-          if ($this->nmgp_botoes['last'] == "on" && empty($this->nm_grid_sem_reg) && $this->Ini->Apl_paginacao != "FULL" && !isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['opc_liga']['nav']))
-          {
-              $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_final", "nm_gp_submit_rec('fim');", "nm_gp_submit_rec('fim');", "last_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
-              $nm_saida->saida("           $Cod_Btn \r\n");
-              $NM_btn = true;
-          }
-          $nm_saida->saida("         </td> \r\n");
-          $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"center\" width=\"33%\"> \r\n");
-          $nm_saida->saida("         </td> \r\n");
-          $nm_saida->saida("          <td class=\"" . $this->css_scGridToolbarPadd . "\" nowrap valign=\"middle\" align=\"right\" width=\"33%\"> \r\n");
           if (is_file("grid_periodos_lectivo_help.txt") && !$this->grid_emb_form)
           {
              $Arq_WebHelp = file("grid_periodos_lectivo_help.txt"); 
@@ -3731,14 +3456,13 @@ class grid_periodos_lectivo_grid
                      $Tmp1 = explode(":", $Cada_help); 
                      if (!empty($Tmp1[0]) && isset($Tmp1[1]) && !empty($Tmp1[1]) && $Tmp1[0] == "cons" && is_file($this->Ini->root . $this->Ini->path_help . $Tmp1[1]))
                      {
-                        $Cod_Btn = nmButtonOutput($this->arr_buttons, "bhelp", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "help_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+                        $Cod_Btn = nmButtonOutput($this->arr_buttons, "bhelp", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "nm_open_popup('" . $this->Ini->path_help . $Tmp1[1] . "');", "help_bot", "", "", "", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "__NM_HINT__ (F1)", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
                         $nm_saida->saida("           $Cod_Btn \r\n");
                         $NM_btn = true;
                      }
                  }
              }
           }
-      }
       $nm_saida->saida("         </td> \r\n");
       $nm_saida->saida("        </tr> \r\n");
       $nm_saida->saida("       </table> \r\n");
@@ -3834,6 +3558,601 @@ class grid_periodos_lectivo_grid
       $nm_saida->saida("      <td colspan=3>\r\n");
       $nm_saida->saida("      </td>\r\n");
       $nm_saida->saida("     </tr>\r\n");
+   }
+   function html_interativ_search()
+   {
+       global $nm_saida;
+       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['int_search_label'] = array();
+       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['int_search_sql']   = array();
+       if (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['interativ_search']))
+       {
+           $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['interativ_search'] = array();
+       }
+       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['int_search_label']['estatus_id'] = (isset($this->New_label['estatus_id'])) ? $this->New_label['estatus_id'] : 'Estatus';
+       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['int_search_sql']['estatus_id']   = "estatus_id";
+       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['int_search_label']['tipo_periodo_id'] = (isset($this->New_label['tipo_periodo_id'])) ? $this->New_label['tipo_periodo_id'] : 'Tipo Periodo';
+       $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['int_search_sql']['tipo_periodo_id']   = "tipo_periodo_id";
+       $tb_disp = (empty($this->nm_grid_sem_reg)) ? '' : 'none';
+       $nm_saida->saida(" <table id=\"TB_Interativ_Search\" style=\"padding: 0px; border-spacing: 0px; border-width: 0px; vertical-align: top; width: 100%; display:" . $tb_disp . ";\" valign=\"top\" cellspacing=0 cellpadding=0>\r\n");
+       $nm_saida->saida("   <tr id=\"NM_Interativ_Search\">\r\n");
+       $nm_saida->saida("   <td valign=\"top\"> \r\n");
+       $nm_saida->saida("    <form id= \"id_Interat_search\" name=\"FInterat_search\" method=\"post\" action=\"./\" target=\"_self\"> \r\n");
+       $nm_saida->saida("     <input type=\"hidden\" name=\"script_case_init\" value=\"" . NM_encode_input($this->Ini->sc_page) . "\"/> \r\n");
+       $nm_saida->saida("     <input type=hidden name=\"script_case_session\" value=\"" . NM_encode_input(session_id()) . "\"/>\r\n");
+       $nm_saida->saida("     <input type=\"hidden\" name=\"nmgp_opcao\" value=\"interativ_search\"/> \r\n");
+       $nm_saida->saida("     <input type=\"hidden\" name=\"parm\" value=\"\"/> \r\n");
+       $nm_saida->saida("    <div id='id_div_interativ_search' class='scGridRefinedSearchMoldura' style='min-width:260px;'>\r\n");
+       $lin_obj = $this->interativ_search_estatus_id();
+       $nm_saida->saida("" . $lin_obj . "\r\n");
+       $lin_obj = $this->interativ_search_tipo_periodo_id();
+       $nm_saida->saida("" . $lin_obj . "\r\n");
+       $nm_saida->saida("    </div>\r\n");
+       $nm_saida->saida("    </form>\r\n");
+       $nm_saida->saida("   </td>\r\n");
+       $nm_saida->saida("   </tr>\r\n");
+       $nm_saida->saida(" </table>\r\n");
+       $this->JS_interativ_search();
+       $nm_saida->saida(" <SCRIPT LANGUAGE=\"Javascript\" SRC=\"" . $this->Ini->path_js . "/nm_format_num.js\"></SCRIPT>\r\n");
+   }
+   function refresh_interativ_search()
+   {
+       $array_fields = array();
+       $array_fields[] = "estatus_id";
+       $array_fields[] = "tipo_periodo_id";
+       if(is_array($array_fields) && !empty($array_fields))
+       {
+           $str_out = "";
+           foreach($array_fields as $str_field)
+           {
+               $method = "interativ_search_" . $str_field;
+               $str_out .= $this->$method();
+           }
+           $this->Ini->Arr_result['setValue'][] = array('field' => 'id_div_interativ_search', 'value' => NM_charset_to_utf8($str_out));
+       }
+   }
+   function interativ_search_estatus_id()
+   {
+       $cle_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['interativ_search']["estatus_id"])) ? "" : "none";
+       $exp_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['interativ_search']["estatus_id"])) ? "none" : "";
+       $lin_obj  = "    <div id=\"div_int_estatus_id\">";
+       $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
+       $lin_obj .= "     <tr>";
+       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel'>";
+       $lin_obj .= "        <table width='100%' cellspacing=0 cellpadding=0>";
+       $lin_obj .= "         <tr>";
+       $lin_obj .= "          <td nowrap>";
+       $lin_obj .= "              <span id=\"id_expand_estatus_id\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('estatus_id')\"/>   </span>";
+       $lin_obj .= "              <span id=\"id_retract_estatus_id\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('estatus_id')\"/>   </span>";
+       $lin_obj .= "              <INPUT class='" . $this->css_scAppDivToolbarInput . "' style=\"display: none;\" type=\"checkbox\" id=\"id_int_search_estatus_id_ck\" name=\"int_search_estatus_id_ck[]\" value=\"\" checked onclick=\"nm_change_mult_int_search('estatus_id');\">";
+       $lin_obj .= "              <span style=\"cursor: pointer;\" onclick=\"nm_toggle_int_search('estatus_id')\">";
+       $lin_obj .= $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['int_search_label']['estatus_id'];
+       $lin_obj .= "              </span>";
+       $lin_obj .= "          </td>";
+       $lin_obj .= "          <td align='right'>";
+       $lin_obj .= "              <span id=\"id_clear_estatus_id\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('clear','','','estatus_id', '', 'estatus_id', '')\"/>   </span>";
+       $lin_obj .= "          </td>";
+       $lin_obj .= "         </tr>";
+       $lin_obj .= "        </table>";
+       $lin_obj .= "     </td></tr>";
+       $nm_comando = "select estatus_id, COUNT(*) AS countTest from " . $this->Ini->nm_tabela;
+       $tmp_where = "";
+       if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq']))
+       {
+           $tmp_where = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq'];
+       }
+       $nm_comando .= " " . $tmp_where;
+       $nm_comando .= " GROUP BY estatus_id";
+       $nm_comando .= " order by estatus_id ASC";
+       $result = array();
+       $range_max = false;
+       $range_min = false;
+       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+       if ($RSI = $this->Db->Execute($nm_comando))
+       {
+           while (!$RSI->EOF) 
+           { 
+              if($RSI->fields[0] == '')
+              {
+                  if(isset($result[ $RSI->fields[0] ]))
+                  {
+                    $result[ $RSI->fields[0] ] += $RSI->fields[1];
+                  }
+                  else
+                  {
+                    $result[ $RSI->fields[0] ] = $RSI->fields[1];
+                  }
+              }
+              else
+              {
+              $result[$RSI->fields[0]] = $RSI->fields[1];
+              }
+              if($range_max === false || $RSI->fields[0] > $range_max)
+              {
+                  $range_max = $RSI->fields[0];
+              }
+              if($range_min === false || $RSI->fields[0] < $range_min)
+              {
+                  $range_min = $RSI->fields[0];
+              }
+              $RSI->MoveNext() ;
+           }  
+           $RSI->Close(); 
+       }
+       elseif ($GLOBALS["NM_ERRO_IBASE"] != 1)  
+       { 
+           $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+           exit; 
+       } 
+       $lin_mult  = "";
+       $disp_link = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['interativ_search']['estatus_id'])) ? "" : "none";
+       $lin_obj  .= "   <tr><td><div class='scGridRefinedSearchMolduraResult' id=\"id_tab_estatus_id_link\" style=\"display: " . $disp_link . ";\">";
+       $qtd_see_more  = 0;
+       $qtd_result_see_more  = 0;
+       $bol_open_see_more  = false;
+       foreach ($result as $dados => $qtd_result)
+       {
+           $formatado = $dados;
+           $this->Lookup->lookup_estatus_id($formatado , $formatado, $_SESSION['vglo_colegio']);
+           $formatado_exib  = $formatado;
+           $dados = (string)$dados;
+           if($dados == '')
+           {
+               $formatado_exib = "" . $this->Ini->Nm_lang['lang_refine_search_empty'] . "";
+           }
+           $veja_mais_link  = '';
+           $veja_mais_link  =sprintf($this->Ini->Nm_lang['lang_othr_refinedsearch_more_mask'], $qtd_result);
+           if($qtd_see_more > 0 && $qtd_result_see_more >= $qtd_see_more && !$bol_open_see_more)
+           {
+               $lin_obj  .= "   <div id='id_see_more_estatus_id' class='scGridRefinedSearchVejaMais'>";
+               $lin_obj  .= "    <a href=\"javascript:toggleSeeMore('estatus_id');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_more'] ."</a>";
+               $lin_obj  .= "   </div>";
+               $lin_obj  .= "   <div id='id_see_more_list_estatus_id' style='display:none'>";
+               $bol_open_see_more  = true;
+           }
+           $on_mouse_over= "";
+           $on_mouse_out = "";
+           if(empty($disp_link))
+           {
+               $on_mouse_over= "$(this).find('img').css('opacity', 1);";
+               $on_mouse_out = "$(this).find('img').css('opacity', 0);";
+           }
+           $lin_obj  .= "   <div class='scGridRefinedSearchCampo' onmouseover=\"". $on_mouse_over ."\" onmouseout=\"". $on_mouse_out ."\">";
+           $lin_obj  .= "  <table cellspacing=0 cellpadding=0>";
+           $lin_obj  .= "   <tr>";
+           if(isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['interativ_search']['estatus_id']))
+           {
+               $lin_obj  .= "   <td>";
+               $lin_obj  .= "    <IMG align='absmiddle' style=\"cursor: pointer; position:relative; opacity:0;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_campo_close_icon . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('uncheck', 'nn','" . str_replace('"', '__asp__', $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['int_search_label']['estatus_id']) . "','estatus_id','id_int_search_estatus_id','estatus_id', '" . NM_encode_input($dados . "##@@" . $formatado) . "');\"/>";
+               $lin_obj  .= "   </td>";
+           }
+           $lin_obj  .= "   <td>";
+           $lin_obj  .= "    <a href=\"javascript:nm_proc_int_search('link','nn','" . str_replace('"', '__asp__', $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['int_search_label']['estatus_id']) . "','estatus_id','" . NM_encode_input(NM_encode_input_js($dados . "##@@" . $formatado)) . "', 'estatus_id', '');\" class='scGridRefinedSearchCampoFont'>" . $formatado_exib . "</a> ";
+           $lin_obj  .= "   </td>";
+           if(!empty($veja_mais_link))
+           {
+               $lin_obj  .= "   <td>";
+               $lin_obj  .= "    <a href=\"javascript:nm_proc_int_search('link','nn','" . str_replace('"', '__asp__', $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['int_search_label']['estatus_id']) . "','estatus_id','" . NM_encode_input(NM_encode_input_js($dados . "##@@" . $formatado)) . "', 'estatus_id', '');\" class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</a> ";
+               $lin_obj  .= "   </td>";
+           }
+           $lin_obj  .= "    </tr>";
+           $lin_obj  .= "   </table>";
+           $lin_obj  .= "   </div>";
+           $lin_mult .= "   <div><label class='scGridRefinedSearchCampo' style='display: block;'>";
+           $lin_mult .= "    <INPUT class='" . $this->css_scAppDivToolbarInput . "' type=\"checkbox\" id=\"id_int_search_estatus_id\" name=\"int_search_estatus_id[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" checked><span class='scGridRefinedSearchCampoFont'>" . $formatado_exib . "</span>";
+           if(!empty($veja_mais_link))
+           {
+               $lin_mult .= "    <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
+           }
+           $lin_mult .= "   </label></div>";
+           $qtd_result_see_more++;
+       }
+           if($bol_open_see_more)
+           {
+               $lin_obj  .= "   </div>";
+               $lin_obj  .= "   <div id='id_see_less_estatus_id' class='scGridRefinedSearchVejaMais' style='display:none'>";
+               $lin_obj  .= "    <a href=\"javascript:toggleSeeMore('estatus_id');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_less'] ."</a>";
+               $lin_obj  .= "   </div>";
+           }
+      $lin_obj  .= "<SCRIPT>
+";
+      $lin_obj  .= "$( document ).ready(function() {";
+      $lin_obj  .= "nm_expand_int_search('estatus_id');";
+      $lin_obj  .= "});";
+      $lin_obj  .= "</SCRIPT>";
+       $lin_obj  .= "   </div></td></tr>";
+       if (count($result) > 1)
+       {
+           $disp_chk = "none";
+           $lin_obj  .= "   <tr><td><div class='scGridRefinedSearchMolduraResult' id=\"id_tab_estatus_id_chk\" style=\"display: " . $disp_chk . ";\">";
+           $lin_obj  .= $lin_mult;
+           $lin_obj  .= "   </div></td></tr>";
+       }
+       if (count($result) > 1)
+       {
+           $lin_obj .= "    <tr>";
+           $lin_obj .= "    <td style='display:'>";
+           $lin_obj .= "    <div class='scGridRefinedSearchToolbar' id=\"id_toolbar_estatus_id\" style='display:none'>";
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bmultiselect", "nm_mult_int_search('estatus_id');", "nm_mult_int_search('estatus_id');", "mult_int_search_estatus_id", "", "", "display: $disp_link", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+           $lin_obj .= $Cod_Btn; 
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('chbx', 'nn','" . str_replace('"', '__asp__', $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['int_search_label']['estatus_id']) . "','estatus_id','id_int_search_estatus_id','estatus_id', '');", "nm_proc_int_search('chbx', 'nn','" . str_replace('"', '__asp__', $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['int_search_label']['estatus_id']) . "','estatus_id','id_int_search_estatus_id','estatus_id', '');", "app_int_search_estatus_id", "", "", "display: none", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+           $lin_obj .= $Cod_Btn; 
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_cancel", "nm_single_int_search('estatus_id');", "nm_single_int_search('estatus_id');", "single_int_search_estatus_id", "", "", "display: none", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+           $lin_obj .= $Cod_Btn; 
+           $lin_obj .= "    </div>";
+       }
+       $lin_obj .= "    </td>";
+       $lin_obj .= "    </tr>";
+       $lin_obj .= "    </table>";
+       $lin_obj .= "    </div>";
+       return $lin_obj;
+   }
+   function interativ_search_tipo_periodo_id()
+   {
+       $cle_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['interativ_search']["tipo_periodo_id"])) ? "" : "none";
+       $exp_disp = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['interativ_search']["tipo_periodo_id"])) ? "none" : "";
+       $lin_obj  = "    <div id=\"div_int_tipo_periodo_id\">";
+       $lin_obj .= "    <table width='100%' cellspacing=0 cellpadding=0>";
+       $lin_obj .= "     <tr>";
+       $lin_obj .= "      <td nowrap class='scGridRefinedSearchLabel'>";
+       $lin_obj .= "        <table width='100%' cellspacing=0 cellpadding=0>";
+       $lin_obj .= "         <tr>";
+       $lin_obj .= "          <td nowrap>";
+       $lin_obj .= "              <span id=\"id_expand_tipo_periodo_id\" style=\"display: " .  $exp_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer; padding:0px 2px 0px 0px;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_show . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('tipo_periodo_id')\"/>   </span>";
+       $lin_obj .= "              <span id=\"id_retract_tipo_periodo_id\" style=\"display: none;\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_hide . "\" BORDER=\"0\" onclick=\"nm_toggle_int_search('tipo_periodo_id')\"/>   </span>";
+       $lin_obj .= "              <INPUT class='" . $this->css_scAppDivToolbarInput . "' style=\"display: none;\" type=\"checkbox\" id=\"id_int_search_tipo_periodo_id_ck\" name=\"int_search_tipo_periodo_id_ck[]\" value=\"\" checked onclick=\"nm_change_mult_int_search('tipo_periodo_id');\">";
+       $lin_obj .= "              <span style=\"cursor: pointer;\" onclick=\"nm_toggle_int_search('tipo_periodo_id')\">";
+       $lin_obj .= $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['int_search_label']['tipo_periodo_id'];
+       $lin_obj .= "              </span>";
+       $lin_obj .= "          </td>";
+       $lin_obj .= "          <td align='right'>";
+       $lin_obj .= "              <span id=\"id_clear_tipo_periodo_id\" style=\"display: " .  $cle_disp . ";\">&nbsp;&nbsp;<IMG align='absmiddle' style=\"cursor: pointer;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_close . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('clear','','','tipo_periodo_id', '', 'tipo_periodo_id', '')\"/>   </span>";
+       $lin_obj .= "          </td>";
+       $lin_obj .= "         </tr>";
+       $lin_obj .= "        </table>";
+       $lin_obj .= "     </td></tr>";
+       $nm_comando = "select tipo_periodo_id, COUNT(*) AS countTest from " . $this->Ini->nm_tabela;
+       $tmp_where = "";
+       if (!empty($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq']))
+       {
+           $tmp_where = $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['where_pesq'];
+       }
+       $nm_comando .= " " . $tmp_where;
+       $nm_comando .= " GROUP BY tipo_periodo_id";
+       $nm_comando .= " order by tipo_periodo_id ASC";
+       $result = array();
+       $range_max = false;
+       $range_min = false;
+       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+       if ($RSI = $this->Db->Execute($nm_comando))
+       {
+           while (!$RSI->EOF) 
+           { 
+              if($RSI->fields[0] == '')
+              {
+                  if(isset($result[ $RSI->fields[0] ]))
+                  {
+                    $result[ $RSI->fields[0] ] += $RSI->fields[1];
+                  }
+                  else
+                  {
+                    $result[ $RSI->fields[0] ] = $RSI->fields[1];
+                  }
+              }
+              else
+              {
+              $result[$RSI->fields[0]] = $RSI->fields[1];
+              }
+              if($range_max === false || $RSI->fields[0] > $range_max)
+              {
+                  $range_max = $RSI->fields[0];
+              }
+              if($range_min === false || $RSI->fields[0] < $range_min)
+              {
+                  $range_min = $RSI->fields[0];
+              }
+              $RSI->MoveNext() ;
+           }  
+           $RSI->Close(); 
+       }
+       elseif ($GLOBALS["NM_ERRO_IBASE"] != 1)  
+       { 
+           $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+           exit; 
+       } 
+       $lin_mult  = "";
+       $disp_link = (isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['interativ_search']['tipo_periodo_id'])) ? "" : "none";
+       $lin_obj  .= "   <tr><td><div class='scGridRefinedSearchMolduraResult' id=\"id_tab_tipo_periodo_id_link\" style=\"display: " . $disp_link . ";\">";
+       $qtd_see_more  = 0;
+       $qtd_result_see_more  = 0;
+       $bol_open_see_more  = false;
+       foreach ($result as $dados => $qtd_result)
+       {
+           $formatado = $dados;
+           $this->Lookup->lookup_tipo_periodo_id($formatado , $formatado, $_SESSION['vglo_colegio']);
+           $formatado_exib  = $formatado;
+           $dados = (string)$dados;
+           if($dados == '')
+           {
+               $formatado_exib = "" . $this->Ini->Nm_lang['lang_refine_search_empty'] . "";
+           }
+           $veja_mais_link  = '';
+           $veja_mais_link  =sprintf($this->Ini->Nm_lang['lang_othr_refinedsearch_more_mask'], $qtd_result);
+           if($qtd_see_more > 0 && $qtd_result_see_more >= $qtd_see_more && !$bol_open_see_more)
+           {
+               $lin_obj  .= "   <div id='id_see_more_tipo_periodo_id' class='scGridRefinedSearchVejaMais'>";
+               $lin_obj  .= "    <a href=\"javascript:toggleSeeMore('tipo_periodo_id');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_more'] ."</a>";
+               $lin_obj  .= "   </div>";
+               $lin_obj  .= "   <div id='id_see_more_list_tipo_periodo_id' style='display:none'>";
+               $bol_open_see_more  = true;
+           }
+           $on_mouse_over= "";
+           $on_mouse_out = "";
+           if(empty($disp_link))
+           {
+               $on_mouse_over= "$(this).find('img').css('opacity', 1);";
+               $on_mouse_out = "$(this).find('img').css('opacity', 0);";
+           }
+           $lin_obj  .= "   <div class='scGridRefinedSearchCampo' onmouseover=\"". $on_mouse_over ."\" onmouseout=\"". $on_mouse_out ."\">";
+           $lin_obj  .= "  <table cellspacing=0 cellpadding=0>";
+           $lin_obj  .= "   <tr>";
+           if(isset($_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['interativ_search']['tipo_periodo_id']))
+           {
+               $lin_obj  .= "   <td>";
+               $lin_obj  .= "    <IMG align='absmiddle' style=\"cursor: pointer; position:relative; opacity:0;\" SRC=\"" . $this->Ini->path_img_global . "/" . $this->Ini->refinedsearch_campo_close_icon . "\" BORDER=\"0\" onclick=\"nm_proc_int_search('uncheck', 'nn','" . str_replace('"', '__asp__', $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['int_search_label']['tipo_periodo_id']) . "','tipo_periodo_id','id_int_search_tipo_periodo_id','tipo_periodo_id', '" . NM_encode_input($dados . "##@@" . $formatado) . "');\"/>";
+               $lin_obj  .= "   </td>";
+           }
+           $lin_obj  .= "   <td>";
+           $lin_obj  .= "    <a href=\"javascript:nm_proc_int_search('link','nn','" . str_replace('"', '__asp__', $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['int_search_label']['tipo_periodo_id']) . "','tipo_periodo_id','" . NM_encode_input(NM_encode_input_js($dados . "##@@" . $formatado)) . "', 'tipo_periodo_id', '');\" class='scGridRefinedSearchCampoFont'>" . $formatado_exib . "</a> ";
+           $lin_obj  .= "   </td>";
+           if(!empty($veja_mais_link))
+           {
+               $lin_obj  .= "   <td>";
+               $lin_obj  .= "    <a href=\"javascript:nm_proc_int_search('link','nn','" . str_replace('"', '__asp__', $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['int_search_label']['tipo_periodo_id']) . "','tipo_periodo_id','" . NM_encode_input(NM_encode_input_js($dados . "##@@" . $formatado)) . "', 'tipo_periodo_id', '');\" class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</a> ";
+               $lin_obj  .= "   </td>";
+           }
+           $lin_obj  .= "    </tr>";
+           $lin_obj  .= "   </table>";
+           $lin_obj  .= "   </div>";
+           $lin_mult .= "   <div><label class='scGridRefinedSearchCampo' style='display: block;'>";
+           $lin_mult .= "    <INPUT class='" . $this->css_scAppDivToolbarInput . "' type=\"checkbox\" id=\"id_int_search_tipo_periodo_id\" name=\"int_search_tipo_periodo_id[]\" value=\"" . NM_encode_input($dados . "##@@" . $formatado) . "\" checked><span class='scGridRefinedSearchCampoFont'>" . $formatado_exib . "</span>";
+           if(!empty($veja_mais_link))
+           {
+               $lin_mult .= "    <span class='scGridRefinedSearchQuantidade'>" . $veja_mais_link . "</span>";
+           }
+           $lin_mult .= "   </label></div>";
+           $qtd_result_see_more++;
+       }
+           if($bol_open_see_more)
+           {
+               $lin_obj  .= "   </div>";
+               $lin_obj  .= "   <div id='id_see_less_tipo_periodo_id' class='scGridRefinedSearchVejaMais' style='display:none'>";
+               $lin_obj  .= "    <a href=\"javascript:toggleSeeMore('tipo_periodo_id');\" class='scGridRefinedSearchVejaMaisFont'>". $this->Ini->Nm_lang['lang_othr_refinedsearch_see_less'] ."</a>";
+               $lin_obj  .= "   </div>";
+           }
+      $lin_obj  .= "<SCRIPT>
+";
+      $lin_obj  .= "$( document ).ready(function() {";
+      $lin_obj  .= "nm_expand_int_search('tipo_periodo_id');";
+      $lin_obj  .= "});";
+      $lin_obj  .= "</SCRIPT>";
+       $lin_obj  .= "   </div></td></tr>";
+       if (count($result) > 1)
+       {
+           $disp_chk = "none";
+           $lin_obj  .= "   <tr><td><div class='scGridRefinedSearchMolduraResult' id=\"id_tab_tipo_periodo_id_chk\" style=\"display: " . $disp_chk . ";\">";
+           $lin_obj  .= $lin_mult;
+           $lin_obj  .= "   </div></td></tr>";
+       }
+       if (count($result) > 1)
+       {
+           $lin_obj .= "    <tr>";
+           $lin_obj .= "    <td style='display:'>";
+           $lin_obj .= "    <div class='scGridRefinedSearchToolbar' id=\"id_toolbar_tipo_periodo_id\" style='display:none'>";
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bmultiselect", "nm_mult_int_search('tipo_periodo_id');", "nm_mult_int_search('tipo_periodo_id');", "mult_int_search_tipo_periodo_id", "", "", "display: $disp_link", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+           $lin_obj .= $Cod_Btn; 
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_apply", "nm_proc_int_search('chbx', 'nn','" . str_replace('"', '__asp__', $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['int_search_label']['tipo_periodo_id']) . "','tipo_periodo_id','id_int_search_tipo_periodo_id','tipo_periodo_id', '');", "nm_proc_int_search('chbx', 'nn','" . str_replace('"', '__asp__', $_SESSION['sc_session'][$this->Ini->sc_page]['grid_periodos_lectivo']['int_search_label']['tipo_periodo_id']) . "','tipo_periodo_id','id_int_search_tipo_periodo_id','tipo_periodo_id', '');", "app_int_search_tipo_periodo_id", "", "", "display: none", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+           $lin_obj .= $Cod_Btn; 
+           $Cod_Btn = nmButtonOutput($this->arr_buttons, "bcons_cancel", "nm_single_int_search('tipo_periodo_id');", "nm_single_int_search('tipo_periodo_id');", "single_int_search_tipo_periodo_id", "", "", "display: none", "absmiddle", "", "0px", $this->Ini->path_botoes, "", "", "", "", "", "only_text", "text_right", "", "", "", "", "", "");
+           $lin_obj .= $Cod_Btn; 
+           $lin_obj .= "    </div>";
+       }
+       $lin_obj .= "    </td>";
+       $lin_obj .= "    </tr>";
+       $lin_obj .= "    </table>";
+       $lin_obj .= "    </div>";
+       return $lin_obj;
+   }
+   function JS_interativ_search()
+   {
+       global $nm_saida;
+       $nm_saida->saida("   <script type=\"text/javascript\">\r\n");
+       $nm_saida->saida("     Tab_obj_int_mult = new Array();\r\n");
+       $nm_saida->saida("     function toggleSeeMore(obj_id)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         if($('#id_see_less_'+obj_id).css('display') == 'none')\r\n");
+       $nm_saida->saida("         {\r\n");
+       $nm_saida->saida("             $('#id_see_more_list_'+obj_id).slideDown();\r\n");
+       $nm_saida->saida("         }\r\n");
+       $nm_saida->saida("         else\r\n");
+       $nm_saida->saida("         {\r\n");
+       $nm_saida->saida("             $('#id_see_more_list_'+obj_id).slideUp();\r\n");
+       $nm_saida->saida("         }\r\n");
+       $nm_saida->saida("         $('#id_see_less_'+obj_id).toggle();\r\n");
+       $nm_saida->saida("         $('#id_see_more_'+obj_id).toggle();\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     function nm_proc_int_search(tp_link, tp_obj, label, nam_db, val_obj, obj_id, val_atual)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         while (label.lastIndexOf(\"__asp__\") != -1)\r\n");
+       $nm_saida->saida("         {\r\n");
+       $nm_saida->saida("           label = label.replace(\"__asp__\" , '\"');\r\n");
+       $nm_saida->saida("         }\r\n");
+       $nm_saida->saida("         while (nam_db.lastIndexOf(\"__asp__\") != -1)\r\n");
+       $nm_saida->saida("         {\r\n");
+       $nm_saida->saida("           nam_db = nam_db.replace(\"__asp__\" , '\"');\r\n");
+       $nm_saida->saida("         }\r\n");
+       $nm_saida->saida("         var out_int = nam_db + '__DL__' + label + '__DL__' + tp_obj + '__DL__';\r\n");
+       $nm_saida->saida("         if (tp_link == 'clear')\r\n");
+       $nm_saida->saida("         {\r\n");
+       $nm_saida->saida("             out_int += 'clear_interativ';\r\n");
+       $nm_saida->saida("             Tab_obj_int_mult[\"'\" + obj_id + \"'\"] = 'N';\r\n");
+       $nm_saida->saida("         }\r\n");
+       $nm_saida->saida("         if (tp_link == 'link')\r\n");
+       $nm_saida->saida("         {\r\n");
+       $nm_saida->saida("             out_int += val_obj;\r\n");
+       $nm_saida->saida("         }\r\n");
+       $nm_saida->saida("         if (tp_link == 'range')\r\n");
+       $nm_saida->saida("         {\r\n");
+       $nm_saida->saida("             out_int += $('#id_slider_' + obj_id).slider('values')[0] + \"_VLS_\" + $('#id_slider_' + obj_id).slider('values')[1];\r\n");
+       $nm_saida->saida("         }\r\n");
+       $nm_saida->saida("         if (tp_link == 'chbx' || tp_link == 'uncheck')\r\n");
+       $nm_saida->saida("         {\r\n");
+       $nm_saida->saida("             if(tp_link == 'uncheck')\r\n");
+       $nm_saida->saida("             {\r\n");
+       $nm_saida->saida("                 int_search_unset_checkbox(nam_db, val_atual, obj_id);\r\n");
+       $nm_saida->saida("             }\r\n");
+       $nm_saida->saida("             else\r\n");
+       $nm_saida->saida("             {\r\n");
+       $nm_saida->saida("                 Tab_obj_int_mult[\"'\" + obj_id + \"'\"] = 'N';\r\n");
+       $nm_saida->saida("             }\r\n");
+       $nm_saida->saida("             result  = int_search_get_checkbox(val_obj);\r\n");
+       $nm_saida->saida("             if (result == '') {\r\n");
+       $nm_saida->saida("                 return;\r\n");
+       $nm_saida->saida("             }\r\n");
+       $nm_saida->saida("             out_int += result;\r\n");
+       $nm_saida->saida("         }\r\n");
+       $nm_saida->saida("         out_int  = out_int.replace(/[+]/g, \"__NM_PLUS__\");\r\n");
+       $nm_saida->saida("         out_int  = out_int.replace(/[&]/g, \"__NM_AMP__\");\r\n");
+       $nm_saida->saida("         out_int  = out_int.replace(/[%]/g, \"__NM_PRC__\");\r\n");
+       $nm_saida->saida("         ajax_navigate('interativ_search', out_int);\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     function int_search_unset_checkbox(nam_db, val_atual, obj_id)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         var obj_check = eval(\"document.getElementsByName('int_search_\" + obj_id + \"[]')\");\r\n");
+       $nm_saida->saida("                 has_checked = false;\r\n");
+       $nm_saida->saida("         for (i = 0; i < obj_check.length; i++)\r\n");
+       $nm_saida->saida("         {\r\n");
+       $nm_saida->saida("             if(obj_check[i].checked && obj_check[i].value == val_atual)\r\n");
+       $nm_saida->saida("             {\r\n");
+       $nm_saida->saida("                 obj_check[i].checked = false;\r\n");
+       $nm_saida->saida("             }\r\n");
+       $nm_saida->saida("                         if(obj_check[i].checked)\r\n");
+       $nm_saida->saida("                         {\r\n");
+       $nm_saida->saida("                                 has_checked = true;\r\n");
+       $nm_saida->saida("                         }\r\n");
+       $nm_saida->saida("         }\r\n");
+       $nm_saida->saida("                 //if doesnt have checked anymore, clear\r\n");
+       $nm_saida->saida("                 if(!has_checked)\r\n");
+       $nm_saida->saida("                 {\r\n");
+       $nm_saida->saida("                         nm_proc_int_search('clear','','', nam_db, '', obj_id, '')\r\n");
+       $nm_saida->saida("                         return;\r\n");
+       $nm_saida->saida("                 }\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     function int_search_get_checkbox(obj_id)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("        var Nobj = document.getElementById(obj_id).name;\r\n");
+       $nm_saida->saida("        var obj  = document.getElementsByName(Nobj);\r\n");
+       $nm_saida->saida("        var val  = \"\";\r\n");
+       $nm_saida->saida("        if (!obj.length)\r\n");
+       $nm_saida->saida("        {\r\n");
+       $nm_saida->saida("            if (obj.checked)\r\n");
+       $nm_saida->saida("            {\r\n");
+       $nm_saida->saida("                val = obj.value;\r\n");
+       $nm_saida->saida("            }\r\n");
+       $nm_saida->saida("            return val;\r\n");
+       $nm_saida->saida("        }\r\n");
+       $nm_saida->saida("        else\r\n");
+       $nm_saida->saida("        {\r\n");
+       $nm_saida->saida("            for (iCheck = 0; iCheck < obj.length; iCheck++)\r\n");
+       $nm_saida->saida("            {\r\n");
+       $nm_saida->saida("                if (obj[iCheck].checked)\r\n");
+       $nm_saida->saida("                {\r\n");
+       $nm_saida->saida("                    val += (val != \"\") ? \"_VLS_\" : \"\";\r\n");
+       $nm_saida->saida("                    val += obj[iCheck].value;\r\n");
+       $nm_saida->saida("                }\r\n");
+       $nm_saida->saida("            }\r\n");
+       $nm_saida->saida("        }\r\n");
+       $nm_saida->saida("        return val;\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     function nm_toggle_int_search(obj_id)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         if($('#id_expand_' + obj_id).css('display') != 'none')\r\n");
+       $nm_saida->saida("         {\r\n");
+       $nm_saida->saida("             nm_expand_int_search(obj_id);\r\n");
+       $nm_saida->saida("         }\r\n");
+       $nm_saida->saida("         else\r\n");
+       $nm_saida->saida("         {\r\n");
+       $nm_saida->saida("             nm_retracts_int_search(obj_id);\r\n");
+       $nm_saida->saida("         }\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     function nm_expand_int_search(obj_id)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         if (Tab_obj_int_mult[\"'\" + obj_id + \"'\"] && Tab_obj_int_mult[\"'\" + obj_id + \"'\"] == 'S') {\r\n");
+       $nm_saida->saida("             $('#mult_int_search_' + obj_id).css('display','none');\r\n");
+       $nm_saida->saida("             $('#id_tab_' + obj_id + '_link').css('display','none');\r\n");
+       $nm_saida->saida("             $('#app_int_search_' + obj_id).css('display','');\r\n");
+       $nm_saida->saida("             $('#id_tab_' + obj_id + '_chk').css('display','');\r\n");
+       $nm_saida->saida("             $('#id_int_search_' + obj_id + '_ck').css('display','');\r\n");
+       $nm_saida->saida("         }\r\n");
+       $nm_saida->saida("         else\r\n");
+       $nm_saida->saida("         {\r\n");
+       $nm_saida->saida("             $('#mult_int_search_' + obj_id).css('display','');\r\n");
+       $nm_saida->saida("             $('#id_tab_' + obj_id + '_link').css('display','');\r\n");
+       $nm_saida->saida("             $('#app_int_search_' + obj_id).css('display','none');\r\n");
+       $nm_saida->saida("             $('#id_tab_' + obj_id + '_chk').css('display','none');\r\n");
+       $nm_saida->saida("             $('#id_int_search_' + obj_id + '_ck').css('display','none');\r\n");
+       $nm_saida->saida("         }\r\n");
+       $nm_saida->saida("         $('#id_toolbar_' + obj_id).show();\r\n");
+       $nm_saida->saida("         $('#id_retract_' + obj_id).css('display','');\r\n");
+       $nm_saida->saida("         $('#id_expand_' + obj_id).css('display','none');\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     function nm_retracts_int_search(obj_id)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         $('#mult_int_search_' + obj_id).css('display','none');\r\n");
+       $nm_saida->saida("         $('#app_int_search_' + obj_id).css('display','none');\r\n");
+       $nm_saida->saida("         $('#id_tab_' + obj_id + '_link').css('display','none');\r\n");
+       $nm_saida->saida("         $('#id_tab_' + obj_id + '_chk').css('display','none');\r\n");
+       $nm_saida->saida("         $('#id_int_search_' + obj_id + '_ck').css('display','none');\r\n");
+       $nm_saida->saida("         $('#id_toolbar_' + obj_id).hide();\r\n");
+       $nm_saida->saida("         $('#id_retract_' + obj_id).css('display','none');\r\n");
+       $nm_saida->saida("         $('#id_expand_' + obj_id).css('display','');\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     function nm_mult_int_search(obj_id)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         $('#mult_int_search_' + obj_id).css('display','none');\r\n");
+       $nm_saida->saida("         $('#single_int_search_' + obj_id).css('display','');\r\n");
+       $nm_saida->saida("         $('#app_int_search_' + obj_id).css('display','');\r\n");
+       $nm_saida->saida("         $('#id_tab_' + obj_id + '_link').css('display','none');\r\n");
+       $nm_saida->saida("         $('#id_tab_' + obj_id + '_chk').css('display','');\r\n");
+       $nm_saida->saida("         $('#id_int_search_' + obj_id + '_ck').css('display','');\r\n");
+       $nm_saida->saida("         Tab_obj_int_mult[\"'\" + obj_id + \"'\"] = 'S';\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     function nm_single_int_search(obj_id)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         $('#mult_int_search_' + obj_id).css('display','');\r\n");
+       $nm_saida->saida("         $('#single_int_search_' + obj_id).css('display','none');\r\n");
+       $nm_saida->saida("         $('#app_int_search_' + obj_id).css('display','none');\r\n");
+       $nm_saida->saida("         $('#id_tab_' + obj_id + '_link').css('display','');\r\n");
+       $nm_saida->saida("         $('#id_tab_' + obj_id + '_chk').css('display','none');\r\n");
+       $nm_saida->saida("         $('#id_int_search_' + obj_id + '_ck').css('display','none');\r\n");
+       $nm_saida->saida("         Tab_obj_int_mult[\"'\" + obj_id + \"'\"] = 'N';\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("     function nm_change_mult_int_search(obj_id)\r\n");
+       $nm_saida->saida("     {\r\n");
+       $nm_saida->saida("         if ($('#id_int_search_' + obj_id + '_ck').prop(\"checked\")) {\r\n");
+       $nm_saida->saida("             var ckeck = true;\r\n");
+       $nm_saida->saida("         }\r\n");
+       $nm_saida->saida("         else {\r\n");
+       $nm_saida->saida("             var ckeck = false;\r\n");
+       $nm_saida->saida("         }\r\n");
+       $nm_saida->saida("         var obj_check = eval(\"document.getElementsByName('int_search_\" + obj_id + \"[]')\");\r\n");
+       $nm_saida->saida("         for (i = 0; i < obj_check.length; i++)\r\n");
+       $nm_saida->saida("         {\r\n");
+       $nm_saida->saida("             obj_check[i].checked = ckeck;\r\n");
+       $nm_saida->saida("         }\r\n");
+       $nm_saida->saida("     }\r\n");
+       $nm_saida->saida("</script>\r\n");
    }
    function nm_gera_mask(&$nm_campo, $nm_mask)
    { 
@@ -4267,16 +4586,6 @@ class grid_periodos_lectivo_grid
    $nm_saida->saida("   <form name=\"F6\" method=\"post\" \r\n");
    $nm_saida->saida("                     action=\"./\" \r\n");
    $nm_saida->saida("                     target=\"_self\" style=\"display: none\"> \r\n");
-   $nm_saida->saida("    <input type=\"hidden\" name=\"script_case_init\" value=\"" . NM_encode_input($this->Ini->sc_page) . "\"/> \r\n");
-   $nm_saida->saida("    <input type=\"hidden\" name=\"script_case_session\" value=\"" . NM_encode_input(session_id()) . "\"/> \r\n");
-   $nm_saida->saida("   </form> \r\n");
-   $nm_saida->saida("   <form name=\"Fprint\" method=\"post\" \r\n");
-   $nm_saida->saida("                     action=\"grid_periodos_lectivo_iframe_prt.php\" \r\n");
-   $nm_saida->saida("                     target=\"jan_print\" style=\"display: none\"> \r\n");
-   $nm_saida->saida("    <input type=\"hidden\" name=\"path_botoes\" value=\"" . $this->Ini->path_botoes . "\"/> \r\n");
-   $nm_saida->saida("    <input type=\"hidden\" name=\"opcao\" value=\"print\"/>\r\n");
-   $nm_saida->saida("    <input type=\"hidden\" name=\"tp_print\" value=\"AM\"/>\r\n");
-   $nm_saida->saida("    <input type=\"hidden\" name=\"cor_print\" value=\"AM\"/>\r\n");
    $nm_saida->saida("    <input type=\"hidden\" name=\"script_case_init\" value=\"" . NM_encode_input($this->Ini->sc_page) . "\"/> \r\n");
    $nm_saida->saida("    <input type=\"hidden\" name=\"script_case_session\" value=\"" . NM_encode_input(session_id()) . "\"/> \r\n");
    $nm_saida->saida("   </form> \r\n");
@@ -4767,22 +5076,6 @@ class grid_periodos_lectivo_grid
    $nm_saida->saida("            } \r\n");
    $nm_saida->saida("       }\r\n");
    $nm_saida->saida("   } \r\n");
-   $nm_saida->saida("   function nm_gp_print_conf(tp, cor, ajax, str_type, bol_param)\r\n");
-   $nm_saida->saida("   {\r\n");
-   $nm_saida->saida("       if (\"S\" == ajax)\r\n");
-   $nm_saida->saida("       {\r\n");
-   $nm_saida->saida("           $('#TB_window').remove();\r\n");
-   $nm_saida->saida("           $('body').append(\"<div id='TB_window'></div>\");\r\n");
-   $nm_saida->saida("               nm_submit_modal(\"" . $this->Ini->path_link . "grid_periodos_lectivo/grid_periodos_lectivo_export_email.php?script_case_init={$this->Ini->sc_page}&path_img={$this->Ini->path_img_global}&path_btn={$this->Ini->path_botoes}&sType=\"+ str_type +\"&sAdd=__E__nmgp_tipo_print=\" + tp + \"__E__cor_print=\" + cor + \"&KeepThis=true&TB_iframe=true&modal=true\", bol_param);\r\n");
-   $nm_saida->saida("       }\r\n");
-   $nm_saida->saida("       else\r\n");
-   $nm_saida->saida("       {\r\n");
-   $nm_saida->saida("           document.Fprint.tp_print.value = tp;\r\n");
-   $nm_saida->saida("           document.Fprint.cor_print.value = cor;\r\n");
-   $nm_saida->saida("           window.open('','jan_print','location=no,menubar=no,resizable,scrollbars,status=no,toolbar=no');\r\n");
-   $nm_saida->saida("           document.Fprint.submit() ;\r\n");
-   $nm_saida->saida("       }\r\n");
-   $nm_saida->saida("   }\r\n");
    $nm_saida->saida("   nm_img = new Image();\r\n");
    $nm_saida->saida("   function nm_mostra_img(imagem, altura, largura)\r\n");
    $nm_saida->saida("   {\r\n");
@@ -4883,34 +5176,6 @@ class grid_periodos_lectivo_grid
    }
    $nm_saida->saida("   function process_hotkeys(hotkey)\r\n");
    $nm_saida->saida("   {\r\n");
-   $nm_saida->saida("      if (hotkey == 'sys_format_pdf') { \r\n");
-   $nm_saida->saida("         var output =  $('#pdf_top').click();\r\n");
-   $nm_saida->saida("         return (0 < output.length);\r\n");
-   $nm_saida->saida("      }\r\n");
-   $nm_saida->saida("      if (hotkey == 'sys_format_word') { \r\n");
-   $nm_saida->saida("         var output =  $('#word_top').click();\r\n");
-   $nm_saida->saida("         return (0 < output.length);\r\n");
-   $nm_saida->saida("      }\r\n");
-   $nm_saida->saida("      if (hotkey == 'sys_format_xls') { \r\n");
-   $nm_saida->saida("         var output =  $('#xls_top').click();\r\n");
-   $nm_saida->saida("         return (0 < output.length);\r\n");
-   $nm_saida->saida("      }\r\n");
-   $nm_saida->saida("      if (hotkey == 'sys_format_xml') { \r\n");
-   $nm_saida->saida("         var output =  $('#xml_top').click();\r\n");
-   $nm_saida->saida("         return (0 < output.length);\r\n");
-   $nm_saida->saida("      }\r\n");
-   $nm_saida->saida("      if (hotkey == 'sys_format_csv') { \r\n");
-   $nm_saida->saida("         var output =  $('#csv_top').click();\r\n");
-   $nm_saida->saida("         return (0 < output.length);\r\n");
-   $nm_saida->saida("      }\r\n");
-   $nm_saida->saida("      if (hotkey == 'sys_format_rtf') { \r\n");
-   $nm_saida->saida("         var output =  $('#rtf_top').click();\r\n");
-   $nm_saida->saida("         return (0 < output.length);\r\n");
-   $nm_saida->saida("      }\r\n");
-   $nm_saida->saida("      if (hotkey == 'sys_format_imp') { \r\n");
-   $nm_saida->saida("         var output =  $('#print_top').click();\r\n");
-   $nm_saida->saida("         return (0 < output.length);\r\n");
-   $nm_saida->saida("      }\r\n");
    $nm_saida->saida("      if (hotkey == 'sys_format_webh') { \r\n");
    $nm_saida->saida("         var output =  $('#help_bot').click();\r\n");
    $nm_saida->saida("         return (0 < output.length);\r\n");
