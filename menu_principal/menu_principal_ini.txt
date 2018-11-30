@@ -1,7 +1,7 @@
 index.php
 school_abacus
 menu_principal
-NAO
+SIM
 
 menu_principal
 LigMd5
