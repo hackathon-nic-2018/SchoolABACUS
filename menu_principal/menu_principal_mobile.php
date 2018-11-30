@@ -3,7 +3,7 @@
 <html>
     <head>
         <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
-        <title>menu_principal</title>
+        <title>School ABACUS</title>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="stylesheet"  href="<?php echo $_SESSION["scriptcase"]["menu_principal"]["glo_nm_path_prod"]; ?>/third/jquery.mobile/jquery.mobile-1.2.0.min.css" />
         <link rel="stylesheet"  href="<?php echo $this->url_css; ?>Sc8_PictonBlue/Sc8_PictonBlue_menuMobile.css" />
@@ -18,6 +18,24 @@
         <script src="<?php echo $_SESSION["scriptcase"]["menu_principal"]["glo_nm_path_prod"]; ?>/third/jquery.mobile/jquery.mobile-1.2.0.min.js"></script>
     </head>
     <body>
+<style>
+#lin1_col1 { font-size:22px; width:500px; color: #FFFFFF; }
+#lin1_col2 { font-family:Arial, Helvetica, sans-serif; font-size:12px; text-align:right; color: #FFFFFF;  }
+#lin2_col1 { font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:15px; }
+#lin2_col2 { font-family:Arial, Helvetica, sans-serif; font-size:12px; text-align:right; color: #FFFFFF;  }
+
+</style>
+
+<table width="100%" height="67px" class="scMenuHHeader">
+        <tr>
+                <td width="5px"></td>
+        <td width="67px" class="scMenuHHeaderFont">   <IMG SRC="<?php echo $path_imag_cab ?>/sys__NM__img__NM__abacus_logo.png" BORDER="0"/></td>
+               <td class="scMenuHHeaderFont"><span id="lin1_col1"><?php echo "School ABACUS" ?></span><br /><span id="lin2_col1"><?php echo "" . $_SESSION['vglo_nombre_colegio'] . "" ?></span></td>
+               <td align="right" class="scMenuHHeaderFont"><span  id="lin1_col2"><?php echo $nm_data_fixa ?></span><br /><span id="lin2_col2"><?php echo "Hola " . $_SESSION['usr_name'] . "" ?></span></td>
+        <td width="5px"></td>
+    </tr>
+</table>
+
     <?php
         escreveMenuMobile($menu_principal_menuData["data"], $this->path_imag_apl);
     ?>

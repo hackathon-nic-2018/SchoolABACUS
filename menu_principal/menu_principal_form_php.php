@@ -250,7 +250,11 @@ class menu_principal_form_php
       $link_url = false;
       $parms_session = "";
 
-      if (isset($_SESSION['scriptcase']['sc_def_menu']['menu_principal']))
+      if ($_SESSION['scriptcase']['sc_item_menu'] == "menu_principal")
+      {
+              $apl_run = $_SESSION['scriptcase']['sc_apl_menu_link'] . $this->tab_grupo[0] . SC_dir_app_name("blank_fondo") . "/?nm_run_menu=1&nm_apl_menu=menu_principal&script_case_init=1&script_case_session=" . session_id() . "";
+      }
+      elseif (isset($_SESSION['scriptcase']['sc_def_menu']['menu_principal']))
       {
          foreach($_SESSION['scriptcase']['sc_def_menu']['menu_principal'] as $id_item => $arr_item)
          {
@@ -272,9 +276,45 @@ class menu_principal_form_php
          }
       }
       {
+      if ($_SESSION['scriptcase']['sc_item_menu'] == "item_2")
+      {
+          $apl_run = $_SESSION['scriptcase']['sc_apl_menu_link'] . $this->tab_grupo[0] . SC_dir_app_name("grid_grados") . "/?nm_run_menu=1&nm_apl_menu=menu_principal&script_case_init=" . $this->Gera_sc_init($this->sc_menu_item) . "&script_case_session=" . session_id() . "";
+      }
+      if ($_SESSION['scriptcase']['sc_item_menu'] == "item_3")
+      {
+          $apl_run = $_SESSION['scriptcase']['sc_apl_menu_link'] . $this->tab_grupo[0] . SC_dir_app_name("grid_asignaturas") . "/?nm_run_menu=1&nm_apl_menu=menu_principal&script_case_init=" . $this->Gera_sc_init($this->sc_menu_item) . "&script_case_session=" . session_id() . "";
+      }
+      if ($_SESSION['scriptcase']['sc_item_menu'] == "item_4")
+      {
+          $apl_run = $_SESSION['scriptcase']['sc_apl_menu_link'] . $this->tab_grupo[0] . SC_dir_app_name("grid_docentes") . "/?nm_run_menu=1&nm_apl_menu=menu_principal&script_case_init=" . $this->Gera_sc_init($this->sc_menu_item) . "&script_case_session=" . session_id() . "";
+      }
+      if ($_SESSION['scriptcase']['sc_item_menu'] == "item_5")
+      {
+          $apl_run = $_SESSION['scriptcase']['sc_apl_menu_link'] . $this->tab_grupo[0] . SC_dir_app_name("grid_estudiantes") . "/?nm_run_menu=1&nm_apl_menu=menu_principal&script_case_init=" . $this->Gera_sc_init($this->sc_menu_item) . "&script_case_session=" . session_id() . "";
+      }
+      if ($_SESSION['scriptcase']['sc_item_menu'] == "item_6")
+      {
+          $apl_run = $_SESSION['scriptcase']['sc_apl_menu_link'] . $this->tab_grupo[0] . SC_dir_app_name("grid_padres") . "/?nm_run_menu=1&nm_apl_menu=menu_principal&script_case_init=" . $this->Gera_sc_init($this->sc_menu_item) . "&script_case_session=" . session_id() . "";
+      }
+      if ($_SESSION['scriptcase']['sc_item_menu'] == "item_7")
+      {
+          $apl_run = $_SESSION['scriptcase']['sc_apl_menu_link'] . $this->tab_grupo[0] . SC_dir_app_name("grid_tipo_calificaciones") . "/?nm_run_menu=1&nm_apl_menu=menu_principal&script_case_init=" . $this->Gera_sc_init($this->sc_menu_item) . "&script_case_session=" . session_id() . "";
+      }
+      if ($_SESSION['scriptcase']['sc_item_menu'] == "item_9")
+      {
+          $apl_run = $_SESSION['scriptcase']['sc_apl_menu_link'] . $this->tab_grupo[0] . SC_dir_app_name("form_colegio") . "/?nm_run_menu=1&nm_apl_menu=menu_principal&script_case_init=" . $this->Gera_sc_init($this->sc_menu_item) . "&script_case_session=" . session_id() . "";
+      }
+      if ($_SESSION['scriptcase']['sc_item_menu'] == "item_11")
+      {
+          $apl_run = $_SESSION['scriptcase']['sc_apl_menu_link'] . $this->tab_grupo[0] . SC_dir_app_name("grid_periodos_lectivo") . "/?nm_run_menu=1&nm_apl_menu=menu_principal&script_case_init=" . $this->Gera_sc_init($this->sc_menu_item) . "&script_case_session=" . session_id() . "";
+      }
+      if ($_SESSION['scriptcase']['sc_item_menu'] == "item_25")
+      {
+          $apl_run = $_SESSION['scriptcase']['sc_apl_menu_link'] . $this->tab_grupo[0] . SC_dir_app_name("adm_grid_colegios") . "/?nm_run_menu=1&nm_apl_menu=menu_principal&script_case_init=" . $this->Gera_sc_init($this->sc_menu_item) . "&script_case_session=" . session_id() . "";
+      }
       if ($_SESSION['scriptcase']['sc_item_menu'] == "item_26")
       {
-          $apl_run = $_SESSION['scriptcase']['sc_apl_menu_link'] . $this->tab_grupo[0] . SC_dir_app_name("inicio_sesion") . "/?nm_run_menu=1&nm_apl_menu=menu_principal&script_case_init=" . $this->Gera_sc_init($this->sc_menu_item) . "&script_case_session=" . session_id() . "";
+          $apl_run = $_SESSION['scriptcase']['sc_apl_menu_link'] . $this->tab_grupo[0] . SC_dir_app_name("inicio_sesion") . "/?script_case_init=" . $_SESSION['sc_session'][1]['menu_principal']['init'] . "&script_case_session=" . session_id() . "";
       }
       }
       if (!$link_url)
