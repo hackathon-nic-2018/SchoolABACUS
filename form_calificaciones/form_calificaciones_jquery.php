@@ -41,7 +41,6 @@ function scSetFocusOnField($oField) {
 function scEventControl_init(iSeqRow) {
   scEventControl_data["estudiante_id_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["asignatura_id_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
-  scEventControl_data["tipo_calificacion_id_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["calificacion_1_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["calificacion_nivel_1_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["calificacion_2_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
@@ -61,6 +60,9 @@ function scEventControl_init(iSeqRow) {
   scEventControl_data["calificacion_9_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["calificacion_nivel_9_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
   scEventControl_data["calificacion_final_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["colegio_id_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["periodo_id_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
+  scEventControl_data["curso_id_" + iSeqRow] = {"blur": false, "change": false, "autocomp": false, "original": "", "calculated": ""};
 }
 
 function scEventControl_active(iSeqRow) {
@@ -74,12 +76,6 @@ function scEventControl_active(iSeqRow) {
     return true;
   }
   if (scEventControl_data["asignatura_id_" + iSeqRow]["change"]) {
-    return true;
-  }
-  if (scEventControl_data["tipo_calificacion_id_" + iSeqRow]["blur"]) {
-    return true;
-  }
-  if (scEventControl_data["tipo_calificacion_id_" + iSeqRow]["change"]) {
     return true;
   }
   if (scEventControl_data["calificacion_1_" + iSeqRow]["blur"]) {
@@ -196,6 +192,24 @@ function scEventControl_active(iSeqRow) {
   if (scEventControl_data["calificacion_final_" + iSeqRow]["change"]) {
     return true;
   }
+  if (scEventControl_data["colegio_id_" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["colegio_id_" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["periodo_id_" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["periodo_id_" + iSeqRow]["change"]) {
+    return true;
+  }
+  if (scEventControl_data["curso_id_" + iSeqRow]["blur"]) {
+    return true;
+  }
+  if (scEventControl_data["curso_id_" + iSeqRow]["change"]) {
+    return true;
+  }
   return false;
 } // scEventControl_active
 
@@ -213,6 +227,12 @@ function scEventControl_onFocus(oField, iSeq) {
   fieldId = $(oField).attr("id");
   fieldName = fieldId.substr(12);
   scEventControl_data[fieldName]["blur"] = true;
+  if ("estudiante_id_" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
+  if ("asignatura_id_" + iSeq == fieldName) {
+    scEventControl_data[fieldName]["blur"] = false;
+  }
   if ("colegio_id_" + iSeq == fieldName) {
     scEventControl_data[fieldName]["blur"] = false;
   }
@@ -293,15 +313,21 @@ function scEventControl_onAutocomp(sFieldName) {
 var scEventControl_data = {};
 
 function scJQEventsAdd(iSeqRow) {
+  $('#id_sc_field_colegio_id_' + iSeqRow).bind('blur', function() { sc_form_calificaciones_colegio_id__onblur(this, iSeqRow) })
+                                         .bind('change', function() { sc_form_calificaciones_colegio_id__onchange(this, iSeqRow) })
+                                         .bind('focus', function() { sc_form_calificaciones_colegio_id__onfocus(this, iSeqRow) });
+  $('#id_sc_field_periodo_id_' + iSeqRow).bind('blur', function() { sc_form_calificaciones_periodo_id__onblur(this, iSeqRow) })
+                                         .bind('change', function() { sc_form_calificaciones_periodo_id__onchange(this, iSeqRow) })
+                                         .bind('focus', function() { sc_form_calificaciones_periodo_id__onfocus(this, iSeqRow) });
+  $('#id_sc_field_curso_id_' + iSeqRow).bind('blur', function() { sc_form_calificaciones_curso_id__onblur(this, iSeqRow) })
+                                       .bind('change', function() { sc_form_calificaciones_curso_id__onchange(this, iSeqRow) })
+                                       .bind('focus', function() { sc_form_calificaciones_curso_id__onfocus(this, iSeqRow) });
   $('#id_sc_field_estudiante_id_' + iSeqRow).bind('blur', function() { sc_form_calificaciones_estudiante_id__onblur(this, iSeqRow) })
                                             .bind('change', function() { sc_form_calificaciones_estudiante_id__onchange(this, iSeqRow) })
                                             .bind('focus', function() { sc_form_calificaciones_estudiante_id__onfocus(this, iSeqRow) });
   $('#id_sc_field_asignatura_id_' + iSeqRow).bind('blur', function() { sc_form_calificaciones_asignatura_id__onblur(this, iSeqRow) })
                                             .bind('change', function() { sc_form_calificaciones_asignatura_id__onchange(this, iSeqRow) })
                                             .bind('focus', function() { sc_form_calificaciones_asignatura_id__onfocus(this, iSeqRow) });
-  $('#id_sc_field_tipo_calificacion_id_' + iSeqRow).bind('blur', function() { sc_form_calificaciones_tipo_calificacion_id__onblur(this, iSeqRow) })
-                                                   .bind('change', function() { sc_form_calificaciones_tipo_calificacion_id__onchange(this, iSeqRow) })
-                                                   .bind('focus', function() { sc_form_calificaciones_tipo_calificacion_id__onfocus(this, iSeqRow) });
   $('#id_sc_field_calificacion_final_' + iSeqRow).bind('blur', function() { sc_form_calificaciones_calificacion_final__onblur(this, iSeqRow) })
                                                  .bind('change', function() { sc_form_calificaciones_calificacion_final__onchange(this, iSeqRow) })
                                                  .bind('focus', function() { sc_form_calificaciones_calificacion_final__onfocus(this, iSeqRow) });
@@ -361,6 +387,48 @@ function scJQEventsAdd(iSeqRow) {
                                                    .bind('focus', function() { sc_form_calificaciones_calificacion_nivel_9__onfocus(this, iSeqRow) });
 } // scJQEventsAdd
 
+function sc_form_calificaciones_colegio_id__onblur(oThis, iSeqRow) {
+  do_ajax_form_calificaciones_validate_colegio_id_(iSeqRow);
+  scCssBlur(oThis, iSeqRow);
+}
+
+function sc_form_calificaciones_colegio_id__onchange(oThis, iSeqRow) {
+  nm_check_insert(iSeqRow);
+}
+
+function sc_form_calificaciones_colegio_id__onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis, iSeqRow);
+}
+
+function sc_form_calificaciones_periodo_id__onblur(oThis, iSeqRow) {
+  do_ajax_form_calificaciones_validate_periodo_id_(iSeqRow);
+  scCssBlur(oThis, iSeqRow);
+}
+
+function sc_form_calificaciones_periodo_id__onchange(oThis, iSeqRow) {
+  nm_check_insert(iSeqRow);
+}
+
+function sc_form_calificaciones_periodo_id__onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis, iSeqRow);
+}
+
+function sc_form_calificaciones_curso_id__onblur(oThis, iSeqRow) {
+  do_ajax_form_calificaciones_validate_curso_id_(iSeqRow);
+  scCssBlur(oThis, iSeqRow);
+}
+
+function sc_form_calificaciones_curso_id__onchange(oThis, iSeqRow) {
+  nm_check_insert(iSeqRow);
+}
+
+function sc_form_calificaciones_curso_id__onfocus(oThis, iSeqRow) {
+  scEventControl_onFocus(oThis, iSeqRow);
+  scCssFocus(oThis, iSeqRow);
+}
+
 function sc_form_calificaciones_estudiante_id__onblur(oThis, iSeqRow) {
   do_ajax_form_calificaciones_validate_estudiante_id_(iSeqRow);
   scCssBlur(oThis, iSeqRow);
@@ -381,24 +449,11 @@ function sc_form_calificaciones_asignatura_id__onblur(oThis, iSeqRow) {
 }
 
 function sc_form_calificaciones_asignatura_id__onchange(oThis, iSeqRow) {
+  nm_recarga_form('bloco_0', 0);
   nm_check_insert(iSeqRow);
 }
 
 function sc_form_calificaciones_asignatura_id__onfocus(oThis, iSeqRow) {
-  scEventControl_onFocus(oThis, iSeqRow);
-  scCssFocus(oThis, iSeqRow);
-}
-
-function sc_form_calificaciones_tipo_calificacion_id__onblur(oThis, iSeqRow) {
-  do_ajax_form_calificaciones_validate_tipo_calificacion_id_(iSeqRow);
-  scCssBlur(oThis, iSeqRow);
-}
-
-function sc_form_calificaciones_tipo_calificacion_id__onchange(oThis, iSeqRow) {
-  nm_check_insert(iSeqRow);
-}
-
-function sc_form_calificaciones_tipo_calificacion_id__onfocus(oThis, iSeqRow) {
   scEventControl_onFocus(oThis, iSeqRow);
   scCssFocus(oThis, iSeqRow);
 }
@@ -687,7 +742,6 @@ function displayChange_block(block, status) {
 function displayChange_block_0(status) {
 	displayChange_field("estudiante_id_", "", status);
 	displayChange_field("asignatura_id_", "", status);
-	displayChange_field("tipo_calificacion_id_", "", status);
 	displayChange_field("calificacion_1_", "", status);
 	displayChange_field("calificacion_nivel_1_", "", status);
 	displayChange_field("calificacion_2_", "", status);
@@ -712,7 +766,6 @@ function displayChange_block_0(status) {
 function displayChange_row(row, status) {
 	displayChange_field_estudiante_id_(row, status);
 	displayChange_field_asignatura_id_(row, status);
-	displayChange_field_tipo_calificacion_id_(row, status);
 	displayChange_field_calificacion_1_(row, status);
 	displayChange_field_calificacion_nivel_1_(row, status);
 	displayChange_field_calificacion_2_(row, status);
@@ -732,6 +785,9 @@ function displayChange_row(row, status) {
 	displayChange_field_calificacion_9_(row, status);
 	displayChange_field_calificacion_nivel_9_(row, status);
 	displayChange_field_calificacion_final_(row, status);
+	displayChange_field_colegio_id_(row, status);
+	displayChange_field_periodo_id_(row, status);
+	displayChange_field_curso_id_(row, status);
 }
 
 function displayChange_field(field, row, status) {
@@ -740,9 +796,6 @@ function displayChange_field(field, row, status) {
 	}
 	if ("asignatura_id_" == field) {
 		displayChange_field_asignatura_id_(row, status);
-	}
-	if ("tipo_calificacion_id_" == field) {
-		displayChange_field_tipo_calificacion_id_(row, status);
 	}
 	if ("calificacion_1_" == field) {
 		displayChange_field_calificacion_1_(row, status);
@@ -801,15 +854,21 @@ function displayChange_field(field, row, status) {
 	if ("calificacion_final_" == field) {
 		displayChange_field_calificacion_final_(row, status);
 	}
+	if ("colegio_id_" == field) {
+		displayChange_field_colegio_id_(row, status);
+	}
+	if ("periodo_id_" == field) {
+		displayChange_field_periodo_id_(row, status);
+	}
+	if ("curso_id_" == field) {
+		displayChange_field_curso_id_(row, status);
+	}
 }
 
 function displayChange_field_estudiante_id_(row, status) {
 }
 
 function displayChange_field_asignatura_id_(row, status) {
-}
-
-function displayChange_field_tipo_calificacion_id_(row, status) {
 }
 
 function displayChange_field_calificacion_1_(row, status) {
@@ -867,6 +926,19 @@ function displayChange_field_calificacion_nivel_9_(row, status) {
 }
 
 function displayChange_field_calificacion_final_(row, status) {
+}
+
+function displayChange_field_colegio_id_(row, status) {
+	if ("on" == status) {
+		$("#id_sc_field_colegio_id_" + row).select2("destroy");
+		scJQSelect2Add(row, "colegio_id_");
+	}
+}
+
+function displayChange_field_periodo_id_(row, status) {
+}
+
+function displayChange_field_curso_id_(row, status) {
 }
 
 function scResetPagesDisplay() {

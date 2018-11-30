@@ -253,7 +253,7 @@ class form_calificaciones_ini
       $this->nm_hr_criacao   = "075642"; 
       $this->nm_autor_alt    = "alvarado"; 
       $this->nm_dt_ult_alt   = "20181130"; 
-      $this->nm_hr_ult_alt   = "081203"; 
+      $this->nm_hr_ult_alt   = "113010"; 
       list($NM_usec, $NM_sec) = explode(" ", microtime()); 
       $this->nm_timestamp    = (float) $NM_sec; 
       $this->nm_app_version  = "1.0.0"; 
@@ -487,7 +487,8 @@ class form_calificaciones_ini
           }
       }
       if (isset($_SESSION['scriptcase']['form_calificaciones']['session_timeout']['redir'])) {
-          $SS_cod_html  = '';
+          $SS_cod_html  = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">';
           $SS_cod_html .= "<HTML>\r\n";
           $SS_cod_html .= " <HEAD>\r\n";
           $SS_cod_html .= "  <TITLE></TITLE>\r\n";
@@ -784,7 +785,7 @@ class form_calificaciones_ini
       $this->nm_bases_odbc       = array("odbc");
       $this->nm_bases_progress   = array("progress", "pdo_progress_odbc");
       $this->nm_bases_all        = array_merge($this->nm_bases_access, $this->nm_bases_db2, $this->nm_bases_ibase, $this->nm_bases_informix, $this->nm_bases_mssql, $this->nm_bases_mysql, $this->nm_bases_postgres, $this->nm_bases_oracle, $this->nm_bases_sqlite, $this->nm_bases_sybase, $this->nm_bases_vfp, $this->nm_bases_odbc, $this->nm_bases_progress);
-      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXsDQFaHIrKHQrqHgrwVIFCDWJeHMJeDcFYZSBqD1NaD5JeDMveHArCDuFYHIJsD9XsZ9JeD1BeD5F7DMvmVcBUDWFaHIF7HQBqZSBOHABYHQXGHgBeHArsDWXCHINUHQXGDQFUHArYHuF7DMzGVcXKH5B3VoX7HQFYZ1BODSrYHuFGDMveHErCV5FqHINUHQXGDuBqHAN7HuFUHgrwVcB/H5XKVoX7DcBwH9B/HIrwV5JeDMBYDkBsH5FYHIrqHQJeH9BiHIBeHQXGDMrYVcB/HEF/HIraHQFYZkFGHIBeHuFUHgrKHErsH5FYHMJsHQXGDuFaHIBeHQBODMvODkB/H5XCHIrqHQFYZkFGHAzGD5XGHgNKHErCDuFaHIJwDcJUZSX7HIBeD5BqHgvsZSJ3H5FqHMBqHQBqZSBOD1rwHQBqHgvsHArCDuFaHMX7HQXGDuBqDSBYHQF7DMzGZSNiDurGVoX7HQFYZ1BOHAN7HQJsDMvCVkJ3H5X/ZuXGHQXGDQFUDSBYHuX7DMBOVIB/H5XCHIFUDcBwH9B/HIrwV5JeDMBYDkBsH5FYDoXGDcJeZSFUZ1rwV5JeHgvsVcFCH5XCDoX7DcNwH9BqD1NaZMJwHgvCZSJ3V5XCVoB/D9NmDQFaZ1BYV5FUHuvmDkBOH5XKVoraD9BiVINUDSvOD5FaDEvsZSJGDuFaZuBqD9NwH9X7Z1rwV5JwHuBYVcFiV5X7VoFGDcBqH9FaHAN7V5JeDErKHEBUH5F/DoF7DcJeDQFGD1BeD5JwDMrwZSJ3H5FqDoJeD9JmZ1B/D1NaD5rqDErKZSXeH5FYDoFUD9JKDQJsZ1rwV5BqHuBYVcXKV5X7DoF7D9XOZSFaHArYD5BqDEBOZSXeDWX7DorqDcJeDQX7D1BeVWJwHuzGDkBsDWXCDoJsDcBwH9B/Z1rYHQJwHgrKZSJ3DuFYHIJwHQJKDQFGHABYHuNUHuBYV9FeDuX7VENUD9BiVIJsHIBOZMBqDEBeHEXeDWFqHMBiHQJKDQJsZ1vCV5FGHuNOV9FeDWB3VoraDcJUZSB/Z1BeD5XGDEBOHEJqV5FaDoF7DcJeDQX7HIBeD5BqHgrKVIBOHEFYVoBqDcBqZ1B/D1rwV5JeDEBOZSXeV5XCVoB/D9NwZ9rqZ1N7V5JeHuvmVcrsDWXCHMBiD9BsVIraD1rwV5X7HgBeHErCDWF/VoBiDcJUZSX7Z1BYHuFaHgrwZSNiDWF/HIXGHQBsVINUD1rKHuFGHgBOHErsDWF/VoB/D9NwDQFaHAveD5NUHgNKDkBOV5FYHMBiDcJUZ1FaHArKD5BiDMBYVkJGDWr/DoB/D9XsH9FGDSN7D5JwDMvmVcFKV5BmVoBqD9BsZkFGHAvsD5XGHgveHErsDWFGZuJeHQBiDuBqHAvOV5BqDMvOVcFeDWXCDoJsDcBwH9B/Z1rYHQJwHgveHEFiDWFqHIB/HQXOH9FUHAveD5JeHgrwVcFeH5FqVoBiHQNwZ1X7HAN7HQJwDEBODkFeH5FYVoFGHQJKDQFaHAN7V5BOHgvsVcBOV5F/VoBqD9JmZ1FaD1rwD5rqDEBODkBsDWF/HMJsDcBwDQX7Z1N7V5FUDMvmVcFKV5BmVoBqD9BsZkFGHAvsZMJeHgvCDkXKDWBmZura";
+      $_SESSION['scriptcase']['nm_bases_security']  = "enc_nm_enc_v1HQXsDuFaHIBeVWBqHgrKVcB/DWFYHMFUHQJmH9BOHAN7HQJwDEBODkFeH5FYVoFGHQJKDQBqHArYHQXGDMvsVIB/DWFaHMX7HQJmZkBiHANOHQraHgvCHEJqDWX7HIFGHQNwDQB/D1NKV5BODMrwVcB/HEFYHIJeDcNmZ1FGZ1rYHQraHgvCHArsDWXCHIraDcXGDQFUD1vOV5BOHgNKDkBODuFqDoFGDcBqVIJwD1rwHQF7HgBYVkJ3DuFYHMBqHQXODQFUDSN7HQJwDMrwV9FeDuX7HIJsHQXOZ1BiD1rwHuJwHgvCHArCDuFYHMJeHQBiZSFUD1veHQJeDMrwV9FeDWXKVoX7HQNwZ1FGHIBeHQJsDMrYZSXeDuFYVoXGDcJeZ9rqD1BeHuFGDMvsVIB/H5FqHMrqHQBiZkFGHIBeHuFGHgvCHArsHEFqHMFGHQNwZ9XGHIvsV5BODMrwVcB/DWJeHMFUDcFYZSBqD1NaZMJeHgvCHEJqHEFqHIrqHQFYH9FUD1veHQB/HgNKDkBODuFqDoFGDcBqVIJwD1rwD5JeDMBYZSJqV5FaDoBODcJeDQFGD1veD5BOHgrYDkBsH5B7VEBiHQFYH9BqZ1NOV5FaDEvsHErCV5FqDoraD9JKZSX7D1vOV5JwHuBYZSNiHEX/VoraD9BiH9FaHIBeZMBODErKVkXeV5FaDoB/D9NmDQBOZ1rwV5BqHgvsDkFCDWJeDoFGD9XOZ1rqD1rKD5rqDMBYHEJGH5FYVoB/HQXGZ9rqD1BeD5rqHuvmVcBOH5B7VoBqD9XOH9B/D1rwD5BiDEBeHEFiV5FaDoXGD9NmDQB/Z1rwD5XGHuzGVIFCDWFYVorqD9BsH9B/HABYD5F7DMBYHEXeH5FYZuB/D9NwZSBiHAveD5NUHgNKDkBOV5FYHMBiHQBiZSFaHAzGD5BqHgveDkB/H5BmDoXGD9NmZSX7HIrwHuFaHuNOZSrCH5FqDoXGHQJmZ1FUZ1BeV5BqDEBOZSJGDWr/VoFGDcXOZSX7D1BeV5FUHuNOVcFKHEFYDorqD9JmZ1B/D1rwD5NUDMBYZSXeHEFqDoB/D9XsH9X7HABYV5BqDMrwVIFCDWXCDoX7D9XOZ1FGHArKV5FUDMrYZSXeV5FqHIJsHQJKDQJsZ1vCV5FGHuNOV9FeDWXCHIX7D9XOZ1X7HAvsD5JeDMvCHEJGDWX7HMBOHQJKDuFaD1BeHQBqHuNODkB/HEF/DoJeHQBiZkFGHArKV5FUDMrYZSXeV5FqHIJsDcBwDQFGHAveV5raHgvsVIFCDWJeVoraD9BsZSFaDSNOV5FaHgBeHEFiV5B3DoF7D9XsDuFaHANKV5BODMvOVcBUDWXKVEX7HQNmZkBiHAzGD5JeHgveHErCDWF/VoBiDcJUZSX7Z1BYHuFaDMvOVIBODur/HMX7D9XOZ1B/Z1rYZMBOHgNOZSJ3DuFYHIJsD9XsZ9JeD1BeD5F7DMvmVcFeDWF/VoX7DcBqZ1B/Z1NOD5rqDEBeHEJGH5FYDoF7D9XsZ9rqHAveHQFaHgrKVcBOV5F/VoB/HQJmZ1F7Z1vmD5rqDEBOHArCDWBmZuXGHQXGZ9XGHANKVWFU";
       $this->prep_conect();
       $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['ordem_cmp'] = ""; 
       $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['ordem_ord'] = ""; 
@@ -1470,12 +1471,6 @@ ob_start();
             $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
         }
-        if ('ajax_form_calificaciones_validate_tipo_calificacion_id_' == $_POST['rs'])
-        {
-            $tipo_calificacion_id_ = NM_utf8_urldecode($_POST['rsargs'][0]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
-        }
         if ('ajax_form_calificaciones_validate_calificacion_1_' == $_POST['rs'])
         {
             $calificacion_1_ = NM_utf8_urldecode($_POST['rsargs'][0]);
@@ -1587,6 +1582,24 @@ ob_start();
         if ('ajax_form_calificaciones_validate_calificacion_final_' == $_POST['rs'])
         {
             $calificacion_final_ = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
+        }
+        if ('ajax_form_calificaciones_validate_colegio_id_' == $_POST['rs'])
+        {
+            $colegio_id_ = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
+        }
+        if ('ajax_form_calificaciones_validate_periodo_id_' == $_POST['rs'])
+        {
+            $periodo_id_ = NM_utf8_urldecode($_POST['rsargs'][0]);
+            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
+        }
+        if ('ajax_form_calificaciones_validate_curso_id_' == $_POST['rs'])
+        {
+            $curso_id_ = NM_utf8_urldecode($_POST['rsargs'][0]);
             $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][1]);
             $script_case_init = NM_utf8_urldecode($_POST['rsargs'][2]);
         }
@@ -1729,35 +1742,37 @@ ob_start();
         {
             $estudiante_id_ = NM_utf8_urldecode($_POST['rsargs'][0]);
             $asignatura_id_ = NM_utf8_urldecode($_POST['rsargs'][1]);
-            $tipo_calificacion_id_ = NM_utf8_urldecode($_POST['rsargs'][2]);
-            $calificacion_1_ = NM_utf8_urldecode($_POST['rsargs'][3]);
-            $calificacion_nivel_1_ = NM_utf8_urldecode($_POST['rsargs'][4]);
-            $calificacion_2_ = NM_utf8_urldecode($_POST['rsargs'][5]);
-            $calificacion_nivel_2_ = NM_utf8_urldecode($_POST['rsargs'][6]);
-            $calificacion_3_ = NM_utf8_urldecode($_POST['rsargs'][7]);
-            $calificacion_nivel_3_ = NM_utf8_urldecode($_POST['rsargs'][8]);
-            $calificacion_4_ = NM_utf8_urldecode($_POST['rsargs'][9]);
-            $calificacion_nivel_4_ = NM_utf8_urldecode($_POST['rsargs'][10]);
-            $calificacion_5_ = NM_utf8_urldecode($_POST['rsargs'][11]);
-            $calificacion_nivel_5_ = NM_utf8_urldecode($_POST['rsargs'][12]);
-            $calificacion_6_ = NM_utf8_urldecode($_POST['rsargs'][13]);
-            $calificacion_nivel_6_ = NM_utf8_urldecode($_POST['rsargs'][14]);
-            $calificacion_7_ = NM_utf8_urldecode($_POST['rsargs'][15]);
-            $calificacion_nivel_7_ = NM_utf8_urldecode($_POST['rsargs'][16]);
-            $calificacion_8_ = NM_utf8_urldecode($_POST['rsargs'][17]);
-            $calificacion_nivel_8_ = NM_utf8_urldecode($_POST['rsargs'][18]);
-            $calificacion_9_ = NM_utf8_urldecode($_POST['rsargs'][19]);
-            $calificacion_nivel_9_ = NM_utf8_urldecode($_POST['rsargs'][20]);
-            $calificacion_final_ = NM_utf8_urldecode($_POST['rsargs'][21]);
-            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][22]);
-            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][23]);
-            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][24]);
-            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][25]);
-            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][26]);
-            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][27]);
-            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][28]);
-            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][29]);
-            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][30]);
+            $calificacion_1_ = NM_utf8_urldecode($_POST['rsargs'][2]);
+            $calificacion_nivel_1_ = NM_utf8_urldecode($_POST['rsargs'][3]);
+            $calificacion_2_ = NM_utf8_urldecode($_POST['rsargs'][4]);
+            $calificacion_nivel_2_ = NM_utf8_urldecode($_POST['rsargs'][5]);
+            $calificacion_3_ = NM_utf8_urldecode($_POST['rsargs'][6]);
+            $calificacion_nivel_3_ = NM_utf8_urldecode($_POST['rsargs'][7]);
+            $calificacion_4_ = NM_utf8_urldecode($_POST['rsargs'][8]);
+            $calificacion_nivel_4_ = NM_utf8_urldecode($_POST['rsargs'][9]);
+            $calificacion_5_ = NM_utf8_urldecode($_POST['rsargs'][10]);
+            $calificacion_nivel_5_ = NM_utf8_urldecode($_POST['rsargs'][11]);
+            $calificacion_6_ = NM_utf8_urldecode($_POST['rsargs'][12]);
+            $calificacion_nivel_6_ = NM_utf8_urldecode($_POST['rsargs'][13]);
+            $calificacion_7_ = NM_utf8_urldecode($_POST['rsargs'][14]);
+            $calificacion_nivel_7_ = NM_utf8_urldecode($_POST['rsargs'][15]);
+            $calificacion_8_ = NM_utf8_urldecode($_POST['rsargs'][16]);
+            $calificacion_nivel_8_ = NM_utf8_urldecode($_POST['rsargs'][17]);
+            $calificacion_9_ = NM_utf8_urldecode($_POST['rsargs'][18]);
+            $calificacion_nivel_9_ = NM_utf8_urldecode($_POST['rsargs'][19]);
+            $calificacion_final_ = NM_utf8_urldecode($_POST['rsargs'][20]);
+            $colegio_id_ = NM_utf8_urldecode($_POST['rsargs'][21]);
+            $periodo_id_ = NM_utf8_urldecode($_POST['rsargs'][22]);
+            $curso_id_ = NM_utf8_urldecode($_POST['rsargs'][23]);
+            $nmgp_refresh_row = NM_utf8_urldecode($_POST['rsargs'][24]);
+            $nm_form_submit = NM_utf8_urldecode($_POST['rsargs'][25]);
+            $nmgp_url_saida = NM_utf8_urldecode($_POST['rsargs'][26]);
+            $nmgp_opcao = NM_utf8_urldecode($_POST['rsargs'][27]);
+            $nmgp_ancora = NM_utf8_urldecode($_POST['rsargs'][28]);
+            $nmgp_num_form = NM_utf8_urldecode($_POST['rsargs'][29]);
+            $nmgp_parms = NM_utf8_urldecode($_POST['rsargs'][30]);
+            $script_case_init = NM_utf8_urldecode($_POST['rsargs'][31]);
+            $csrf_token = NM_utf8_urldecode($_POST['rsargs'][32]);
         }
         if ('ajax_form_calificaciones_navigate_form' == $_POST['rs'])
         {
@@ -2071,6 +2086,32 @@ ob_start();
         $nm_apl_dependente = 0;
         $_SESSION['sc_session'][$script_case_init]['form_calificaciones']['sc_outra_jan'] = true;
     }
+    $STR_lang    = (isset($_SESSION['scriptcase']['str_lang']) && !empty($_SESSION['scriptcase']['str_lang'])) ? $_SESSION['scriptcase']['str_lang'] : "es";
+    if (isset($_SESSION['scriptcase']['form_calificaciones']['session_timeout']['lang'])) {
+        $STR_lang = $_SESSION['scriptcase']['form_calificaciones']['session_timeout']['lang'];
+    }
+    $NM_arq_lang = "../_lib/lang/" . $STR_lang . ".lang.php";
+    $Nm_lang = array();
+    if (is_file($NM_arq_lang))
+    {
+        $Lixo = file($NM_arq_lang);
+        foreach ($Lixo as $Cada_lin) 
+        {
+            if (strpos($Cada_lin, "array()") === false && (trim($Cada_lin) != "<?php")  && (trim($Cada_lin) != "?" . ">"))
+            {
+                eval (str_replace("\$this->", "\$", $Cada_lin));
+            }
+        }
+    }
+    $_SESSION['scriptcase']['charset'] = (isset($Nm_lang['Nm_charset']) && !empty($Nm_lang['Nm_charset'])) ? $Nm_lang['Nm_charset'] : "UTF-8";
+    ini_set('default_charset', $_SESSION['scriptcase']['charset']);
+    foreach ($Nm_lang as $ind => $dados)
+    {
+       if ($_SESSION['scriptcase']['charset'] != "UTF-8" && NM_is_utf8($dados))
+       {
+           $Nm_lang[$ind] = sc_convert_encoding($dados, $_SESSION['scriptcase']['charset'], "UTF-8");
+       }
+    }
 
     if (!isset($_SESSION['sc_session'][$script_case_init]['form_calificaciones']['initialize']))
     {
@@ -2287,8 +2328,97 @@ ob_start();
         $nm_apl_dependente = 0;
     }
     $GLOBALS["NM_ERRO_IBASE"] = 0;  
+    if (isset($_SESSION['nm_session']['user']['sec']['flag']) && $_SESSION['nm_session']['user']['sec']['flag'] == "N") 
+    { 
+        $_SESSION['scriptcase']['sc_apl_seg']['form_calificaciones'] = "on";
+    } 
+    if (!isset($_SESSION['scriptcase']['sc_apl_seg']['form_calificaciones']) || $_SESSION['scriptcase']['sc_apl_seg']['form_calificaciones'] != "on")
+    { 
+        $NM_Mens_Erro = $Nm_lang['lang_errm_unth_user'];
+        $nm_botao_ok = ($_SESSION['sc_session'][$script_case_init]['form_calificaciones']['iframe_menu']) ? false : true;
+        if (isset($_SESSION['scriptcase']['sc_aba_iframe']))
+        {
+            foreach ($_SESSION['scriptcase']['sc_aba_iframe'] as $aba => $apls_aba)
+            {
+                if (in_array("form_calificaciones", $apls_aba))
+                {
+                    $nm_botao_ok = false;
+                     break;
+                }
+            }
+        }
+      $str_schema_app = (isset($_SESSION['scriptcase']['str_schema_all']) && !empty($_SESSION['scriptcase']['str_schema_all'])) ? $_SESSION['scriptcase']['str_schema_all'] : "Sc9_Meadow/Sc9_Meadow";
+       $str_button_app = trim($str_button);
+?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+            "http://www.w3.org/TR/1999/REC-html401-19991224/loose.dtd">
+
+        <HTML>
+         <HEAD>
+          <TITLE></TITLE>
+          <META http-equiv="Content-Type" content="text/html; charset=<?php echo $_SESSION['scriptcase']['charset_html'] ?>" />
+          <META http-equiv="Expires" content="Fri, Jan 01 1900 00:00:00 GMT"/>          <META http-equiv="Pragma" content="no-cache"/>
+          <link rel="shortcut icon" href="../_lib/img/scriptcase__NM__ico__NM__favicon.ico">
+          <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $str_schema_app ?>_form.css" />
+          <link rel="stylesheet" type="text/css" href="../_lib/css/<?php echo $str_schema_app ?>_form<?php echo $_SESSION['scriptcase']['reg_conf']['css_dir'] ?>.css" />
+          <link rel="stylesheet" type="text/css" href="../_lib/buttons/<?php echo $str_button_app . '/' . $str_button_app ?>.css" />
+         </HEAD>
+         <body class="scFormPage">
+          <div class="scFormBorder">
+          <table align="center" style="width: 100%" class="scFormTable"><tr><td class="scFormDataOdd" style="padding: 15px 30px; text-align: center">
+           <?php echo $NM_Mens_Erro; ?>
+<?php
+        if ($nm_botao_ok)
+        {
+?>
+          <br />
+          <form name="Fseg" method="post" 
+                              action="<?php echo $nm_url_saida; ?>" 
+                              target="_self"> 
+           <input type="hidden" name="script_case_init" value="<?php echo $script_case_init; ?>"/> 
+           <input type="hidden" name="script_case_session" value="<?php echo session_id(); ?>"/> 
+           <input type="submit" name="sc_sai_seg" value="OK" class="" > 
+          </form> 
+          <script type="text/javascript">
+            function nm_move()
+            { }
+            function nm_atualiza()
+            { }
+          </script> 
+<?php
+        }
+?>
+          </td></tr></table>
+          </div>
+<?php
+       if (isset($_SESSION['scriptcase']['nm_sc_retorno']) && !empty($_SESSION['scriptcase']['nm_sc_retorno']))
+       {
+?>
+<br /><br /><br />
+<div class="scFormBorder">
+ <table align="center" style="width: 450px" class="scFormTable">
+  <tr>
+   <td class="scFormDataOdd" style="padding: 15px 30px">
+    <?php echo $Nm_lang['lang_errm_unth_hwto']; ?>
+   </td>
+  </tr>
+ </table>
+</div>
+<?php
+       }
+?>
+         </body>
+        </HTML>
+<?php
+        exit;
+    } 
     $inicial_form_calificaciones = new form_calificaciones_edit();
     $inicial_form_calificaciones->inicializa();
+
+    $inicial_form_calificaciones->contr_form_calificaciones->NM_ajax_info['select_html'] = array();
+    $inicial_form_calificaciones->contr_form_calificaciones->NM_ajax_info['select_html']['estudiante_id_'] = "class=\\\"sc-js-input scFormObjectOddMult css_estudiante_id__obj\\\" style=\\\"\\\" id=\\\"id_sc_field_estudiante_id_\" . \$sc_seq_vert . \"\\\" name=\\\"estudiante_id_\" . \$sc_seq_vert . \"\\\" size=\\\"1\\\" alt=\\\"{type: 'select', enterTab: false}\\\"";
+    $inicial_form_calificaciones->contr_form_calificaciones->NM_ajax_info['select_html']['asignatura_id_'] = "class=\\\"sc-js-input scFormObjectOddMult css_asignatura_id__obj\\\" style=\\\"\\\" id=\\\"id_sc_field_asignatura_id_\" . \$sc_seq_vert . \"\\\" name=\\\"asignatura_id_\" . \$sc_seq_vert . \"\\\" size=\\\"1\\\" alt=\\\"{type: 'select', enterTab: false}\\\"";
+    $inicial_form_calificaciones->contr_form_calificaciones->NM_ajax_info['select_html']['colegio_id_'] = "class=\\\"sc-js-input scFormObjectOddMult css_colegio_id__obj\\\" style=\\\"\\\" id=\\\"id_sc_field_colegio_id_\" . \$sc_seq_vert . \"\\\" name=\\\"colegio_id_\" . \$sc_seq_vert . \"\\\" size=\\\"1\\\" alt=\\\"{type: 'select', enterTab: false}\\\"";
 
     if (!defined('SC_SAJAX_LOADED'))
     {
@@ -2304,7 +2434,6 @@ ob_start();
     //$sajax_debug_mode = 1;
     sajax_export("ajax_form_calificaciones_validate_estudiante_id_");
     sajax_export("ajax_form_calificaciones_validate_asignatura_id_");
-    sajax_export("ajax_form_calificaciones_validate_tipo_calificacion_id_");
     sajax_export("ajax_form_calificaciones_validate_calificacion_1_");
     sajax_export("ajax_form_calificaciones_validate_calificacion_nivel_1_");
     sajax_export("ajax_form_calificaciones_validate_calificacion_2_");
@@ -2324,6 +2453,9 @@ ob_start();
     sajax_export("ajax_form_calificaciones_validate_calificacion_9_");
     sajax_export("ajax_form_calificaciones_validate_calificacion_nivel_9_");
     sajax_export("ajax_form_calificaciones_validate_calificacion_final_");
+    sajax_export("ajax_form_calificaciones_validate_colegio_id_");
+    sajax_export("ajax_form_calificaciones_validate_periodo_id_");
+    sajax_export("ajax_form_calificaciones_validate_curso_id_");
     sajax_export("ajax_form_calificaciones_event_calificacion_1__onchange");
     sajax_export("ajax_form_calificaciones_event_calificacion_2__onchange");
     sajax_export("ajax_form_calificaciones_event_calificacion_3__onchange");
@@ -2401,26 +2533,6 @@ ob_start();
         $inicial_form_calificaciones->contr_form_calificaciones->controle();
         exit;
     } // ajax_validate_asignatura_id_
-
-    function ajax_form_calificaciones_validate_tipo_calificacion_id_($tipo_calificacion_id_, $nmgp_refresh_row, $script_case_init)
-    {
-        global $inicial_form_calificaciones;
-        //register_shutdown_function("form_calificaciones_pack_ajax_response");
-        $inicial_form_calificaciones->contr_form_calificaciones->NM_ajax_flag          = true;
-        $inicial_form_calificaciones->contr_form_calificaciones->NM_ajax_opcao         = 'validate_tipo_calificacion_id_';
-        $inicial_form_calificaciones->contr_form_calificaciones->NM_ajax_info['param'] = array(
-                  'tipo_calificacion_id_' => NM_utf8_urldecode($tipo_calificacion_id_),
-                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
-                  'script_case_init' => NM_utf8_urldecode($script_case_init),
-                  'buffer_output' => true,
-                 );
-        if ($inicial_form_calificaciones->contr_form_calificaciones->NM_ajax_info['param']['buffer_output'])
-        {
-            ob_start();
-        }
-        $inicial_form_calificaciones->contr_form_calificaciones->controle();
-        exit;
-    } // ajax_validate_tipo_calificacion_id_
 
     function ajax_form_calificaciones_validate_calificacion_1_($calificacion_1_, $nmgp_refresh_row, $script_case_init)
     {
@@ -2802,6 +2914,66 @@ ob_start();
         exit;
     } // ajax_validate_calificacion_final_
 
+    function ajax_form_calificaciones_validate_colegio_id_($colegio_id_, $nmgp_refresh_row, $script_case_init)
+    {
+        global $inicial_form_calificaciones;
+        //register_shutdown_function("form_calificaciones_pack_ajax_response");
+        $inicial_form_calificaciones->contr_form_calificaciones->NM_ajax_flag          = true;
+        $inicial_form_calificaciones->contr_form_calificaciones->NM_ajax_opcao         = 'validate_colegio_id_';
+        $inicial_form_calificaciones->contr_form_calificaciones->NM_ajax_info['param'] = array(
+                  'colegio_id_' => NM_utf8_urldecode($colegio_id_),
+                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_calificaciones->contr_form_calificaciones->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_calificaciones->contr_form_calificaciones->controle();
+        exit;
+    } // ajax_validate_colegio_id_
+
+    function ajax_form_calificaciones_validate_periodo_id_($periodo_id_, $nmgp_refresh_row, $script_case_init)
+    {
+        global $inicial_form_calificaciones;
+        //register_shutdown_function("form_calificaciones_pack_ajax_response");
+        $inicial_form_calificaciones->contr_form_calificaciones->NM_ajax_flag          = true;
+        $inicial_form_calificaciones->contr_form_calificaciones->NM_ajax_opcao         = 'validate_periodo_id_';
+        $inicial_form_calificaciones->contr_form_calificaciones->NM_ajax_info['param'] = array(
+                  'periodo_id_' => NM_utf8_urldecode($periodo_id_),
+                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_calificaciones->contr_form_calificaciones->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_calificaciones->contr_form_calificaciones->controle();
+        exit;
+    } // ajax_validate_periodo_id_
+
+    function ajax_form_calificaciones_validate_curso_id_($curso_id_, $nmgp_refresh_row, $script_case_init)
+    {
+        global $inicial_form_calificaciones;
+        //register_shutdown_function("form_calificaciones_pack_ajax_response");
+        $inicial_form_calificaciones->contr_form_calificaciones->NM_ajax_flag          = true;
+        $inicial_form_calificaciones->contr_form_calificaciones->NM_ajax_opcao         = 'validate_curso_id_';
+        $inicial_form_calificaciones->contr_form_calificaciones->NM_ajax_info['param'] = array(
+                  'curso_id_' => NM_utf8_urldecode($curso_id_),
+                  'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
+                  'script_case_init' => NM_utf8_urldecode($script_case_init),
+                  'buffer_output' => true,
+                 );
+        if ($inicial_form_calificaciones->contr_form_calificaciones->NM_ajax_info['param']['buffer_output'])
+        {
+            ob_start();
+        }
+        $inicial_form_calificaciones->contr_form_calificaciones->controle();
+        exit;
+    } // ajax_validate_curso_id_
+
     function ajax_form_calificaciones_event_calificacion_1__onchange($calificacion_1_, $calificacion_2_, $calificacion_3_, $calificacion_4_, $calificacion_5_, $calificacion_6_, $calificacion_7_, $calificacion_8_, $calificacion_9_, $calificacion_final_, $script_case_init, $nmgp_refresh_row)
     {
         global $inicial_form_calificaciones;
@@ -3063,7 +3235,7 @@ ob_start();
         exit;
     } // ajax_event_calificacion_9__onchange
 
-    function ajax_form_calificaciones_submit_form($estudiante_id_, $asignatura_id_, $tipo_calificacion_id_, $calificacion_1_, $calificacion_nivel_1_, $calificacion_2_, $calificacion_nivel_2_, $calificacion_3_, $calificacion_nivel_3_, $calificacion_4_, $calificacion_nivel_4_, $calificacion_5_, $calificacion_nivel_5_, $calificacion_6_, $calificacion_nivel_6_, $calificacion_7_, $calificacion_nivel_7_, $calificacion_8_, $calificacion_nivel_8_, $calificacion_9_, $calificacion_nivel_9_, $calificacion_final_, $nmgp_refresh_row, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
+    function ajax_form_calificaciones_submit_form($estudiante_id_, $asignatura_id_, $calificacion_1_, $calificacion_nivel_1_, $calificacion_2_, $calificacion_nivel_2_, $calificacion_3_, $calificacion_nivel_3_, $calificacion_4_, $calificacion_nivel_4_, $calificacion_5_, $calificacion_nivel_5_, $calificacion_6_, $calificacion_nivel_6_, $calificacion_7_, $calificacion_nivel_7_, $calificacion_8_, $calificacion_nivel_8_, $calificacion_9_, $calificacion_nivel_9_, $calificacion_final_, $colegio_id_, $periodo_id_, $curso_id_, $nmgp_refresh_row, $nm_form_submit, $nmgp_url_saida, $nmgp_opcao, $nmgp_ancora, $nmgp_num_form, $nmgp_parms, $script_case_init, $csrf_token)
     {
         global $inicial_form_calificaciones;
         //register_shutdown_function("form_calificaciones_pack_ajax_response");
@@ -3072,7 +3244,6 @@ ob_start();
         $inicial_form_calificaciones->contr_form_calificaciones->NM_ajax_info['param'] = array(
                   'estudiante_id_' => NM_utf8_urldecode($estudiante_id_),
                   'asignatura_id_' => NM_utf8_urldecode($asignatura_id_),
-                  'tipo_calificacion_id_' => NM_utf8_urldecode($tipo_calificacion_id_),
                   'calificacion_1_' => NM_utf8_urldecode($calificacion_1_),
                   'calificacion_nivel_1_' => NM_utf8_urldecode($calificacion_nivel_1_),
                   'calificacion_2_' => NM_utf8_urldecode($calificacion_2_),
@@ -3092,6 +3263,9 @@ ob_start();
                   'calificacion_9_' => NM_utf8_urldecode($calificacion_9_),
                   'calificacion_nivel_9_' => NM_utf8_urldecode($calificacion_nivel_9_),
                   'calificacion_final_' => NM_utf8_urldecode($calificacion_final_),
+                  'colegio_id_' => NM_utf8_urldecode($colegio_id_),
+                  'periodo_id_' => NM_utf8_urldecode($periodo_id_),
+                  'curso_id_' => NM_utf8_urldecode($curso_id_),
                   'nmgp_refresh_row' => NM_utf8_urldecode($nmgp_refresh_row),
                   'nm_form_submit' => NM_utf8_urldecode($nm_form_submit),
                   'nmgp_url_saida' => NM_utf8_urldecode($nmgp_url_saida),

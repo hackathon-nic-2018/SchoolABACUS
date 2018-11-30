@@ -926,6 +926,18 @@ function Form_Table($Table_refresh = false)
    }
 ?>
 <?php
+   if (!isset($this->nmgp_cmp_hidden['colegio_id_']))
+   {
+       $this->nmgp_cmp_hidden['colegio_id_'] = 'off';
+   }
+   if (!isset($this->nmgp_cmp_hidden['periodo_id_']))
+   {
+       $this->nmgp_cmp_hidden['periodo_id_'] = 'off';
+   }
+   if (!isset($this->nmgp_cmp_hidden['curso_id_']))
+   {
+       $this->nmgp_cmp_hidden['curso_id_'] = 'off';
+   }
 ?>
 <TABLE align="center" id="hidden_bloco_0" class="scFormTable" width="100%" style="height: 100%;">   <tr>
 <?php
@@ -972,7 +984,7 @@ $orderColOrient = '';
    <?php if (isset($this->nmgp_cmp_hidden['estudiante_id_']) && $this->nmgp_cmp_hidden['estudiante_id_'] == 'off') { $sStyleHidden_estudiante_id_ = 'display: none'; }
       if (1 || !isset($this->nmgp_cmp_hidden['estudiante_id_']) || $this->nmgp_cmp_hidden['estudiante_id_'] == 'on') {
       if (!isset($this->nm_new_label['estudiante_id_'])) {
-          $this->nm_new_label['estudiante_id_'] = "Estudiante Id"; } ?>
+          $this->nm_new_label['estudiante_id_'] = "Estudiante"; } ?>
 
     <TD class="scFormLabelOddMult css_estudiante_id__label" id="hidden_field_label_estudiante_id_" style="<?php echo $sStyleHidden_estudiante_id_; ?>" > <?php echo $this->nm_new_label['estudiante_id_'] ?> <span class="scFormRequiredOddMult">*</span> </TD>
    <?php } ?>
@@ -980,23 +992,15 @@ $orderColOrient = '';
    <?php if (isset($this->nmgp_cmp_hidden['asignatura_id_']) && $this->nmgp_cmp_hidden['asignatura_id_'] == 'off') { $sStyleHidden_asignatura_id_ = 'display: none'; }
       if (1 || !isset($this->nmgp_cmp_hidden['asignatura_id_']) || $this->nmgp_cmp_hidden['asignatura_id_'] == 'on') {
       if (!isset($this->nm_new_label['asignatura_id_'])) {
-          $this->nm_new_label['asignatura_id_'] = "Asignatura Id"; } ?>
+          $this->nm_new_label['asignatura_id_'] = "Asignatura"; } ?>
 
     <TD class="scFormLabelOddMult css_asignatura_id__label" id="hidden_field_label_asignatura_id_" style="<?php echo $sStyleHidden_asignatura_id_; ?>" > <?php echo $this->nm_new_label['asignatura_id_'] ?> <span class="scFormRequiredOddMult">*</span> </TD>
-   <?php } ?>
-
-   <?php if (isset($this->nmgp_cmp_hidden['tipo_calificacion_id_']) && $this->nmgp_cmp_hidden['tipo_calificacion_id_'] == 'off') { $sStyleHidden_tipo_calificacion_id_ = 'display: none'; }
-      if (1 || !isset($this->nmgp_cmp_hidden['tipo_calificacion_id_']) || $this->nmgp_cmp_hidden['tipo_calificacion_id_'] == 'on') {
-      if (!isset($this->nm_new_label['tipo_calificacion_id_'])) {
-          $this->nm_new_label['tipo_calificacion_id_'] = "Tipo Calificacion Id"; } ?>
-
-    <TD class="scFormLabelOddMult css_tipo_calificacion_id__label" id="hidden_field_label_tipo_calificacion_id_" style="<?php echo $sStyleHidden_tipo_calificacion_id_; ?>" > <?php echo $this->nm_new_label['tipo_calificacion_id_'] ?> </TD>
    <?php } ?>
 
    <?php if (isset($this->nmgp_cmp_hidden['calificacion_1_']) && $this->nmgp_cmp_hidden['calificacion_1_'] == 'off') { $sStyleHidden_calificacion_1_ = 'display: none'; }
       if (1 || !isset($this->nmgp_cmp_hidden['calificacion_1_']) || $this->nmgp_cmp_hidden['calificacion_1_'] == 'on') {
       if (!isset($this->nm_new_label['calificacion_1_'])) {
-          $this->nm_new_label['calificacion_1_'] = "Calificacion 1"; } ?>
+          $this->nm_new_label['calificacion_1_'] = "Calificación 1"; } ?>
 
     <TD class="scFormLabelOddMult css_calificacion_1__label" id="hidden_field_label_calificacion_1_" style="<?php echo $sStyleHidden_calificacion_1_; ?>" > <?php echo $this->nm_new_label['calificacion_1_'] ?> </TD>
    <?php } ?>
@@ -1004,7 +1008,7 @@ $orderColOrient = '';
    <?php if (isset($this->nmgp_cmp_hidden['calificacion_nivel_1_']) && $this->nmgp_cmp_hidden['calificacion_nivel_1_'] == 'off') { $sStyleHidden_calificacion_nivel_1_ = 'display: none'; }
       if (1 || !isset($this->nmgp_cmp_hidden['calificacion_nivel_1_']) || $this->nmgp_cmp_hidden['calificacion_nivel_1_'] == 'on') {
       if (!isset($this->nm_new_label['calificacion_nivel_1_'])) {
-          $this->nm_new_label['calificacion_nivel_1_'] = "Calificacion Nivel 1"; } ?>
+          $this->nm_new_label['calificacion_nivel_1_'] = ""; } ?>
 
     <TD class="scFormLabelOddMult css_calificacion_nivel_1__label" id="hidden_field_label_calificacion_nivel_1_" style="<?php echo $sStyleHidden_calificacion_nivel_1_; ?>" > <?php echo $this->nm_new_label['calificacion_nivel_1_'] ?> </TD>
    <?php } ?>
@@ -1012,7 +1016,7 @@ $orderColOrient = '';
    <?php if (isset($this->nmgp_cmp_hidden['calificacion_2_']) && $this->nmgp_cmp_hidden['calificacion_2_'] == 'off') { $sStyleHidden_calificacion_2_ = 'display: none'; }
       if (1 || !isset($this->nmgp_cmp_hidden['calificacion_2_']) || $this->nmgp_cmp_hidden['calificacion_2_'] == 'on') {
       if (!isset($this->nm_new_label['calificacion_2_'])) {
-          $this->nm_new_label['calificacion_2_'] = "Calificacion 2"; } ?>
+          $this->nm_new_label['calificacion_2_'] = "Calificación 2"; } ?>
 
     <TD class="scFormLabelOddMult css_calificacion_2__label" id="hidden_field_label_calificacion_2_" style="<?php echo $sStyleHidden_calificacion_2_; ?>" > <?php echo $this->nm_new_label['calificacion_2_'] ?> </TD>
    <?php } ?>
@@ -1020,7 +1024,7 @@ $orderColOrient = '';
    <?php if (isset($this->nmgp_cmp_hidden['calificacion_nivel_2_']) && $this->nmgp_cmp_hidden['calificacion_nivel_2_'] == 'off') { $sStyleHidden_calificacion_nivel_2_ = 'display: none'; }
       if (1 || !isset($this->nmgp_cmp_hidden['calificacion_nivel_2_']) || $this->nmgp_cmp_hidden['calificacion_nivel_2_'] == 'on') {
       if (!isset($this->nm_new_label['calificacion_nivel_2_'])) {
-          $this->nm_new_label['calificacion_nivel_2_'] = "Calificacion Nivel 2"; } ?>
+          $this->nm_new_label['calificacion_nivel_2_'] = ""; } ?>
 
     <TD class="scFormLabelOddMult css_calificacion_nivel_2__label" id="hidden_field_label_calificacion_nivel_2_" style="<?php echo $sStyleHidden_calificacion_nivel_2_; ?>" > <?php echo $this->nm_new_label['calificacion_nivel_2_'] ?> </TD>
    <?php } ?>
@@ -1028,7 +1032,7 @@ $orderColOrient = '';
    <?php if (isset($this->nmgp_cmp_hidden['calificacion_3_']) && $this->nmgp_cmp_hidden['calificacion_3_'] == 'off') { $sStyleHidden_calificacion_3_ = 'display: none'; }
       if (1 || !isset($this->nmgp_cmp_hidden['calificacion_3_']) || $this->nmgp_cmp_hidden['calificacion_3_'] == 'on') {
       if (!isset($this->nm_new_label['calificacion_3_'])) {
-          $this->nm_new_label['calificacion_3_'] = "Calificacion 3"; } ?>
+          $this->nm_new_label['calificacion_3_'] = "Calificación 3"; } ?>
 
     <TD class="scFormLabelOddMult css_calificacion_3__label" id="hidden_field_label_calificacion_3_" style="<?php echo $sStyleHidden_calificacion_3_; ?>" > <?php echo $this->nm_new_label['calificacion_3_'] ?> </TD>
    <?php } ?>
@@ -1036,7 +1040,7 @@ $orderColOrient = '';
    <?php if (isset($this->nmgp_cmp_hidden['calificacion_nivel_3_']) && $this->nmgp_cmp_hidden['calificacion_nivel_3_'] == 'off') { $sStyleHidden_calificacion_nivel_3_ = 'display: none'; }
       if (1 || !isset($this->nmgp_cmp_hidden['calificacion_nivel_3_']) || $this->nmgp_cmp_hidden['calificacion_nivel_3_'] == 'on') {
       if (!isset($this->nm_new_label['calificacion_nivel_3_'])) {
-          $this->nm_new_label['calificacion_nivel_3_'] = "Calificacion Nivel 3"; } ?>
+          $this->nm_new_label['calificacion_nivel_3_'] = ""; } ?>
 
     <TD class="scFormLabelOddMult css_calificacion_nivel_3__label" id="hidden_field_label_calificacion_nivel_3_" style="<?php echo $sStyleHidden_calificacion_nivel_3_; ?>" > <?php echo $this->nm_new_label['calificacion_nivel_3_'] ?> </TD>
    <?php } ?>
@@ -1044,7 +1048,7 @@ $orderColOrient = '';
    <?php if (isset($this->nmgp_cmp_hidden['calificacion_4_']) && $this->nmgp_cmp_hidden['calificacion_4_'] == 'off') { $sStyleHidden_calificacion_4_ = 'display: none'; }
       if (1 || !isset($this->nmgp_cmp_hidden['calificacion_4_']) || $this->nmgp_cmp_hidden['calificacion_4_'] == 'on') {
       if (!isset($this->nm_new_label['calificacion_4_'])) {
-          $this->nm_new_label['calificacion_4_'] = "Calificacion 4"; } ?>
+          $this->nm_new_label['calificacion_4_'] = "Calificación 4"; } ?>
 
     <TD class="scFormLabelOddMult css_calificacion_4__label" id="hidden_field_label_calificacion_4_" style="<?php echo $sStyleHidden_calificacion_4_; ?>" > <?php echo $this->nm_new_label['calificacion_4_'] ?> </TD>
    <?php } ?>
@@ -1052,7 +1056,7 @@ $orderColOrient = '';
    <?php if (isset($this->nmgp_cmp_hidden['calificacion_nivel_4_']) && $this->nmgp_cmp_hidden['calificacion_nivel_4_'] == 'off') { $sStyleHidden_calificacion_nivel_4_ = 'display: none'; }
       if (1 || !isset($this->nmgp_cmp_hidden['calificacion_nivel_4_']) || $this->nmgp_cmp_hidden['calificacion_nivel_4_'] == 'on') {
       if (!isset($this->nm_new_label['calificacion_nivel_4_'])) {
-          $this->nm_new_label['calificacion_nivel_4_'] = "Calificacion Nivel 4"; } ?>
+          $this->nm_new_label['calificacion_nivel_4_'] = ""; } ?>
 
     <TD class="scFormLabelOddMult css_calificacion_nivel_4__label" id="hidden_field_label_calificacion_nivel_4_" style="<?php echo $sStyleHidden_calificacion_nivel_4_; ?>" > <?php echo $this->nm_new_label['calificacion_nivel_4_'] ?> </TD>
    <?php } ?>
@@ -1068,7 +1072,7 @@ $orderColOrient = '';
    <?php if (isset($this->nmgp_cmp_hidden['calificacion_nivel_5_']) && $this->nmgp_cmp_hidden['calificacion_nivel_5_'] == 'off') { $sStyleHidden_calificacion_nivel_5_ = 'display: none'; }
       if (1 || !isset($this->nmgp_cmp_hidden['calificacion_nivel_5_']) || $this->nmgp_cmp_hidden['calificacion_nivel_5_'] == 'on') {
       if (!isset($this->nm_new_label['calificacion_nivel_5_'])) {
-          $this->nm_new_label['calificacion_nivel_5_'] = "Calificacion Nivel 5"; } ?>
+          $this->nm_new_label['calificacion_nivel_5_'] = ""; } ?>
 
     <TD class="scFormLabelOddMult css_calificacion_nivel_5__label" id="hidden_field_label_calificacion_nivel_5_" style="<?php echo $sStyleHidden_calificacion_nivel_5_; ?>" > <?php echo $this->nm_new_label['calificacion_nivel_5_'] ?> </TD>
    <?php } ?>
@@ -1084,7 +1088,7 @@ $orderColOrient = '';
    <?php if (isset($this->nmgp_cmp_hidden['calificacion_nivel_6_']) && $this->nmgp_cmp_hidden['calificacion_nivel_6_'] == 'off') { $sStyleHidden_calificacion_nivel_6_ = 'display: none'; }
       if (1 || !isset($this->nmgp_cmp_hidden['calificacion_nivel_6_']) || $this->nmgp_cmp_hidden['calificacion_nivel_6_'] == 'on') {
       if (!isset($this->nm_new_label['calificacion_nivel_6_'])) {
-          $this->nm_new_label['calificacion_nivel_6_'] = "Calificacion Nivel 6"; } ?>
+          $this->nm_new_label['calificacion_nivel_6_'] = ""; } ?>
 
     <TD class="scFormLabelOddMult css_calificacion_nivel_6__label" id="hidden_field_label_calificacion_nivel_6_" style="<?php echo $sStyleHidden_calificacion_nivel_6_; ?>" > <?php echo $this->nm_new_label['calificacion_nivel_6_'] ?> </TD>
    <?php } ?>
@@ -1100,7 +1104,7 @@ $orderColOrient = '';
    <?php if (isset($this->nmgp_cmp_hidden['calificacion_nivel_7_']) && $this->nmgp_cmp_hidden['calificacion_nivel_7_'] == 'off') { $sStyleHidden_calificacion_nivel_7_ = 'display: none'; }
       if (1 || !isset($this->nmgp_cmp_hidden['calificacion_nivel_7_']) || $this->nmgp_cmp_hidden['calificacion_nivel_7_'] == 'on') {
       if (!isset($this->nm_new_label['calificacion_nivel_7_'])) {
-          $this->nm_new_label['calificacion_nivel_7_'] = "Calificacion Nivel 7"; } ?>
+          $this->nm_new_label['calificacion_nivel_7_'] = ""; } ?>
 
     <TD class="scFormLabelOddMult css_calificacion_nivel_7__label" id="hidden_field_label_calificacion_nivel_7_" style="<?php echo $sStyleHidden_calificacion_nivel_7_; ?>" > <?php echo $this->nm_new_label['calificacion_nivel_7_'] ?> </TD>
    <?php } ?>
@@ -1116,7 +1120,7 @@ $orderColOrient = '';
    <?php if (isset($this->nmgp_cmp_hidden['calificacion_nivel_8_']) && $this->nmgp_cmp_hidden['calificacion_nivel_8_'] == 'off') { $sStyleHidden_calificacion_nivel_8_ = 'display: none'; }
       if (1 || !isset($this->nmgp_cmp_hidden['calificacion_nivel_8_']) || $this->nmgp_cmp_hidden['calificacion_nivel_8_'] == 'on') {
       if (!isset($this->nm_new_label['calificacion_nivel_8_'])) {
-          $this->nm_new_label['calificacion_nivel_8_'] = "Calificacion Nivel 8"; } ?>
+          $this->nm_new_label['calificacion_nivel_8_'] = ""; } ?>
 
     <TD class="scFormLabelOddMult css_calificacion_nivel_8__label" id="hidden_field_label_calificacion_nivel_8_" style="<?php echo $sStyleHidden_calificacion_nivel_8_; ?>" > <?php echo $this->nm_new_label['calificacion_nivel_8_'] ?> </TD>
    <?php } ?>
@@ -1132,7 +1136,7 @@ $orderColOrient = '';
    <?php if (isset($this->nmgp_cmp_hidden['calificacion_nivel_9_']) && $this->nmgp_cmp_hidden['calificacion_nivel_9_'] == 'off') { $sStyleHidden_calificacion_nivel_9_ = 'display: none'; }
       if (1 || !isset($this->nmgp_cmp_hidden['calificacion_nivel_9_']) || $this->nmgp_cmp_hidden['calificacion_nivel_9_'] == 'on') {
       if (!isset($this->nm_new_label['calificacion_nivel_9_'])) {
-          $this->nm_new_label['calificacion_nivel_9_'] = "Calificacion Nivel 9"; } ?>
+          $this->nm_new_label['calificacion_nivel_9_'] = ""; } ?>
 
     <TD class="scFormLabelOddMult css_calificacion_nivel_9__label" id="hidden_field_label_calificacion_nivel_9_" style="<?php echo $sStyleHidden_calificacion_nivel_9_; ?>" > <?php echo $this->nm_new_label['calificacion_nivel_9_'] ?> </TD>
    <?php } ?>
@@ -1143,6 +1147,30 @@ $orderColOrient = '';
           $this->nm_new_label['calificacion_final_'] = "Calificacion Final"; } ?>
 
     <TD class="scFormLabelOddMult css_calificacion_final__label" id="hidden_field_label_calificacion_final_" style="<?php echo $sStyleHidden_calificacion_final_; ?>" > <?php echo $this->nm_new_label['calificacion_final_'] ?> </TD>
+   <?php } ?>
+
+   <?php if (isset($this->nmgp_cmp_hidden['colegio_id_']) && $this->nmgp_cmp_hidden['colegio_id_'] == 'off') { $sStyleHidden_colegio_id_ = 'display: none'; }
+      if (1 || !isset($this->nmgp_cmp_hidden['colegio_id_']) || $this->nmgp_cmp_hidden['colegio_id_'] == 'on') {
+      if (!isset($this->nm_new_label['colegio_id_'])) {
+          $this->nm_new_label['colegio_id_'] = "Colegio Id"; } ?>
+
+    <TD class="scFormLabelOddMult css_colegio_id__label" id="hidden_field_label_colegio_id_" style="<?php echo $sStyleHidden_colegio_id_; ?>" > <?php echo $this->nm_new_label['colegio_id_'] ?> <span class="scFormRequiredOddMult">*</span> </TD>
+   <?php } ?>
+
+   <?php if (isset($this->nmgp_cmp_hidden['periodo_id_']) && $this->nmgp_cmp_hidden['periodo_id_'] == 'off') { $sStyleHidden_periodo_id_ = 'display: none'; }
+      if (1 || !isset($this->nmgp_cmp_hidden['periodo_id_']) || $this->nmgp_cmp_hidden['periodo_id_'] == 'on') {
+      if (!isset($this->nm_new_label['periodo_id_'])) {
+          $this->nm_new_label['periodo_id_'] = "Periodo Id"; } ?>
+
+    <TD class="scFormLabelOddMult css_periodo_id__label" id="hidden_field_label_periodo_id_" style="<?php echo $sStyleHidden_periodo_id_; ?>" > <?php echo $this->nm_new_label['periodo_id_'] ?> <span class="scFormRequiredOddMult">*</span> </TD>
+   <?php } ?>
+
+   <?php if (isset($this->nmgp_cmp_hidden['curso_id_']) && $this->nmgp_cmp_hidden['curso_id_'] == 'off') { $sStyleHidden_curso_id_ = 'display: none'; }
+      if (1 || !isset($this->nmgp_cmp_hidden['curso_id_']) || $this->nmgp_cmp_hidden['curso_id_'] == 'on') {
+      if (!isset($this->nm_new_label['curso_id_'])) {
+          $this->nm_new_label['curso_id_'] = "Curso Id"; } ?>
+
+    <TD class="scFormLabelOddMult css_curso_id__label" id="hidden_field_label_curso_id_" style="<?php echo $sStyleHidden_curso_id_; ?>" > <?php echo $this->nm_new_label['curso_id_'] ?> <span class="scFormRequiredOddMult">*</span> </TD>
    <?php } ?>
 
 
@@ -1179,12 +1207,22 @@ function Form_Corpo($Line_Add = false, $Table_refresh = false)
            {
                $this->nmgp_cmp_readonly['asignatura_id_'] = 'on';
            }
+           if ('novo' != $this->nmgp_opcao && !isset($this->nmgp_cmp_readonly['colegio_id_']))
+           {
+               $this->nmgp_cmp_readonly['colegio_id_'] = 'on';
+           }
+           if ('novo' != $this->nmgp_opcao && !isset($this->nmgp_cmp_readonly['periodo_id_']))
+           {
+               $this->nmgp_cmp_readonly['periodo_id_'] = 'on';
+           }
+           if ('novo' != $this->nmgp_opcao && !isset($this->nmgp_cmp_readonly['curso_id_']))
+           {
+               $this->nmgp_cmp_readonly['curso_id_'] = 'on';
+           }
    foreach ($this->form_vert_form_calificaciones as $sc_seq_vert => $sc_lixo)
    {
        $this->loadRecordState($sc_seq_vert);
-       $this->colegio_id_ = $this->form_vert_form_calificaciones[$sc_seq_vert]['colegio_id_'];
-       $this->periodo_id_ = $this->form_vert_form_calificaciones[$sc_seq_vert]['periodo_id_'];
-       $this->curso_id_ = $this->form_vert_form_calificaciones[$sc_seq_vert]['curso_id_'];
+       $this->tipo_calificacion_id_ = $this->form_vert_form_calificaciones[$sc_seq_vert]['tipo_calificacion_id_'];
        $this->descripcion_1_ = $this->form_vert_form_calificaciones[$sc_seq_vert]['descripcion_1_'];
        $this->publicada_1_ = $this->form_vert_form_calificaciones[$sc_seq_vert]['publicada_1_'];
        $this->descripcion_2_ = $this->form_vert_form_calificaciones[$sc_seq_vert]['descripcion_2_'];
@@ -1207,7 +1245,6 @@ function Form_Corpo($Line_Add = false, $Table_refresh = false)
        {
            $this->nmgp_cmp_readonly['estudiante_id_'] = true;
            $this->nmgp_cmp_readonly['asignatura_id_'] = true;
-           $this->nmgp_cmp_readonly['tipo_calificacion_id_'] = true;
            $this->nmgp_cmp_readonly['calificacion_1_'] = true;
            $this->nmgp_cmp_readonly['calificacion_nivel_1_'] = true;
            $this->nmgp_cmp_readonly['calificacion_2_'] = true;
@@ -1227,12 +1264,14 @@ function Form_Corpo($Line_Add = false, $Table_refresh = false)
            $this->nmgp_cmp_readonly['calificacion_9_'] = true;
            $this->nmgp_cmp_readonly['calificacion_nivel_9_'] = true;
            $this->nmgp_cmp_readonly['calificacion_final_'] = true;
+           $this->nmgp_cmp_readonly['colegio_id_'] = true;
+           $this->nmgp_cmp_readonly['periodo_id_'] = true;
+           $this->nmgp_cmp_readonly['curso_id_'] = true;
        }
        elseif ($Line_Add)
        {
            if (!isset($this->nmgp_cmp_readonly['estudiante_id_']) || $this->nmgp_cmp_readonly['estudiante_id_'] != "on") {$this->nmgp_cmp_readonly['estudiante_id_'] = false;}
            if (!isset($this->nmgp_cmp_readonly['asignatura_id_']) || $this->nmgp_cmp_readonly['asignatura_id_'] != "on") {$this->nmgp_cmp_readonly['asignatura_id_'] = false;}
-           if (!isset($this->nmgp_cmp_readonly['tipo_calificacion_id_']) || $this->nmgp_cmp_readonly['tipo_calificacion_id_'] != "on") {$this->nmgp_cmp_readonly['tipo_calificacion_id_'] = false;}
            if (!isset($this->nmgp_cmp_readonly['calificacion_1_']) || $this->nmgp_cmp_readonly['calificacion_1_'] != "on") {$this->nmgp_cmp_readonly['calificacion_1_'] = false;}
            if (!isset($this->nmgp_cmp_readonly['calificacion_nivel_1_']) || $this->nmgp_cmp_readonly['calificacion_nivel_1_'] != "on") {$this->nmgp_cmp_readonly['calificacion_nivel_1_'] = false;}
            if (!isset($this->nmgp_cmp_readonly['calificacion_2_']) || $this->nmgp_cmp_readonly['calificacion_2_'] != "on") {$this->nmgp_cmp_readonly['calificacion_2_'] = false;}
@@ -1252,6 +1291,9 @@ function Form_Corpo($Line_Add = false, $Table_refresh = false)
            if (!isset($this->nmgp_cmp_readonly['calificacion_9_']) || $this->nmgp_cmp_readonly['calificacion_9_'] != "on") {$this->nmgp_cmp_readonly['calificacion_9_'] = false;}
            if (!isset($this->nmgp_cmp_readonly['calificacion_nivel_9_']) || $this->nmgp_cmp_readonly['calificacion_nivel_9_'] != "on") {$this->nmgp_cmp_readonly['calificacion_nivel_9_'] = false;}
            if (!isset($this->nmgp_cmp_readonly['calificacion_final_']) || $this->nmgp_cmp_readonly['calificacion_final_'] != "on") {$this->nmgp_cmp_readonly['calificacion_final_'] = false;}
+           if (!isset($this->nmgp_cmp_readonly['colegio_id_']) || $this->nmgp_cmp_readonly['colegio_id_'] != "on") {$this->nmgp_cmp_readonly['colegio_id_'] = false;}
+           if (!isset($this->nmgp_cmp_readonly['periodo_id_']) || $this->nmgp_cmp_readonly['periodo_id_'] != "on") {$this->nmgp_cmp_readonly['periodo_id_'] = false;}
+           if (!isset($this->nmgp_cmp_readonly['curso_id_']) || $this->nmgp_cmp_readonly['curso_id_'] != "on") {$this->nmgp_cmp_readonly['curso_id_'] = false;}
        }
               foreach ($this->form_vert_form_preenchimento[$sc_seq_vert] as $sCmpNome => $mCmpVal)
               {
@@ -1308,32 +1350,6 @@ function Form_Corpo($Line_Add = false, $Table_refresh = false)
            unset($this->nmgp_cmp_readonly['asignatura_id_']);
            $sStyleReadLab_asignatura_id_ = '';
            $sStyleReadInp_asignatura_id_ = 'display: none;';
-       }
-       $this->tipo_calificacion_id_ = $this->form_vert_form_calificaciones[$sc_seq_vert]['tipo_calificacion_id_']; 
-       $tipo_calificacion_id_ = $this->tipo_calificacion_id_; 
-       $sStyleHidden_tipo_calificacion_id_ = '';
-       if (isset($sCheckRead_tipo_calificacion_id_))
-       {
-           unset($sCheckRead_tipo_calificacion_id_);
-       }
-       if (isset($this->nmgp_cmp_readonly['tipo_calificacion_id_']))
-       {
-           $sCheckRead_tipo_calificacion_id_ = $this->nmgp_cmp_readonly['tipo_calificacion_id_'];
-       }
-       if (isset($this->nmgp_cmp_hidden['tipo_calificacion_id_']) && $this->nmgp_cmp_hidden['tipo_calificacion_id_'] == 'off')
-       {
-           unset($this->nmgp_cmp_hidden['tipo_calificacion_id_']);
-           $sStyleHidden_tipo_calificacion_id_ = 'display: none;';
-       }
-       $bTestReadOnly_tipo_calificacion_id_ = true;
-       $sStyleReadLab_tipo_calificacion_id_ = 'display: none;';
-       $sStyleReadInp_tipo_calificacion_id_ = '';
-       if (isset($this->nmgp_cmp_readonly['tipo_calificacion_id_']) && $this->nmgp_cmp_readonly['tipo_calificacion_id_'] == 'on')
-       {
-           $bTestReadOnly_tipo_calificacion_id_ = false;
-           unset($this->nmgp_cmp_readonly['tipo_calificacion_id_']);
-           $sStyleReadLab_tipo_calificacion_id_ = '';
-           $sStyleReadInp_tipo_calificacion_id_ = 'display: none;';
        }
        $this->calificacion_1_ = $this->form_vert_form_calificaciones[$sc_seq_vert]['calificacion_1_']; 
        $calificacion_1_ = $this->calificacion_1_; 
@@ -1829,6 +1845,96 @@ function Form_Corpo($Line_Add = false, $Table_refresh = false)
            $sStyleReadLab_calificacion_final_ = '';
            $sStyleReadInp_calificacion_final_ = 'display: none;';
        }
+       $this->colegio_id_ = $this->form_vert_form_calificaciones[$sc_seq_vert]['colegio_id_']; 
+       $colegio_id_ = $this->colegio_id_; 
+       if (!isset($this->nmgp_cmp_hidden['colegio_id_']))
+       {
+           $this->nmgp_cmp_hidden['colegio_id_'] = 'off';
+       }
+       $sStyleHidden_colegio_id_ = '';
+       if (isset($sCheckRead_colegio_id_))
+       {
+           unset($sCheckRead_colegio_id_);
+       }
+       if (isset($this->nmgp_cmp_readonly['colegio_id_']))
+       {
+           $sCheckRead_colegio_id_ = $this->nmgp_cmp_readonly['colegio_id_'];
+       }
+       if (isset($this->nmgp_cmp_hidden['colegio_id_']) && $this->nmgp_cmp_hidden['colegio_id_'] == 'off')
+       {
+           unset($this->nmgp_cmp_hidden['colegio_id_']);
+           $sStyleHidden_colegio_id_ = 'display: none;';
+       }
+       $bTestReadOnly_colegio_id_ = true;
+       $sStyleReadLab_colegio_id_ = 'display: none;';
+       $sStyleReadInp_colegio_id_ = '';
+       if (/*($this->nmgp_opcao != "novo" && $this->nmgp_opc_ant != "incluir") || */(isset($this->nmgp_cmp_readonly["colegio_id_"]) &&  $this->nmgp_cmp_readonly["colegio_id_"] == "on"))
+       {
+           $bTestReadOnly_colegio_id_ = false;
+           unset($this->nmgp_cmp_readonly['colegio_id_']);
+           $sStyleReadLab_colegio_id_ = '';
+           $sStyleReadInp_colegio_id_ = 'display: none;';
+       }
+       $this->periodo_id_ = $this->form_vert_form_calificaciones[$sc_seq_vert]['periodo_id_']; 
+       $periodo_id_ = $this->periodo_id_; 
+       if (!isset($this->nmgp_cmp_hidden['periodo_id_']))
+       {
+           $this->nmgp_cmp_hidden['periodo_id_'] = 'off';
+       }
+       $sStyleHidden_periodo_id_ = '';
+       if (isset($sCheckRead_periodo_id_))
+       {
+           unset($sCheckRead_periodo_id_);
+       }
+       if (isset($this->nmgp_cmp_readonly['periodo_id_']))
+       {
+           $sCheckRead_periodo_id_ = $this->nmgp_cmp_readonly['periodo_id_'];
+       }
+       if (isset($this->nmgp_cmp_hidden['periodo_id_']) && $this->nmgp_cmp_hidden['periodo_id_'] == 'off')
+       {
+           unset($this->nmgp_cmp_hidden['periodo_id_']);
+           $sStyleHidden_periodo_id_ = 'display: none;';
+       }
+       $bTestReadOnly_periodo_id_ = true;
+       $sStyleReadLab_periodo_id_ = 'display: none;';
+       $sStyleReadInp_periodo_id_ = '';
+       if (/*($this->nmgp_opcao != "novo" && $this->nmgp_opc_ant != "incluir") || */(isset($this->nmgp_cmp_readonly["periodo_id_"]) &&  $this->nmgp_cmp_readonly["periodo_id_"] == "on"))
+       {
+           $bTestReadOnly_periodo_id_ = false;
+           unset($this->nmgp_cmp_readonly['periodo_id_']);
+           $sStyleReadLab_periodo_id_ = '';
+           $sStyleReadInp_periodo_id_ = 'display: none;';
+       }
+       $this->curso_id_ = $this->form_vert_form_calificaciones[$sc_seq_vert]['curso_id_']; 
+       $curso_id_ = $this->curso_id_; 
+       if (!isset($this->nmgp_cmp_hidden['curso_id_']))
+       {
+           $this->nmgp_cmp_hidden['curso_id_'] = 'off';
+       }
+       $sStyleHidden_curso_id_ = '';
+       if (isset($sCheckRead_curso_id_))
+       {
+           unset($sCheckRead_curso_id_);
+       }
+       if (isset($this->nmgp_cmp_readonly['curso_id_']))
+       {
+           $sCheckRead_curso_id_ = $this->nmgp_cmp_readonly['curso_id_'];
+       }
+       if (isset($this->nmgp_cmp_hidden['curso_id_']) && $this->nmgp_cmp_hidden['curso_id_'] == 'off')
+       {
+           unset($this->nmgp_cmp_hidden['curso_id_']);
+           $sStyleHidden_curso_id_ = 'display: none;';
+       }
+       $bTestReadOnly_curso_id_ = true;
+       $sStyleReadLab_curso_id_ = 'display: none;';
+       $sStyleReadInp_curso_id_ = '';
+       if (/*($this->nmgp_opcao != "novo" && $this->nmgp_opc_ant != "incluir") || */(isset($this->nmgp_cmp_readonly["curso_id_"]) &&  $this->nmgp_cmp_readonly["curso_id_"] == "on"))
+       {
+           $bTestReadOnly_curso_id_ = false;
+           unset($this->nmgp_cmp_readonly['curso_id_']);
+           $sStyleReadLab_curso_id_ = '';
+           $sStyleReadInp_curso_id_ = 'display: none;';
+       }
 
        $nm_cor_fun_vert = ($nm_cor_fun_vert == $this->Ini->cor_grid_impar ? $this->Ini->cor_grid_par : $this->Ini->cor_grid_impar);
        $nm_img_fun_cel  = ($nm_img_fun_cel  == $this->Ini->img_fun_imp    ? $this->Ini->img_fun_par  : $this->Ini->img_fun_imp);
@@ -1909,59 +2015,301 @@ if ($this->nmgp_opcao != "novo") {
 <?php echo nmButtonOutput($this->arr_buttons, "bmd_cancelar", "do_ajax_form_calificaciones_cancel_update(" . $sc_seq_vert . ")", "do_ajax_form_calificaciones_cancel_update(" . $sc_seq_vert . ")", "sc_cancelu_line_" . $sc_seq_vert . "", "", "", "display: none", "", "", "", $this->Ini->path_botoes, "", "", "", "", "");?>
  </TD>
    <?php }?>
-   <?php if (isset($this->nmgp_cmp_hidden['estudiante_id_']) && $this->nmgp_cmp_hidden['estudiante_id_'] == 'off') { $sc_hidden_yes++;  ?>
-<input type="hidden" name="estudiante_id_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($estudiante_id_) . "\">"; ?>
+   <?php if (isset($this->nmgp_cmp_hidden['estudiante_id_']) && $this->nmgp_cmp_hidden['estudiante_id_'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="estudiante_id_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($this->estudiante_id_) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
     <TD class="scFormDataOddMult css_estudiante_id__line" id="hidden_field_data_estudiante_id_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_estudiante_id_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_estudiante_id__line" style="vertical-align: top;padding: 0px">
 <?php if ($bTestReadOnly_estudiante_id_ && ($this->nmgp_opcao != "novo" && $this->nmgp_opc_ant != "incluir") || (isset($this->nmgp_cmp_readonly["estudiante_id_"]) &&  $this->nmgp_cmp_readonly["estudiante_id_"] == "on")) { 
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_'] = array(); 
+    }
 
- ?>
-<input type="hidden" name="estudiante_id_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($estudiante_id_) . "\"><span id=\"id_ajax_label_estudiante_id_" . $sc_seq_vert . "\">" . $estudiante_id_ . "</span>"; ?>
+   $old_value_calificacion_final_ = $this->calificacion_final_;
+   $old_value_periodo_id_ = $this->periodo_id_;
+   $old_value_curso_id_ = $this->curso_id_;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_calificacion_final_ = $this->calificacion_final_;
+   $unformatted_value_periodo_id_ = $this->periodo_id_;
+   $unformatted_value_curso_id_ = $this->curso_id_;
+
+   $nm_comando = "SELECT estudiante_id, concat(nombres,' ', primer_apellido)  FROM estudiantes  WHERE colegio_id=" . $_SESSION['vglo_colegio'] . " ORDER BY primer_apellido";
+
+   $this->calificacion_final_ = $old_value_calificacion_final_;
+   $this->periodo_id_ = $old_value_periodo_id_;
+   $this->curso_id_ = $old_value_curso_id_;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
+              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
+              $rs->fields[0] = (string)$rs->fields[0];
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $x = 0; 
+   $estudiante_id__look = ""; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->estudiante_id__1))
+          {
+              foreach ($this->estudiante_id__1 as $tmp_estudiante_id_)
+              {
+                  if (trim($tmp_estudiante_id_) === trim($cadaselect[1])) { $estudiante_id__look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
+              }
+          }
+          elseif (trim($this->estudiante_id_) === trim($cadaselect[1])) { $estudiante_id__look .= $cadaselect[0]; } 
+          $x++; 
+   }
+
+?>
+<input type="hidden" name="estudiante_id_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($estudiante_id_) . "\"><span id=\"id_ajax_label_estudiante_id_" . $sc_seq_vert . "\">" . $estudiante_id__look . "</span>"; ?>
 <?php } else { ?>
-<span id="id_read_on_estudiante_id_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-estudiante_id_<?php echo $sc_seq_vert ?> css_estudiante_id__line" style="<?php echo $sStyleReadLab_estudiante_id_; ?>"><?php echo $this->form_encode_input($this->estudiante_id_); ?></span><span id="id_read_off_estudiante_id_<?php echo $sc_seq_vert ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_estudiante_id_; ?>">
- <input class="sc-js-input scFormObjectOddMult css_estudiante_id__obj" style="" id="id_sc_field_estudiante_id_<?php echo $sc_seq_vert ?>" type=text name="estudiante_id_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($estudiante_id_) ?>"
- size=11 alt="{datatype: 'integer', maxLength: 11, thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['estudiante_id_']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['estudiante_id_']['symbol_fmt']; ?>, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['estudiante_id_']['format_neg'] ? "'suffix'" : "'prefix'") ?>, alignment: 'left', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+<?php
+   $todo = $this->Form_lookup_estudiante_id_();
+   $x = 0 ; 
+   $estudiante_id__look = ""; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->estudiante_id__1))
+          {
+              foreach ($this->estudiante_id__1 as $tmp_estudiante_id_)
+              {
+                  if (trim($tmp_estudiante_id_) === trim($cadaselect[1])) { $estudiante_id__look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
+              }
+          }
+          elseif (trim($this->estudiante_id_) === trim($cadaselect[1])) { $estudiante_id__look .= $cadaselect[0]; } 
+          $x++; 
+   }
+          if (empty($estudiante_id__look))
+          {
+              $estudiante_id__look = $this->estudiante_id_;
+          }
+   $x = 0; 
+   echo "<span id=\"id_read_on_estudiante_id_" . $sc_seq_vert . "\" class=\"css_estudiante_id__line\" style=\"" .  $sStyleReadLab_estudiante_id_ . "\">" . $this->form_encode_input($estudiante_id__look) . "</span><span id=\"id_read_off_estudiante_id_" . $sc_seq_vert . "\" style=\"" . $sStyleReadInp_estudiante_id_ . "\">";
+   echo " <span id=\"idAjaxSelect_estudiante_id_" .  $sc_seq_vert . "\"><select class=\"sc-js-input scFormObjectOddMult css_estudiante_id__obj\" style=\"\" id=\"id_sc_field_estudiante_id_" . $sc_seq_vert . "\" name=\"estudiante_id_" . $sc_seq_vert . "\" size=\"1\" alt=\"{type: 'select', enterTab: false}\">" ; 
+   echo "\r" ; 
+   while (!empty($todo[$x]) && !$nm_nao_carga) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          echo "  <option value=\"$cadaselect[1]\"" ; 
+          if (trim($this->estudiante_id_) === trim($cadaselect[1])) 
+          {
+              echo " selected" ; 
+          }
+          if (strtoupper($cadaselect[2]) == "S") 
+          {
+              if (empty($this->estudiante_id_)) 
+              {
+                  echo " selected" ;
+              } 
+           } 
+          echo ">$cadaselect[0] </option>" ; 
+          echo "\r" ; 
+          $x++ ; 
+   }  ; 
+   echo " </select></span>" ; 
+   echo "\r" ; 
+   echo "</span>";
+?> 
+<?php  }?>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_estudiante_id_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_estudiante_id_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
-   <?php if (isset($this->nmgp_cmp_hidden['asignatura_id_']) && $this->nmgp_cmp_hidden['asignatura_id_'] == 'off') { $sc_hidden_yes++;  ?>
-<input type="hidden" name="asignatura_id_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($asignatura_id_) . "\">"; ?>
+   <?php if (isset($this->nmgp_cmp_hidden['asignatura_id_']) && $this->nmgp_cmp_hidden['asignatura_id_'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="asignatura_id_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($this->asignatura_id_) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
     <TD class="scFormDataOddMult css_asignatura_id__line" id="hidden_field_data_asignatura_id_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_asignatura_id_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_asignatura_id__line" style="vertical-align: top;padding: 0px">
 <?php if ($bTestReadOnly_asignatura_id_ && ($this->nmgp_opcao != "novo" && $this->nmgp_opc_ant != "incluir") || (isset($this->nmgp_cmp_readonly["asignatura_id_"]) &&  $this->nmgp_cmp_readonly["asignatura_id_"] == "on")) { 
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_'] = array(); 
+    }
 
- ?>
-<input type="hidden" name="asignatura_id_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($asignatura_id_) . "\"><span id=\"id_ajax_label_asignatura_id_" . $sc_seq_vert . "\">" . $asignatura_id_ . "</span>"; ?>
+   $old_value_calificacion_final_ = $this->calificacion_final_;
+   $old_value_periodo_id_ = $this->periodo_id_;
+   $old_value_curso_id_ = $this->curso_id_;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_calificacion_final_ = $this->calificacion_final_;
+   $unformatted_value_periodo_id_ = $this->periodo_id_;
+   $unformatted_value_curso_id_ = $this->curso_id_;
+
+   $nm_comando = "SELECT asignatura_id, descripcion  FROM asignaturas  WHERE colegio_id=" . $_SESSION['vglo_colegio'] . " ORDER BY descripcion";
+
+   $this->calificacion_final_ = $old_value_calificacion_final_;
+   $this->periodo_id_ = $old_value_periodo_id_;
+   $this->curso_id_ = $old_value_curso_id_;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
+              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
+              $rs->fields[0] = (string)$rs->fields[0];
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $x = 0; 
+   $asignatura_id__look = ""; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->asignatura_id__1))
+          {
+              foreach ($this->asignatura_id__1 as $tmp_asignatura_id_)
+              {
+                  if (trim($tmp_asignatura_id_) === trim($cadaselect[1])) { $asignatura_id__look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
+              }
+          }
+          elseif (trim($this->asignatura_id_) === trim($cadaselect[1])) { $asignatura_id__look .= $cadaselect[0]; } 
+          $x++; 
+   }
+
+?>
+<input type="hidden" name="asignatura_id_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($asignatura_id_) . "\"><span id=\"id_ajax_label_asignatura_id_" . $sc_seq_vert . "\">" . $asignatura_id__look . "</span>"; ?>
 <?php } else { ?>
-<span id="id_read_on_asignatura_id_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-asignatura_id_<?php echo $sc_seq_vert ?> css_asignatura_id__line" style="<?php echo $sStyleReadLab_asignatura_id_; ?>"><?php echo $this->form_encode_input($this->asignatura_id_); ?></span><span id="id_read_off_asignatura_id_<?php echo $sc_seq_vert ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_asignatura_id_; ?>">
- <input class="sc-js-input scFormObjectOddMult css_asignatura_id__obj" style="" id="id_sc_field_asignatura_id_<?php echo $sc_seq_vert ?>" type=text name="asignatura_id_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($asignatura_id_) ?>"
- size=11 alt="{datatype: 'integer', maxLength: 11, thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['asignatura_id_']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['asignatura_id_']['symbol_fmt']; ?>, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['asignatura_id_']['format_neg'] ? "'suffix'" : "'prefix'") ?>, alignment: 'left', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+<?php
+   $todo = $this->Form_lookup_asignatura_id_();
+   $x = 0 ; 
+   $asignatura_id__look = ""; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->asignatura_id__1))
+          {
+              foreach ($this->asignatura_id__1 as $tmp_asignatura_id_)
+              {
+                  if (trim($tmp_asignatura_id_) === trim($cadaselect[1])) { $asignatura_id__look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
+              }
+          }
+          elseif (trim($this->asignatura_id_) === trim($cadaselect[1])) { $asignatura_id__look .= $cadaselect[0]; } 
+          $x++; 
+   }
+          if (empty($asignatura_id__look))
+          {
+              $asignatura_id__look = $this->asignatura_id_;
+          }
+   $x = 0; 
+   echo "<span id=\"id_read_on_asignatura_id_" . $sc_seq_vert . "\" class=\"css_asignatura_id__line\" style=\"" .  $sStyleReadLab_asignatura_id_ . "\">" . $this->form_encode_input($asignatura_id__look) . "</span><span id=\"id_read_off_asignatura_id_" . $sc_seq_vert . "\" style=\"" . $sStyleReadInp_asignatura_id_ . "\">";
+   echo " <span id=\"idAjaxSelect_asignatura_id_" .  $sc_seq_vert . "\"><select class=\"sc-js-input scFormObjectOddMult css_asignatura_id__obj\" style=\"\" id=\"id_sc_field_asignatura_id_" . $sc_seq_vert . "\" name=\"asignatura_id_" . $sc_seq_vert . "\" size=\"1\" alt=\"{type: 'select', enterTab: false}\">" ; 
+   echo "\r" ; 
+   while (!empty($todo[$x]) && !$nm_nao_carga) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          echo "  <option value=\"$cadaselect[1]\"" ; 
+          if (trim($this->asignatura_id_) === trim($cadaselect[1])) 
+          {
+              echo " selected" ; 
+          }
+          if (strtoupper($cadaselect[2]) == "S") 
+          {
+              if (empty($this->asignatura_id_)) 
+              {
+                  echo " selected" ;
+              } 
+           } 
+          echo ">$cadaselect[0] </option>" ; 
+          echo "\r" ; 
+          $x++ ; 
+   }  ; 
+   echo " </select></span>" ; 
+   echo "\r" ; 
+   echo "</span>";
+?> 
+<?php  }?>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_asignatura_id_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_asignatura_id_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
-   <?php }?>
-
-   <?php if (isset($this->nmgp_cmp_hidden['tipo_calificacion_id_']) && $this->nmgp_cmp_hidden['tipo_calificacion_id_'] == 'off') { $sc_hidden_yes++;  ?>
-<input type="hidden" name="tipo_calificacion_id_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($tipo_calificacion_id_) . "\">"; ?>
-<?php } else { $sc_hidden_no++; ?>
-
-    <TD class="scFormDataOddMult css_tipo_calificacion_id__line" id="hidden_field_data_tipo_calificacion_id_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_tipo_calificacion_id_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_tipo_calificacion_id__line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly_tipo_calificacion_id_ && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["tipo_calificacion_id_"]) &&  $this->nmgp_cmp_readonly["tipo_calificacion_id_"] == "on") { 
-
- ?>
-<input type="hidden" name="tipo_calificacion_id_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($tipo_calificacion_id_) . "\">" . $tipo_calificacion_id_ . ""; ?>
-<?php } else { ?>
-<span id="id_read_on_tipo_calificacion_id_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-tipo_calificacion_id_<?php echo $sc_seq_vert ?> css_tipo_calificacion_id__line" style="<?php echo $sStyleReadLab_tipo_calificacion_id_; ?>"><?php echo $this->form_encode_input($this->tipo_calificacion_id_); ?></span><span id="id_read_off_tipo_calificacion_id_<?php echo $sc_seq_vert ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_tipo_calificacion_id_; ?>">
- <input class="sc-js-input scFormObjectOddMult css_tipo_calificacion_id__obj" style="" id="id_sc_field_tipo_calificacion_id_<?php echo $sc_seq_vert ?>" type=text name="tipo_calificacion_id_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($tipo_calificacion_id_) ?>"
- size=11 alt="{datatype: 'integer', maxLength: 11, thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['tipo_calificacion_id_']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['tipo_calificacion_id_']['symbol_fmt']; ?>, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['tipo_calificacion_id_']['format_neg'] ? "'suffix'" : "'prefix'") ?>, alignment: 'left', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
-</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_tipo_calificacion_id_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_tipo_calificacion_id_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
    <?php if (isset($this->nmgp_cmp_hidden['calificacion_1_']) && $this->nmgp_cmp_hidden['calificacion_1_'] == 'off') { $sc_hidden_yes++;  ?>
 <input type="hidden" name="calificacion_1_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_1_) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormDataOddMult css_calificacion_1__line" id="hidden_field_data_calificacion_1_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_1_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_calificacion_1__line" style="vertical-align: top;padding: 0px">
+    <TD class="scFormDataOddMult css_calificacion_1__line" id="hidden_field_data_calificacion_1_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_1_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%;float:right"><tr><td  class="scFormDataFontOddMult css_calificacion_1__line" style="vertical-align: top;padding: 0px">
 <?php if ($bTestReadOnly_calificacion_1_ && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["calificacion_1_"]) &&  $this->nmgp_cmp_readonly["calificacion_1_"] == "on") { 
 
  ?>
@@ -1969,7 +2317,7 @@ if ($this->nmgp_opcao != "novo") {
 <?php } else { ?>
 <span id="id_read_on_calificacion_1_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-calificacion_1_<?php echo $sc_seq_vert ?> css_calificacion_1__line" style="<?php echo $sStyleReadLab_calificacion_1_; ?>"><?php echo $this->form_encode_input($this->calificacion_1_); ?></span><span id="id_read_off_calificacion_1_<?php echo $sc_seq_vert ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_calificacion_1_; ?>">
  <input class="sc-js-input scFormObjectOddMult css_calificacion_1__obj" style="" id="id_sc_field_calificacion_1_<?php echo $sc_seq_vert ?>" type=text name="calificacion_1_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_1_) ?>"
- size=11 alt="{datatype: 'integer', maxLength: 11, thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['calificacion_1_']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['calificacion_1_']['symbol_fmt']; ?>, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['calificacion_1_']['format_neg'] ? "'suffix'" : "'prefix'") ?>, alignment: 'left', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+ size=11 maxlength=11 alt="{datatype: 'text', maxLength: 11, allowedChars: '<?php echo $this->allowedCharsCharset("0123456789") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_calificacion_1_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_calificacion_1_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
@@ -1977,15 +2325,7 @@ if ($this->nmgp_opcao != "novo") {
 <input type="hidden" name="calificacion_nivel_1_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_1_) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormDataOddMult css_calificacion_nivel_1__line" id="hidden_field_data_calificacion_nivel_1_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_nivel_1_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_calificacion_nivel_1__line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly_calificacion_nivel_1_ && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["calificacion_nivel_1_"]) &&  $this->nmgp_cmp_readonly["calificacion_nivel_1_"] == "on") { 
-
- ?>
-<input type="hidden" name="calificacion_nivel_1_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_1_) . "\">" . $calificacion_nivel_1_ . ""; ?>
-<?php } else { ?>
-<span id="id_read_on_calificacion_nivel_1_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-calificacion_nivel_1_<?php echo $sc_seq_vert ?> css_calificacion_nivel_1__line" style="<?php echo $sStyleReadLab_calificacion_nivel_1_; ?>"><?php echo $this->form_encode_input($this->calificacion_nivel_1_); ?></span><span id="id_read_off_calificacion_nivel_1_<?php echo $sc_seq_vert ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_calificacion_nivel_1_; ?>">
- <input class="sc-js-input scFormObjectOddMult css_calificacion_nivel_1__obj" style="" id="id_sc_field_calificacion_nivel_1_<?php echo $sc_seq_vert ?>" type=text name="calificacion_nivel_1_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_1_) ?>"
- size=10 maxlength=10 alt="{datatype: 'text', maxLength: 10, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+    <TD class="scFormDataOddMult css_calificacion_nivel_1__line" id="hidden_field_data_calificacion_nivel_1_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_nivel_1_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_calificacion_nivel_1__line" style="vertical-align: top;padding: 0px"><input type="hidden" name="calificacion_nivel_1_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_1_); ?>"><span id="id_ajax_label_calificacion_nivel_1_<?php echo $sc_seq_vert; ?>"><?php echo nl2br($calificacion_nivel_1_); ?></span>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_calificacion_nivel_1_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_calificacion_nivel_1_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
@@ -1993,7 +2333,7 @@ if ($this->nmgp_opcao != "novo") {
 <input type="hidden" name="calificacion_2_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_2_) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormDataOddMult css_calificacion_2__line" id="hidden_field_data_calificacion_2_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_2_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_calificacion_2__line" style="vertical-align: top;padding: 0px">
+    <TD class="scFormDataOddMult css_calificacion_2__line" id="hidden_field_data_calificacion_2_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_2_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%;float:right"><tr><td  class="scFormDataFontOddMult css_calificacion_2__line" style="vertical-align: top;padding: 0px">
 <?php if ($bTestReadOnly_calificacion_2_ && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["calificacion_2_"]) &&  $this->nmgp_cmp_readonly["calificacion_2_"] == "on") { 
 
  ?>
@@ -2001,7 +2341,7 @@ if ($this->nmgp_opcao != "novo") {
 <?php } else { ?>
 <span id="id_read_on_calificacion_2_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-calificacion_2_<?php echo $sc_seq_vert ?> css_calificacion_2__line" style="<?php echo $sStyleReadLab_calificacion_2_; ?>"><?php echo $this->form_encode_input($this->calificacion_2_); ?></span><span id="id_read_off_calificacion_2_<?php echo $sc_seq_vert ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_calificacion_2_; ?>">
  <input class="sc-js-input scFormObjectOddMult css_calificacion_2__obj" style="" id="id_sc_field_calificacion_2_<?php echo $sc_seq_vert ?>" type=text name="calificacion_2_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_2_) ?>"
- size=11 alt="{datatype: 'integer', maxLength: 11, thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['calificacion_2_']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['calificacion_2_']['symbol_fmt']; ?>, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['calificacion_2_']['format_neg'] ? "'suffix'" : "'prefix'") ?>, alignment: 'left', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+ size=11 maxlength=11 alt="{datatype: 'text', maxLength: 11, allowedChars: '<?php echo $this->allowedCharsCharset("0123456789") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_calificacion_2_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_calificacion_2_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
@@ -2009,15 +2349,7 @@ if ($this->nmgp_opcao != "novo") {
 <input type="hidden" name="calificacion_nivel_2_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_2_) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormDataOddMult css_calificacion_nivel_2__line" id="hidden_field_data_calificacion_nivel_2_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_nivel_2_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_calificacion_nivel_2__line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly_calificacion_nivel_2_ && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["calificacion_nivel_2_"]) &&  $this->nmgp_cmp_readonly["calificacion_nivel_2_"] == "on") { 
-
- ?>
-<input type="hidden" name="calificacion_nivel_2_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_2_) . "\">" . $calificacion_nivel_2_ . ""; ?>
-<?php } else { ?>
-<span id="id_read_on_calificacion_nivel_2_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-calificacion_nivel_2_<?php echo $sc_seq_vert ?> css_calificacion_nivel_2__line" style="<?php echo $sStyleReadLab_calificacion_nivel_2_; ?>"><?php echo $this->form_encode_input($this->calificacion_nivel_2_); ?></span><span id="id_read_off_calificacion_nivel_2_<?php echo $sc_seq_vert ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_calificacion_nivel_2_; ?>">
- <input class="sc-js-input scFormObjectOddMult css_calificacion_nivel_2__obj" style="" id="id_sc_field_calificacion_nivel_2_<?php echo $sc_seq_vert ?>" type=text name="calificacion_nivel_2_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_2_) ?>"
- size=10 maxlength=10 alt="{datatype: 'text', maxLength: 10, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+    <TD class="scFormDataOddMult css_calificacion_nivel_2__line" id="hidden_field_data_calificacion_nivel_2_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_nivel_2_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_calificacion_nivel_2__line" style="vertical-align: top;padding: 0px"><input type="hidden" name="calificacion_nivel_2_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_2_); ?>"><span id="id_ajax_label_calificacion_nivel_2_<?php echo $sc_seq_vert; ?>"><?php echo nl2br($calificacion_nivel_2_); ?></span>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_calificacion_nivel_2_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_calificacion_nivel_2_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
@@ -2025,7 +2357,7 @@ if ($this->nmgp_opcao != "novo") {
 <input type="hidden" name="calificacion_3_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_3_) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormDataOddMult css_calificacion_3__line" id="hidden_field_data_calificacion_3_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_3_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_calificacion_3__line" style="vertical-align: top;padding: 0px">
+    <TD class="scFormDataOddMult css_calificacion_3__line" id="hidden_field_data_calificacion_3_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_3_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%;float:right"><tr><td  class="scFormDataFontOddMult css_calificacion_3__line" style="vertical-align: top;padding: 0px">
 <?php if ($bTestReadOnly_calificacion_3_ && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["calificacion_3_"]) &&  $this->nmgp_cmp_readonly["calificacion_3_"] == "on") { 
 
  ?>
@@ -2033,7 +2365,7 @@ if ($this->nmgp_opcao != "novo") {
 <?php } else { ?>
 <span id="id_read_on_calificacion_3_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-calificacion_3_<?php echo $sc_seq_vert ?> css_calificacion_3__line" style="<?php echo $sStyleReadLab_calificacion_3_; ?>"><?php echo $this->form_encode_input($this->calificacion_3_); ?></span><span id="id_read_off_calificacion_3_<?php echo $sc_seq_vert ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_calificacion_3_; ?>">
  <input class="sc-js-input scFormObjectOddMult css_calificacion_3__obj" style="" id="id_sc_field_calificacion_3_<?php echo $sc_seq_vert ?>" type=text name="calificacion_3_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_3_) ?>"
- size=11 alt="{datatype: 'integer', maxLength: 11, thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['calificacion_3_']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['calificacion_3_']['symbol_fmt']; ?>, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['calificacion_3_']['format_neg'] ? "'suffix'" : "'prefix'") ?>, alignment: 'left', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+ size=11 maxlength=11 alt="{datatype: 'text', maxLength: 11, allowedChars: '<?php echo $this->allowedCharsCharset("0123456789") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_calificacion_3_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_calificacion_3_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
@@ -2041,15 +2373,7 @@ if ($this->nmgp_opcao != "novo") {
 <input type="hidden" name="calificacion_nivel_3_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_3_) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormDataOddMult css_calificacion_nivel_3__line" id="hidden_field_data_calificacion_nivel_3_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_nivel_3_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_calificacion_nivel_3__line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly_calificacion_nivel_3_ && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["calificacion_nivel_3_"]) &&  $this->nmgp_cmp_readonly["calificacion_nivel_3_"] == "on") { 
-
- ?>
-<input type="hidden" name="calificacion_nivel_3_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_3_) . "\">" . $calificacion_nivel_3_ . ""; ?>
-<?php } else { ?>
-<span id="id_read_on_calificacion_nivel_3_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-calificacion_nivel_3_<?php echo $sc_seq_vert ?> css_calificacion_nivel_3__line" style="<?php echo $sStyleReadLab_calificacion_nivel_3_; ?>"><?php echo $this->form_encode_input($this->calificacion_nivel_3_); ?></span><span id="id_read_off_calificacion_nivel_3_<?php echo $sc_seq_vert ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_calificacion_nivel_3_; ?>">
- <input class="sc-js-input scFormObjectOddMult css_calificacion_nivel_3__obj" style="" id="id_sc_field_calificacion_nivel_3_<?php echo $sc_seq_vert ?>" type=text name="calificacion_nivel_3_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_3_) ?>"
- size=10 maxlength=10 alt="{datatype: 'text', maxLength: 10, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+    <TD class="scFormDataOddMult css_calificacion_nivel_3__line" id="hidden_field_data_calificacion_nivel_3_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_nivel_3_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_calificacion_nivel_3__line" style="vertical-align: top;padding: 0px"><input type="hidden" name="calificacion_nivel_3_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_3_); ?>"><span id="id_ajax_label_calificacion_nivel_3_<?php echo $sc_seq_vert; ?>"><?php echo nl2br($calificacion_nivel_3_); ?></span>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_calificacion_nivel_3_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_calificacion_nivel_3_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
@@ -2057,7 +2381,7 @@ if ($this->nmgp_opcao != "novo") {
 <input type="hidden" name="calificacion_4_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_4_) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormDataOddMult css_calificacion_4__line" id="hidden_field_data_calificacion_4_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_4_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_calificacion_4__line" style="vertical-align: top;padding: 0px">
+    <TD class="scFormDataOddMult css_calificacion_4__line" id="hidden_field_data_calificacion_4_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_4_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%;float:right"><tr><td  class="scFormDataFontOddMult css_calificacion_4__line" style="vertical-align: top;padding: 0px">
 <?php if ($bTestReadOnly_calificacion_4_ && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["calificacion_4_"]) &&  $this->nmgp_cmp_readonly["calificacion_4_"] == "on") { 
 
  ?>
@@ -2065,7 +2389,7 @@ if ($this->nmgp_opcao != "novo") {
 <?php } else { ?>
 <span id="id_read_on_calificacion_4_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-calificacion_4_<?php echo $sc_seq_vert ?> css_calificacion_4__line" style="<?php echo $sStyleReadLab_calificacion_4_; ?>"><?php echo $this->form_encode_input($this->calificacion_4_); ?></span><span id="id_read_off_calificacion_4_<?php echo $sc_seq_vert ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_calificacion_4_; ?>">
  <input class="sc-js-input scFormObjectOddMult css_calificacion_4__obj" style="" id="id_sc_field_calificacion_4_<?php echo $sc_seq_vert ?>" type=text name="calificacion_4_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_4_) ?>"
- size=11 alt="{datatype: 'integer', maxLength: 11, thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['calificacion_4_']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['calificacion_4_']['symbol_fmt']; ?>, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['calificacion_4_']['format_neg'] ? "'suffix'" : "'prefix'") ?>, alignment: 'left', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+ size=11 maxlength=11 alt="{datatype: 'text', maxLength: 11, allowedChars: '<?php echo $this->allowedCharsCharset("0123456789") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_calificacion_4_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_calificacion_4_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
@@ -2073,15 +2397,7 @@ if ($this->nmgp_opcao != "novo") {
 <input type="hidden" name="calificacion_nivel_4_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_4_) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormDataOddMult css_calificacion_nivel_4__line" id="hidden_field_data_calificacion_nivel_4_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_nivel_4_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_calificacion_nivel_4__line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly_calificacion_nivel_4_ && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["calificacion_nivel_4_"]) &&  $this->nmgp_cmp_readonly["calificacion_nivel_4_"] == "on") { 
-
- ?>
-<input type="hidden" name="calificacion_nivel_4_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_4_) . "\">" . $calificacion_nivel_4_ . ""; ?>
-<?php } else { ?>
-<span id="id_read_on_calificacion_nivel_4_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-calificacion_nivel_4_<?php echo $sc_seq_vert ?> css_calificacion_nivel_4__line" style="<?php echo $sStyleReadLab_calificacion_nivel_4_; ?>"><?php echo $this->form_encode_input($this->calificacion_nivel_4_); ?></span><span id="id_read_off_calificacion_nivel_4_<?php echo $sc_seq_vert ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_calificacion_nivel_4_; ?>">
- <input class="sc-js-input scFormObjectOddMult css_calificacion_nivel_4__obj" style="" id="id_sc_field_calificacion_nivel_4_<?php echo $sc_seq_vert ?>" type=text name="calificacion_nivel_4_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_4_) ?>"
- size=10 maxlength=10 alt="{datatype: 'text', maxLength: 10, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+    <TD class="scFormDataOddMult css_calificacion_nivel_4__line" id="hidden_field_data_calificacion_nivel_4_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_nivel_4_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_calificacion_nivel_4__line" style="vertical-align: top;padding: 0px"><input type="hidden" name="calificacion_nivel_4_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_4_); ?>"><span id="id_ajax_label_calificacion_nivel_4_<?php echo $sc_seq_vert; ?>"><?php echo nl2br($calificacion_nivel_4_); ?></span>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_calificacion_nivel_4_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_calificacion_nivel_4_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
@@ -2089,7 +2405,7 @@ if ($this->nmgp_opcao != "novo") {
 <input type="hidden" name="calificacion_5_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_5_) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormDataOddMult css_calificacion_5__line" id="hidden_field_data_calificacion_5_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_5_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_calificacion_5__line" style="vertical-align: top;padding: 0px">
+    <TD class="scFormDataOddMult css_calificacion_5__line" id="hidden_field_data_calificacion_5_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_5_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%;float:right"><tr><td  class="scFormDataFontOddMult css_calificacion_5__line" style="vertical-align: top;padding: 0px">
 <?php if ($bTestReadOnly_calificacion_5_ && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["calificacion_5_"]) &&  $this->nmgp_cmp_readonly["calificacion_5_"] == "on") { 
 
  ?>
@@ -2097,7 +2413,7 @@ if ($this->nmgp_opcao != "novo") {
 <?php } else { ?>
 <span id="id_read_on_calificacion_5_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-calificacion_5_<?php echo $sc_seq_vert ?> css_calificacion_5__line" style="<?php echo $sStyleReadLab_calificacion_5_; ?>"><?php echo $this->form_encode_input($this->calificacion_5_); ?></span><span id="id_read_off_calificacion_5_<?php echo $sc_seq_vert ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_calificacion_5_; ?>">
  <input class="sc-js-input scFormObjectOddMult css_calificacion_5__obj" style="" id="id_sc_field_calificacion_5_<?php echo $sc_seq_vert ?>" type=text name="calificacion_5_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_5_) ?>"
- size=11 alt="{datatype: 'integer', maxLength: 11, thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['calificacion_5_']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['calificacion_5_']['symbol_fmt']; ?>, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['calificacion_5_']['format_neg'] ? "'suffix'" : "'prefix'") ?>, alignment: 'left', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+ size=11 maxlength=11 alt="{datatype: 'text', maxLength: 11, allowedChars: '<?php echo $this->allowedCharsCharset("0123456789") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_calificacion_5_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_calificacion_5_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
@@ -2105,15 +2421,7 @@ if ($this->nmgp_opcao != "novo") {
 <input type="hidden" name="calificacion_nivel_5_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_5_) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormDataOddMult css_calificacion_nivel_5__line" id="hidden_field_data_calificacion_nivel_5_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_nivel_5_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_calificacion_nivel_5__line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly_calificacion_nivel_5_ && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["calificacion_nivel_5_"]) &&  $this->nmgp_cmp_readonly["calificacion_nivel_5_"] == "on") { 
-
- ?>
-<input type="hidden" name="calificacion_nivel_5_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_5_) . "\">" . $calificacion_nivel_5_ . ""; ?>
-<?php } else { ?>
-<span id="id_read_on_calificacion_nivel_5_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-calificacion_nivel_5_<?php echo $sc_seq_vert ?> css_calificacion_nivel_5__line" style="<?php echo $sStyleReadLab_calificacion_nivel_5_; ?>"><?php echo $this->form_encode_input($this->calificacion_nivel_5_); ?></span><span id="id_read_off_calificacion_nivel_5_<?php echo $sc_seq_vert ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_calificacion_nivel_5_; ?>">
- <input class="sc-js-input scFormObjectOddMult css_calificacion_nivel_5__obj" style="" id="id_sc_field_calificacion_nivel_5_<?php echo $sc_seq_vert ?>" type=text name="calificacion_nivel_5_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_5_) ?>"
- size=10 maxlength=10 alt="{datatype: 'text', maxLength: 10, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+    <TD class="scFormDataOddMult css_calificacion_nivel_5__line" id="hidden_field_data_calificacion_nivel_5_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_nivel_5_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_calificacion_nivel_5__line" style="vertical-align: top;padding: 0px"><input type="hidden" name="calificacion_nivel_5_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_5_); ?>"><span id="id_ajax_label_calificacion_nivel_5_<?php echo $sc_seq_vert; ?>"><?php echo nl2br($calificacion_nivel_5_); ?></span>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_calificacion_nivel_5_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_calificacion_nivel_5_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
@@ -2121,7 +2429,7 @@ if ($this->nmgp_opcao != "novo") {
 <input type="hidden" name="calificacion_6_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_6_) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormDataOddMult css_calificacion_6__line" id="hidden_field_data_calificacion_6_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_6_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_calificacion_6__line" style="vertical-align: top;padding: 0px">
+    <TD class="scFormDataOddMult css_calificacion_6__line" id="hidden_field_data_calificacion_6_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_6_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%;float:right"><tr><td  class="scFormDataFontOddMult css_calificacion_6__line" style="vertical-align: top;padding: 0px">
 <?php if ($bTestReadOnly_calificacion_6_ && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["calificacion_6_"]) &&  $this->nmgp_cmp_readonly["calificacion_6_"] == "on") { 
 
  ?>
@@ -2129,7 +2437,7 @@ if ($this->nmgp_opcao != "novo") {
 <?php } else { ?>
 <span id="id_read_on_calificacion_6_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-calificacion_6_<?php echo $sc_seq_vert ?> css_calificacion_6__line" style="<?php echo $sStyleReadLab_calificacion_6_; ?>"><?php echo $this->form_encode_input($this->calificacion_6_); ?></span><span id="id_read_off_calificacion_6_<?php echo $sc_seq_vert ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_calificacion_6_; ?>">
  <input class="sc-js-input scFormObjectOddMult css_calificacion_6__obj" style="" id="id_sc_field_calificacion_6_<?php echo $sc_seq_vert ?>" type=text name="calificacion_6_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_6_) ?>"
- size=11 alt="{datatype: 'integer', maxLength: 11, thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['calificacion_6_']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['calificacion_6_']['symbol_fmt']; ?>, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['calificacion_6_']['format_neg'] ? "'suffix'" : "'prefix'") ?>, alignment: 'left', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+ size=11 maxlength=11 alt="{datatype: 'text', maxLength: 11, allowedChars: '<?php echo $this->allowedCharsCharset("0123456789") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_calificacion_6_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_calificacion_6_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
@@ -2137,15 +2445,7 @@ if ($this->nmgp_opcao != "novo") {
 <input type="hidden" name="calificacion_nivel_6_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_6_) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormDataOddMult css_calificacion_nivel_6__line" id="hidden_field_data_calificacion_nivel_6_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_nivel_6_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_calificacion_nivel_6__line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly_calificacion_nivel_6_ && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["calificacion_nivel_6_"]) &&  $this->nmgp_cmp_readonly["calificacion_nivel_6_"] == "on") { 
-
- ?>
-<input type="hidden" name="calificacion_nivel_6_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_6_) . "\">" . $calificacion_nivel_6_ . ""; ?>
-<?php } else { ?>
-<span id="id_read_on_calificacion_nivel_6_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-calificacion_nivel_6_<?php echo $sc_seq_vert ?> css_calificacion_nivel_6__line" style="<?php echo $sStyleReadLab_calificacion_nivel_6_; ?>"><?php echo $this->form_encode_input($this->calificacion_nivel_6_); ?></span><span id="id_read_off_calificacion_nivel_6_<?php echo $sc_seq_vert ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_calificacion_nivel_6_; ?>">
- <input class="sc-js-input scFormObjectOddMult css_calificacion_nivel_6__obj" style="" id="id_sc_field_calificacion_nivel_6_<?php echo $sc_seq_vert ?>" type=text name="calificacion_nivel_6_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_6_) ?>"
- size=10 maxlength=10 alt="{datatype: 'text', maxLength: 10, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+    <TD class="scFormDataOddMult css_calificacion_nivel_6__line" id="hidden_field_data_calificacion_nivel_6_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_nivel_6_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_calificacion_nivel_6__line" style="vertical-align: top;padding: 0px"><input type="hidden" name="calificacion_nivel_6_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_6_); ?>"><span id="id_ajax_label_calificacion_nivel_6_<?php echo $sc_seq_vert; ?>"><?php echo nl2br($calificacion_nivel_6_); ?></span>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_calificacion_nivel_6_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_calificacion_nivel_6_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
@@ -2153,7 +2453,7 @@ if ($this->nmgp_opcao != "novo") {
 <input type="hidden" name="calificacion_7_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_7_) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormDataOddMult css_calificacion_7__line" id="hidden_field_data_calificacion_7_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_7_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_calificacion_7__line" style="vertical-align: top;padding: 0px">
+    <TD class="scFormDataOddMult css_calificacion_7__line" id="hidden_field_data_calificacion_7_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_7_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%;float:right"><tr><td  class="scFormDataFontOddMult css_calificacion_7__line" style="vertical-align: top;padding: 0px">
 <?php if ($bTestReadOnly_calificacion_7_ && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["calificacion_7_"]) &&  $this->nmgp_cmp_readonly["calificacion_7_"] == "on") { 
 
  ?>
@@ -2161,7 +2461,7 @@ if ($this->nmgp_opcao != "novo") {
 <?php } else { ?>
 <span id="id_read_on_calificacion_7_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-calificacion_7_<?php echo $sc_seq_vert ?> css_calificacion_7__line" style="<?php echo $sStyleReadLab_calificacion_7_; ?>"><?php echo $this->form_encode_input($this->calificacion_7_); ?></span><span id="id_read_off_calificacion_7_<?php echo $sc_seq_vert ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_calificacion_7_; ?>">
  <input class="sc-js-input scFormObjectOddMult css_calificacion_7__obj" style="" id="id_sc_field_calificacion_7_<?php echo $sc_seq_vert ?>" type=text name="calificacion_7_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_7_) ?>"
- size=11 alt="{datatype: 'integer', maxLength: 11, thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['calificacion_7_']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['calificacion_7_']['symbol_fmt']; ?>, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['calificacion_7_']['format_neg'] ? "'suffix'" : "'prefix'") ?>, alignment: 'left', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+ size=11 maxlength=11 alt="{datatype: 'text', maxLength: 11, allowedChars: '<?php echo $this->allowedCharsCharset("0123456789") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_calificacion_7_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_calificacion_7_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
@@ -2169,15 +2469,7 @@ if ($this->nmgp_opcao != "novo") {
 <input type="hidden" name="calificacion_nivel_7_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_7_) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormDataOddMult css_calificacion_nivel_7__line" id="hidden_field_data_calificacion_nivel_7_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_nivel_7_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_calificacion_nivel_7__line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly_calificacion_nivel_7_ && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["calificacion_nivel_7_"]) &&  $this->nmgp_cmp_readonly["calificacion_nivel_7_"] == "on") { 
-
- ?>
-<input type="hidden" name="calificacion_nivel_7_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_7_) . "\">" . $calificacion_nivel_7_ . ""; ?>
-<?php } else { ?>
-<span id="id_read_on_calificacion_nivel_7_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-calificacion_nivel_7_<?php echo $sc_seq_vert ?> css_calificacion_nivel_7__line" style="<?php echo $sStyleReadLab_calificacion_nivel_7_; ?>"><?php echo $this->form_encode_input($this->calificacion_nivel_7_); ?></span><span id="id_read_off_calificacion_nivel_7_<?php echo $sc_seq_vert ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_calificacion_nivel_7_; ?>">
- <input class="sc-js-input scFormObjectOddMult css_calificacion_nivel_7__obj" style="" id="id_sc_field_calificacion_nivel_7_<?php echo $sc_seq_vert ?>" type=text name="calificacion_nivel_7_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_7_) ?>"
- size=10 maxlength=10 alt="{datatype: 'text', maxLength: 10, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+    <TD class="scFormDataOddMult css_calificacion_nivel_7__line" id="hidden_field_data_calificacion_nivel_7_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_nivel_7_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_calificacion_nivel_7__line" style="vertical-align: top;padding: 0px"><input type="hidden" name="calificacion_nivel_7_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_7_); ?>"><span id="id_ajax_label_calificacion_nivel_7_<?php echo $sc_seq_vert; ?>"><?php echo nl2br($calificacion_nivel_7_); ?></span>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_calificacion_nivel_7_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_calificacion_nivel_7_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
@@ -2185,7 +2477,7 @@ if ($this->nmgp_opcao != "novo") {
 <input type="hidden" name="calificacion_8_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_8_) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormDataOddMult css_calificacion_8__line" id="hidden_field_data_calificacion_8_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_8_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_calificacion_8__line" style="vertical-align: top;padding: 0px">
+    <TD class="scFormDataOddMult css_calificacion_8__line" id="hidden_field_data_calificacion_8_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_8_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%;float:right"><tr><td  class="scFormDataFontOddMult css_calificacion_8__line" style="vertical-align: top;padding: 0px">
 <?php if ($bTestReadOnly_calificacion_8_ && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["calificacion_8_"]) &&  $this->nmgp_cmp_readonly["calificacion_8_"] == "on") { 
 
  ?>
@@ -2193,7 +2485,7 @@ if ($this->nmgp_opcao != "novo") {
 <?php } else { ?>
 <span id="id_read_on_calificacion_8_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-calificacion_8_<?php echo $sc_seq_vert ?> css_calificacion_8__line" style="<?php echo $sStyleReadLab_calificacion_8_; ?>"><?php echo $this->form_encode_input($this->calificacion_8_); ?></span><span id="id_read_off_calificacion_8_<?php echo $sc_seq_vert ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_calificacion_8_; ?>">
  <input class="sc-js-input scFormObjectOddMult css_calificacion_8__obj" style="" id="id_sc_field_calificacion_8_<?php echo $sc_seq_vert ?>" type=text name="calificacion_8_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_8_) ?>"
- size=11 alt="{datatype: 'integer', maxLength: 11, thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['calificacion_8_']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['calificacion_8_']['symbol_fmt']; ?>, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['calificacion_8_']['format_neg'] ? "'suffix'" : "'prefix'") ?>, alignment: 'left', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+ size=11 maxlength=11 alt="{datatype: 'text', maxLength: 11, allowedChars: '<?php echo $this->allowedCharsCharset("0123456789") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_calificacion_8_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_calificacion_8_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
@@ -2201,15 +2493,7 @@ if ($this->nmgp_opcao != "novo") {
 <input type="hidden" name="calificacion_nivel_8_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_8_) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormDataOddMult css_calificacion_nivel_8__line" id="hidden_field_data_calificacion_nivel_8_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_nivel_8_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_calificacion_nivel_8__line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly_calificacion_nivel_8_ && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["calificacion_nivel_8_"]) &&  $this->nmgp_cmp_readonly["calificacion_nivel_8_"] == "on") { 
-
- ?>
-<input type="hidden" name="calificacion_nivel_8_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_8_) . "\">" . $calificacion_nivel_8_ . ""; ?>
-<?php } else { ?>
-<span id="id_read_on_calificacion_nivel_8_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-calificacion_nivel_8_<?php echo $sc_seq_vert ?> css_calificacion_nivel_8__line" style="<?php echo $sStyleReadLab_calificacion_nivel_8_; ?>"><?php echo $this->form_encode_input($this->calificacion_nivel_8_); ?></span><span id="id_read_off_calificacion_nivel_8_<?php echo $sc_seq_vert ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_calificacion_nivel_8_; ?>">
- <input class="sc-js-input scFormObjectOddMult css_calificacion_nivel_8__obj" style="" id="id_sc_field_calificacion_nivel_8_<?php echo $sc_seq_vert ?>" type=text name="calificacion_nivel_8_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_8_) ?>"
- size=10 maxlength=10 alt="{datatype: 'text', maxLength: 10, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+    <TD class="scFormDataOddMult css_calificacion_nivel_8__line" id="hidden_field_data_calificacion_nivel_8_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_nivel_8_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_calificacion_nivel_8__line" style="vertical-align: top;padding: 0px"><input type="hidden" name="calificacion_nivel_8_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_8_); ?>"><span id="id_ajax_label_calificacion_nivel_8_<?php echo $sc_seq_vert; ?>"><?php echo nl2br($calificacion_nivel_8_); ?></span>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_calificacion_nivel_8_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_calificacion_nivel_8_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
@@ -2217,7 +2501,7 @@ if ($this->nmgp_opcao != "novo") {
 <input type="hidden" name="calificacion_9_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_9_) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormDataOddMult css_calificacion_9__line" id="hidden_field_data_calificacion_9_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_9_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_calificacion_9__line" style="vertical-align: top;padding: 0px">
+    <TD class="scFormDataOddMult css_calificacion_9__line" id="hidden_field_data_calificacion_9_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_9_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%;float:right"><tr><td  class="scFormDataFontOddMult css_calificacion_9__line" style="vertical-align: top;padding: 0px">
 <?php if ($bTestReadOnly_calificacion_9_ && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["calificacion_9_"]) &&  $this->nmgp_cmp_readonly["calificacion_9_"] == "on") { 
 
  ?>
@@ -2225,7 +2509,7 @@ if ($this->nmgp_opcao != "novo") {
 <?php } else { ?>
 <span id="id_read_on_calificacion_9_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-calificacion_9_<?php echo $sc_seq_vert ?> css_calificacion_9__line" style="<?php echo $sStyleReadLab_calificacion_9_; ?>"><?php echo $this->form_encode_input($this->calificacion_9_); ?></span><span id="id_read_off_calificacion_9_<?php echo $sc_seq_vert ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_calificacion_9_; ?>">
  <input class="sc-js-input scFormObjectOddMult css_calificacion_9__obj" style="" id="id_sc_field_calificacion_9_<?php echo $sc_seq_vert ?>" type=text name="calificacion_9_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_9_) ?>"
- size=11 alt="{datatype: 'integer', maxLength: 11, thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['calificacion_9_']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['calificacion_9_']['symbol_fmt']; ?>, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['calificacion_9_']['format_neg'] ? "'suffix'" : "'prefix'") ?>, alignment: 'left', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+ size=11 maxlength=11 alt="{datatype: 'text', maxLength: 11, allowedChars: '<?php echo $this->allowedCharsCharset("0123456789") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_calificacion_9_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_calificacion_9_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
@@ -2233,15 +2517,7 @@ if ($this->nmgp_opcao != "novo") {
 <input type="hidden" name="calificacion_nivel_9_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_9_) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormDataOddMult css_calificacion_nivel_9__line" id="hidden_field_data_calificacion_nivel_9_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_nivel_9_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_calificacion_nivel_9__line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly_calificacion_nivel_9_ && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["calificacion_nivel_9_"]) &&  $this->nmgp_cmp_readonly["calificacion_nivel_9_"] == "on") { 
-
- ?>
-<input type="hidden" name="calificacion_nivel_9_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_9_) . "\">" . $calificacion_nivel_9_ . ""; ?>
-<?php } else { ?>
-<span id="id_read_on_calificacion_nivel_9_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-calificacion_nivel_9_<?php echo $sc_seq_vert ?> css_calificacion_nivel_9__line" style="<?php echo $sStyleReadLab_calificacion_nivel_9_; ?>"><?php echo $this->form_encode_input($this->calificacion_nivel_9_); ?></span><span id="id_read_off_calificacion_nivel_9_<?php echo $sc_seq_vert ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_calificacion_nivel_9_; ?>">
- <input class="sc-js-input scFormObjectOddMult css_calificacion_nivel_9__obj" style="" id="id_sc_field_calificacion_nivel_9_<?php echo $sc_seq_vert ?>" type=text name="calificacion_nivel_9_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_9_) ?>"
- size=10 maxlength=10 alt="{datatype: 'text', maxLength: 10, allowedChars: '<?php echo $this->allowedCharsCharset("") ?>', lettersCase: '', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+    <TD class="scFormDataOddMult css_calificacion_nivel_9__line" id="hidden_field_data_calificacion_nivel_9_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_nivel_9_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_calificacion_nivel_9__line" style="vertical-align: top;padding: 0px"><input type="hidden" name="calificacion_nivel_9_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_nivel_9_); ?>"><span id="id_ajax_label_calificacion_nivel_9_<?php echo $sc_seq_vert; ?>"><?php echo nl2br($calificacion_nivel_9_); ?></span>
 </td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_calificacion_nivel_9_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_calificacion_nivel_9_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
@@ -2249,16 +2525,188 @@ if ($this->nmgp_opcao != "novo") {
 <input type="hidden" name="calificacion_final_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_final_) . "\">"; ?>
 <?php } else { $sc_hidden_no++; ?>
 
-    <TD class="scFormDataOddMult css_calificacion_final__line" id="hidden_field_data_calificacion_final_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_final_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_calificacion_final__line" style="vertical-align: top;padding: 0px">
-<?php if ($bTestReadOnly_calificacion_final_ && $this->nmgp_opcao != "novo" && isset($this->nmgp_cmp_readonly["calificacion_final_"]) &&  $this->nmgp_cmp_readonly["calificacion_final_"] == "on") { 
+    <TD class="scFormDataOddMult css_calificacion_final__line" id="hidden_field_data_calificacion_final_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_calificacion_final_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%;float:right"><tr><td  class="scFormDataFontOddMult css_calificacion_final__line" style="vertical-align: top;padding: 0px"><input type="hidden" name="calificacion_final_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_final_); ?>"><span id="id_ajax_label_calificacion_final_<?php echo $sc_seq_vert; ?>"><?php echo nl2br($calificacion_final_); ?></span>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_calificacion_final_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_calificacion_final_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+   <?php if (isset($this->nmgp_cmp_hidden['colegio_id_']) && $this->nmgp_cmp_hidden['colegio_id_'] == 'off') { $sc_hidden_yes++; ?>
+<input type=hidden name="colegio_id_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($this->colegio_id_) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOddMult css_colegio_id__line" id="hidden_field_data_colegio_id_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_colegio_id_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_colegio_id__line" style="vertical-align: top;padding: 0px">
+<?php if ($bTestReadOnly_colegio_id_ && ($this->nmgp_opcao != "novo" && $this->nmgp_opc_ant != "incluir") || (isset($this->nmgp_cmp_readonly["colegio_id_"]) &&  $this->nmgp_cmp_readonly["colegio_id_"] == "on")) { 
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_colegio_id_']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_colegio_id_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_colegio_id_']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_colegio_id_'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_colegio_id_']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_colegio_id_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_colegio_id_']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_colegio_id_'] = array(); 
+    }
+
+   $old_value_calificacion_final_ = $this->calificacion_final_;
+   $old_value_periodo_id_ = $this->periodo_id_;
+   $old_value_curso_id_ = $this->curso_id_;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_calificacion_final_ = $this->calificacion_final_;
+   $unformatted_value_periodo_id_ = $this->periodo_id_;
+   $unformatted_value_curso_id_ = $this->curso_id_;
+
+   $nm_comando = "SELECT colegio_id, colegio_id FROM colegios ORDER BY colegio_id";
+
+   $this->calificacion_final_ = $old_value_calificacion_final_;
+   $this->periodo_id_ = $old_value_periodo_id_;
+   $this->curso_id_ = $old_value_curso_id_;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
+              $rs->fields[1] = str_replace(',', '.', $rs->fields[1]);
+              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
+              $rs->fields[0] = (string)$rs->fields[0];
+              $rs->fields[1] = (strpos(strtolower($rs->fields[1]), "e")) ? (float)$rs->fields[1] : $rs->fields[1];
+              $rs->fields[1] = (string)$rs->fields[1];
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_colegio_id_'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $x = 0; 
+   $colegio_id__look = ""; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->colegio_id__1))
+          {
+              foreach ($this->colegio_id__1 as $tmp_colegio_id_)
+              {
+                  if (trim($tmp_colegio_id_) === trim($cadaselect[1])) { $colegio_id__look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
+              }
+          }
+          elseif (trim($this->colegio_id_) === trim($cadaselect[1])) { $colegio_id__look .= $cadaselect[0]; } 
+          $x++; 
+   }
+
+?>
+<input type="hidden" name="colegio_id_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($colegio_id_) . "\"><span id=\"id_ajax_label_colegio_id_" . $sc_seq_vert . "\">" . $colegio_id__look . "</span>"; ?>
+<?php } else { ?>
+<?php
+   $todo = $this->Form_lookup_colegio_id_();
+   $x = 0 ; 
+   $colegio_id__look = ""; 
+   while (!empty($todo[$x])) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          if (isset($this->Embutida_ronly) && $this->Embutida_ronly && isset($this->colegio_id__1))
+          {
+              foreach ($this->colegio_id__1 as $tmp_colegio_id_)
+              {
+                  if (trim($tmp_colegio_id_) === trim($cadaselect[1])) { $colegio_id__look .= $cadaselect[0] . '__SC_BREAK_LINE__'; }
+              }
+          }
+          elseif (trim($this->colegio_id_) === trim($cadaselect[1])) { $colegio_id__look .= $cadaselect[0]; } 
+          $x++; 
+   }
+          if (empty($colegio_id__look))
+          {
+              $colegio_id__look = $this->colegio_id_;
+          }
+   $x = 0; 
+   echo "<span id=\"id_read_on_colegio_id_" . $sc_seq_vert . "\" class=\"css_colegio_id__line\" style=\"" .  $sStyleReadLab_colegio_id_ . "\">" . $this->form_encode_input($colegio_id__look) . "</span><span id=\"id_read_off_colegio_id_" . $sc_seq_vert . "\" style=\"" . $sStyleReadInp_colegio_id_ . "\">";
+   echo " <span id=\"idAjaxSelect_colegio_id_" .  $sc_seq_vert . "\"><select class=\"sc-js-input scFormObjectOddMult css_colegio_id__obj\" style=\"\" id=\"id_sc_field_colegio_id_" . $sc_seq_vert . "\" name=\"colegio_id_" . $sc_seq_vert . "\" size=\"1\" alt=\"{type: 'select', enterTab: false}\">" ; 
+   echo "\r" ; 
+   while (!empty($todo[$x]) && !$nm_nao_carga) 
+   {
+          $cadaselect = explode("?#?", $todo[$x]) ; 
+          if ($cadaselect[1] == "@ ") {$cadaselect[1]= trim($cadaselect[1]); } ; 
+          echo "  <option value=\"$cadaselect[1]\"" ; 
+          if (trim($this->colegio_id_) === trim($cadaselect[1])) 
+          {
+              echo " selected" ; 
+          }
+          if (strtoupper($cadaselect[2]) == "S") 
+          {
+              if (empty($this->colegio_id_)) 
+              {
+                  echo " selected" ;
+              } 
+           } 
+          echo ">$cadaselect[0] </option>" ; 
+          echo "\r" ; 
+          $x++ ; 
+   }  ; 
+   echo " </select></span>" ; 
+   echo "\r" ; 
+   echo "</span>";
+?> 
+<?php  }?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_colegio_id_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_colegio_id_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+   <?php if (isset($this->nmgp_cmp_hidden['periodo_id_']) && $this->nmgp_cmp_hidden['periodo_id_'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="periodo_id_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($periodo_id_) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOddMult css_periodo_id__line" id="hidden_field_data_periodo_id_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_periodo_id_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_periodo_id__line" style="vertical-align: top;padding: 0px">
+<?php if ($bTestReadOnly_periodo_id_ && ($this->nmgp_opcao != "novo" && $this->nmgp_opc_ant != "incluir") || (isset($this->nmgp_cmp_readonly["periodo_id_"]) &&  $this->nmgp_cmp_readonly["periodo_id_"] == "on")) { 
 
  ?>
-<input type="hidden" name="calificacion_final_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_final_) . "\">" . $calificacion_final_ . ""; ?>
+<input type="hidden" name="periodo_id_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($periodo_id_) . "\"><span id=\"id_ajax_label_periodo_id_" . $sc_seq_vert . "\">" . $periodo_id_ . "</span>"; ?>
 <?php } else { ?>
-<span id="id_read_on_calificacion_final_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-calificacion_final_<?php echo $sc_seq_vert ?> css_calificacion_final__line" style="<?php echo $sStyleReadLab_calificacion_final_; ?>"><?php echo $this->form_encode_input($this->calificacion_final_); ?></span><span id="id_read_off_calificacion_final_<?php echo $sc_seq_vert ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_calificacion_final_; ?>">
- <input class="sc-js-input scFormObjectOddMult css_calificacion_final__obj" style="" id="id_sc_field_calificacion_final_<?php echo $sc_seq_vert ?>" type=text name="calificacion_final_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($calificacion_final_) ?>"
- size=11 alt="{datatype: 'integer', maxLength: 11, thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['calificacion_final_']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['calificacion_final_']['symbol_fmt']; ?>, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['calificacion_final_']['format_neg'] ? "'suffix'" : "'prefix'") ?>, alignment: 'left', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
-</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_calificacion_final_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_calificacion_final_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
+<span id="id_read_on_periodo_id_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-periodo_id_<?php echo $sc_seq_vert ?> css_periodo_id__line" style="<?php echo $sStyleReadLab_periodo_id_; ?>"><?php echo $this->form_encode_input($this->periodo_id_); ?></span><span id="id_read_off_periodo_id_<?php echo $sc_seq_vert ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_periodo_id_; ?>">
+ <input class="sc-js-input scFormObjectOddMult css_periodo_id__obj" style="" id="id_sc_field_periodo_id_<?php echo $sc_seq_vert ?>" type=text name="periodo_id_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($periodo_id_) ?>"
+ size=11 alt="{datatype: 'integer', maxLength: 11, thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['periodo_id_']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['periodo_id_']['symbol_fmt']; ?>, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['periodo_id_']['format_neg'] ? "'suffix'" : "'prefix'") ?>, alignment: 'left', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_periodo_id_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_periodo_id_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
+   <?php }?>
+
+   <?php if (isset($this->nmgp_cmp_hidden['curso_id_']) && $this->nmgp_cmp_hidden['curso_id_'] == 'off') { $sc_hidden_yes++;  ?>
+<input type="hidden" name="curso_id_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($curso_id_) . "\">"; ?>
+<?php } else { $sc_hidden_no++; ?>
+
+    <TD class="scFormDataOddMult css_curso_id__line" id="hidden_field_data_curso_id_<?php echo $sc_seq_vert; ?>" style="<?php echo $sStyleHidden_curso_id_; ?>"> <table style="border-width: 0px; border-collapse: collapse; width: 100%"><tr><td  class="scFormDataFontOddMult css_curso_id__line" style="vertical-align: top;padding: 0px">
+<?php if ($bTestReadOnly_curso_id_ && ($this->nmgp_opcao != "novo" && $this->nmgp_opc_ant != "incluir") || (isset($this->nmgp_cmp_readonly["curso_id_"]) &&  $this->nmgp_cmp_readonly["curso_id_"] == "on")) { 
+
+ ?>
+<input type="hidden" name="curso_id_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($curso_id_) . "\"><span id=\"id_ajax_label_curso_id_" . $sc_seq_vert . "\">" . $curso_id_ . "</span>"; ?>
+<?php } else { ?>
+<span id="id_read_on_curso_id_<?php echo $sc_seq_vert ?>" class="sc-ui-readonly-curso_id_<?php echo $sc_seq_vert ?> css_curso_id__line" style="<?php echo $sStyleReadLab_curso_id_; ?>"><?php echo $this->form_encode_input($this->curso_id_); ?></span><span id="id_read_off_curso_id_<?php echo $sc_seq_vert ?>" style="white-space: nowrap;<?php echo $sStyleReadInp_curso_id_; ?>">
+ <input class="sc-js-input scFormObjectOddMult css_curso_id__obj" style="" id="id_sc_field_curso_id_<?php echo $sc_seq_vert ?>" type=text name="curso_id_<?php echo $sc_seq_vert ?>" value="<?php echo $this->form_encode_input($curso_id_) ?>"
+ size=11 alt="{datatype: 'integer', maxLength: 11, thousandsSep: '<?php echo str_replace("'", "\'", $this->field_config['curso_id_']['symbol_grp']); ?>', thousandsFormat: <?php echo $this->field_config['curso_id_']['symbol_fmt']; ?>, allowNegative: false, onlyNegative: false, negativePos: <?php echo (4 == $this->field_config['curso_id_']['format_neg'] ? "'suffix'" : "'prefix'") ?>, alignment: 'left', enterTab: false, enterSubmit: false, autoTab: false, selectOnFocus: true, watermark: '', watermarkClass: 'scFormObjectOddMultWm', maskChars: '(){}[].,;:-+/ '}" ></span><?php } ?>
+</td></tr><tr><td style="vertical-align: top; padding: 0"><table class="scFormFieldErrorTable" style="display: none" id="id_error_display_curso_id_<?php echo $sc_seq_vert; ?>_frame"><tr><td class="scFormFieldErrorMessage"><span id="id_error_display_curso_id_<?php echo $sc_seq_vert; ?>_text"></span></td></tr></table></td></tr></table> </TD>
    <?php }?>
 
 
@@ -2282,14 +2730,6 @@ if ($this->nmgp_opcao != "novo") {
        if ('display: none;' == $sStyleHidden_asignatura_id_)
        {
            $this->nmgp_cmp_hidden['asignatura_id_'] = 'off';
-       }
-       if (isset($sCheckRead_tipo_calificacion_id_))
-       {
-           $this->nmgp_cmp_readonly['tipo_calificacion_id_'] = $sCheckRead_tipo_calificacion_id_;
-       }
-       if ('display: none;' == $sStyleHidden_tipo_calificacion_id_)
-       {
-           $this->nmgp_cmp_hidden['tipo_calificacion_id_'] = 'off';
        }
        if (isset($sCheckRead_calificacion_1_))
        {
@@ -2442,6 +2882,30 @@ if ($this->nmgp_opcao != "novo") {
        if ('display: none;' == $sStyleHidden_calificacion_final_)
        {
            $this->nmgp_cmp_hidden['calificacion_final_'] = 'off';
+       }
+       if (isset($sCheckRead_colegio_id_))
+       {
+           $this->nmgp_cmp_readonly['colegio_id_'] = $sCheckRead_colegio_id_;
+       }
+       if ('display: none;' == $sStyleHidden_colegio_id_)
+       {
+           $this->nmgp_cmp_hidden['colegio_id_'] = 'off';
+       }
+       if (isset($sCheckRead_periodo_id_))
+       {
+           $this->nmgp_cmp_readonly['periodo_id_'] = $sCheckRead_periodo_id_;
+       }
+       if ('display: none;' == $sStyleHidden_periodo_id_)
+       {
+           $this->nmgp_cmp_hidden['periodo_id_'] = 'off';
+       }
+       if (isset($sCheckRead_curso_id_))
+       {
+           $this->nmgp_cmp_readonly['curso_id_'] = $sCheckRead_curso_id_;
+       }
+       if ('display: none;' == $sStyleHidden_curso_id_)
+       {
+           $this->nmgp_cmp_hidden['curso_id_'] = 'off';
        }
 
    }

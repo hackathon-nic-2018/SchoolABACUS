@@ -52,7 +52,9 @@ class form_calificaciones_apl
    var $periodo_id_;
    var $curso_id_;
    var $estudiante_id_;
+   var $estudiante_id__1;
    var $asignatura_id_;
+   var $asignatura_id__1;
    var $tipo_calificacion_id_;
    var $calificacion_final_;
    var $descripcion_1_;
@@ -126,8 +128,8 @@ class form_calificaciones_apl
    var $Embutida_call  = false;
    var $Embutida_ronly = false;
    var $Embutida_proc  = false;
-   var $Embutida_form  = true;
-   var $Grid_editavel  = false;
+   var $Embutida_form  = false;
+   var $Grid_editavel  = true;
    var $url_webhelp = '';
    var $nm_todas_criticas;
    var $Campos_Mens_erro;
@@ -306,10 +308,6 @@ class form_calificaciones_apl
           if (isset($this->NM_ajax_info['param']['script_case_init']))
           {
               $this->script_case_init = $this->NM_ajax_info['param']['script_case_init'];
-          }
-          if (isset($this->NM_ajax_info['param']['tipo_calificacion_id_']))
-          {
-              $this->tipo_calificacion_id_ = $this->NM_ajax_info['param']['tipo_calificacion_id_'];
           }
           if (isset($this->nmgp_refresh_fields))
           {
@@ -760,15 +758,6 @@ class form_calificaciones_apl
       $this->Ini->Str_btn_form    = trim($str_button);
       include($this->Ini->path_btn . $this->Ini->Str_btn_form . '/' . $this->Ini->Str_btn_form . $_SESSION['scriptcase']['reg_conf']['css_dir'] . '.php');
       $this->Db = $this->Ini->Db; 
-      $this->nm_new_label['calificacion_1_'] = 'Calificacion 1';
-      $this->nm_new_label['calificacion_2_'] = 'Calificacion 2';
-      $this->nm_new_label['calificacion_3_'] = 'Calificacion 3';
-      $this->nm_new_label['calificacion_4_'] = 'Calificacion 4';
-      $this->nm_new_label['calificacion_5_'] = 'Calificacion 5';
-      $this->nm_new_label['calificacion_6_'] = 'Calificacion 6';
-      $this->nm_new_label['calificacion_7_'] = 'Calificacion 7';
-      $this->nm_new_label['calificacion_8_'] = 'Calificacion 8';
-      $this->nm_new_label['calificacion_9_'] = 'Calificacion 9';
 
       $this->Ini->Img_sep_form    = "/" . trim($str_toolbar_separator);
       $this->Ini->Color_bg_ajax   = "" == trim($str_ajax_bg)         ? "#000" : $str_ajax_bg;
@@ -1312,95 +1301,231 @@ class form_calificaciones_apl
       }
 //
       $this->sc_evento = $this->nmgp_opcao;
+      if (!isset($this->NM_ajax_flag) || ('validate_' != substr($this->NM_ajax_opcao, 0, 9) && 'add_new_line' != $this->NM_ajax_opcao && 'autocomp_' != substr($this->NM_ajax_opcao, 0, 9)))
+      {
+      $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'on';
+if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
+{
+    $original_calificacion_1_ = $this->calificacion_1_;
+    $original_calificacion_2_ = $this->calificacion_2_;
+    $original_calificacion_3_ = $this->calificacion_3_;
+    $original_calificacion_4_ = $this->calificacion_4_;
+    $original_calificacion_5_ = $this->calificacion_5_;
+    $original_calificacion_6_ = $this->calificacion_6_;
+    $original_calificacion_7_ = $this->calificacion_7_;
+    $original_calificacion_8_ = $this->calificacion_8_;
+    $original_calificacion_9_ = $this->calificacion_9_;
+    $original_calificacion_nivel_1_ = $this->calificacion_nivel_1_;
+    $original_calificacion_nivel_2_ = $this->calificacion_nivel_2_;
+    $original_calificacion_nivel_3_ = $this->calificacion_nivel_3_;
+    $original_calificacion_nivel_4_ = $this->calificacion_nivel_4_;
+    $original_calificacion_nivel_5_ = $this->calificacion_nivel_5_;
+    $original_calificacion_nivel_6_ = $this->calificacion_nivel_6_;
+    $original_calificacion_nivel_7_ = $this->calificacion_nivel_7_;
+    $original_calificacion_nivel_8_ = $this->calificacion_nivel_8_;
+    $original_calificacion_nivel_9_ = $this->calificacion_nivel_9_;
+}
+if (!isset($this->sc_temp_vglo_curso)) {$this->sc_temp_vglo_curso = (isset($_SESSION['vglo_curso'])) ? $_SESSION['vglo_curso'] : "";}
+if (!isset($this->sc_temp_vglo_periodo)) {$this->sc_temp_vglo_periodo = (isset($_SESSION['vglo_periodo'])) ? $_SESSION['vglo_periodo'] : "";}
+if (!isset($this->sc_temp_vglo_colegio)) {$this->sc_temp_vglo_colegio = (isset($_SESSION['vglo_colegio'])) ? $_SESSION['vglo_colegio'] : "";}
+   
+      $nm_select = "SELECT ifnull(descripcion_1, ''), ifnull(descripcion_2, ''), ifnull(descripcion_3, ''),
+ ifnull(descripcion_4, ''), ifnull(descripcion_5, ''), ifnull(descripcion_6, ''), 
+ ifnull(descripcion_7, ''), ifnull(descripcion_8, ''), ifnull(descripcion_9, '') 
+ FROM calificaciones WHERE colegio_id=$this->sc_temp_vglo_colegio and periodo_id=$this->sc_temp_vglo_periodo and curso_id=$this->sc_temp_vglo_curso 
+ GROUP BY ifnull(descripcion_1, ''), ifnull(descripcion_2, ''), ifnull(descripcion_3, ''),
+ ifnull(descripcion_4, ''), ifnull(descripcion_5, ''), ifnull(descripcion_6, ''), 
+ ifnull(descripcion_7, ''), ifnull(descripcion_8, ''), ifnull(descripcion_9, '') "; 
+      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
+      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+      $this->rs = array();
+      if ($rx = $this->Db->Execute($nm_select)) 
+      { 
+          $y = 0; 
+          $nm_count = $rx->FieldCount();
+          while (!$rx->EOF)
+          { 
+                 for ($x = 0; $x < $nm_count; $x++)
+                 { 
+                      $this->rs[$y] [$x] = $rx->fields[$x];
+                 }
+                 $y++; 
+                 $rx->MoveNext();
+          } 
+          $rx->Close();
+      } 
+      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
+      { 
+          $this->rs = false;
+          $this->rs_erro = $this->Db->ErrorMsg();
+      } 
+;
+
+if($this->rs[0][0] == '') {
+	$this->nmgp_cmp_hidden["calificacion_1_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_1_'] = 'off';
+	$this->nmgp_cmp_hidden["calificacion_nivel_1_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_nivel_1_'] = 'off';
+	}
+
+if($this->rs[0][1] == '') {
+	$this->nmgp_cmp_hidden["calificacion_2_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_2_'] = 'off';
+	$this->nmgp_cmp_hidden["calificacion_nivel_2_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_nivel_2_'] = 'off';
+	}
+
+if($this->rs[0][2] == '') {
+	$this->nmgp_cmp_hidden["calificacion_3_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_3_'] = 'off';
+	$this->nmgp_cmp_hidden["calificacion_nivel_3_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_nivel_3_'] = 'off';
+	}
+
+if($this->rs[0][3] == '') {
+	$this->nmgp_cmp_hidden["calificacion_4_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_4_'] = 'off';
+	$this->nmgp_cmp_hidden["calificacion_nivel_4_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_nivel_4_'] = 'off';
+	}
+
+if($this->rs[0][4] == '') {
+	$this->nmgp_cmp_hidden["calificacion_5_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_5_'] = 'off';
+	$this->nmgp_cmp_hidden["calificacion_nivel_5_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_nivel_5_'] = 'off';
+	}
+
+if($this->rs[0][5] == '') {
+	$this->nmgp_cmp_hidden["calificacion_6_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_6_'] = 'off';
+	$this->nmgp_cmp_hidden["calificacion_nivel_6_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_nivel_6_'] = 'off';
+	}
+
+if($this->rs[0][6] == '') {
+	$this->nmgp_cmp_hidden["calificacion_7_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_7_'] = 'off';
+	$this->nmgp_cmp_hidden["calificacion_nivel_7_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_nivel_7_'] = 'off';
+	}
+
+if($this->rs[0][7] == '') {
+	$this->nmgp_cmp_hidden["calificacion_8_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_8_'] = 'off';
+	$this->nmgp_cmp_hidden["calificacion_nivel_8_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_nivel_8_'] = 'off';
+	}
+
+if($this->rs[0][8] == '') {
+	$this->nmgp_cmp_hidden["calificacion_9_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_9_'] = 'off';
+	$this->nmgp_cmp_hidden["calificacion_nivel_9_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_nivel_9_'] = 'off';
+	}
+if (isset($this->sc_temp_vglo_colegio)) { $_SESSION['vglo_colegio'] = $this->sc_temp_vglo_colegio;}
+if (isset($this->sc_temp_vglo_periodo)) { $_SESSION['vglo_periodo'] = $this->sc_temp_vglo_periodo;}
+if (isset($this->sc_temp_vglo_curso)) { $_SESSION['vglo_curso'] = $this->sc_temp_vglo_curso;}
+if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
+{
+    if (($original_calificacion_1_ != $this->calificacion_1_ || (isset($bFlagRead_calificacion_1_) && $bFlagRead_calificacion_1_))&& isset($this->nmgp_refresh_row))
+    {
+        $this->NM_ajax_info['fldList']['calificacion_1_' . $this->nmgp_refresh_row]['type']    = 'text';
+        $this->NM_ajax_info['fldList']['calificacion_1_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_1_);
+        $this->NM_ajax_changed['calificacion_1_'] = true;
+    }
+    if (($original_calificacion_2_ != $this->calificacion_2_ || (isset($bFlagRead_calificacion_2_) && $bFlagRead_calificacion_2_))&& isset($this->nmgp_refresh_row))
+    {
+        $this->NM_ajax_info['fldList']['calificacion_2_' . $this->nmgp_refresh_row]['type']    = 'text';
+        $this->NM_ajax_info['fldList']['calificacion_2_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_2_);
+        $this->NM_ajax_changed['calificacion_2_'] = true;
+    }
+    if (($original_calificacion_3_ != $this->calificacion_3_ || (isset($bFlagRead_calificacion_3_) && $bFlagRead_calificacion_3_))&& isset($this->nmgp_refresh_row))
+    {
+        $this->NM_ajax_info['fldList']['calificacion_3_' . $this->nmgp_refresh_row]['type']    = 'text';
+        $this->NM_ajax_info['fldList']['calificacion_3_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_3_);
+        $this->NM_ajax_changed['calificacion_3_'] = true;
+    }
+    if (($original_calificacion_4_ != $this->calificacion_4_ || (isset($bFlagRead_calificacion_4_) && $bFlagRead_calificacion_4_))&& isset($this->nmgp_refresh_row))
+    {
+        $this->NM_ajax_info['fldList']['calificacion_4_' . $this->nmgp_refresh_row]['type']    = 'text';
+        $this->NM_ajax_info['fldList']['calificacion_4_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_4_);
+        $this->NM_ajax_changed['calificacion_4_'] = true;
+    }
+    if (($original_calificacion_5_ != $this->calificacion_5_ || (isset($bFlagRead_calificacion_5_) && $bFlagRead_calificacion_5_))&& isset($this->nmgp_refresh_row))
+    {
+        $this->NM_ajax_info['fldList']['calificacion_5_' . $this->nmgp_refresh_row]['type']    = 'text';
+        $this->NM_ajax_info['fldList']['calificacion_5_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_5_);
+        $this->NM_ajax_changed['calificacion_5_'] = true;
+    }
+    if (($original_calificacion_6_ != $this->calificacion_6_ || (isset($bFlagRead_calificacion_6_) && $bFlagRead_calificacion_6_))&& isset($this->nmgp_refresh_row))
+    {
+        $this->NM_ajax_info['fldList']['calificacion_6_' . $this->nmgp_refresh_row]['type']    = 'text';
+        $this->NM_ajax_info['fldList']['calificacion_6_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_6_);
+        $this->NM_ajax_changed['calificacion_6_'] = true;
+    }
+    if (($original_calificacion_7_ != $this->calificacion_7_ || (isset($bFlagRead_calificacion_7_) && $bFlagRead_calificacion_7_))&& isset($this->nmgp_refresh_row))
+    {
+        $this->NM_ajax_info['fldList']['calificacion_7_' . $this->nmgp_refresh_row]['type']    = 'text';
+        $this->NM_ajax_info['fldList']['calificacion_7_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_7_);
+        $this->NM_ajax_changed['calificacion_7_'] = true;
+    }
+    if (($original_calificacion_8_ != $this->calificacion_8_ || (isset($bFlagRead_calificacion_8_) && $bFlagRead_calificacion_8_))&& isset($this->nmgp_refresh_row))
+    {
+        $this->NM_ajax_info['fldList']['calificacion_8_' . $this->nmgp_refresh_row]['type']    = 'text';
+        $this->NM_ajax_info['fldList']['calificacion_8_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_8_);
+        $this->NM_ajax_changed['calificacion_8_'] = true;
+    }
+    if (($original_calificacion_9_ != $this->calificacion_9_ || (isset($bFlagRead_calificacion_9_) && $bFlagRead_calificacion_9_))&& isset($this->nmgp_refresh_row))
+    {
+        $this->NM_ajax_info['fldList']['calificacion_9_' . $this->nmgp_refresh_row]['type']    = 'text';
+        $this->NM_ajax_info['fldList']['calificacion_9_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_9_);
+        $this->NM_ajax_changed['calificacion_9_'] = true;
+    }
+    if (($original_calificacion_nivel_1_ != $this->calificacion_nivel_1_ || (isset($bFlagRead_calificacion_nivel_1_) && $bFlagRead_calificacion_nivel_1_))&& isset($this->nmgp_refresh_row))
+    {
+        $this->NM_ajax_info['fldList']['calificacion_nivel_1_' . $this->nmgp_refresh_row]['type']    = 'label';
+        $this->NM_ajax_info['fldList']['calificacion_nivel_1_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_nivel_1_);
+        $this->NM_ajax_changed['calificacion_nivel_1_'] = true;
+    }
+    if (($original_calificacion_nivel_2_ != $this->calificacion_nivel_2_ || (isset($bFlagRead_calificacion_nivel_2_) && $bFlagRead_calificacion_nivel_2_))&& isset($this->nmgp_refresh_row))
+    {
+        $this->NM_ajax_info['fldList']['calificacion_nivel_2_' . $this->nmgp_refresh_row]['type']    = 'label';
+        $this->NM_ajax_info['fldList']['calificacion_nivel_2_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_nivel_2_);
+        $this->NM_ajax_changed['calificacion_nivel_2_'] = true;
+    }
+    if (($original_calificacion_nivel_3_ != $this->calificacion_nivel_3_ || (isset($bFlagRead_calificacion_nivel_3_) && $bFlagRead_calificacion_nivel_3_))&& isset($this->nmgp_refresh_row))
+    {
+        $this->NM_ajax_info['fldList']['calificacion_nivel_3_' . $this->nmgp_refresh_row]['type']    = 'label';
+        $this->NM_ajax_info['fldList']['calificacion_nivel_3_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_nivel_3_);
+        $this->NM_ajax_changed['calificacion_nivel_3_'] = true;
+    }
+    if (($original_calificacion_nivel_4_ != $this->calificacion_nivel_4_ || (isset($bFlagRead_calificacion_nivel_4_) && $bFlagRead_calificacion_nivel_4_))&& isset($this->nmgp_refresh_row))
+    {
+        $this->NM_ajax_info['fldList']['calificacion_nivel_4_' . $this->nmgp_refresh_row]['type']    = 'label';
+        $this->NM_ajax_info['fldList']['calificacion_nivel_4_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_nivel_4_);
+        $this->NM_ajax_changed['calificacion_nivel_4_'] = true;
+    }
+    if (($original_calificacion_nivel_5_ != $this->calificacion_nivel_5_ || (isset($bFlagRead_calificacion_nivel_5_) && $bFlagRead_calificacion_nivel_5_))&& isset($this->nmgp_refresh_row))
+    {
+        $this->NM_ajax_info['fldList']['calificacion_nivel_5_' . $this->nmgp_refresh_row]['type']    = 'label';
+        $this->NM_ajax_info['fldList']['calificacion_nivel_5_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_nivel_5_);
+        $this->NM_ajax_changed['calificacion_nivel_5_'] = true;
+    }
+    if (($original_calificacion_nivel_6_ != $this->calificacion_nivel_6_ || (isset($bFlagRead_calificacion_nivel_6_) && $bFlagRead_calificacion_nivel_6_))&& isset($this->nmgp_refresh_row))
+    {
+        $this->NM_ajax_info['fldList']['calificacion_nivel_6_' . $this->nmgp_refresh_row]['type']    = 'label';
+        $this->NM_ajax_info['fldList']['calificacion_nivel_6_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_nivel_6_);
+        $this->NM_ajax_changed['calificacion_nivel_6_'] = true;
+    }
+    if (($original_calificacion_nivel_7_ != $this->calificacion_nivel_7_ || (isset($bFlagRead_calificacion_nivel_7_) && $bFlagRead_calificacion_nivel_7_))&& isset($this->nmgp_refresh_row))
+    {
+        $this->NM_ajax_info['fldList']['calificacion_nivel_7_' . $this->nmgp_refresh_row]['type']    = 'label';
+        $this->NM_ajax_info['fldList']['calificacion_nivel_7_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_nivel_7_);
+        $this->NM_ajax_changed['calificacion_nivel_7_'] = true;
+    }
+    if (($original_calificacion_nivel_8_ != $this->calificacion_nivel_8_ || (isset($bFlagRead_calificacion_nivel_8_) && $bFlagRead_calificacion_nivel_8_))&& isset($this->nmgp_refresh_row))
+    {
+        $this->NM_ajax_info['fldList']['calificacion_nivel_8_' . $this->nmgp_refresh_row]['type']    = 'label';
+        $this->NM_ajax_info['fldList']['calificacion_nivel_8_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_nivel_8_);
+        $this->NM_ajax_changed['calificacion_nivel_8_'] = true;
+    }
+    if (($original_calificacion_nivel_9_ != $this->calificacion_nivel_9_ || (isset($bFlagRead_calificacion_nivel_9_) && $bFlagRead_calificacion_nivel_9_))&& isset($this->nmgp_refresh_row))
+    {
+        $this->NM_ajax_info['fldList']['calificacion_nivel_9_' . $this->nmgp_refresh_row]['type']    = 'label';
+        $this->NM_ajax_info['fldList']['calificacion_nivel_9_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_nivel_9_);
+        $this->NM_ajax_changed['calificacion_nivel_9_'] = true;
+    }
+}
+$_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off'; 
+      }
    }
 
    function loadFieldConfig()
    {
       $this->field_config = array();
-      //-- estudiante_id_
-      $this->field_config['estudiante_id_']               = array();
-      $this->field_config['estudiante_id_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
-      $this->field_config['estudiante_id_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
-      $this->field_config['estudiante_id_']['symbol_dec'] = '';
-      $this->field_config['estudiante_id_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
-      $this->field_config['estudiante_id_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
-      //-- asignatura_id_
-      $this->field_config['asignatura_id_']               = array();
-      $this->field_config['asignatura_id_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
-      $this->field_config['asignatura_id_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
-      $this->field_config['asignatura_id_']['symbol_dec'] = '';
-      $this->field_config['asignatura_id_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
-      $this->field_config['asignatura_id_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
-      //-- tipo_calificacion_id_
-      $this->field_config['tipo_calificacion_id_']               = array();
-      $this->field_config['tipo_calificacion_id_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
-      $this->field_config['tipo_calificacion_id_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
-      $this->field_config['tipo_calificacion_id_']['symbol_dec'] = '';
-      $this->field_config['tipo_calificacion_id_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
-      $this->field_config['tipo_calificacion_id_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
-      //-- calificacion_1_
-      $this->field_config['calificacion_1_']               = array();
-      $this->field_config['calificacion_1_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
-      $this->field_config['calificacion_1_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
-      $this->field_config['calificacion_1_']['symbol_dec'] = '';
-      $this->field_config['calificacion_1_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
-      $this->field_config['calificacion_1_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
-      //-- calificacion_2_
-      $this->field_config['calificacion_2_']               = array();
-      $this->field_config['calificacion_2_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
-      $this->field_config['calificacion_2_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
-      $this->field_config['calificacion_2_']['symbol_dec'] = '';
-      $this->field_config['calificacion_2_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
-      $this->field_config['calificacion_2_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
-      //-- calificacion_3_
-      $this->field_config['calificacion_3_']               = array();
-      $this->field_config['calificacion_3_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
-      $this->field_config['calificacion_3_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
-      $this->field_config['calificacion_3_']['symbol_dec'] = '';
-      $this->field_config['calificacion_3_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
-      $this->field_config['calificacion_3_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
-      //-- calificacion_4_
-      $this->field_config['calificacion_4_']               = array();
-      $this->field_config['calificacion_4_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
-      $this->field_config['calificacion_4_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
-      $this->field_config['calificacion_4_']['symbol_dec'] = '';
-      $this->field_config['calificacion_4_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
-      $this->field_config['calificacion_4_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
-      //-- calificacion_5_
-      $this->field_config['calificacion_5_']               = array();
-      $this->field_config['calificacion_5_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
-      $this->field_config['calificacion_5_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
-      $this->field_config['calificacion_5_']['symbol_dec'] = '';
-      $this->field_config['calificacion_5_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
-      $this->field_config['calificacion_5_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
-      //-- calificacion_6_
-      $this->field_config['calificacion_6_']               = array();
-      $this->field_config['calificacion_6_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
-      $this->field_config['calificacion_6_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
-      $this->field_config['calificacion_6_']['symbol_dec'] = '';
-      $this->field_config['calificacion_6_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
-      $this->field_config['calificacion_6_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
-      //-- calificacion_7_
-      $this->field_config['calificacion_7_']               = array();
-      $this->field_config['calificacion_7_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
-      $this->field_config['calificacion_7_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
-      $this->field_config['calificacion_7_']['symbol_dec'] = '';
-      $this->field_config['calificacion_7_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
-      $this->field_config['calificacion_7_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
-      //-- calificacion_8_
-      $this->field_config['calificacion_8_']               = array();
-      $this->field_config['calificacion_8_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
-      $this->field_config['calificacion_8_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
-      $this->field_config['calificacion_8_']['symbol_dec'] = '';
-      $this->field_config['calificacion_8_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
-      $this->field_config['calificacion_8_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
-      //-- calificacion_9_
-      $this->field_config['calificacion_9_']               = array();
-      $this->field_config['calificacion_9_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
-      $this->field_config['calificacion_9_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
-      $this->field_config['calificacion_9_']['symbol_dec'] = '';
-      $this->field_config['calificacion_9_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
-      $this->field_config['calificacion_9_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
       //-- calificacion_final_
       $this->field_config['calificacion_final_']               = array();
       $this->field_config['calificacion_final_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
@@ -1422,6 +1547,13 @@ class form_calificaciones_apl
       $this->field_config['curso_id_']['symbol_dec'] = '';
       $this->field_config['curso_id_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
       $this->field_config['curso_id_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
+      //-- tipo_calificacion_id_
+      $this->field_config['tipo_calificacion_id_']               = array();
+      $this->field_config['tipo_calificacion_id_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
+      $this->field_config['tipo_calificacion_id_']['symbol_fmt'] = $_SESSION['scriptcase']['reg_conf']['num_group_digit'];
+      $this->field_config['tipo_calificacion_id_']['symbol_dec'] = '';
+      $this->field_config['tipo_calificacion_id_']['symbol_neg'] = $_SESSION['scriptcase']['reg_conf']['simb_neg'];
+      $this->field_config['tipo_calificacion_id_']['format_neg'] = $_SESSION['scriptcase']['reg_conf']['neg_num'];
       //-- publicada_1_
       $this->field_config['publicada_1_']               = array();
       $this->field_config['publicada_1_']['symbol_grp'] = $_SESSION['scriptcase']['reg_conf']['grup_num'];
@@ -1583,9 +1715,11 @@ class form_calificaciones_apl
       }
       if ($this->NM_ajax_flag && 'submit_form' == $this->NM_ajax_opcao)
       {
+         if (isset($this->colegio_id_)) { $this->nm_limpa_alfa($this->colegio_id_); }
+         if (isset($this->periodo_id_)) { $this->nm_limpa_alfa($this->periodo_id_); }
+         if (isset($this->curso_id_)) { $this->nm_limpa_alfa($this->curso_id_); }
          if (isset($this->estudiante_id_)) { $this->nm_limpa_alfa($this->estudiante_id_); }
          if (isset($this->asignatura_id_)) { $this->nm_limpa_alfa($this->asignatura_id_); }
-         if (isset($this->tipo_calificacion_id_)) { $this->nm_limpa_alfa($this->tipo_calificacion_id_); }
          if (isset($this->calificacion_final_)) { $this->nm_limpa_alfa($this->calificacion_final_); }
          if (isset($this->calificacion_1_)) { $this->nm_limpa_alfa($this->calificacion_1_); }
          if (isset($this->calificacion_nivel_1_)) { $this->nm_limpa_alfa($this->calificacion_nivel_1_); }
@@ -1612,9 +1746,7 @@ class form_calificaciones_apl
          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['dados_form'][$sc_seq_vert]))
          {
              $this->nmgp_dados_form = $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['dados_form'][$sc_seq_vert];
-             $this->colegio_id_ = $this->nmgp_dados_form['colegio_id_']; 
-             $this->periodo_id_ = $this->nmgp_dados_form['periodo_id_']; 
-             $this->curso_id_ = $this->nmgp_dados_form['curso_id_']; 
+             $this->tipo_calificacion_id_ = $this->nmgp_dados_form['tipo_calificacion_id_']; 
              $this->descripcion_1_ = $this->nmgp_dados_form['descripcion_1_']; 
              $this->publicada_1_ = $this->nmgp_dados_form['publicada_1_']; 
              $this->descripcion_2_ = $this->nmgp_dados_form['descripcion_2_']; 
@@ -1706,10 +1838,6 @@ class form_calificaciones_apl
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'asignatura_id_');
           }
-          if ('validate_tipo_calificacion_id_' == $this->NM_ajax_opcao)
-          {
-              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'tipo_calificacion_id_');
-          }
           if ('validate_calificacion_1_' == $this->NM_ajax_opcao)
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'calificacion_1_');
@@ -1786,6 +1914,18 @@ class form_calificaciones_apl
           {
               $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'calificacion_final_');
           }
+          if ('validate_colegio_id_' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'colegio_id_');
+          }
+          if ('validate_periodo_id_' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'periodo_id_');
+          }
+          if ('validate_curso_id_' == $this->NM_ajax_opcao)
+          {
+              $this->Valida_campos($Campos_Crit, $Campos_Falta, $Campos_Erros, 'curso_id_');
+          }
           form_calificaciones_pack_ajax_response();
           exit;
       }
@@ -1796,7 +1936,6 @@ class form_calificaciones_apl
          $Campos_Erros = array();
          $this->estudiante_id_ = $GLOBALS["estudiante_id_" . $sc_seq_vert]; 
          $this->asignatura_id_ = $GLOBALS["asignatura_id_" . $sc_seq_vert]; 
-         $this->tipo_calificacion_id_ = $GLOBALS["tipo_calificacion_id_" . $sc_seq_vert]; 
          $this->calificacion_1_ = $GLOBALS["calificacion_1_" . $sc_seq_vert]; 
          $this->calificacion_nivel_1_ = $GLOBALS["calificacion_nivel_1_" . $sc_seq_vert]; 
          $this->calificacion_2_ = $GLOBALS["calificacion_2_" . $sc_seq_vert]; 
@@ -1816,12 +1955,13 @@ class form_calificaciones_apl
          $this->calificacion_9_ = $GLOBALS["calificacion_9_" . $sc_seq_vert]; 
          $this->calificacion_nivel_9_ = $GLOBALS["calificacion_nivel_9_" . $sc_seq_vert]; 
          $this->calificacion_final_ = $GLOBALS["calificacion_final_" . $sc_seq_vert]; 
+         $this->colegio_id_ = $GLOBALS["colegio_id_" . $sc_seq_vert]; 
+         $this->periodo_id_ = $GLOBALS["periodo_id_" . $sc_seq_vert]; 
+         $this->curso_id_ = $GLOBALS["curso_id_" . $sc_seq_vert]; 
          if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['dados_form'][$sc_seq_vert]))
          {
              $this->nmgp_dados_form = $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['dados_form'][$sc_seq_vert];
-             $this->colegio_id_ = $this->nmgp_dados_form['colegio_id_']; 
-             $this->periodo_id_ = $this->nmgp_dados_form['periodo_id_']; 
-             $this->curso_id_ = $this->nmgp_dados_form['curso_id_']; 
+             $this->tipo_calificacion_id_ = $this->nmgp_dados_form['tipo_calificacion_id_']; 
              $this->descripcion_1_ = $this->nmgp_dados_form['descripcion_1_']; 
              $this->publicada_1_ = $this->nmgp_dados_form['publicada_1_']; 
              $this->descripcion_2_ = $this->nmgp_dados_form['descripcion_2_']; 
@@ -1841,9 +1981,11 @@ class form_calificaciones_apl
              $this->descripcion_9_ = $this->nmgp_dados_form['descripcion_9_']; 
              $this->publicada_9_ = $this->nmgp_dados_form['publicada_9_']; 
          }
+         if (isset($this->colegio_id_)) { $this->nm_limpa_alfa($this->colegio_id_); }
+         if (isset($this->periodo_id_)) { $this->nm_limpa_alfa($this->periodo_id_); }
+         if (isset($this->curso_id_)) { $this->nm_limpa_alfa($this->curso_id_); }
          if (isset($this->estudiante_id_)) { $this->nm_limpa_alfa($this->estudiante_id_); }
          if (isset($this->asignatura_id_)) { $this->nm_limpa_alfa($this->asignatura_id_); }
-         if (isset($this->tipo_calificacion_id_)) { $this->nm_limpa_alfa($this->tipo_calificacion_id_); }
          if (isset($this->calificacion_final_)) { $this->nm_limpa_alfa($this->calificacion_final_); }
          if (isset($this->calificacion_1_)) { $this->nm_limpa_alfa($this->calificacion_1_); }
          if (isset($this->calificacion_nivel_1_)) { $this->nm_limpa_alfa($this->calificacion_nivel_1_); }
@@ -1896,7 +2038,6 @@ class form_calificaciones_apl
              }
              $this->form_vert_form_calificaciones[$sc_seq_vert]['estudiante_id_'] =  $this->estudiante_id_; 
              $this->form_vert_form_calificaciones[$sc_seq_vert]['asignatura_id_'] =  $this->asignatura_id_; 
-             $this->form_vert_form_calificaciones[$sc_seq_vert]['tipo_calificacion_id_'] =  $this->tipo_calificacion_id_; 
              $this->form_vert_form_calificaciones[$sc_seq_vert]['calificacion_1_'] =  $this->calificacion_1_; 
              $this->form_vert_form_calificaciones[$sc_seq_vert]['calificacion_nivel_1_'] =  $this->calificacion_nivel_1_; 
              $this->form_vert_form_calificaciones[$sc_seq_vert]['calificacion_2_'] =  $this->calificacion_2_; 
@@ -1919,6 +2060,7 @@ class form_calificaciones_apl
              $this->form_vert_form_calificaciones[$sc_seq_vert]['colegio_id_'] =  $this->colegio_id_; 
              $this->form_vert_form_calificaciones[$sc_seq_vert]['periodo_id_'] =  $this->periodo_id_; 
              $this->form_vert_form_calificaciones[$sc_seq_vert]['curso_id_'] =  $this->curso_id_; 
+             $this->form_vert_form_calificaciones[$sc_seq_vert]['tipo_calificacion_id_'] =  $this->tipo_calificacion_id_; 
              $this->form_vert_form_calificaciones[$sc_seq_vert]['descripcion_1_'] =  $this->descripcion_1_; 
              $this->form_vert_form_calificaciones[$sc_seq_vert]['publicada_1_'] =  $this->publicada_1_; 
              $this->form_vert_form_calificaciones[$sc_seq_vert]['descripcion_2_'] =  $this->descripcion_2_; 
@@ -2379,67 +2521,64 @@ class form_calificaciones_apl
        switch($campo)
        {
            case 'estudiante_id_':
-               return "Estudiante Id";
+               return "Estudiante";
                break;
            case 'asignatura_id_':
-               return "Asignatura Id";
-               break;
-           case 'tipo_calificacion_id_':
-               return "Tipo Calificacion Id";
+               return "Asignatura";
                break;
            case 'calificacion_1_':
-               return "Calificacion 1";
+               return "Calificación 1";
                break;
            case 'calificacion_nivel_1_':
-               return "Calificacion Nivel 1";
+               return "";
                break;
            case 'calificacion_2_':
-               return "Calificacion 2";
+               return "Calificación 2";
                break;
            case 'calificacion_nivel_2_':
-               return "Calificacion Nivel 2";
+               return "";
                break;
            case 'calificacion_3_':
-               return "Calificacion 3";
+               return "Calificación 3";
                break;
            case 'calificacion_nivel_3_':
-               return "Calificacion Nivel 3";
+               return "";
                break;
            case 'calificacion_4_':
-               return "Calificacion 4";
+               return "Calificación 4";
                break;
            case 'calificacion_nivel_4_':
-               return "Calificacion Nivel 4";
+               return "";
                break;
            case 'calificacion_5_':
                return "Calificacion 5";
                break;
            case 'calificacion_nivel_5_':
-               return "Calificacion Nivel 5";
+               return "";
                break;
            case 'calificacion_6_':
                return "Calificacion 6";
                break;
            case 'calificacion_nivel_6_':
-               return "Calificacion Nivel 6";
+               return "";
                break;
            case 'calificacion_7_':
                return "Calificacion 7";
                break;
            case 'calificacion_nivel_7_':
-               return "Calificacion Nivel 7";
+               return "";
                break;
            case 'calificacion_8_':
                return "Calificacion 8";
                break;
            case 'calificacion_nivel_8_':
-               return "Calificacion Nivel 8";
+               return "";
                break;
            case 'calificacion_9_':
                return "Calificacion 9";
                break;
            case 'calificacion_nivel_9_':
-               return "Calificacion Nivel 9";
+               return "";
                break;
            case 'calificacion_final_':
                return "Calificacion Final";
@@ -2452,6 +2591,9 @@ class form_calificaciones_apl
                break;
            case 'curso_id_':
                return "Curso Id";
+               break;
+           case 'tipo_calificacion_id_':
+               return "Tipo Calificacion Id";
                break;
            case 'descripcion_1_':
                return "Descripcion 1";
@@ -2556,8 +2698,6 @@ class form_calificaciones_apl
         $this->ValidateField_estudiante_id_($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $filtro || 'asignatura_id_' == $filtro)
         $this->ValidateField_asignatura_id_($Campos_Crit, $Campos_Falta, $Campos_Erros);
-      if ('' == $filtro || 'tipo_calificacion_id_' == $filtro)
-        $this->ValidateField_tipo_calificacion_id_($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $filtro || 'calificacion_1_' == $filtro)
         $this->ValidateField_calificacion_1_($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $filtro || 'calificacion_nivel_1_' == $filtro)
@@ -2596,6 +2736,12 @@ class form_calificaciones_apl
         $this->ValidateField_calificacion_nivel_9_($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if ('' == $filtro || 'calificacion_final_' == $filtro)
         $this->ValidateField_calificacion_final_($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ('' == $filtro || 'colegio_id_' == $filtro)
+        $this->ValidateField_colegio_id_($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ('' == $filtro || 'periodo_id_' == $filtro)
+        $this->ValidateField_periodo_id_($Campos_Crit, $Campos_Falta, $Campos_Erros);
+      if ('' == $filtro || 'curso_id_' == $filtro)
+        $this->ValidateField_curso_id_($Campos_Crit, $Campos_Falta, $Campos_Erros);
       if (!empty($Campos_Crit) || !empty($Campos_Falta) || !empty($this->Campos_Mens_erro))
       {
           if (!empty($this->sc_force_zero))
@@ -2612,201 +2758,133 @@ class form_calificaciones_apl
     function ValidateField_estudiante_id_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
-      nm_limpa_numero($this->estudiante_id_, $this->field_config['estudiante_id_']['symbol_grp']) ; 
-      if ($this->nmgp_opcao == "incluir")
-      { 
-          if ($this->estudiante_id_ != '')  
-          { 
-              $iTestSize = 11;
-              if (strlen($this->estudiante_id_) > $iTestSize)  
-              { 
-                  $Campos_Crit .= "Estudiante Id: " . $this->Ini->Nm_lang['lang_errm_size']; 
-                  if (!isset($Campos_Erros['estudiante_id_']))
-                  {
-                      $Campos_Erros['estudiante_id_'] = array();
-                  }
-                  $Campos_Erros['estudiante_id_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-                  if (!isset($this->NM_ajax_info['errList']['estudiante_id_']) || !is_array($this->NM_ajax_info['errList']['estudiante_id_']))
-                  {
-                      $this->NM_ajax_info['errList']['estudiante_id_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['estudiante_id_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-              } 
-              if ($teste_validade->Valor($this->estudiante_id_, 11, 0, 0, 0, "N") == false)  
-              { 
-                  $Campos_Crit .= "Estudiante Id; " ; 
-                  if (!isset($Campos_Erros['estudiante_id_']))
-                  {
-                      $Campos_Erros['estudiante_id_'] = array();
-                  }
-                  $Campos_Erros['estudiante_id_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-                  if (!isset($this->NM_ajax_info['errList']['estudiante_id_']) || !is_array($this->NM_ajax_info['errList']['estudiante_id_']))
-                  {
-                      $this->NM_ajax_info['errList']['estudiante_id_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['estudiante_id_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-              } 
-          } 
-           elseif (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['php_cmp_required']['estudiante_id_']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['php_cmp_required']['estudiante_id_'] == "on") 
-           { 
-              $Campos_Falta[] = "Estudiante Id" ; 
+   if ($this->nmgp_opcao == "incluir")
+   {
+      if ($this->estudiante_id_ == "" && $this->nmgp_opcao != "excluir" && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['php_cmp_required']['estudiante_id_']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['php_cmp_required']['estudiante_id_'] == "on"))
+      {
+          $Campos_Falta[] = "Estudiante" ; 
+          if (!isset($Campos_Erros['estudiante_id_']))
+          {
+              $Campos_Erros['estudiante_id_'] = array();
+          }
+          $Campos_Erros['estudiante_id_'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
+          if (!isset($this->NM_ajax_info['errList']['estudiante_id_']) || !is_array($this->NM_ajax_info['errList']['estudiante_id_']))
+          {
+              $this->NM_ajax_info['errList']['estudiante_id_'] = array();
+          }
+          $this->NM_ajax_info['errList']['estudiante_id_'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
+      }
+          if (!empty($this->estudiante_id_) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_']) && !in_array($this->estudiante_id_, $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_']))
+          {
+              $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
               if (!isset($Campos_Erros['estudiante_id_']))
               {
                   $Campos_Erros['estudiante_id_'] = array();
               }
-              $Campos_Erros['estudiante_id_'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
-                  if (!isset($this->NM_ajax_info['errList']['estudiante_id_']) || !is_array($this->NM_ajax_info['errList']['estudiante_id_']))
-                  {
-                      $this->NM_ajax_info['errList']['estudiante_id_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['estudiante_id_'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
-           } 
-      } 
+              $Campos_Erros['estudiante_id_'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+              if (!isset($this->NM_ajax_info['errList']['estudiante_id_']) || !is_array($this->NM_ajax_info['errList']['estudiante_id_']))
+              {
+                  $this->NM_ajax_info['errList']['estudiante_id_'] = array();
+              }
+              $this->NM_ajax_info['errList']['estudiante_id_'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+          }
+   }
     } // ValidateField_estudiante_id_
 
     function ValidateField_asignatura_id_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
-      nm_limpa_numero($this->asignatura_id_, $this->field_config['asignatura_id_']['symbol_grp']) ; 
-      if ($this->nmgp_opcao == "incluir")
-      { 
-          if ($this->asignatura_id_ != '')  
-          { 
-              $iTestSize = 11;
-              if (strlen($this->asignatura_id_) > $iTestSize)  
-              { 
-                  $Campos_Crit .= "Asignatura Id: " . $this->Ini->Nm_lang['lang_errm_size']; 
-                  if (!isset($Campos_Erros['asignatura_id_']))
-                  {
-                      $Campos_Erros['asignatura_id_'] = array();
-                  }
-                  $Campos_Erros['asignatura_id_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-                  if (!isset($this->NM_ajax_info['errList']['asignatura_id_']) || !is_array($this->NM_ajax_info['errList']['asignatura_id_']))
-                  {
-                      $this->NM_ajax_info['errList']['asignatura_id_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['asignatura_id_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-              } 
-              if ($teste_validade->Valor($this->asignatura_id_, 11, 0, 0, 0, "N") == false)  
-              { 
-                  $Campos_Crit .= "Asignatura Id; " ; 
-                  if (!isset($Campos_Erros['asignatura_id_']))
-                  {
-                      $Campos_Erros['asignatura_id_'] = array();
-                  }
-                  $Campos_Erros['asignatura_id_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-                  if (!isset($this->NM_ajax_info['errList']['asignatura_id_']) || !is_array($this->NM_ajax_info['errList']['asignatura_id_']))
-                  {
-                      $this->NM_ajax_info['errList']['asignatura_id_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['asignatura_id_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-              } 
-          } 
-           elseif (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['php_cmp_required']['asignatura_id_']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['php_cmp_required']['asignatura_id_'] == "on") 
-           { 
-              $Campos_Falta[] = "Asignatura Id" ; 
+   if ($this->nmgp_opcao == "incluir")
+   {
+      if ($this->asignatura_id_ == "" && $this->nmgp_opcao != "excluir" && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['php_cmp_required']['asignatura_id_']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['php_cmp_required']['asignatura_id_'] == "on"))
+      {
+          $Campos_Falta[] = "Asignatura" ; 
+          if (!isset($Campos_Erros['asignatura_id_']))
+          {
+              $Campos_Erros['asignatura_id_'] = array();
+          }
+          $Campos_Erros['asignatura_id_'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
+          if (!isset($this->NM_ajax_info['errList']['asignatura_id_']) || !is_array($this->NM_ajax_info['errList']['asignatura_id_']))
+          {
+              $this->NM_ajax_info['errList']['asignatura_id_'] = array();
+          }
+          $this->NM_ajax_info['errList']['asignatura_id_'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
+      }
+          if (!empty($this->asignatura_id_) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_']) && !in_array($this->asignatura_id_, $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_']))
+          {
+              $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
               if (!isset($Campos_Erros['asignatura_id_']))
               {
                   $Campos_Erros['asignatura_id_'] = array();
               }
-              $Campos_Erros['asignatura_id_'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
-                  if (!isset($this->NM_ajax_info['errList']['asignatura_id_']) || !is_array($this->NM_ajax_info['errList']['asignatura_id_']))
-                  {
-                      $this->NM_ajax_info['errList']['asignatura_id_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['asignatura_id_'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
-           } 
-      } 
+              $Campos_Erros['asignatura_id_'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+              if (!isset($this->NM_ajax_info['errList']['asignatura_id_']) || !is_array($this->NM_ajax_info['errList']['asignatura_id_']))
+              {
+                  $this->NM_ajax_info['errList']['asignatura_id_'] = array();
+              }
+              $this->NM_ajax_info['errList']['asignatura_id_'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+          }
+   }
     } // ValidateField_asignatura_id_
-
-    function ValidateField_tipo_calificacion_id_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
-    {
-        global $teste_validade;
-      if ($this->tipo_calificacion_id_ == "")  
-      { 
-          $this->tipo_calificacion_id_ = 0;
-          $this->sc_force_zero[] = 'tipo_calificacion_id_';
-      } 
-      nm_limpa_numero($this->tipo_calificacion_id_, $this->field_config['tipo_calificacion_id_']['symbol_grp']) ; 
-      if ($this->nmgp_opcao != "excluir") 
-      { 
-          if ($this->tipo_calificacion_id_ != '')  
-          { 
-              $iTestSize = 11;
-              if (strlen($this->tipo_calificacion_id_) > $iTestSize)  
-              { 
-                  $Campos_Crit .= "Tipo Calificacion Id: " . $this->Ini->Nm_lang['lang_errm_size']; 
-                  if (!isset($Campos_Erros['tipo_calificacion_id_']))
-                  {
-                      $Campos_Erros['tipo_calificacion_id_'] = array();
-                  }
-                  $Campos_Erros['tipo_calificacion_id_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-                  if (!isset($this->NM_ajax_info['errList']['tipo_calificacion_id_']) || !is_array($this->NM_ajax_info['errList']['tipo_calificacion_id_']))
-                  {
-                      $this->NM_ajax_info['errList']['tipo_calificacion_id_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['tipo_calificacion_id_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-              } 
-              if ($teste_validade->Valor($this->tipo_calificacion_id_, 11, 0, 0, 0, "N") == false)  
-              { 
-                  $Campos_Crit .= "Tipo Calificacion Id; " ; 
-                  if (!isset($Campos_Erros['tipo_calificacion_id_']))
-                  {
-                      $Campos_Erros['tipo_calificacion_id_'] = array();
-                  }
-                  $Campos_Erros['tipo_calificacion_id_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-                  if (!isset($this->NM_ajax_info['errList']['tipo_calificacion_id_']) || !is_array($this->NM_ajax_info['errList']['tipo_calificacion_id_']))
-                  {
-                      $this->NM_ajax_info['errList']['tipo_calificacion_id_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['tipo_calificacion_id_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-              } 
-          } 
-      } 
-    } // ValidateField_tipo_calificacion_id_
 
     function ValidateField_calificacion_1_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
-      if ($this->calificacion_1_ == "")  
-      { 
-          $this->calificacion_1_ = 0;
-          $this->sc_force_zero[] = 'calificacion_1_';
-      } 
-      nm_limpa_numero($this->calificacion_1_, $this->field_config['calificacion_1_']['symbol_grp']) ; 
       if ($this->nmgp_opcao != "excluir") 
       { 
-          if ($this->calificacion_1_ != '')  
+          if (NM_utf8_strlen($this->calificacion_1_) > 11) 
           { 
-              $iTestSize = 11;
-              if (strlen($this->calificacion_1_) > $iTestSize)  
-              { 
-                  $Campos_Crit .= "Calificacion 1: " . $this->Ini->Nm_lang['lang_errm_size']; 
-                  if (!isset($Campos_Erros['calificacion_1_']))
-                  {
-                      $Campos_Erros['calificacion_1_'] = array();
-                  }
-                  $Campos_Erros['calificacion_1_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-                  if (!isset($this->NM_ajax_info['errList']['calificacion_1_']) || !is_array($this->NM_ajax_info['errList']['calificacion_1_']))
-                  {
-                      $this->NM_ajax_info['errList']['calificacion_1_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['calificacion_1_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-              } 
-              if ($teste_validade->Valor($this->calificacion_1_, 11, 0, 0, 0, "N") == false)  
-              { 
-                  $Campos_Crit .= "Calificacion 1; " ; 
-                  if (!isset($Campos_Erros['calificacion_1_']))
-                  {
-                      $Campos_Erros['calificacion_1_'] = array();
-                  }
-                  $Campos_Erros['calificacion_1_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-                  if (!isset($this->NM_ajax_info['errList']['calificacion_1_']) || !is_array($this->NM_ajax_info['errList']['calificacion_1_']))
-                  {
-                      $this->NM_ajax_info['errList']['calificacion_1_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['calificacion_1_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-              } 
+              $Campos_Crit .= "Calificación 1 " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 11 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['calificacion_1_']))
+              {
+                  $Campos_Erros['calificacion_1_'] = array();
+              }
+              $Campos_Erros['calificacion_1_'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 11 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['calificacion_1_']) || !is_array($this->NM_ajax_info['errList']['calificacion_1_']))
+              {
+                  $this->NM_ajax_info['errList']['calificacion_1_'] = array();
+              }
+              $this->NM_ajax_info['errList']['calificacion_1_'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 11 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+          } 
+      } 
+      $Teste_trab = "01234567890123456789";
+      if ($_SESSION['scriptcase']['charset'] != "UTF-8")
+      {
+          $Teste_trab = NM_conv_charset($Teste_trab, $_SESSION['scriptcase']['charset'], "UTF-8");
+      }
+;
+      $Teste_trab = $Teste_trab . chr(10) . chr(13) ; 
+      $Teste_compara = $this->calificacion_1_ ; 
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          $Teste_critica = 0 ; 
+          for ($x = 0; $x < mb_strlen($this->calificacion_1_, $_SESSION['scriptcase']['charset']); $x++) 
+          { 
+               for ($y = 0; $y < mb_strlen($Teste_trab, $_SESSION['scriptcase']['charset']); $y++) 
+               { 
+                    if (sc_substr($Teste_compara, $x, 1) == sc_substr($Teste_trab, $y, 1) ) 
+                    { 
+                        break ; 
+                    } 
+               } 
+               if (sc_substr($Teste_compara, $x, 1) != sc_substr($Teste_trab, $y, 1) )  
+               { 
+                  $Teste_critica = 1 ; 
+               } 
+          } 
+          if ($Teste_critica == 1) 
+          { 
+              $Campos_Crit .= "Calificación 1 " . $this->Ini->Nm_lang['lang_errm_ivch']; 
+              if (!isset($Campos_Erros['calificacion_1_']))
+              {
+                  $Campos_Erros['calificacion_1_'] = array();
+              }
+              $Campos_Erros['calificacion_1_'][] = $this->Ini->Nm_lang['lang_errm_ivch'];
+              if (!isset($this->NM_ajax_info['errList']['calificacion_1_']) || !is_array($this->NM_ajax_info['errList']['calificacion_1_']))
+              {
+                  $this->NM_ajax_info['errList']['calificacion_1_'] = array();
+              }
+              $this->NM_ajax_info['errList']['calificacion_1_'][] = $this->Ini->Nm_lang['lang_errm_ivch'];
           } 
       } 
     } // ValidateField_calificacion_1_
@@ -2818,7 +2896,7 @@ class form_calificaciones_apl
       { 
           if (NM_utf8_strlen($this->calificacion_nivel_1_) > 10) 
           { 
-              $Campos_Crit .= "Calificacion Nivel 1 " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 10 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              $Campos_Crit .= " " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 10 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
               if (!isset($Campos_Erros['calificacion_nivel_1_']))
               {
                   $Campos_Erros['calificacion_nivel_1_'] = array();
@@ -2836,45 +2914,61 @@ class form_calificaciones_apl
     function ValidateField_calificacion_2_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
-      if ($this->calificacion_2_ == "")  
-      { 
-          $this->calificacion_2_ = 0;
-          $this->sc_force_zero[] = 'calificacion_2_';
-      } 
-      nm_limpa_numero($this->calificacion_2_, $this->field_config['calificacion_2_']['symbol_grp']) ; 
       if ($this->nmgp_opcao != "excluir") 
       { 
-          if ($this->calificacion_2_ != '')  
+          if (NM_utf8_strlen($this->calificacion_2_) > 11) 
           { 
-              $iTestSize = 11;
-              if (strlen($this->calificacion_2_) > $iTestSize)  
-              { 
-                  $Campos_Crit .= "Calificacion 2: " . $this->Ini->Nm_lang['lang_errm_size']; 
-                  if (!isset($Campos_Erros['calificacion_2_']))
-                  {
-                      $Campos_Erros['calificacion_2_'] = array();
-                  }
-                  $Campos_Erros['calificacion_2_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-                  if (!isset($this->NM_ajax_info['errList']['calificacion_2_']) || !is_array($this->NM_ajax_info['errList']['calificacion_2_']))
-                  {
-                      $this->NM_ajax_info['errList']['calificacion_2_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['calificacion_2_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-              } 
-              if ($teste_validade->Valor($this->calificacion_2_, 11, 0, 0, 0, "N") == false)  
-              { 
-                  $Campos_Crit .= "Calificacion 2; " ; 
-                  if (!isset($Campos_Erros['calificacion_2_']))
-                  {
-                      $Campos_Erros['calificacion_2_'] = array();
-                  }
-                  $Campos_Erros['calificacion_2_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-                  if (!isset($this->NM_ajax_info['errList']['calificacion_2_']) || !is_array($this->NM_ajax_info['errList']['calificacion_2_']))
-                  {
-                      $this->NM_ajax_info['errList']['calificacion_2_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['calificacion_2_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-              } 
+              $Campos_Crit .= "Calificación 2 " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 11 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['calificacion_2_']))
+              {
+                  $Campos_Erros['calificacion_2_'] = array();
+              }
+              $Campos_Erros['calificacion_2_'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 11 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['calificacion_2_']) || !is_array($this->NM_ajax_info['errList']['calificacion_2_']))
+              {
+                  $this->NM_ajax_info['errList']['calificacion_2_'] = array();
+              }
+              $this->NM_ajax_info['errList']['calificacion_2_'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 11 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+          } 
+      } 
+      $Teste_trab = "01234567890123456789";
+      if ($_SESSION['scriptcase']['charset'] != "UTF-8")
+      {
+          $Teste_trab = NM_conv_charset($Teste_trab, $_SESSION['scriptcase']['charset'], "UTF-8");
+      }
+;
+      $Teste_trab = $Teste_trab . chr(10) . chr(13) ; 
+      $Teste_compara = $this->calificacion_2_ ; 
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          $Teste_critica = 0 ; 
+          for ($x = 0; $x < mb_strlen($this->calificacion_2_, $_SESSION['scriptcase']['charset']); $x++) 
+          { 
+               for ($y = 0; $y < mb_strlen($Teste_trab, $_SESSION['scriptcase']['charset']); $y++) 
+               { 
+                    if (sc_substr($Teste_compara, $x, 1) == sc_substr($Teste_trab, $y, 1) ) 
+                    { 
+                        break ; 
+                    } 
+               } 
+               if (sc_substr($Teste_compara, $x, 1) != sc_substr($Teste_trab, $y, 1) )  
+               { 
+                  $Teste_critica = 1 ; 
+               } 
+          } 
+          if ($Teste_critica == 1) 
+          { 
+              $Campos_Crit .= "Calificación 2 " . $this->Ini->Nm_lang['lang_errm_ivch']; 
+              if (!isset($Campos_Erros['calificacion_2_']))
+              {
+                  $Campos_Erros['calificacion_2_'] = array();
+              }
+              $Campos_Erros['calificacion_2_'][] = $this->Ini->Nm_lang['lang_errm_ivch'];
+              if (!isset($this->NM_ajax_info['errList']['calificacion_2_']) || !is_array($this->NM_ajax_info['errList']['calificacion_2_']))
+              {
+                  $this->NM_ajax_info['errList']['calificacion_2_'] = array();
+              }
+              $this->NM_ajax_info['errList']['calificacion_2_'][] = $this->Ini->Nm_lang['lang_errm_ivch'];
           } 
       } 
     } // ValidateField_calificacion_2_
@@ -2886,7 +2980,7 @@ class form_calificaciones_apl
       { 
           if (NM_utf8_strlen($this->calificacion_nivel_2_) > 10) 
           { 
-              $Campos_Crit .= "Calificacion Nivel 2 " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 10 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              $Campos_Crit .= " " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 10 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
               if (!isset($Campos_Erros['calificacion_nivel_2_']))
               {
                   $Campos_Erros['calificacion_nivel_2_'] = array();
@@ -2904,45 +2998,61 @@ class form_calificaciones_apl
     function ValidateField_calificacion_3_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
-      if ($this->calificacion_3_ == "")  
-      { 
-          $this->calificacion_3_ = 0;
-          $this->sc_force_zero[] = 'calificacion_3_';
-      } 
-      nm_limpa_numero($this->calificacion_3_, $this->field_config['calificacion_3_']['symbol_grp']) ; 
       if ($this->nmgp_opcao != "excluir") 
       { 
-          if ($this->calificacion_3_ != '')  
+          if (NM_utf8_strlen($this->calificacion_3_) > 11) 
           { 
-              $iTestSize = 11;
-              if (strlen($this->calificacion_3_) > $iTestSize)  
-              { 
-                  $Campos_Crit .= "Calificacion 3: " . $this->Ini->Nm_lang['lang_errm_size']; 
-                  if (!isset($Campos_Erros['calificacion_3_']))
-                  {
-                      $Campos_Erros['calificacion_3_'] = array();
-                  }
-                  $Campos_Erros['calificacion_3_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-                  if (!isset($this->NM_ajax_info['errList']['calificacion_3_']) || !is_array($this->NM_ajax_info['errList']['calificacion_3_']))
-                  {
-                      $this->NM_ajax_info['errList']['calificacion_3_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['calificacion_3_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-              } 
-              if ($teste_validade->Valor($this->calificacion_3_, 11, 0, 0, 0, "N") == false)  
-              { 
-                  $Campos_Crit .= "Calificacion 3; " ; 
-                  if (!isset($Campos_Erros['calificacion_3_']))
-                  {
-                      $Campos_Erros['calificacion_3_'] = array();
-                  }
-                  $Campos_Erros['calificacion_3_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-                  if (!isset($this->NM_ajax_info['errList']['calificacion_3_']) || !is_array($this->NM_ajax_info['errList']['calificacion_3_']))
-                  {
-                      $this->NM_ajax_info['errList']['calificacion_3_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['calificacion_3_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-              } 
+              $Campos_Crit .= "Calificación 3 " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 11 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['calificacion_3_']))
+              {
+                  $Campos_Erros['calificacion_3_'] = array();
+              }
+              $Campos_Erros['calificacion_3_'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 11 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['calificacion_3_']) || !is_array($this->NM_ajax_info['errList']['calificacion_3_']))
+              {
+                  $this->NM_ajax_info['errList']['calificacion_3_'] = array();
+              }
+              $this->NM_ajax_info['errList']['calificacion_3_'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 11 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+          } 
+      } 
+      $Teste_trab = "01234567890123456789";
+      if ($_SESSION['scriptcase']['charset'] != "UTF-8")
+      {
+          $Teste_trab = NM_conv_charset($Teste_trab, $_SESSION['scriptcase']['charset'], "UTF-8");
+      }
+;
+      $Teste_trab = $Teste_trab . chr(10) . chr(13) ; 
+      $Teste_compara = $this->calificacion_3_ ; 
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          $Teste_critica = 0 ; 
+          for ($x = 0; $x < mb_strlen($this->calificacion_3_, $_SESSION['scriptcase']['charset']); $x++) 
+          { 
+               for ($y = 0; $y < mb_strlen($Teste_trab, $_SESSION['scriptcase']['charset']); $y++) 
+               { 
+                    if (sc_substr($Teste_compara, $x, 1) == sc_substr($Teste_trab, $y, 1) ) 
+                    { 
+                        break ; 
+                    } 
+               } 
+               if (sc_substr($Teste_compara, $x, 1) != sc_substr($Teste_trab, $y, 1) )  
+               { 
+                  $Teste_critica = 1 ; 
+               } 
+          } 
+          if ($Teste_critica == 1) 
+          { 
+              $Campos_Crit .= "Calificación 3 " . $this->Ini->Nm_lang['lang_errm_ivch']; 
+              if (!isset($Campos_Erros['calificacion_3_']))
+              {
+                  $Campos_Erros['calificacion_3_'] = array();
+              }
+              $Campos_Erros['calificacion_3_'][] = $this->Ini->Nm_lang['lang_errm_ivch'];
+              if (!isset($this->NM_ajax_info['errList']['calificacion_3_']) || !is_array($this->NM_ajax_info['errList']['calificacion_3_']))
+              {
+                  $this->NM_ajax_info['errList']['calificacion_3_'] = array();
+              }
+              $this->NM_ajax_info['errList']['calificacion_3_'][] = $this->Ini->Nm_lang['lang_errm_ivch'];
           } 
       } 
     } // ValidateField_calificacion_3_
@@ -2954,7 +3064,7 @@ class form_calificaciones_apl
       { 
           if (NM_utf8_strlen($this->calificacion_nivel_3_) > 10) 
           { 
-              $Campos_Crit .= "Calificacion Nivel 3 " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 10 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              $Campos_Crit .= " " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 10 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
               if (!isset($Campos_Erros['calificacion_nivel_3_']))
               {
                   $Campos_Erros['calificacion_nivel_3_'] = array();
@@ -2972,45 +3082,61 @@ class form_calificaciones_apl
     function ValidateField_calificacion_4_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
-      if ($this->calificacion_4_ == "")  
-      { 
-          $this->calificacion_4_ = 0;
-          $this->sc_force_zero[] = 'calificacion_4_';
-      } 
-      nm_limpa_numero($this->calificacion_4_, $this->field_config['calificacion_4_']['symbol_grp']) ; 
       if ($this->nmgp_opcao != "excluir") 
       { 
-          if ($this->calificacion_4_ != '')  
+          if (NM_utf8_strlen($this->calificacion_4_) > 11) 
           { 
-              $iTestSize = 11;
-              if (strlen($this->calificacion_4_) > $iTestSize)  
-              { 
-                  $Campos_Crit .= "Calificacion 4: " . $this->Ini->Nm_lang['lang_errm_size']; 
-                  if (!isset($Campos_Erros['calificacion_4_']))
-                  {
-                      $Campos_Erros['calificacion_4_'] = array();
-                  }
-                  $Campos_Erros['calificacion_4_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-                  if (!isset($this->NM_ajax_info['errList']['calificacion_4_']) || !is_array($this->NM_ajax_info['errList']['calificacion_4_']))
-                  {
-                      $this->NM_ajax_info['errList']['calificacion_4_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['calificacion_4_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-              } 
-              if ($teste_validade->Valor($this->calificacion_4_, 11, 0, 0, 0, "N") == false)  
-              { 
-                  $Campos_Crit .= "Calificacion 4; " ; 
-                  if (!isset($Campos_Erros['calificacion_4_']))
-                  {
-                      $Campos_Erros['calificacion_4_'] = array();
-                  }
-                  $Campos_Erros['calificacion_4_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-                  if (!isset($this->NM_ajax_info['errList']['calificacion_4_']) || !is_array($this->NM_ajax_info['errList']['calificacion_4_']))
-                  {
-                      $this->NM_ajax_info['errList']['calificacion_4_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['calificacion_4_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-              } 
+              $Campos_Crit .= "Calificación 4 " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 11 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['calificacion_4_']))
+              {
+                  $Campos_Erros['calificacion_4_'] = array();
+              }
+              $Campos_Erros['calificacion_4_'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 11 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['calificacion_4_']) || !is_array($this->NM_ajax_info['errList']['calificacion_4_']))
+              {
+                  $this->NM_ajax_info['errList']['calificacion_4_'] = array();
+              }
+              $this->NM_ajax_info['errList']['calificacion_4_'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 11 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+          } 
+      } 
+      $Teste_trab = "01234567890123456789";
+      if ($_SESSION['scriptcase']['charset'] != "UTF-8")
+      {
+          $Teste_trab = NM_conv_charset($Teste_trab, $_SESSION['scriptcase']['charset'], "UTF-8");
+      }
+;
+      $Teste_trab = $Teste_trab . chr(10) . chr(13) ; 
+      $Teste_compara = $this->calificacion_4_ ; 
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          $Teste_critica = 0 ; 
+          for ($x = 0; $x < mb_strlen($this->calificacion_4_, $_SESSION['scriptcase']['charset']); $x++) 
+          { 
+               for ($y = 0; $y < mb_strlen($Teste_trab, $_SESSION['scriptcase']['charset']); $y++) 
+               { 
+                    if (sc_substr($Teste_compara, $x, 1) == sc_substr($Teste_trab, $y, 1) ) 
+                    { 
+                        break ; 
+                    } 
+               } 
+               if (sc_substr($Teste_compara, $x, 1) != sc_substr($Teste_trab, $y, 1) )  
+               { 
+                  $Teste_critica = 1 ; 
+               } 
+          } 
+          if ($Teste_critica == 1) 
+          { 
+              $Campos_Crit .= "Calificación 4 " . $this->Ini->Nm_lang['lang_errm_ivch']; 
+              if (!isset($Campos_Erros['calificacion_4_']))
+              {
+                  $Campos_Erros['calificacion_4_'] = array();
+              }
+              $Campos_Erros['calificacion_4_'][] = $this->Ini->Nm_lang['lang_errm_ivch'];
+              if (!isset($this->NM_ajax_info['errList']['calificacion_4_']) || !is_array($this->NM_ajax_info['errList']['calificacion_4_']))
+              {
+                  $this->NM_ajax_info['errList']['calificacion_4_'] = array();
+              }
+              $this->NM_ajax_info['errList']['calificacion_4_'][] = $this->Ini->Nm_lang['lang_errm_ivch'];
           } 
       } 
     } // ValidateField_calificacion_4_
@@ -3022,7 +3148,7 @@ class form_calificaciones_apl
       { 
           if (NM_utf8_strlen($this->calificacion_nivel_4_) > 10) 
           { 
-              $Campos_Crit .= "Calificacion Nivel 4 " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 10 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              $Campos_Crit .= " " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 10 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
               if (!isset($Campos_Erros['calificacion_nivel_4_']))
               {
                   $Campos_Erros['calificacion_nivel_4_'] = array();
@@ -3040,45 +3166,61 @@ class form_calificaciones_apl
     function ValidateField_calificacion_5_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
-      if ($this->calificacion_5_ == "")  
-      { 
-          $this->calificacion_5_ = 0;
-          $this->sc_force_zero[] = 'calificacion_5_';
-      } 
-      nm_limpa_numero($this->calificacion_5_, $this->field_config['calificacion_5_']['symbol_grp']) ; 
       if ($this->nmgp_opcao != "excluir") 
       { 
-          if ($this->calificacion_5_ != '')  
+          if (NM_utf8_strlen($this->calificacion_5_) > 11) 
           { 
-              $iTestSize = 11;
-              if (strlen($this->calificacion_5_) > $iTestSize)  
-              { 
-                  $Campos_Crit .= "Calificacion 5: " . $this->Ini->Nm_lang['lang_errm_size']; 
-                  if (!isset($Campos_Erros['calificacion_5_']))
-                  {
-                      $Campos_Erros['calificacion_5_'] = array();
-                  }
-                  $Campos_Erros['calificacion_5_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-                  if (!isset($this->NM_ajax_info['errList']['calificacion_5_']) || !is_array($this->NM_ajax_info['errList']['calificacion_5_']))
-                  {
-                      $this->NM_ajax_info['errList']['calificacion_5_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['calificacion_5_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-              } 
-              if ($teste_validade->Valor($this->calificacion_5_, 11, 0, 0, 0, "N") == false)  
-              { 
-                  $Campos_Crit .= "Calificacion 5; " ; 
-                  if (!isset($Campos_Erros['calificacion_5_']))
-                  {
-                      $Campos_Erros['calificacion_5_'] = array();
-                  }
-                  $Campos_Erros['calificacion_5_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-                  if (!isset($this->NM_ajax_info['errList']['calificacion_5_']) || !is_array($this->NM_ajax_info['errList']['calificacion_5_']))
-                  {
-                      $this->NM_ajax_info['errList']['calificacion_5_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['calificacion_5_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-              } 
+              $Campos_Crit .= "Calificacion 5 " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 11 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['calificacion_5_']))
+              {
+                  $Campos_Erros['calificacion_5_'] = array();
+              }
+              $Campos_Erros['calificacion_5_'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 11 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['calificacion_5_']) || !is_array($this->NM_ajax_info['errList']['calificacion_5_']))
+              {
+                  $this->NM_ajax_info['errList']['calificacion_5_'] = array();
+              }
+              $this->NM_ajax_info['errList']['calificacion_5_'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 11 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+          } 
+      } 
+      $Teste_trab = "01234567890123456789";
+      if ($_SESSION['scriptcase']['charset'] != "UTF-8")
+      {
+          $Teste_trab = NM_conv_charset($Teste_trab, $_SESSION['scriptcase']['charset'], "UTF-8");
+      }
+;
+      $Teste_trab = $Teste_trab . chr(10) . chr(13) ; 
+      $Teste_compara = $this->calificacion_5_ ; 
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          $Teste_critica = 0 ; 
+          for ($x = 0; $x < mb_strlen($this->calificacion_5_, $_SESSION['scriptcase']['charset']); $x++) 
+          { 
+               for ($y = 0; $y < mb_strlen($Teste_trab, $_SESSION['scriptcase']['charset']); $y++) 
+               { 
+                    if (sc_substr($Teste_compara, $x, 1) == sc_substr($Teste_trab, $y, 1) ) 
+                    { 
+                        break ; 
+                    } 
+               } 
+               if (sc_substr($Teste_compara, $x, 1) != sc_substr($Teste_trab, $y, 1) )  
+               { 
+                  $Teste_critica = 1 ; 
+               } 
+          } 
+          if ($Teste_critica == 1) 
+          { 
+              $Campos_Crit .= "Calificacion 5 " . $this->Ini->Nm_lang['lang_errm_ivch']; 
+              if (!isset($Campos_Erros['calificacion_5_']))
+              {
+                  $Campos_Erros['calificacion_5_'] = array();
+              }
+              $Campos_Erros['calificacion_5_'][] = $this->Ini->Nm_lang['lang_errm_ivch'];
+              if (!isset($this->NM_ajax_info['errList']['calificacion_5_']) || !is_array($this->NM_ajax_info['errList']['calificacion_5_']))
+              {
+                  $this->NM_ajax_info['errList']['calificacion_5_'] = array();
+              }
+              $this->NM_ajax_info['errList']['calificacion_5_'][] = $this->Ini->Nm_lang['lang_errm_ivch'];
           } 
       } 
     } // ValidateField_calificacion_5_
@@ -3090,7 +3232,7 @@ class form_calificaciones_apl
       { 
           if (NM_utf8_strlen($this->calificacion_nivel_5_) > 10) 
           { 
-              $Campos_Crit .= "Calificacion Nivel 5 " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 10 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              $Campos_Crit .= " " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 10 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
               if (!isset($Campos_Erros['calificacion_nivel_5_']))
               {
                   $Campos_Erros['calificacion_nivel_5_'] = array();
@@ -3108,45 +3250,61 @@ class form_calificaciones_apl
     function ValidateField_calificacion_6_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
-      if ($this->calificacion_6_ == "")  
-      { 
-          $this->calificacion_6_ = 0;
-          $this->sc_force_zero[] = 'calificacion_6_';
-      } 
-      nm_limpa_numero($this->calificacion_6_, $this->field_config['calificacion_6_']['symbol_grp']) ; 
       if ($this->nmgp_opcao != "excluir") 
       { 
-          if ($this->calificacion_6_ != '')  
+          if (NM_utf8_strlen($this->calificacion_6_) > 11) 
           { 
-              $iTestSize = 11;
-              if (strlen($this->calificacion_6_) > $iTestSize)  
-              { 
-                  $Campos_Crit .= "Calificacion 6: " . $this->Ini->Nm_lang['lang_errm_size']; 
-                  if (!isset($Campos_Erros['calificacion_6_']))
-                  {
-                      $Campos_Erros['calificacion_6_'] = array();
-                  }
-                  $Campos_Erros['calificacion_6_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-                  if (!isset($this->NM_ajax_info['errList']['calificacion_6_']) || !is_array($this->NM_ajax_info['errList']['calificacion_6_']))
-                  {
-                      $this->NM_ajax_info['errList']['calificacion_6_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['calificacion_6_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-              } 
-              if ($teste_validade->Valor($this->calificacion_6_, 11, 0, 0, 0, "N") == false)  
-              { 
-                  $Campos_Crit .= "Calificacion 6; " ; 
-                  if (!isset($Campos_Erros['calificacion_6_']))
-                  {
-                      $Campos_Erros['calificacion_6_'] = array();
-                  }
-                  $Campos_Erros['calificacion_6_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-                  if (!isset($this->NM_ajax_info['errList']['calificacion_6_']) || !is_array($this->NM_ajax_info['errList']['calificacion_6_']))
-                  {
-                      $this->NM_ajax_info['errList']['calificacion_6_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['calificacion_6_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-              } 
+              $Campos_Crit .= "Calificacion 6 " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 11 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['calificacion_6_']))
+              {
+                  $Campos_Erros['calificacion_6_'] = array();
+              }
+              $Campos_Erros['calificacion_6_'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 11 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['calificacion_6_']) || !is_array($this->NM_ajax_info['errList']['calificacion_6_']))
+              {
+                  $this->NM_ajax_info['errList']['calificacion_6_'] = array();
+              }
+              $this->NM_ajax_info['errList']['calificacion_6_'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 11 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+          } 
+      } 
+      $Teste_trab = "01234567890123456789";
+      if ($_SESSION['scriptcase']['charset'] != "UTF-8")
+      {
+          $Teste_trab = NM_conv_charset($Teste_trab, $_SESSION['scriptcase']['charset'], "UTF-8");
+      }
+;
+      $Teste_trab = $Teste_trab . chr(10) . chr(13) ; 
+      $Teste_compara = $this->calificacion_6_ ; 
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          $Teste_critica = 0 ; 
+          for ($x = 0; $x < mb_strlen($this->calificacion_6_, $_SESSION['scriptcase']['charset']); $x++) 
+          { 
+               for ($y = 0; $y < mb_strlen($Teste_trab, $_SESSION['scriptcase']['charset']); $y++) 
+               { 
+                    if (sc_substr($Teste_compara, $x, 1) == sc_substr($Teste_trab, $y, 1) ) 
+                    { 
+                        break ; 
+                    } 
+               } 
+               if (sc_substr($Teste_compara, $x, 1) != sc_substr($Teste_trab, $y, 1) )  
+               { 
+                  $Teste_critica = 1 ; 
+               } 
+          } 
+          if ($Teste_critica == 1) 
+          { 
+              $Campos_Crit .= "Calificacion 6 " . $this->Ini->Nm_lang['lang_errm_ivch']; 
+              if (!isset($Campos_Erros['calificacion_6_']))
+              {
+                  $Campos_Erros['calificacion_6_'] = array();
+              }
+              $Campos_Erros['calificacion_6_'][] = $this->Ini->Nm_lang['lang_errm_ivch'];
+              if (!isset($this->NM_ajax_info['errList']['calificacion_6_']) || !is_array($this->NM_ajax_info['errList']['calificacion_6_']))
+              {
+                  $this->NM_ajax_info['errList']['calificacion_6_'] = array();
+              }
+              $this->NM_ajax_info['errList']['calificacion_6_'][] = $this->Ini->Nm_lang['lang_errm_ivch'];
           } 
       } 
     } // ValidateField_calificacion_6_
@@ -3158,7 +3316,7 @@ class form_calificaciones_apl
       { 
           if (NM_utf8_strlen($this->calificacion_nivel_6_) > 10) 
           { 
-              $Campos_Crit .= "Calificacion Nivel 6 " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 10 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              $Campos_Crit .= " " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 10 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
               if (!isset($Campos_Erros['calificacion_nivel_6_']))
               {
                   $Campos_Erros['calificacion_nivel_6_'] = array();
@@ -3176,45 +3334,61 @@ class form_calificaciones_apl
     function ValidateField_calificacion_7_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
-      if ($this->calificacion_7_ == "")  
-      { 
-          $this->calificacion_7_ = 0;
-          $this->sc_force_zero[] = 'calificacion_7_';
-      } 
-      nm_limpa_numero($this->calificacion_7_, $this->field_config['calificacion_7_']['symbol_grp']) ; 
       if ($this->nmgp_opcao != "excluir") 
       { 
-          if ($this->calificacion_7_ != '')  
+          if (NM_utf8_strlen($this->calificacion_7_) > 11) 
           { 
-              $iTestSize = 11;
-              if (strlen($this->calificacion_7_) > $iTestSize)  
-              { 
-                  $Campos_Crit .= "Calificacion 7: " . $this->Ini->Nm_lang['lang_errm_size']; 
-                  if (!isset($Campos_Erros['calificacion_7_']))
-                  {
-                      $Campos_Erros['calificacion_7_'] = array();
-                  }
-                  $Campos_Erros['calificacion_7_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-                  if (!isset($this->NM_ajax_info['errList']['calificacion_7_']) || !is_array($this->NM_ajax_info['errList']['calificacion_7_']))
-                  {
-                      $this->NM_ajax_info['errList']['calificacion_7_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['calificacion_7_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-              } 
-              if ($teste_validade->Valor($this->calificacion_7_, 11, 0, 0, 0, "N") == false)  
-              { 
-                  $Campos_Crit .= "Calificacion 7; " ; 
-                  if (!isset($Campos_Erros['calificacion_7_']))
-                  {
-                      $Campos_Erros['calificacion_7_'] = array();
-                  }
-                  $Campos_Erros['calificacion_7_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-                  if (!isset($this->NM_ajax_info['errList']['calificacion_7_']) || !is_array($this->NM_ajax_info['errList']['calificacion_7_']))
-                  {
-                      $this->NM_ajax_info['errList']['calificacion_7_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['calificacion_7_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-              } 
+              $Campos_Crit .= "Calificacion 7 " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 11 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['calificacion_7_']))
+              {
+                  $Campos_Erros['calificacion_7_'] = array();
+              }
+              $Campos_Erros['calificacion_7_'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 11 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['calificacion_7_']) || !is_array($this->NM_ajax_info['errList']['calificacion_7_']))
+              {
+                  $this->NM_ajax_info['errList']['calificacion_7_'] = array();
+              }
+              $this->NM_ajax_info['errList']['calificacion_7_'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 11 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+          } 
+      } 
+      $Teste_trab = "01234567890123456789";
+      if ($_SESSION['scriptcase']['charset'] != "UTF-8")
+      {
+          $Teste_trab = NM_conv_charset($Teste_trab, $_SESSION['scriptcase']['charset'], "UTF-8");
+      }
+;
+      $Teste_trab = $Teste_trab . chr(10) . chr(13) ; 
+      $Teste_compara = $this->calificacion_7_ ; 
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          $Teste_critica = 0 ; 
+          for ($x = 0; $x < mb_strlen($this->calificacion_7_, $_SESSION['scriptcase']['charset']); $x++) 
+          { 
+               for ($y = 0; $y < mb_strlen($Teste_trab, $_SESSION['scriptcase']['charset']); $y++) 
+               { 
+                    if (sc_substr($Teste_compara, $x, 1) == sc_substr($Teste_trab, $y, 1) ) 
+                    { 
+                        break ; 
+                    } 
+               } 
+               if (sc_substr($Teste_compara, $x, 1) != sc_substr($Teste_trab, $y, 1) )  
+               { 
+                  $Teste_critica = 1 ; 
+               } 
+          } 
+          if ($Teste_critica == 1) 
+          { 
+              $Campos_Crit .= "Calificacion 7 " . $this->Ini->Nm_lang['lang_errm_ivch']; 
+              if (!isset($Campos_Erros['calificacion_7_']))
+              {
+                  $Campos_Erros['calificacion_7_'] = array();
+              }
+              $Campos_Erros['calificacion_7_'][] = $this->Ini->Nm_lang['lang_errm_ivch'];
+              if (!isset($this->NM_ajax_info['errList']['calificacion_7_']) || !is_array($this->NM_ajax_info['errList']['calificacion_7_']))
+              {
+                  $this->NM_ajax_info['errList']['calificacion_7_'] = array();
+              }
+              $this->NM_ajax_info['errList']['calificacion_7_'][] = $this->Ini->Nm_lang['lang_errm_ivch'];
           } 
       } 
     } // ValidateField_calificacion_7_
@@ -3226,7 +3400,7 @@ class form_calificaciones_apl
       { 
           if (NM_utf8_strlen($this->calificacion_nivel_7_) > 10) 
           { 
-              $Campos_Crit .= "Calificacion Nivel 7 " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 10 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              $Campos_Crit .= " " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 10 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
               if (!isset($Campos_Erros['calificacion_nivel_7_']))
               {
                   $Campos_Erros['calificacion_nivel_7_'] = array();
@@ -3244,45 +3418,61 @@ class form_calificaciones_apl
     function ValidateField_calificacion_8_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
-      if ($this->calificacion_8_ == "")  
-      { 
-          $this->calificacion_8_ = 0;
-          $this->sc_force_zero[] = 'calificacion_8_';
-      } 
-      nm_limpa_numero($this->calificacion_8_, $this->field_config['calificacion_8_']['symbol_grp']) ; 
       if ($this->nmgp_opcao != "excluir") 
       { 
-          if ($this->calificacion_8_ != '')  
+          if (NM_utf8_strlen($this->calificacion_8_) > 11) 
           { 
-              $iTestSize = 11;
-              if (strlen($this->calificacion_8_) > $iTestSize)  
-              { 
-                  $Campos_Crit .= "Calificacion 8: " . $this->Ini->Nm_lang['lang_errm_size']; 
-                  if (!isset($Campos_Erros['calificacion_8_']))
-                  {
-                      $Campos_Erros['calificacion_8_'] = array();
-                  }
-                  $Campos_Erros['calificacion_8_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-                  if (!isset($this->NM_ajax_info['errList']['calificacion_8_']) || !is_array($this->NM_ajax_info['errList']['calificacion_8_']))
-                  {
-                      $this->NM_ajax_info['errList']['calificacion_8_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['calificacion_8_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-              } 
-              if ($teste_validade->Valor($this->calificacion_8_, 11, 0, 0, 0, "N") == false)  
-              { 
-                  $Campos_Crit .= "Calificacion 8; " ; 
-                  if (!isset($Campos_Erros['calificacion_8_']))
-                  {
-                      $Campos_Erros['calificacion_8_'] = array();
-                  }
-                  $Campos_Erros['calificacion_8_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-                  if (!isset($this->NM_ajax_info['errList']['calificacion_8_']) || !is_array($this->NM_ajax_info['errList']['calificacion_8_']))
-                  {
-                      $this->NM_ajax_info['errList']['calificacion_8_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['calificacion_8_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-              } 
+              $Campos_Crit .= "Calificacion 8 " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 11 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['calificacion_8_']))
+              {
+                  $Campos_Erros['calificacion_8_'] = array();
+              }
+              $Campos_Erros['calificacion_8_'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 11 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['calificacion_8_']) || !is_array($this->NM_ajax_info['errList']['calificacion_8_']))
+              {
+                  $this->NM_ajax_info['errList']['calificacion_8_'] = array();
+              }
+              $this->NM_ajax_info['errList']['calificacion_8_'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 11 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+          } 
+      } 
+      $Teste_trab = "01234567890123456789";
+      if ($_SESSION['scriptcase']['charset'] != "UTF-8")
+      {
+          $Teste_trab = NM_conv_charset($Teste_trab, $_SESSION['scriptcase']['charset'], "UTF-8");
+      }
+;
+      $Teste_trab = $Teste_trab . chr(10) . chr(13) ; 
+      $Teste_compara = $this->calificacion_8_ ; 
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          $Teste_critica = 0 ; 
+          for ($x = 0; $x < mb_strlen($this->calificacion_8_, $_SESSION['scriptcase']['charset']); $x++) 
+          { 
+               for ($y = 0; $y < mb_strlen($Teste_trab, $_SESSION['scriptcase']['charset']); $y++) 
+               { 
+                    if (sc_substr($Teste_compara, $x, 1) == sc_substr($Teste_trab, $y, 1) ) 
+                    { 
+                        break ; 
+                    } 
+               } 
+               if (sc_substr($Teste_compara, $x, 1) != sc_substr($Teste_trab, $y, 1) )  
+               { 
+                  $Teste_critica = 1 ; 
+               } 
+          } 
+          if ($Teste_critica == 1) 
+          { 
+              $Campos_Crit .= "Calificacion 8 " . $this->Ini->Nm_lang['lang_errm_ivch']; 
+              if (!isset($Campos_Erros['calificacion_8_']))
+              {
+                  $Campos_Erros['calificacion_8_'] = array();
+              }
+              $Campos_Erros['calificacion_8_'][] = $this->Ini->Nm_lang['lang_errm_ivch'];
+              if (!isset($this->NM_ajax_info['errList']['calificacion_8_']) || !is_array($this->NM_ajax_info['errList']['calificacion_8_']))
+              {
+                  $this->NM_ajax_info['errList']['calificacion_8_'] = array();
+              }
+              $this->NM_ajax_info['errList']['calificacion_8_'][] = $this->Ini->Nm_lang['lang_errm_ivch'];
           } 
       } 
     } // ValidateField_calificacion_8_
@@ -3294,7 +3484,7 @@ class form_calificaciones_apl
       { 
           if (NM_utf8_strlen($this->calificacion_nivel_8_) > 10) 
           { 
-              $Campos_Crit .= "Calificacion Nivel 8 " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 10 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              $Campos_Crit .= " " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 10 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
               if (!isset($Campos_Erros['calificacion_nivel_8_']))
               {
                   $Campos_Erros['calificacion_nivel_8_'] = array();
@@ -3312,45 +3502,61 @@ class form_calificaciones_apl
     function ValidateField_calificacion_9_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
     {
         global $teste_validade;
-      if ($this->calificacion_9_ == "")  
-      { 
-          $this->calificacion_9_ = 0;
-          $this->sc_force_zero[] = 'calificacion_9_';
-      } 
-      nm_limpa_numero($this->calificacion_9_, $this->field_config['calificacion_9_']['symbol_grp']) ; 
       if ($this->nmgp_opcao != "excluir") 
       { 
-          if ($this->calificacion_9_ != '')  
+          if (NM_utf8_strlen($this->calificacion_9_) > 11) 
           { 
-              $iTestSize = 11;
-              if (strlen($this->calificacion_9_) > $iTestSize)  
-              { 
-                  $Campos_Crit .= "Calificacion 9: " . $this->Ini->Nm_lang['lang_errm_size']; 
-                  if (!isset($Campos_Erros['calificacion_9_']))
-                  {
-                      $Campos_Erros['calificacion_9_'] = array();
-                  }
-                  $Campos_Erros['calificacion_9_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-                  if (!isset($this->NM_ajax_info['errList']['calificacion_9_']) || !is_array($this->NM_ajax_info['errList']['calificacion_9_']))
-                  {
-                      $this->NM_ajax_info['errList']['calificacion_9_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['calificacion_9_'][] = $this->Ini->Nm_lang['lang_errm_size'];
-              } 
-              if ($teste_validade->Valor($this->calificacion_9_, 11, 0, 0, 0, "N") == false)  
-              { 
-                  $Campos_Crit .= "Calificacion 9; " ; 
-                  if (!isset($Campos_Erros['calificacion_9_']))
-                  {
-                      $Campos_Erros['calificacion_9_'] = array();
-                  }
-                  $Campos_Erros['calificacion_9_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-                  if (!isset($this->NM_ajax_info['errList']['calificacion_9_']) || !is_array($this->NM_ajax_info['errList']['calificacion_9_']))
-                  {
-                      $this->NM_ajax_info['errList']['calificacion_9_'] = array();
-                  }
-                  $this->NM_ajax_info['errList']['calificacion_9_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
-              } 
+              $Campos_Crit .= "Calificacion 9 " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 11 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              if (!isset($Campos_Erros['calificacion_9_']))
+              {
+                  $Campos_Erros['calificacion_9_'] = array();
+              }
+              $Campos_Erros['calificacion_9_'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 11 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+              if (!isset($this->NM_ajax_info['errList']['calificacion_9_']) || !is_array($this->NM_ajax_info['errList']['calificacion_9_']))
+              {
+                  $this->NM_ajax_info['errList']['calificacion_9_'] = array();
+              }
+              $this->NM_ajax_info['errList']['calificacion_9_'][] = $this->Ini->Nm_lang['lang_errm_mxch'] . " 11 " . $this->Ini->Nm_lang['lang_errm_nchr'];
+          } 
+      } 
+      $Teste_trab = "01234567890123456789";
+      if ($_SESSION['scriptcase']['charset'] != "UTF-8")
+      {
+          $Teste_trab = NM_conv_charset($Teste_trab, $_SESSION['scriptcase']['charset'], "UTF-8");
+      }
+;
+      $Teste_trab = $Teste_trab . chr(10) . chr(13) ; 
+      $Teste_compara = $this->calificacion_9_ ; 
+      if ($this->nmgp_opcao != "excluir") 
+      { 
+          $Teste_critica = 0 ; 
+          for ($x = 0; $x < mb_strlen($this->calificacion_9_, $_SESSION['scriptcase']['charset']); $x++) 
+          { 
+               for ($y = 0; $y < mb_strlen($Teste_trab, $_SESSION['scriptcase']['charset']); $y++) 
+               { 
+                    if (sc_substr($Teste_compara, $x, 1) == sc_substr($Teste_trab, $y, 1) ) 
+                    { 
+                        break ; 
+                    } 
+               } 
+               if (sc_substr($Teste_compara, $x, 1) != sc_substr($Teste_trab, $y, 1) )  
+               { 
+                  $Teste_critica = 1 ; 
+               } 
+          } 
+          if ($Teste_critica == 1) 
+          { 
+              $Campos_Crit .= "Calificacion 9 " . $this->Ini->Nm_lang['lang_errm_ivch']; 
+              if (!isset($Campos_Erros['calificacion_9_']))
+              {
+                  $Campos_Erros['calificacion_9_'] = array();
+              }
+              $Campos_Erros['calificacion_9_'][] = $this->Ini->Nm_lang['lang_errm_ivch'];
+              if (!isset($this->NM_ajax_info['errList']['calificacion_9_']) || !is_array($this->NM_ajax_info['errList']['calificacion_9_']))
+              {
+                  $this->NM_ajax_info['errList']['calificacion_9_'] = array();
+              }
+              $this->NM_ajax_info['errList']['calificacion_9_'][] = $this->Ini->Nm_lang['lang_errm_ivch'];
           } 
       } 
     } // ValidateField_calificacion_9_
@@ -3362,7 +3568,7 @@ class form_calificaciones_apl
       { 
           if (NM_utf8_strlen($this->calificacion_nivel_9_) > 10) 
           { 
-              $Campos_Crit .= "Calificacion Nivel 9 " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 10 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
+              $Campos_Crit .= " " . $this->Ini->Nm_lang['lang_errm_mxch'] . " 10 " . $this->Ini->Nm_lang['lang_errm_nchr']; 
               if (!isset($Campos_Erros['calificacion_nivel_9_']))
               {
                   $Campos_Erros['calificacion_nivel_9_'] = array();
@@ -3423,6 +3629,152 @@ class form_calificaciones_apl
       } 
     } // ValidateField_calificacion_final_
 
+    function ValidateField_colegio_id_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+   if ($this->nmgp_opcao == "incluir")
+   {
+      if ($this->colegio_id_ == "" && $this->nmgp_opcao != "excluir" && (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['php_cmp_required']['colegio_id_']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['php_cmp_required']['colegio_id_'] == "on"))
+      {
+          $Campos_Falta[] = "Colegio Id" ; 
+          if (!isset($Campos_Erros['colegio_id_']))
+          {
+              $Campos_Erros['colegio_id_'] = array();
+          }
+          $Campos_Erros['colegio_id_'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
+          if (!isset($this->NM_ajax_info['errList']['colegio_id_']) || !is_array($this->NM_ajax_info['errList']['colegio_id_']))
+          {
+              $this->NM_ajax_info['errList']['colegio_id_'] = array();
+          }
+          $this->NM_ajax_info['errList']['colegio_id_'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
+      }
+          if (!empty($this->colegio_id_) && isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_colegio_id_']) && !in_array($this->colegio_id_, $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_colegio_id_']))
+          {
+              $Campos_Crit .= $this->Ini->Nm_lang['lang_errm_ajax_data'];
+              if (!isset($Campos_Erros['colegio_id_']))
+              {
+                  $Campos_Erros['colegio_id_'] = array();
+              }
+              $Campos_Erros['colegio_id_'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+              if (!isset($this->NM_ajax_info['errList']['colegio_id_']) || !is_array($this->NM_ajax_info['errList']['colegio_id_']))
+              {
+                  $this->NM_ajax_info['errList']['colegio_id_'] = array();
+              }
+              $this->NM_ajax_info['errList']['colegio_id_'][] = $this->Ini->Nm_lang['lang_errm_ajax_data'];
+          }
+   }
+    } // ValidateField_colegio_id_
+
+    function ValidateField_periodo_id_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+      nm_limpa_numero($this->periodo_id_, $this->field_config['periodo_id_']['symbol_grp']) ; 
+      if ($this->nmgp_opcao == "incluir")
+      { 
+          if ($this->periodo_id_ != '')  
+          { 
+              $iTestSize = 11;
+              if (strlen($this->periodo_id_) > $iTestSize)  
+              { 
+                  $Campos_Crit .= "Periodo Id: " . $this->Ini->Nm_lang['lang_errm_size']; 
+                  if (!isset($Campos_Erros['periodo_id_']))
+                  {
+                      $Campos_Erros['periodo_id_'] = array();
+                  }
+                  $Campos_Erros['periodo_id_'][] = $this->Ini->Nm_lang['lang_errm_size'];
+                  if (!isset($this->NM_ajax_info['errList']['periodo_id_']) || !is_array($this->NM_ajax_info['errList']['periodo_id_']))
+                  {
+                      $this->NM_ajax_info['errList']['periodo_id_'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['periodo_id_'][] = $this->Ini->Nm_lang['lang_errm_size'];
+              } 
+              if ($teste_validade->Valor($this->periodo_id_, 11, 0, 0, 0, "N") == false)  
+              { 
+                  $Campos_Crit .= "Periodo Id; " ; 
+                  if (!isset($Campos_Erros['periodo_id_']))
+                  {
+                      $Campos_Erros['periodo_id_'] = array();
+                  }
+                  $Campos_Erros['periodo_id_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
+                  if (!isset($this->NM_ajax_info['errList']['periodo_id_']) || !is_array($this->NM_ajax_info['errList']['periodo_id_']))
+                  {
+                      $this->NM_ajax_info['errList']['periodo_id_'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['periodo_id_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
+              } 
+          } 
+           elseif (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['php_cmp_required']['periodo_id_']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['php_cmp_required']['periodo_id_'] == "on") 
+           { 
+              $Campos_Falta[] = "Periodo Id" ; 
+              if (!isset($Campos_Erros['periodo_id_']))
+              {
+                  $Campos_Erros['periodo_id_'] = array();
+              }
+              $Campos_Erros['periodo_id_'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
+                  if (!isset($this->NM_ajax_info['errList']['periodo_id_']) || !is_array($this->NM_ajax_info['errList']['periodo_id_']))
+                  {
+                      $this->NM_ajax_info['errList']['periodo_id_'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['periodo_id_'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
+           } 
+      } 
+    } // ValidateField_periodo_id_
+
+    function ValidateField_curso_id_(&$Campos_Crit, &$Campos_Falta, &$Campos_Erros)
+    {
+        global $teste_validade;
+      nm_limpa_numero($this->curso_id_, $this->field_config['curso_id_']['symbol_grp']) ; 
+      if ($this->nmgp_opcao == "incluir")
+      { 
+          if ($this->curso_id_ != '')  
+          { 
+              $iTestSize = 11;
+              if (strlen($this->curso_id_) > $iTestSize)  
+              { 
+                  $Campos_Crit .= "Curso Id: " . $this->Ini->Nm_lang['lang_errm_size']; 
+                  if (!isset($Campos_Erros['curso_id_']))
+                  {
+                      $Campos_Erros['curso_id_'] = array();
+                  }
+                  $Campos_Erros['curso_id_'][] = $this->Ini->Nm_lang['lang_errm_size'];
+                  if (!isset($this->NM_ajax_info['errList']['curso_id_']) || !is_array($this->NM_ajax_info['errList']['curso_id_']))
+                  {
+                      $this->NM_ajax_info['errList']['curso_id_'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['curso_id_'][] = $this->Ini->Nm_lang['lang_errm_size'];
+              } 
+              if ($teste_validade->Valor($this->curso_id_, 11, 0, 0, 0, "N") == false)  
+              { 
+                  $Campos_Crit .= "Curso Id; " ; 
+                  if (!isset($Campos_Erros['curso_id_']))
+                  {
+                      $Campos_Erros['curso_id_'] = array();
+                  }
+                  $Campos_Erros['curso_id_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
+                  if (!isset($this->NM_ajax_info['errList']['curso_id_']) || !is_array($this->NM_ajax_info['errList']['curso_id_']))
+                  {
+                      $this->NM_ajax_info['errList']['curso_id_'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['curso_id_'][] = "" . $this->Ini->Nm_lang['lang_errm_ajax_data'] . "";
+              } 
+          } 
+           elseif (!isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['php_cmp_required']['curso_id_']) || $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['php_cmp_required']['curso_id_'] == "on") 
+           { 
+              $Campos_Falta[] = "Curso Id" ; 
+              if (!isset($Campos_Erros['curso_id_']))
+              {
+                  $Campos_Erros['curso_id_'] = array();
+              }
+              $Campos_Erros['curso_id_'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
+                  if (!isset($this->NM_ajax_info['errList']['curso_id_']) || !is_array($this->NM_ajax_info['errList']['curso_id_']))
+                  {
+                      $this->NM_ajax_info['errList']['curso_id_'] = array();
+                  }
+                  $this->NM_ajax_info['errList']['curso_id_'][] = $this->Ini->Nm_lang['lang_errm_ajax_rqrd'];
+           } 
+      } 
+    } // ValidateField_curso_id_
+
     function removeDuplicateDttmError($aErrDate, &$aErrTime)
     {
         if (empty($aErrDate) || empty($aErrTime))
@@ -3448,7 +3800,6 @@ class form_calificaciones_apl
            $sc_seq_vert;
     $this->nmgp_dados_form['estudiante_id_'] = $this->estudiante_id_;
     $this->nmgp_dados_form['asignatura_id_'] = $this->asignatura_id_;
-    $this->nmgp_dados_form['tipo_calificacion_id_'] = $this->tipo_calificacion_id_;
     $this->nmgp_dados_form['calificacion_1_'] = $this->calificacion_1_;
     $this->nmgp_dados_form['calificacion_nivel_1_'] = $this->calificacion_nivel_1_;
     $this->nmgp_dados_form['calificacion_2_'] = $this->calificacion_2_;
@@ -3471,6 +3822,7 @@ class form_calificaciones_apl
     $this->nmgp_dados_form['colegio_id_'] = $this->colegio_id_;
     $this->nmgp_dados_form['periodo_id_'] = $this->periodo_id_;
     $this->nmgp_dados_form['curso_id_'] = $this->curso_id_;
+    $this->nmgp_dados_form['tipo_calificacion_id_'] = $this->tipo_calificacion_id_;
     $this->nmgp_dados_form['descripcion_1_'] = $this->descripcion_1_;
     $this->nmgp_dados_form['publicada_1_'] = $this->publicada_1_;
     $this->nmgp_dados_form['descripcion_2_'] = $this->descripcion_2_;
@@ -3495,21 +3847,10 @@ class form_calificaciones_apl
    {
       global $nm_form_submit;
          $this->formatado = false;
-      nm_limpa_numero($this->estudiante_id_, $this->field_config['estudiante_id_']['symbol_grp']) ; 
-      nm_limpa_numero($this->asignatura_id_, $this->field_config['asignatura_id_']['symbol_grp']) ; 
-      nm_limpa_numero($this->tipo_calificacion_id_, $this->field_config['tipo_calificacion_id_']['symbol_grp']) ; 
-      nm_limpa_numero($this->calificacion_1_, $this->field_config['calificacion_1_']['symbol_grp']) ; 
-      nm_limpa_numero($this->calificacion_2_, $this->field_config['calificacion_2_']['symbol_grp']) ; 
-      nm_limpa_numero($this->calificacion_3_, $this->field_config['calificacion_3_']['symbol_grp']) ; 
-      nm_limpa_numero($this->calificacion_4_, $this->field_config['calificacion_4_']['symbol_grp']) ; 
-      nm_limpa_numero($this->calificacion_5_, $this->field_config['calificacion_5_']['symbol_grp']) ; 
-      nm_limpa_numero($this->calificacion_6_, $this->field_config['calificacion_6_']['symbol_grp']) ; 
-      nm_limpa_numero($this->calificacion_7_, $this->field_config['calificacion_7_']['symbol_grp']) ; 
-      nm_limpa_numero($this->calificacion_8_, $this->field_config['calificacion_8_']['symbol_grp']) ; 
-      nm_limpa_numero($this->calificacion_9_, $this->field_config['calificacion_9_']['symbol_grp']) ; 
       nm_limpa_numero($this->calificacion_final_, $this->field_config['calificacion_final_']['symbol_grp']) ; 
       nm_limpa_numero($this->periodo_id_, $this->field_config['periodo_id_']['symbol_grp']) ; 
       nm_limpa_numero($this->curso_id_, $this->field_config['curso_id_']['symbol_grp']) ; 
+      nm_limpa_numero($this->tipo_calificacion_id_, $this->field_config['tipo_calificacion_id_']['symbol_grp']) ; 
       nm_limpa_numero($this->publicada_1_, $this->field_config['publicada_1_']['symbol_grp']) ; 
       nm_limpa_numero($this->publicada_2_, $this->field_config['publicada_2_']['symbol_grp']) ; 
       nm_limpa_numero($this->publicada_3_, $this->field_config['publicada_3_']['symbol_grp']) ; 
@@ -3562,54 +3903,6 @@ class form_calificaciones_apl
    }
    function nm_clear_val($Nome_Campo)
    {
-      if ($Nome_Campo == "estudiante_id_")
-      {
-          nm_limpa_numero($this->estudiante_id_, $this->field_config['estudiante_id_']['symbol_grp']) ; 
-      }
-      if ($Nome_Campo == "asignatura_id_")
-      {
-          nm_limpa_numero($this->asignatura_id_, $this->field_config['asignatura_id_']['symbol_grp']) ; 
-      }
-      if ($Nome_Campo == "tipo_calificacion_id_")
-      {
-          nm_limpa_numero($this->tipo_calificacion_id_, $this->field_config['tipo_calificacion_id_']['symbol_grp']) ; 
-      }
-      if ($Nome_Campo == "calificacion_1_")
-      {
-          nm_limpa_numero($this->calificacion_1_, $this->field_config['calificacion_1_']['symbol_grp']) ; 
-      }
-      if ($Nome_Campo == "calificacion_2_")
-      {
-          nm_limpa_numero($this->calificacion_2_, $this->field_config['calificacion_2_']['symbol_grp']) ; 
-      }
-      if ($Nome_Campo == "calificacion_3_")
-      {
-          nm_limpa_numero($this->calificacion_3_, $this->field_config['calificacion_3_']['symbol_grp']) ; 
-      }
-      if ($Nome_Campo == "calificacion_4_")
-      {
-          nm_limpa_numero($this->calificacion_4_, $this->field_config['calificacion_4_']['symbol_grp']) ; 
-      }
-      if ($Nome_Campo == "calificacion_5_")
-      {
-          nm_limpa_numero($this->calificacion_5_, $this->field_config['calificacion_5_']['symbol_grp']) ; 
-      }
-      if ($Nome_Campo == "calificacion_6_")
-      {
-          nm_limpa_numero($this->calificacion_6_, $this->field_config['calificacion_6_']['symbol_grp']) ; 
-      }
-      if ($Nome_Campo == "calificacion_7_")
-      {
-          nm_limpa_numero($this->calificacion_7_, $this->field_config['calificacion_7_']['symbol_grp']) ; 
-      }
-      if ($Nome_Campo == "calificacion_8_")
-      {
-          nm_limpa_numero($this->calificacion_8_, $this->field_config['calificacion_8_']['symbol_grp']) ; 
-      }
-      if ($Nome_Campo == "calificacion_9_")
-      {
-          nm_limpa_numero($this->calificacion_9_, $this->field_config['calificacion_9_']['symbol_grp']) ; 
-      }
       if ($Nome_Campo == "calificacion_final_")
       {
           nm_limpa_numero($this->calificacion_final_, $this->field_config['calificacion_final_']['symbol_grp']) ; 
@@ -3621,6 +3914,10 @@ class form_calificaciones_apl
       if ($Nome_Campo == "curso_id_")
       {
           nm_limpa_numero($this->curso_id_, $this->field_config['curso_id_']['symbol_grp']) ; 
+      }
+      if ($Nome_Campo == "tipo_calificacion_id_")
+      {
+          nm_limpa_numero($this->tipo_calificacion_id_, $this->field_config['tipo_calificacion_id_']['symbol_grp']) ; 
       }
       if ($Nome_Campo == "publicada_1_")
       {
@@ -3662,57 +3959,17 @@ class form_calificaciones_apl
    function nm_formatar_campos($format_fields = array())
    {
       global $nm_form_submit;
-      if ('' !== $this->estudiante_id_ || (!empty($format_fields) && isset($format_fields['estudiante_id_'])))
-      {
-          nmgp_Form_Num_Val($this->estudiante_id_, $this->field_config['estudiante_id_']['symbol_grp'], $this->field_config['estudiante_id_']['symbol_dec'], "0", "S", $this->field_config['estudiante_id_']['format_neg'], "", "", "-", $this->field_config['estudiante_id_']['symbol_fmt']) ; 
-      }
-      if ('' !== $this->asignatura_id_ || (!empty($format_fields) && isset($format_fields['asignatura_id_'])))
-      {
-          nmgp_Form_Num_Val($this->asignatura_id_, $this->field_config['asignatura_id_']['symbol_grp'], $this->field_config['asignatura_id_']['symbol_dec'], "0", "S", $this->field_config['asignatura_id_']['format_neg'], "", "", "-", $this->field_config['asignatura_id_']['symbol_fmt']) ; 
-      }
-      if ('' !== $this->tipo_calificacion_id_ || (!empty($format_fields) && isset($format_fields['tipo_calificacion_id_'])))
-      {
-          nmgp_Form_Num_Val($this->tipo_calificacion_id_, $this->field_config['tipo_calificacion_id_']['symbol_grp'], $this->field_config['tipo_calificacion_id_']['symbol_dec'], "0", "S", $this->field_config['tipo_calificacion_id_']['format_neg'], "", "", "-", $this->field_config['tipo_calificacion_id_']['symbol_fmt']) ; 
-      }
-      if ('' !== $this->calificacion_1_ || (!empty($format_fields) && isset($format_fields['calificacion_1_'])))
-      {
-          nmgp_Form_Num_Val($this->calificacion_1_, $this->field_config['calificacion_1_']['symbol_grp'], $this->field_config['calificacion_1_']['symbol_dec'], "0", "S", $this->field_config['calificacion_1_']['format_neg'], "", "", "-", $this->field_config['calificacion_1_']['symbol_fmt']) ; 
-      }
-      if ('' !== $this->calificacion_2_ || (!empty($format_fields) && isset($format_fields['calificacion_2_'])))
-      {
-          nmgp_Form_Num_Val($this->calificacion_2_, $this->field_config['calificacion_2_']['symbol_grp'], $this->field_config['calificacion_2_']['symbol_dec'], "0", "S", $this->field_config['calificacion_2_']['format_neg'], "", "", "-", $this->field_config['calificacion_2_']['symbol_fmt']) ; 
-      }
-      if ('' !== $this->calificacion_3_ || (!empty($format_fields) && isset($format_fields['calificacion_3_'])))
-      {
-          nmgp_Form_Num_Val($this->calificacion_3_, $this->field_config['calificacion_3_']['symbol_grp'], $this->field_config['calificacion_3_']['symbol_dec'], "0", "S", $this->field_config['calificacion_3_']['format_neg'], "", "", "-", $this->field_config['calificacion_3_']['symbol_fmt']) ; 
-      }
-      if ('' !== $this->calificacion_4_ || (!empty($format_fields) && isset($format_fields['calificacion_4_'])))
-      {
-          nmgp_Form_Num_Val($this->calificacion_4_, $this->field_config['calificacion_4_']['symbol_grp'], $this->field_config['calificacion_4_']['symbol_dec'], "0", "S", $this->field_config['calificacion_4_']['format_neg'], "", "", "-", $this->field_config['calificacion_4_']['symbol_fmt']) ; 
-      }
-      if ('' !== $this->calificacion_5_ || (!empty($format_fields) && isset($format_fields['calificacion_5_'])))
-      {
-          nmgp_Form_Num_Val($this->calificacion_5_, $this->field_config['calificacion_5_']['symbol_grp'], $this->field_config['calificacion_5_']['symbol_dec'], "0", "S", $this->field_config['calificacion_5_']['format_neg'], "", "", "-", $this->field_config['calificacion_5_']['symbol_fmt']) ; 
-      }
-      if ('' !== $this->calificacion_6_ || (!empty($format_fields) && isset($format_fields['calificacion_6_'])))
-      {
-          nmgp_Form_Num_Val($this->calificacion_6_, $this->field_config['calificacion_6_']['symbol_grp'], $this->field_config['calificacion_6_']['symbol_dec'], "0", "S", $this->field_config['calificacion_6_']['format_neg'], "", "", "-", $this->field_config['calificacion_6_']['symbol_fmt']) ; 
-      }
-      if ('' !== $this->calificacion_7_ || (!empty($format_fields) && isset($format_fields['calificacion_7_'])))
-      {
-          nmgp_Form_Num_Val($this->calificacion_7_, $this->field_config['calificacion_7_']['symbol_grp'], $this->field_config['calificacion_7_']['symbol_dec'], "0", "S", $this->field_config['calificacion_7_']['format_neg'], "", "", "-", $this->field_config['calificacion_7_']['symbol_fmt']) ; 
-      }
-      if ('' !== $this->calificacion_8_ || (!empty($format_fields) && isset($format_fields['calificacion_8_'])))
-      {
-          nmgp_Form_Num_Val($this->calificacion_8_, $this->field_config['calificacion_8_']['symbol_grp'], $this->field_config['calificacion_8_']['symbol_dec'], "0", "S", $this->field_config['calificacion_8_']['format_neg'], "", "", "-", $this->field_config['calificacion_8_']['symbol_fmt']) ; 
-      }
-      if ('' !== $this->calificacion_9_ || (!empty($format_fields) && isset($format_fields['calificacion_9_'])))
-      {
-          nmgp_Form_Num_Val($this->calificacion_9_, $this->field_config['calificacion_9_']['symbol_grp'], $this->field_config['calificacion_9_']['symbol_dec'], "0", "S", $this->field_config['calificacion_9_']['format_neg'], "", "", "-", $this->field_config['calificacion_9_']['symbol_fmt']) ; 
-      }
       if ('' !== $this->calificacion_final_ || (!empty($format_fields) && isset($format_fields['calificacion_final_'])))
       {
           nmgp_Form_Num_Val($this->calificacion_final_, $this->field_config['calificacion_final_']['symbol_grp'], $this->field_config['calificacion_final_']['symbol_dec'], "0", "S", $this->field_config['calificacion_final_']['format_neg'], "", "", "-", $this->field_config['calificacion_final_']['symbol_fmt']) ; 
+      }
+      if ('' !== $this->periodo_id_ || (!empty($format_fields) && isset($format_fields['periodo_id_'])))
+      {
+          nmgp_Form_Num_Val($this->periodo_id_, $this->field_config['periodo_id_']['symbol_grp'], $this->field_config['periodo_id_']['symbol_dec'], "0", "S", $this->field_config['periodo_id_']['format_neg'], "", "", "-", $this->field_config['periodo_id_']['symbol_fmt']) ; 
+      }
+      if ('' !== $this->curso_id_ || (!empty($format_fields) && isset($format_fields['curso_id_'])))
+      {
+          nmgp_Form_Num_Val($this->curso_id_, $this->field_config['curso_id_']['symbol_grp'], $this->field_config['curso_id_']['symbol_dec'], "0", "S", $this->field_config['curso_id_']['format_neg'], "", "", "-", $this->field_config['curso_id_']['symbol_fmt']) ; 
       }
    }
    function nm_gera_mask(&$nm_campo, $nm_mask)
@@ -4135,10 +4392,6 @@ class form_calificaciones_apl
                   {
                       $this->form_vert_form_calificaciones[$this->nmgp_refresh_row]['asignatura_id_'] = $this->asignatura_id_;
                   }
-                  if (isset($this->NM_ajax_changed['tipo_calificacion_id_']) && $this->NM_ajax_changed['tipo_calificacion_id_'])
-                  {
-                      $this->form_vert_form_calificaciones[$this->nmgp_refresh_row]['tipo_calificacion_id_'] = $this->tipo_calificacion_id_;
-                  }
                   if (isset($this->NM_ajax_changed['calificacion_1_']) && $this->NM_ajax_changed['calificacion_1_'])
                   {
                       $this->form_vert_form_calificaciones[$this->nmgp_refresh_row]['calificacion_1_'] = $this->calificacion_1_;
@@ -4215,6 +4468,18 @@ class form_calificaciones_apl
                   {
                       $this->form_vert_form_calificaciones[$this->nmgp_refresh_row]['calificacion_final_'] = $this->calificacion_final_;
                   }
+                  if (isset($this->NM_ajax_changed['colegio_id_']) && $this->NM_ajax_changed['colegio_id_'])
+                  {
+                      $this->form_vert_form_calificaciones[$this->nmgp_refresh_row]['colegio_id_'] = $this->colegio_id_;
+                  }
+                  if (isset($this->NM_ajax_changed['periodo_id_']) && $this->NM_ajax_changed['periodo_id_'])
+                  {
+                      $this->form_vert_form_calificaciones[$this->nmgp_refresh_row]['periodo_id_'] = $this->periodo_id_;
+                  }
+                  if (isset($this->NM_ajax_changed['curso_id_']) && $this->NM_ajax_changed['curso_id_'])
+                  {
+                      $this->form_vert_form_calificaciones[$this->nmgp_refresh_row]['curso_id_'] = $this->curso_id_;
+                  }
               }
           }
           if (isset($this->nmgp_refresh_row) && '' != $this->nmgp_refresh_row)
@@ -4237,7 +4502,7 @@ class form_calificaciones_apl
               if ('navigate_form' == $this->NM_ajax_opcao) {
                   $this->NM_ajax_info['buttonDisplayVert'][] = array(
                       'seq'      => $sc_seq_vert,
-                      'gridView' => false,
+                      'gridView' => true,
                       'delete'   => $this->nmgp_botoes['delete'],
                       'update'   => $this->nmgp_botoes['update'],
                   );
@@ -4246,34 +4511,205 @@ class form_calificaciones_apl
               {
                   $sTmpValue = NM_charset_to_utf8($aRecData['estudiante_id_']);
                   $aLookup = array();
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+
+   $old_value_calificacion_final_ = $this->calificacion_final_;
+   $old_value_periodo_id_ = $this->periodo_id_;
+   $old_value_curso_id_ = $this->curso_id_;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_calificacion_final_ = $this->calificacion_final_;
+   $unformatted_value_periodo_id_ = $this->periodo_id_;
+   $unformatted_value_curso_id_ = $this->curso_id_;
+
+   $nm_comando = "SELECT estudiante_id, concat(nombres,' ', primer_apellido)  FROM estudiantes  WHERE colegio_id=" . $_SESSION['vglo_colegio'] . " ORDER BY primer_apellido";
+
+   $this->calificacion_final_ = $old_value_calificacion_final_;
+   $this->periodo_id_ = $old_value_periodo_id_;
+   $this->curso_id_ = $old_value_curso_id_;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
+              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
+              $rs->fields[0] = (string)$rs->fields[0];
+              $aLookup[] = array(form_calificaciones_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_calificaciones_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
           $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"estudiante_id_\"";
+          if (isset($this->NM_ajax_info['select_html']['estudiante_id_']) && !empty($this->NM_ajax_info['select_html']['estudiante_id_']))
+          {
+              eval("\$sSelComp = \"" . $this->NM_ajax_info['select_html']['estudiante_id_'] . "\";");
+          }
+          $sLookup = '';
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+                  $Nm_tp_obj = (isset($this->nmgp_refresh_fields) && in_array("estudiante_id_", $this->nmgp_refresh_fields)) ? 'select' : 'text';
                   $this->NM_ajax_info['fldList']['estudiante_id_' . $sc_seq_vert] = array(
                        'row'    => $sc_seq_vert,
-                       'type'    => 'label',
+                       'type'    => $Nm_tp_obj,
                        'valList' => array($sTmpValue),
+               'optList' => $aLookup,
                        );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['estudiante_id_' . $sc_seq_vert]['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['estudiante_id_' . $sc_seq_vert]['valList'][$i] = form_calificaciones_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['estudiante_id_' . $sc_seq_vert]['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['estudiante_id_' . $sc_seq_vert]['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['estudiante_id_' . $sc_seq_vert]['labList'] = $aLabel;
               }
               if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("asignatura_id_", $this->nmgp_refresh_fields)))
               {
                   $sTmpValue = NM_charset_to_utf8($aRecData['asignatura_id_']);
                   $aLookup = array();
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+
+   $old_value_calificacion_final_ = $this->calificacion_final_;
+   $old_value_periodo_id_ = $this->periodo_id_;
+   $old_value_curso_id_ = $this->curso_id_;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_calificacion_final_ = $this->calificacion_final_;
+   $unformatted_value_periodo_id_ = $this->periodo_id_;
+   $unformatted_value_curso_id_ = $this->curso_id_;
+
+   $nm_comando = "SELECT asignatura_id, descripcion  FROM asignaturas  WHERE colegio_id=" . $_SESSION['vglo_colegio'] . " ORDER BY descripcion";
+
+   $this->calificacion_final_ = $old_value_calificacion_final_;
+   $this->periodo_id_ = $old_value_periodo_id_;
+   $this->curso_id_ = $old_value_curso_id_;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
+              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
+              $rs->fields[0] = (string)$rs->fields[0];
+              $aLookup[] = array(form_calificaciones_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_calificaciones_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
           $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"asignatura_id_\"";
+          if (isset($this->NM_ajax_info['select_html']['asignatura_id_']) && !empty($this->NM_ajax_info['select_html']['asignatura_id_']))
+          {
+              eval("\$sSelComp = \"" . $this->NM_ajax_info['select_html']['asignatura_id_'] . "\";");
+          }
+          $sLookup = '';
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+                  $Nm_tp_obj = (isset($this->nmgp_refresh_fields) && in_array("asignatura_id_", $this->nmgp_refresh_fields)) ? 'select' : 'text';
                   $this->NM_ajax_info['fldList']['asignatura_id_' . $sc_seq_vert] = array(
                        'row'    => $sc_seq_vert,
-                       'type'    => 'label',
+                       'type'    => $Nm_tp_obj,
                        'valList' => array($sTmpValue),
+               'optList' => $aLookup,
                        );
-              }
-              if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("tipo_calificacion_id_", $this->nmgp_refresh_fields)))
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['asignatura_id_' . $sc_seq_vert]['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['asignatura_id_' . $sc_seq_vert]['valList'][$i] = form_calificaciones_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['asignatura_id_' . $sc_seq_vert]['valList']))
               {
-                  $sTmpValue = NM_charset_to_utf8($aRecData['tipo_calificacion_id_']);
-                  $aLookup = array();
-          $aLookupOrig = $aLookup;
-                  $this->NM_ajax_info['fldList']['tipo_calificacion_id_' . $sc_seq_vert] = array(
-                       'row'    => $sc_seq_vert,
-                       'type'    => 'text',
-                       'valList' => array($sTmpValue),
-                       );
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['asignatura_id_' . $sc_seq_vert]['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['asignatura_id_' . $sc_seq_vert]['labList'] = $aLabel;
               }
               if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("calificacion_1_", $this->nmgp_refresh_fields)))
               {
@@ -4283,7 +4719,7 @@ class form_calificaciones_apl
                   $this->NM_ajax_info['fldList']['calificacion_1_' . $sc_seq_vert] = array(
                        'row'    => $sc_seq_vert,
                        'type'    => 'text',
-                       'valList' => array($sTmpValue),
+                       'valList' => array($this->form_encode_input($sTmpValue)),
                        );
               }
               if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("calificacion_nivel_1_", $this->nmgp_refresh_fields)))
@@ -4293,8 +4729,8 @@ class form_calificaciones_apl
           $aLookupOrig = $aLookup;
                   $this->NM_ajax_info['fldList']['calificacion_nivel_1_' . $sc_seq_vert] = array(
                        'row'    => $sc_seq_vert,
-                       'type'    => 'text',
-                       'valList' => array($this->form_encode_input($sTmpValue)),
+                       'type'    => 'label',
+                       'valList' => array($sTmpValue),
                        );
               }
               if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("calificacion_2_", $this->nmgp_refresh_fields)))
@@ -4305,7 +4741,7 @@ class form_calificaciones_apl
                   $this->NM_ajax_info['fldList']['calificacion_2_' . $sc_seq_vert] = array(
                        'row'    => $sc_seq_vert,
                        'type'    => 'text',
-                       'valList' => array($sTmpValue),
+                       'valList' => array($this->form_encode_input($sTmpValue)),
                        );
               }
               if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("calificacion_nivel_2_", $this->nmgp_refresh_fields)))
@@ -4315,8 +4751,8 @@ class form_calificaciones_apl
           $aLookupOrig = $aLookup;
                   $this->NM_ajax_info['fldList']['calificacion_nivel_2_' . $sc_seq_vert] = array(
                        'row'    => $sc_seq_vert,
-                       'type'    => 'text',
-                       'valList' => array($this->form_encode_input($sTmpValue)),
+                       'type'    => 'label',
+                       'valList' => array($sTmpValue),
                        );
               }
               if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("calificacion_3_", $this->nmgp_refresh_fields)))
@@ -4327,7 +4763,7 @@ class form_calificaciones_apl
                   $this->NM_ajax_info['fldList']['calificacion_3_' . $sc_seq_vert] = array(
                        'row'    => $sc_seq_vert,
                        'type'    => 'text',
-                       'valList' => array($sTmpValue),
+                       'valList' => array($this->form_encode_input($sTmpValue)),
                        );
               }
               if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("calificacion_nivel_3_", $this->nmgp_refresh_fields)))
@@ -4337,8 +4773,8 @@ class form_calificaciones_apl
           $aLookupOrig = $aLookup;
                   $this->NM_ajax_info['fldList']['calificacion_nivel_3_' . $sc_seq_vert] = array(
                        'row'    => $sc_seq_vert,
-                       'type'    => 'text',
-                       'valList' => array($this->form_encode_input($sTmpValue)),
+                       'type'    => 'label',
+                       'valList' => array($sTmpValue),
                        );
               }
               if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("calificacion_4_", $this->nmgp_refresh_fields)))
@@ -4349,7 +4785,7 @@ class form_calificaciones_apl
                   $this->NM_ajax_info['fldList']['calificacion_4_' . $sc_seq_vert] = array(
                        'row'    => $sc_seq_vert,
                        'type'    => 'text',
-                       'valList' => array($sTmpValue),
+                       'valList' => array($this->form_encode_input($sTmpValue)),
                        );
               }
               if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("calificacion_nivel_4_", $this->nmgp_refresh_fields)))
@@ -4359,8 +4795,8 @@ class form_calificaciones_apl
           $aLookupOrig = $aLookup;
                   $this->NM_ajax_info['fldList']['calificacion_nivel_4_' . $sc_seq_vert] = array(
                        'row'    => $sc_seq_vert,
-                       'type'    => 'text',
-                       'valList' => array($this->form_encode_input($sTmpValue)),
+                       'type'    => 'label',
+                       'valList' => array($sTmpValue),
                        );
               }
               if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("calificacion_5_", $this->nmgp_refresh_fields)))
@@ -4371,7 +4807,7 @@ class form_calificaciones_apl
                   $this->NM_ajax_info['fldList']['calificacion_5_' . $sc_seq_vert] = array(
                        'row'    => $sc_seq_vert,
                        'type'    => 'text',
-                       'valList' => array($sTmpValue),
+                       'valList' => array($this->form_encode_input($sTmpValue)),
                        );
               }
               if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("calificacion_nivel_5_", $this->nmgp_refresh_fields)))
@@ -4381,8 +4817,8 @@ class form_calificaciones_apl
           $aLookupOrig = $aLookup;
                   $this->NM_ajax_info['fldList']['calificacion_nivel_5_' . $sc_seq_vert] = array(
                        'row'    => $sc_seq_vert,
-                       'type'    => 'text',
-                       'valList' => array($this->form_encode_input($sTmpValue)),
+                       'type'    => 'label',
+                       'valList' => array($sTmpValue),
                        );
               }
               if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("calificacion_6_", $this->nmgp_refresh_fields)))
@@ -4393,7 +4829,7 @@ class form_calificaciones_apl
                   $this->NM_ajax_info['fldList']['calificacion_6_' . $sc_seq_vert] = array(
                        'row'    => $sc_seq_vert,
                        'type'    => 'text',
-                       'valList' => array($sTmpValue),
+                       'valList' => array($this->form_encode_input($sTmpValue)),
                        );
               }
               if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("calificacion_nivel_6_", $this->nmgp_refresh_fields)))
@@ -4403,8 +4839,8 @@ class form_calificaciones_apl
           $aLookupOrig = $aLookup;
                   $this->NM_ajax_info['fldList']['calificacion_nivel_6_' . $sc_seq_vert] = array(
                        'row'    => $sc_seq_vert,
-                       'type'    => 'text',
-                       'valList' => array($this->form_encode_input($sTmpValue)),
+                       'type'    => 'label',
+                       'valList' => array($sTmpValue),
                        );
               }
               if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("calificacion_7_", $this->nmgp_refresh_fields)))
@@ -4415,7 +4851,7 @@ class form_calificaciones_apl
                   $this->NM_ajax_info['fldList']['calificacion_7_' . $sc_seq_vert] = array(
                        'row'    => $sc_seq_vert,
                        'type'    => 'text',
-                       'valList' => array($sTmpValue),
+                       'valList' => array($this->form_encode_input($sTmpValue)),
                        );
               }
               if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("calificacion_nivel_7_", $this->nmgp_refresh_fields)))
@@ -4425,8 +4861,8 @@ class form_calificaciones_apl
           $aLookupOrig = $aLookup;
                   $this->NM_ajax_info['fldList']['calificacion_nivel_7_' . $sc_seq_vert] = array(
                        'row'    => $sc_seq_vert,
-                       'type'    => 'text',
-                       'valList' => array($this->form_encode_input($sTmpValue)),
+                       'type'    => 'label',
+                       'valList' => array($sTmpValue),
                        );
               }
               if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("calificacion_8_", $this->nmgp_refresh_fields)))
@@ -4437,7 +4873,7 @@ class form_calificaciones_apl
                   $this->NM_ajax_info['fldList']['calificacion_8_' . $sc_seq_vert] = array(
                        'row'    => $sc_seq_vert,
                        'type'    => 'text',
-                       'valList' => array($sTmpValue),
+                       'valList' => array($this->form_encode_input($sTmpValue)),
                        );
               }
               if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("calificacion_nivel_8_", $this->nmgp_refresh_fields)))
@@ -4447,8 +4883,8 @@ class form_calificaciones_apl
           $aLookupOrig = $aLookup;
                   $this->NM_ajax_info['fldList']['calificacion_nivel_8_' . $sc_seq_vert] = array(
                        'row'    => $sc_seq_vert,
-                       'type'    => 'text',
-                       'valList' => array($this->form_encode_input($sTmpValue)),
+                       'type'    => 'label',
+                       'valList' => array($sTmpValue),
                        );
               }
               if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("calificacion_9_", $this->nmgp_refresh_fields)))
@@ -4459,7 +4895,7 @@ class form_calificaciones_apl
                   $this->NM_ajax_info['fldList']['calificacion_9_' . $sc_seq_vert] = array(
                        'row'    => $sc_seq_vert,
                        'type'    => 'text',
-                       'valList' => array($sTmpValue),
+                       'valList' => array($this->form_encode_input($sTmpValue)),
                        );
               }
               if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("calificacion_nivel_9_", $this->nmgp_refresh_fields)))
@@ -4469,8 +4905,8 @@ class form_calificaciones_apl
           $aLookupOrig = $aLookup;
                   $this->NM_ajax_info['fldList']['calificacion_nivel_9_' . $sc_seq_vert] = array(
                        'row'    => $sc_seq_vert,
-                       'type'    => 'text',
-                       'valList' => array($this->form_encode_input($sTmpValue)),
+                       'type'    => 'label',
+                       'valList' => array($sTmpValue),
                        );
               }
               if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("calificacion_final_", $this->nmgp_refresh_fields)))
@@ -4480,7 +4916,134 @@ class form_calificaciones_apl
           $aLookupOrig = $aLookup;
                   $this->NM_ajax_info['fldList']['calificacion_final_' . $sc_seq_vert] = array(
                        'row'    => $sc_seq_vert,
-                       'type'    => 'text',
+                       'type'    => 'label',
+                       'valList' => array($sTmpValue),
+                       );
+              }
+              if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("colegio_id_", $this->nmgp_refresh_fields)))
+              {
+                  $sTmpValue = NM_charset_to_utf8($aRecData['colegio_id_']);
+                  $aLookup = array();
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_colegio_id_']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_colegio_id_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_colegio_id_']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_colegio_id_'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+
+   $old_value_calificacion_final_ = $this->calificacion_final_;
+   $old_value_periodo_id_ = $this->periodo_id_;
+   $old_value_curso_id_ = $this->curso_id_;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_calificacion_final_ = $this->calificacion_final_;
+   $unformatted_value_periodo_id_ = $this->periodo_id_;
+   $unformatted_value_curso_id_ = $this->curso_id_;
+
+   $nm_comando = "SELECT colegio_id, colegio_id FROM colegios ORDER BY colegio_id";
+
+   $this->calificacion_final_ = $old_value_calificacion_final_;
+   $this->periodo_id_ = $old_value_periodo_id_;
+   $this->curso_id_ = $old_value_curso_id_;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
+              $rs->fields[1] = str_replace(',', '.', $rs->fields[1]);
+              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
+              $rs->fields[0] = (string)$rs->fields[0];
+              $rs->fields[1] = (strpos(strtolower($rs->fields[1]), "e")) ? (float)$rs->fields[1] : $rs->fields[1];
+              $rs->fields[1] = (string)$rs->fields[1];
+              $aLookup[] = array(form_calificaciones_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_calificaciones_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_colegio_id_'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+          $aLookupOrig = $aLookup;
+          $sSelComp = "name=\"colegio_id_\"";
+          if (isset($this->NM_ajax_info['select_html']['colegio_id_']) && !empty($this->NM_ajax_info['select_html']['colegio_id_']))
+          {
+              eval("\$sSelComp = \"" . $this->NM_ajax_info['select_html']['colegio_id_'] . "\";");
+          }
+          $sLookup = '';
+          foreach ($aLookup as $aOption)
+          {
+              foreach ($aOption as $sValue => $sLabel)
+              {
+                  $sOpt     = ($sValue !== $sLabel) ? $sValue : $sLabel;
+                  $sLookup .= "<option value=\"" . $sOpt . "\">" . $sLabel . "</option>";
+              }
+          }
+          $aLookup  = $sLookup;
+                  $Nm_tp_obj = (isset($this->nmgp_refresh_fields) && in_array("colegio_id_", $this->nmgp_refresh_fields)) ? 'select' : 'text';
+                  $this->NM_ajax_info['fldList']['colegio_id_' . $sc_seq_vert] = array(
+                       'row'    => $sc_seq_vert,
+                       'type'    => $Nm_tp_obj,
+                       'valList' => array($sTmpValue),
+               'optList' => $aLookup,
+                       );
+          $aLabel     = array();
+          $aLabelTemp = array();
+          foreach ($this->NM_ajax_info['fldList']['colegio_id_' . $sc_seq_vert]['valList'] as $i => $v)
+          {
+              $this->NM_ajax_info['fldList']['colegio_id_' . $sc_seq_vert]['valList'][$i] = form_calificaciones_pack_protect_string($v);
+          }
+          foreach ($aLookupOrig as $aValData)
+          {
+              if (in_array(key($aValData), $this->NM_ajax_info['fldList']['colegio_id_' . $sc_seq_vert]['valList']))
+              {
+                  $aLabelTemp[key($aValData)] = current($aValData);
+              }
+          }
+          foreach ($this->NM_ajax_info['fldList']['colegio_id_' . $sc_seq_vert]['valList'] as $iIndex => $sValue)
+          {
+              $aLabel[$iIndex] = (isset($aLabelTemp[$sValue])) ? $aLabelTemp[$sValue] : $sValue;
+          }
+          $this->NM_ajax_info['fldList']['colegio_id_' . $sc_seq_vert]['labList'] = $aLabel;
+              }
+              if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("periodo_id_", $this->nmgp_refresh_fields)))
+              {
+                  $sTmpValue = NM_charset_to_utf8($aRecData['periodo_id_']);
+                  $aLookup = array();
+          $aLookupOrig = $aLookup;
+                  $this->NM_ajax_info['fldList']['periodo_id_' . $sc_seq_vert] = array(
+                       'row'    => $sc_seq_vert,
+                       'type'    => 'label',
+                       'valList' => array($sTmpValue),
+                       );
+              }
+              if ('navigate_form' == $this->NM_ajax_opcao || 'backup_line' == $this->NM_ajax_opcao || (isset($this->nmgp_refresh_fields) && in_array("curso_id_", $this->nmgp_refresh_fields)))
+              {
+                  $sTmpValue = NM_charset_to_utf8($aRecData['curso_id_']);
+                  $aLookup = array();
+          $aLookupOrig = $aLookup;
+                  $this->NM_ajax_info['fldList']['curso_id_' . $sc_seq_vert] = array(
+                       'row'    => $sc_seq_vert,
+                       'type'    => 'label',
                        'valList' => array($sTmpValue),
                        );
               }
@@ -4561,379 +5124,91 @@ class form_calificaciones_apl
   {
           if (!$this->NM_ajax_flag || !isset($this->nmgp_refresh_fields)) {
           $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'on';
-if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
-{
-    $original_calificacion_1_ = $this->calificacion_1_;
-    $original_calificacion_2_ = $this->calificacion_2_;
-    $original_calificacion_3_ = $this->calificacion_3_;
-    $original_calificacion_4_ = $this->calificacion_4_;
-    $original_calificacion_5_ = $this->calificacion_5_;
-    $original_calificacion_6_ = $this->calificacion_6_;
-    $original_calificacion_7_ = $this->calificacion_7_;
-    $original_calificacion_8_ = $this->calificacion_8_;
-    $original_calificacion_9_ = $this->calificacion_9_;
-}
   if($this->descripcion_1_  !=null) {
-	$sc_tmp_field_name = $this->calificacion_1_ ;
-if (isset($this->sc_conv_var[$this->calificacion_1_ ]) && '' != $this->sc_conv_var[$this->calificacion_1_ ])
+	$sc_tmp_field_name = 'calificacion_1';
+if (isset($this->sc_conv_var['calificacion_1']) && '' != $this->sc_conv_var['calificacion_1'])
 {
-    $sc_tmp_field_name = $this->sc_conv_var[$this->calificacion_1_ ];
+    $sc_tmp_field_name = $this->sc_conv_var['calificacion_1'];
 }
 $this->NM_ajax_info['fieldLabel'][$sc_tmp_field_name] = $this->nm_new_label[$sc_tmp_field_name] =$this->descripcion_1_ ;
 }
 
 if($this->descripcion_2_  !=null) {
-	$sc_tmp_field_name = $this->calificacion_2_ ;
-if (isset($this->sc_conv_var[$this->calificacion_2_ ]) && '' != $this->sc_conv_var[$this->calificacion_2_ ])
+	$sc_tmp_field_name = 'calificacion_2';
+if (isset($this->sc_conv_var['calificacion_2']) && '' != $this->sc_conv_var['calificacion_2'])
 {
-    $sc_tmp_field_name = $this->sc_conv_var[$this->calificacion_2_ ];
+    $sc_tmp_field_name = $this->sc_conv_var['calificacion_2'];
 }
 $this->NM_ajax_info['fieldLabel'][$sc_tmp_field_name] = $this->nm_new_label[$sc_tmp_field_name] =$this->descripcion_2_ ;
 }
 
 if($this->descripcion_3_  !=null) {
-	$sc_tmp_field_name = $this->calificacion_3_ ;
-if (isset($this->sc_conv_var[$this->calificacion_3_ ]) && '' != $this->sc_conv_var[$this->calificacion_3_ ])
+	$sc_tmp_field_name = 'calificacion_3';
+if (isset($this->sc_conv_var['calificacion_3']) && '' != $this->sc_conv_var['calificacion_3'])
 {
-    $sc_tmp_field_name = $this->sc_conv_var[$this->calificacion_3_ ];
+    $sc_tmp_field_name = $this->sc_conv_var['calificacion_3'];
 }
 $this->NM_ajax_info['fieldLabel'][$sc_tmp_field_name] = $this->nm_new_label[$sc_tmp_field_name] =$this->descripcion_3_ ;
 }
 
 if($this->descripcion_4_  !=null) {
-	$sc_tmp_field_name = $this->calificacion_4_ ;
-if (isset($this->sc_conv_var[$this->calificacion_4_ ]) && '' != $this->sc_conv_var[$this->calificacion_4_ ])
+	$sc_tmp_field_name = 'calificacion_4';
+if (isset($this->sc_conv_var['calificacion_4']) && '' != $this->sc_conv_var['calificacion_4'])
 {
-    $sc_tmp_field_name = $this->sc_conv_var[$this->calificacion_4_ ];
+    $sc_tmp_field_name = $this->sc_conv_var['calificacion_4'];
 }
 $this->NM_ajax_info['fieldLabel'][$sc_tmp_field_name] = $this->nm_new_label[$sc_tmp_field_name] =$this->descripcion_4_ ;
 }
 
 if($this->descripcion_5_  !=null) {
-	$sc_tmp_field_name = $this->calificacion_5_ ;
-if (isset($this->sc_conv_var[$this->calificacion_5_ ]) && '' != $this->sc_conv_var[$this->calificacion_5_ ])
+	$sc_tmp_field_name = 'calificacion_5';
+if (isset($this->sc_conv_var['calificacion_5']) && '' != $this->sc_conv_var['calificacion_5'])
 {
-    $sc_tmp_field_name = $this->sc_conv_var[$this->calificacion_5_ ];
+    $sc_tmp_field_name = $this->sc_conv_var['calificacion_5'];
 }
 $this->NM_ajax_info['fieldLabel'][$sc_tmp_field_name] = $this->nm_new_label[$sc_tmp_field_name] =$this->descripcion_5_ ;
 }
 
 if($this->descripcion_6_  !=null) {
-	$sc_tmp_field_name = $this->calificacion_6_ ;
-if (isset($this->sc_conv_var[$this->calificacion_6_ ]) && '' != $this->sc_conv_var[$this->calificacion_6_ ])
+	$sc_tmp_field_name = 'calificacion_6';
+if (isset($this->sc_conv_var['calificacion_6']) && '' != $this->sc_conv_var['calificacion_6'])
 {
-    $sc_tmp_field_name = $this->sc_conv_var[$this->calificacion_6_ ];
+    $sc_tmp_field_name = $this->sc_conv_var['calificacion_6'];
 }
 $this->NM_ajax_info['fieldLabel'][$sc_tmp_field_name] = $this->nm_new_label[$sc_tmp_field_name] =$this->descripcion_6_ ;
 }
 
 if($this->descripcion_7_  !=null) {
-	$sc_tmp_field_name = $this->calificacion_7_ ;
-if (isset($this->sc_conv_var[$this->calificacion_7_ ]) && '' != $this->sc_conv_var[$this->calificacion_7_ ])
+	$sc_tmp_field_name = 'calificacion_7';
+if (isset($this->sc_conv_var['calificacion_7']) && '' != $this->sc_conv_var['calificacion_7'])
 {
-    $sc_tmp_field_name = $this->sc_conv_var[$this->calificacion_7_ ];
+    $sc_tmp_field_name = $this->sc_conv_var['calificacion_7'];
 }
 $this->NM_ajax_info['fieldLabel'][$sc_tmp_field_name] = $this->nm_new_label[$sc_tmp_field_name] =$this->descripcion_7_ ;
 }
 
 if($this->descripcion_8_  !=null) {
-	$sc_tmp_field_name = $this->calificacion_8_ ;
-if (isset($this->sc_conv_var[$this->calificacion_8_ ]) && '' != $this->sc_conv_var[$this->calificacion_8_ ])
+	$sc_tmp_field_name = 'calificacion_8';
+if (isset($this->sc_conv_var['calificacion_8']) && '' != $this->sc_conv_var['calificacion_8'])
 {
-    $sc_tmp_field_name = $this->sc_conv_var[$this->calificacion_8_ ];
+    $sc_tmp_field_name = $this->sc_conv_var['calificacion_8'];
 }
 $this->NM_ajax_info['fieldLabel'][$sc_tmp_field_name] = $this->nm_new_label[$sc_tmp_field_name] =$this->descripcion_8_ ;
 }
 
 if($this->descripcion_9_  !=null) {
-	$sc_tmp_field_name = $this->calificacion_9_ ;
-if (isset($this->sc_conv_var[$this->calificacion_9_ ]) && '' != $this->sc_conv_var[$this->calificacion_9_ ])
+	$sc_tmp_field_name = 'calificacion_9';
+if (isset($this->sc_conv_var['calificacion_9']) && '' != $this->sc_conv_var['calificacion_9'])
 {
-    $sc_tmp_field_name = $this->sc_conv_var[$this->calificacion_9_ ];
+    $sc_tmp_field_name = $this->sc_conv_var['calificacion_9'];
 }
 $this->NM_ajax_info['fieldLabel'][$sc_tmp_field_name] = $this->nm_new_label[$sc_tmp_field_name] =$this->descripcion_9_ ;
-}
-if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
-{
-    if (($original_calificacion_1_ != $this->calificacion_1_ || (isset($bFlagRead_calificacion_1_) && $bFlagRead_calificacion_1_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['calificacion_1_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['calificacion_1_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_1_);
-        $this->NM_ajax_changed['calificacion_1_'] = true;
-    }
-    if (($original_calificacion_2_ != $this->calificacion_2_ || (isset($bFlagRead_calificacion_2_) && $bFlagRead_calificacion_2_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['calificacion_2_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['calificacion_2_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_2_);
-        $this->NM_ajax_changed['calificacion_2_'] = true;
-    }
-    if (($original_calificacion_3_ != $this->calificacion_3_ || (isset($bFlagRead_calificacion_3_) && $bFlagRead_calificacion_3_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['calificacion_3_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['calificacion_3_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_3_);
-        $this->NM_ajax_changed['calificacion_3_'] = true;
-    }
-    if (($original_calificacion_4_ != $this->calificacion_4_ || (isset($bFlagRead_calificacion_4_) && $bFlagRead_calificacion_4_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['calificacion_4_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['calificacion_4_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_4_);
-        $this->NM_ajax_changed['calificacion_4_'] = true;
-    }
-    if (($original_calificacion_5_ != $this->calificacion_5_ || (isset($bFlagRead_calificacion_5_) && $bFlagRead_calificacion_5_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['calificacion_5_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['calificacion_5_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_5_);
-        $this->NM_ajax_changed['calificacion_5_'] = true;
-    }
-    if (($original_calificacion_6_ != $this->calificacion_6_ || (isset($bFlagRead_calificacion_6_) && $bFlagRead_calificacion_6_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['calificacion_6_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['calificacion_6_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_6_);
-        $this->NM_ajax_changed['calificacion_6_'] = true;
-    }
-    if (($original_calificacion_7_ != $this->calificacion_7_ || (isset($bFlagRead_calificacion_7_) && $bFlagRead_calificacion_7_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['calificacion_7_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['calificacion_7_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_7_);
-        $this->NM_ajax_changed['calificacion_7_'] = true;
-    }
-    if (($original_calificacion_8_ != $this->calificacion_8_ || (isset($bFlagRead_calificacion_8_) && $bFlagRead_calificacion_8_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['calificacion_8_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['calificacion_8_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_8_);
-        $this->NM_ajax_changed['calificacion_8_'] = true;
-    }
-    if (($original_calificacion_9_ != $this->calificacion_9_ || (isset($bFlagRead_calificacion_9_) && $bFlagRead_calificacion_9_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['calificacion_9_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['calificacion_9_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_9_);
-        $this->NM_ajax_changed['calificacion_9_'] = true;
-    }
 }
 $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off'; 
           }
   }
   function nm_proc_onload($bFormat = true)
   {
-      if (!$this->NM_ajax_flag || !isset($this->nmgp_refresh_fields)) {
-      $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'on';
-if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
-{
-    $original_calificacion_1_ = $this->calificacion_1_;
-    $original_calificacion_2_ = $this->calificacion_2_;
-    $original_calificacion_3_ = $this->calificacion_3_;
-    $original_calificacion_4_ = $this->calificacion_4_;
-    $original_calificacion_5_ = $this->calificacion_5_;
-    $original_calificacion_6_ = $this->calificacion_6_;
-    $original_calificacion_7_ = $this->calificacion_7_;
-    $original_calificacion_8_ = $this->calificacion_8_;
-    $original_calificacion_9_ = $this->calificacion_9_;
-    $original_calificacion_nivel_1_ = $this->calificacion_nivel_1_;
-    $original_calificacion_nivel_2_ = $this->calificacion_nivel_2_;
-    $original_calificacion_nivel_3_ = $this->calificacion_nivel_3_;
-    $original_calificacion_nivel_4_ = $this->calificacion_nivel_4_;
-    $original_calificacion_nivel_5_ = $this->calificacion_nivel_5_;
-    $original_calificacion_nivel_6_ = $this->calificacion_nivel_6_;
-    $original_calificacion_nivel_7_ = $this->calificacion_nivel_7_;
-    $original_calificacion_nivel_8_ = $this->calificacion_nivel_8_;
-    $original_calificacion_nivel_9_ = $this->calificacion_nivel_9_;
-}
-if (!isset($this->sc_temp_vglo_curso)) {$this->sc_temp_vglo_curso = (isset($_SESSION['vglo_curso'])) ? $_SESSION['vglo_curso'] : "";}
-if (!isset($this->sc_temp_vglo_periodo)) {$this->sc_temp_vglo_periodo = (isset($_SESSION['vglo_periodo'])) ? $_SESSION['vglo_periodo'] : "";}
-if (!isset($this->sc_temp_vglo_colegio)) {$this->sc_temp_vglo_colegio = (isset($_SESSION['vglo_colegio'])) ? $_SESSION['vglo_colegio'] : "";}
-   
-      $nm_select = "SELECT ifnull(descripcion_1, ''), ifnull(descripcion_2, ''), ifnull(descripcion_3, ''),
- ifnull(descripcion_4, ''), ifnull(descripcion_5, ''), ifnull(descripcion_6, ''), 
- ifnull(descripcion_7, ''), ifnull(descripcion_8, ''), ifnull(descripcion_9, '') 
- FROM calificaciones WHERE colegio_id=$this->sc_temp_vglo_colegio and periodo_id=$this->sc_temp_vglo_periodo and curso_id=$this->sc_temp_vglo_curso 
- GROUP BY ifnull(descripcion_1, ''), ifnull(descripcion_2, ''), ifnull(descripcion_3, ''),
- ifnull(descripcion_4, ''), ifnull(descripcion_5, ''), ifnull(descripcion_6, ''), 
- ifnull(descripcion_7, ''), ifnull(descripcion_8, ''), ifnull(descripcion_9, '') "; 
-      $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_select; 
-      $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
-      $this->rs = array();
-      if ($rx = $this->Db->Execute($nm_select)) 
-      { 
-          $y = 0; 
-          $nm_count = $rx->FieldCount();
-          while (!$rx->EOF)
-          { 
-                 for ($x = 0; $x < $nm_count; $x++)
-                 { 
-                      $this->rs[$y] [$x] = $rx->fields[$x];
-                 }
-                 $y++; 
-                 $rx->MoveNext();
-          } 
-          $rx->Close();
-      } 
-      elseif (isset($GLOBALS["NM_ERRO_IBASE"]) && $GLOBALS["NM_ERRO_IBASE"] != 1)  
-      { 
-          $this->rs = false;
-          $this->rs_erro = $this->Db->ErrorMsg();
-      } 
-;
-
-if($this->rs[0][0] == '') {
-	$this->nmgp_cmp_hidden["calificacion_1_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_1_'] = 'off';
-	$this->nmgp_cmp_hidden["calificacion_nivel_1_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_nivel_1_'] = 'off';
-	}
-
-if($this->rs[0][1] == '') {
-	$this->nmgp_cmp_hidden["calificacion_2_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_2_'] = 'off';
-	$this->nmgp_cmp_hidden["calificacion_nivel_2_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_nivel_2_'] = 'off';
-	}
-
-if($this->rs[0][2] == '') {
-	$this->nmgp_cmp_hidden["calificacion_3_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_3_'] = 'off';
-	$this->nmgp_cmp_hidden["calificacion_nivel_3_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_nivel_3_'] = 'off';
-	}
-
-if($this->rs[0][3] == '') {
-	$this->nmgp_cmp_hidden["calificacion_4_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_4_'] = 'off';
-	$this->nmgp_cmp_hidden["calificacion_nivel_4_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_nivel_4_'] = 'off';
-	}
-
-if($this->rs[0][4] == '') {
-	$this->nmgp_cmp_hidden["calificacion_5_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_5_'] = 'off';
-	$this->nmgp_cmp_hidden["calificacion_nivel_5_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_nivel_5_'] = 'off';
-	}
-
-if($this->rs[0][5] == '') {
-	$this->nmgp_cmp_hidden["calificacion_6_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_6_'] = 'off';
-	$this->nmgp_cmp_hidden["calificacion_nivel_6_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_nivel_6_'] = 'off';
-	}
-
-if($this->rs[0][6] == '') {
-	$this->nmgp_cmp_hidden["calificacion_7_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_7_'] = 'off';
-	$this->nmgp_cmp_hidden["calificacion_nivel_7_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_nivel_7_'] = 'off';
-	}
-
-if($this->rs[0][7] == '') {
-	$this->nmgp_cmp_hidden["calificacion_8_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_8_'] = 'off';
-	$this->nmgp_cmp_hidden["calificacion_nivel_8_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_nivel_8_'] = 'off';
-	}
-
-if($this->rs[0][8] == '') {
-	$this->nmgp_cmp_hidden["calificacion_9_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_9_'] = 'off';
-	$this->nmgp_cmp_hidden["calificacion_nivel_9_"] = "off"; $this->NM_ajax_info['fieldDisplay']['calificacion_nivel_9_'] = 'off';
-	}
-if (isset($this->sc_temp_vglo_colegio)) { $_SESSION['vglo_colegio'] = $this->sc_temp_vglo_colegio;}
-if (isset($this->sc_temp_vglo_periodo)) { $_SESSION['vglo_periodo'] = $this->sc_temp_vglo_periodo;}
-if (isset($this->sc_temp_vglo_curso)) { $_SESSION['vglo_curso'] = $this->sc_temp_vglo_curso;}
-if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
-{
-    if (($original_calificacion_1_ != $this->calificacion_1_ || (isset($bFlagRead_calificacion_1_) && $bFlagRead_calificacion_1_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['calificacion_1_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['calificacion_1_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_1_);
-        $this->NM_ajax_changed['calificacion_1_'] = true;
-    }
-    if (($original_calificacion_2_ != $this->calificacion_2_ || (isset($bFlagRead_calificacion_2_) && $bFlagRead_calificacion_2_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['calificacion_2_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['calificacion_2_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_2_);
-        $this->NM_ajax_changed['calificacion_2_'] = true;
-    }
-    if (($original_calificacion_3_ != $this->calificacion_3_ || (isset($bFlagRead_calificacion_3_) && $bFlagRead_calificacion_3_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['calificacion_3_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['calificacion_3_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_3_);
-        $this->NM_ajax_changed['calificacion_3_'] = true;
-    }
-    if (($original_calificacion_4_ != $this->calificacion_4_ || (isset($bFlagRead_calificacion_4_) && $bFlagRead_calificacion_4_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['calificacion_4_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['calificacion_4_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_4_);
-        $this->NM_ajax_changed['calificacion_4_'] = true;
-    }
-    if (($original_calificacion_5_ != $this->calificacion_5_ || (isset($bFlagRead_calificacion_5_) && $bFlagRead_calificacion_5_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['calificacion_5_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['calificacion_5_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_5_);
-        $this->NM_ajax_changed['calificacion_5_'] = true;
-    }
-    if (($original_calificacion_6_ != $this->calificacion_6_ || (isset($bFlagRead_calificacion_6_) && $bFlagRead_calificacion_6_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['calificacion_6_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['calificacion_6_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_6_);
-        $this->NM_ajax_changed['calificacion_6_'] = true;
-    }
-    if (($original_calificacion_7_ != $this->calificacion_7_ || (isset($bFlagRead_calificacion_7_) && $bFlagRead_calificacion_7_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['calificacion_7_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['calificacion_7_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_7_);
-        $this->NM_ajax_changed['calificacion_7_'] = true;
-    }
-    if (($original_calificacion_8_ != $this->calificacion_8_ || (isset($bFlagRead_calificacion_8_) && $bFlagRead_calificacion_8_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['calificacion_8_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['calificacion_8_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_8_);
-        $this->NM_ajax_changed['calificacion_8_'] = true;
-    }
-    if (($original_calificacion_9_ != $this->calificacion_9_ || (isset($bFlagRead_calificacion_9_) && $bFlagRead_calificacion_9_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['calificacion_9_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['calificacion_9_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_9_);
-        $this->NM_ajax_changed['calificacion_9_'] = true;
-    }
-    if (($original_calificacion_nivel_1_ != $this->calificacion_nivel_1_ || (isset($bFlagRead_calificacion_nivel_1_) && $bFlagRead_calificacion_nivel_1_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['calificacion_nivel_1_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['calificacion_nivel_1_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_nivel_1_);
-        $this->NM_ajax_changed['calificacion_nivel_1_'] = true;
-    }
-    if (($original_calificacion_nivel_2_ != $this->calificacion_nivel_2_ || (isset($bFlagRead_calificacion_nivel_2_) && $bFlagRead_calificacion_nivel_2_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['calificacion_nivel_2_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['calificacion_nivel_2_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_nivel_2_);
-        $this->NM_ajax_changed['calificacion_nivel_2_'] = true;
-    }
-    if (($original_calificacion_nivel_3_ != $this->calificacion_nivel_3_ || (isset($bFlagRead_calificacion_nivel_3_) && $bFlagRead_calificacion_nivel_3_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['calificacion_nivel_3_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['calificacion_nivel_3_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_nivel_3_);
-        $this->NM_ajax_changed['calificacion_nivel_3_'] = true;
-    }
-    if (($original_calificacion_nivel_4_ != $this->calificacion_nivel_4_ || (isset($bFlagRead_calificacion_nivel_4_) && $bFlagRead_calificacion_nivel_4_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['calificacion_nivel_4_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['calificacion_nivel_4_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_nivel_4_);
-        $this->NM_ajax_changed['calificacion_nivel_4_'] = true;
-    }
-    if (($original_calificacion_nivel_5_ != $this->calificacion_nivel_5_ || (isset($bFlagRead_calificacion_nivel_5_) && $bFlagRead_calificacion_nivel_5_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['calificacion_nivel_5_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['calificacion_nivel_5_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_nivel_5_);
-        $this->NM_ajax_changed['calificacion_nivel_5_'] = true;
-    }
-    if (($original_calificacion_nivel_6_ != $this->calificacion_nivel_6_ || (isset($bFlagRead_calificacion_nivel_6_) && $bFlagRead_calificacion_nivel_6_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['calificacion_nivel_6_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['calificacion_nivel_6_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_nivel_6_);
-        $this->NM_ajax_changed['calificacion_nivel_6_'] = true;
-    }
-    if (($original_calificacion_nivel_7_ != $this->calificacion_nivel_7_ || (isset($bFlagRead_calificacion_nivel_7_) && $bFlagRead_calificacion_nivel_7_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['calificacion_nivel_7_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['calificacion_nivel_7_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_nivel_7_);
-        $this->NM_ajax_changed['calificacion_nivel_7_'] = true;
-    }
-    if (($original_calificacion_nivel_8_ != $this->calificacion_nivel_8_ || (isset($bFlagRead_calificacion_nivel_8_) && $bFlagRead_calificacion_nivel_8_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['calificacion_nivel_8_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['calificacion_nivel_8_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_nivel_8_);
-        $this->NM_ajax_changed['calificacion_nivel_8_'] = true;
-    }
-    if (($original_calificacion_nivel_9_ != $this->calificacion_nivel_9_ || (isset($bFlagRead_calificacion_nivel_9_) && $bFlagRead_calificacion_nivel_9_))&& isset($this->nmgp_refresh_row))
-    {
-        $this->NM_ajax_info['fldList']['calificacion_nivel_9_' . $this->nmgp_refresh_row]['type']    = 'text';
-        $this->NM_ajax_info['fldList']['calificacion_nivel_9_' . $this->nmgp_refresh_row]['valList'] = array($this->calificacion_nivel_9_);
-        $this->NM_ajax_changed['calificacion_nivel_9_'] = true;
-    }
-}
-$_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off'; 
-      }
       $this->nm_guardar_campos();
       if ($bFormat) $this->nm_formatar_campos();
   }
@@ -5002,7 +5277,6 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
           $this->nmgp_dados_select = $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['dados_select'][$sc_seq_vert];
           if ($this->nmgp_dados_select['estudiante_id_'] == $this->estudiante_id_ &&
               $this->nmgp_dados_select['asignatura_id_'] == $this->asignatura_id_ &&
-              $this->nmgp_dados_select['tipo_calificacion_id_'] == $this->tipo_calificacion_id_ &&
               $this->nmgp_dados_select['calificacion_1_'] == $this->calificacion_1_ &&
               $this->nmgp_dados_select['calificacion_nivel_1_'] == $this->calificacion_nivel_1_ &&
               $this->nmgp_dados_select['calificacion_2_'] == $this->calificacion_2_ &&
@@ -5021,7 +5295,10 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
               $this->nmgp_dados_select['calificacion_nivel_8_'] == $this->calificacion_nivel_8_ &&
               $this->nmgp_dados_select['calificacion_9_'] == $this->calificacion_9_ &&
               $this->nmgp_dados_select['calificacion_nivel_9_'] == $this->calificacion_nivel_9_ &&
-              $this->nmgp_dados_select['calificacion_final_'] == $this->calificacion_final_)
+              $this->nmgp_dados_select['calificacion_final_'] == $this->calificacion_final_ &&
+              $this->nmgp_dados_select['colegio_id_'] == $this->colegio_id_ &&
+              $this->nmgp_dados_select['periodo_id_'] == $this->periodo_id_ &&
+              $this->nmgp_dados_select['curso_id_'] == $this->curso_id_)
           {
               $SC_ex_update = false; 
               $SC_ex_upd_or = false; 
@@ -5030,7 +5307,6 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
           {
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['dados_select'][$sc_seq_vert]['estudiante_id_'] = $this->estudiante_id_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['dados_select'][$sc_seq_vert]['asignatura_id_'] = $this->asignatura_id_;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['dados_select'][$sc_seq_vert]['tipo_calificacion_id_'] = $this->tipo_calificacion_id_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['dados_select'][$sc_seq_vert]['calificacion_1_'] = $this->calificacion_1_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['dados_select'][$sc_seq_vert]['calificacion_nivel_1_'] = $this->calificacion_nivel_1_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['dados_select'][$sc_seq_vert]['calificacion_2_'] = $this->calificacion_2_;
@@ -5050,6 +5326,9 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['dados_select'][$sc_seq_vert]['calificacion_9_'] = $this->calificacion_9_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['dados_select'][$sc_seq_vert]['calificacion_nivel_9_'] = $this->calificacion_nivel_9_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['dados_select'][$sc_seq_vert]['calificacion_final_'] = $this->calificacion_final_;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['dados_select'][$sc_seq_vert]['colegio_id_'] = $this->colegio_id_;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['dados_select'][$sc_seq_vert]['periodo_id_'] = $this->periodo_id_;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['dados_select'][$sc_seq_vert]['curso_id_'] = $this->curso_id_;
           }
       }
       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
@@ -5063,9 +5342,17 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
           $this->Db->BeginTrans(); 
           $this->Ini->sc_tem_trans_banco = true; 
       } 
+      if (('alterar' == $this->nmgp_opcao || 'igual' == $this->nmgp_opcao) && $this->calificacion_1_ == ""){$this->calificacion_1_ = "null"; $NM_val_null[] = "calificacion_1_";}  
+      if (('alterar' == $this->nmgp_opcao || 'igual' == $this->nmgp_opcao) && $this->calificacion_2_ == ""){$this->calificacion_2_ = "null"; $NM_val_null[] = "calificacion_2_";}  
+      if (('alterar' == $this->nmgp_opcao || 'igual' == $this->nmgp_opcao) && $this->calificacion_3_ == ""){$this->calificacion_3_ = "null"; $NM_val_null[] = "calificacion_3_";}  
+      if (('alterar' == $this->nmgp_opcao || 'igual' == $this->nmgp_opcao) && $this->calificacion_4_ == ""){$this->calificacion_4_ = "null"; $NM_val_null[] = "calificacion_4_";}  
+      if (('alterar' == $this->nmgp_opcao || 'igual' == $this->nmgp_opcao) && $this->calificacion_5_ == ""){$this->calificacion_5_ = "null"; $NM_val_null[] = "calificacion_5_";}  
+      if (('alterar' == $this->nmgp_opcao || 'igual' == $this->nmgp_opcao) && $this->calificacion_6_ == ""){$this->calificacion_6_ = "null"; $NM_val_null[] = "calificacion_6_";}  
+      if (('alterar' == $this->nmgp_opcao || 'igual' == $this->nmgp_opcao) && $this->calificacion_7_ == ""){$this->calificacion_7_ = "null"; $NM_val_null[] = "calificacion_7_";}  
+      if (('alterar' == $this->nmgp_opcao || 'igual' == $this->nmgp_opcao) && $this->calificacion_8_ == ""){$this->calificacion_8_ = "null"; $NM_val_null[] = "calificacion_8_";}  
+      if (('alterar' == $this->nmgp_opcao || 'igual' == $this->nmgp_opcao) && $this->calificacion_9_ == ""){$this->calificacion_9_ = "null"; $NM_val_null[] = "calificacion_9_";}  
       $NM_val_form['estudiante_id_'] = $this->estudiante_id_;
       $NM_val_form['asignatura_id_'] = $this->asignatura_id_;
-      $NM_val_form['tipo_calificacion_id_'] = $this->tipo_calificacion_id_;
       $NM_val_form['calificacion_1_'] = $this->calificacion_1_;
       $NM_val_form['calificacion_nivel_1_'] = $this->calificacion_nivel_1_;
       $NM_val_form['calificacion_2_'] = $this->calificacion_2_;
@@ -5088,6 +5375,7 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
       $NM_val_form['colegio_id_'] = $this->colegio_id_;
       $NM_val_form['periodo_id_'] = $this->periodo_id_;
       $NM_val_form['curso_id_'] = $this->curso_id_;
+      $NM_val_form['tipo_calificacion_id_'] = $this->tipo_calificacion_id_;
       $NM_val_form['descripcion_1_'] = $this->descripcion_1_;
       $NM_val_form['publicada_1_'] = $this->publicada_1_;
       $NM_val_form['descripcion_2_'] = $this->descripcion_2_;
@@ -5419,31 +5707,43 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
               $rs1->Close(); 
               if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_access))
               { 
-                  $comando = "UPDATE " . $this->Ini->nm_tabela . " SET tipo_calificacion_id = $this->tipo_calificacion_id_, calificacion_final = $this->calificacion_final_, calificacion_1 = $this->calificacion_1_, calificacion_nivel_1 = '$this->calificacion_nivel_1_', calificacion_2 = $this->calificacion_2_, calificacion_nivel_2 = '$this->calificacion_nivel_2_', calificacion_3 = $this->calificacion_3_, calificacion_nivel_3 = '$this->calificacion_nivel_3_', calificacion_4 = $this->calificacion_4_, calificacion_nivel_4 = '$this->calificacion_nivel_4_', calificacion_5 = $this->calificacion_5_, calificacion_nivel_5 = '$this->calificacion_nivel_5_', calificacion_6 = $this->calificacion_6_, calificacion_nivel_6 = '$this->calificacion_nivel_6_', calificacion_7 = $this->calificacion_7_, calificacion_nivel_7 = '$this->calificacion_nivel_7_', calificacion_8 = $this->calificacion_8_, calificacion_nivel_8 = '$this->calificacion_nivel_8_', calificacion_9 = $this->calificacion_9_, calificacion_nivel_9 = '$this->calificacion_nivel_9_'";  
+                  $comando = "UPDATE " . $this->Ini->nm_tabela . " SET calificacion_final = $this->calificacion_final_, calificacion_1 = $this->calificacion_1_, calificacion_nivel_1 = '$this->calificacion_nivel_1_', calificacion_2 = $this->calificacion_2_, calificacion_nivel_2 = '$this->calificacion_nivel_2_', calificacion_3 = $this->calificacion_3_, calificacion_nivel_3 = '$this->calificacion_nivel_3_', calificacion_4 = $this->calificacion_4_, calificacion_nivel_4 = '$this->calificacion_nivel_4_', calificacion_5 = $this->calificacion_5_, calificacion_nivel_5 = '$this->calificacion_nivel_5_', calificacion_6 = $this->calificacion_6_, calificacion_nivel_6 = '$this->calificacion_nivel_6_', calificacion_7 = $this->calificacion_7_, calificacion_nivel_7 = '$this->calificacion_nivel_7_', calificacion_8 = $this->calificacion_8_, calificacion_nivel_8 = '$this->calificacion_nivel_8_', calificacion_9 = $this->calificacion_9_, calificacion_nivel_9 = '$this->calificacion_nivel_9_'";  
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mssql))
               { 
-                  $comando = "UPDATE " . $this->Ini->nm_tabela . " SET tipo_calificacion_id = $this->tipo_calificacion_id_, calificacion_final = $this->calificacion_final_, calificacion_1 = $this->calificacion_1_, calificacion_nivel_1 = '$this->calificacion_nivel_1_', calificacion_2 = $this->calificacion_2_, calificacion_nivel_2 = '$this->calificacion_nivel_2_', calificacion_3 = $this->calificacion_3_, calificacion_nivel_3 = '$this->calificacion_nivel_3_', calificacion_4 = $this->calificacion_4_, calificacion_nivel_4 = '$this->calificacion_nivel_4_', calificacion_5 = $this->calificacion_5_, calificacion_nivel_5 = '$this->calificacion_nivel_5_', calificacion_6 = $this->calificacion_6_, calificacion_nivel_6 = '$this->calificacion_nivel_6_', calificacion_7 = $this->calificacion_7_, calificacion_nivel_7 = '$this->calificacion_nivel_7_', calificacion_8 = $this->calificacion_8_, calificacion_nivel_8 = '$this->calificacion_nivel_8_', calificacion_9 = $this->calificacion_9_, calificacion_nivel_9 = '$this->calificacion_nivel_9_'";  
+                  $comando = "UPDATE " . $this->Ini->nm_tabela . " SET calificacion_final = $this->calificacion_final_, calificacion_1 = $this->calificacion_1_, calificacion_nivel_1 = '$this->calificacion_nivel_1_', calificacion_2 = $this->calificacion_2_, calificacion_nivel_2 = '$this->calificacion_nivel_2_', calificacion_3 = $this->calificacion_3_, calificacion_nivel_3 = '$this->calificacion_nivel_3_', calificacion_4 = $this->calificacion_4_, calificacion_nivel_4 = '$this->calificacion_nivel_4_', calificacion_5 = $this->calificacion_5_, calificacion_nivel_5 = '$this->calificacion_nivel_5_', calificacion_6 = $this->calificacion_6_, calificacion_nivel_6 = '$this->calificacion_nivel_6_', calificacion_7 = $this->calificacion_7_, calificacion_nivel_7 = '$this->calificacion_nivel_7_', calificacion_8 = $this->calificacion_8_, calificacion_nivel_8 = '$this->calificacion_nivel_8_', calificacion_9 = $this->calificacion_9_, calificacion_nivel_9 = '$this->calificacion_nivel_9_'";  
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_oracle))
               { 
-                  $comando_oracle = "UPDATE " . $this->Ini->nm_tabela . " SET tipo_calificacion_id = $this->tipo_calificacion_id_, calificacion_final = $this->calificacion_final_, calificacion_1 = $this->calificacion_1_, calificacion_nivel_1 = '$this->calificacion_nivel_1_', calificacion_2 = $this->calificacion_2_, calificacion_nivel_2 = '$this->calificacion_nivel_2_', calificacion_3 = $this->calificacion_3_, calificacion_nivel_3 = '$this->calificacion_nivel_3_', calificacion_4 = $this->calificacion_4_, calificacion_nivel_4 = '$this->calificacion_nivel_4_', calificacion_5 = $this->calificacion_5_, calificacion_nivel_5 = '$this->calificacion_nivel_5_', calificacion_6 = $this->calificacion_6_, calificacion_nivel_6 = '$this->calificacion_nivel_6_', calificacion_7 = $this->calificacion_7_, calificacion_nivel_7 = '$this->calificacion_nivel_7_', calificacion_8 = $this->calificacion_8_, calificacion_nivel_8 = '$this->calificacion_nivel_8_', calificacion_9 = $this->calificacion_9_, calificacion_nivel_9 = '$this->calificacion_nivel_9_'";  
+                  $comando_oracle = "UPDATE " . $this->Ini->nm_tabela . " SET calificacion_final = $this->calificacion_final_, calificacion_1 = $this->calificacion_1_, calificacion_nivel_1 = '$this->calificacion_nivel_1_', calificacion_2 = $this->calificacion_2_, calificacion_nivel_2 = '$this->calificacion_nivel_2_', calificacion_3 = $this->calificacion_3_, calificacion_nivel_3 = '$this->calificacion_nivel_3_', calificacion_4 = $this->calificacion_4_, calificacion_nivel_4 = '$this->calificacion_nivel_4_', calificacion_5 = $this->calificacion_5_, calificacion_nivel_5 = '$this->calificacion_nivel_5_', calificacion_6 = $this->calificacion_6_, calificacion_nivel_6 = '$this->calificacion_nivel_6_', calificacion_7 = $this->calificacion_7_, calificacion_nivel_7 = '$this->calificacion_nivel_7_', calificacion_8 = $this->calificacion_8_, calificacion_nivel_8 = '$this->calificacion_nivel_8_', calificacion_9 = $this->calificacion_9_, calificacion_nivel_9 = '$this->calificacion_nivel_9_'";  
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_informix))
               { 
-                  $comando_oracle = "UPDATE " . $this->Ini->nm_tabela . " SET tipo_calificacion_id = $this->tipo_calificacion_id_, calificacion_final = $this->calificacion_final_, calificacion_1 = $this->calificacion_1_, calificacion_nivel_1 = '$this->calificacion_nivel_1_', calificacion_2 = $this->calificacion_2_, calificacion_nivel_2 = '$this->calificacion_nivel_2_', calificacion_3 = $this->calificacion_3_, calificacion_nivel_3 = '$this->calificacion_nivel_3_', calificacion_4 = $this->calificacion_4_, calificacion_nivel_4 = '$this->calificacion_nivel_4_', calificacion_5 = $this->calificacion_5_, calificacion_nivel_5 = '$this->calificacion_nivel_5_', calificacion_6 = $this->calificacion_6_, calificacion_nivel_6 = '$this->calificacion_nivel_6_', calificacion_7 = $this->calificacion_7_, calificacion_nivel_7 = '$this->calificacion_nivel_7_', calificacion_8 = $this->calificacion_8_, calificacion_nivel_8 = '$this->calificacion_nivel_8_', calificacion_9 = $this->calificacion_9_, calificacion_nivel_9 = '$this->calificacion_nivel_9_'";  
+                  $comando_oracle = "UPDATE " . $this->Ini->nm_tabela . " SET calificacion_final = $this->calificacion_final_, calificacion_1 = $this->calificacion_1_, calificacion_nivel_1 = '$this->calificacion_nivel_1_', calificacion_2 = $this->calificacion_2_, calificacion_nivel_2 = '$this->calificacion_nivel_2_', calificacion_3 = $this->calificacion_3_, calificacion_nivel_3 = '$this->calificacion_nivel_3_', calificacion_4 = $this->calificacion_4_, calificacion_nivel_4 = '$this->calificacion_nivel_4_', calificacion_5 = $this->calificacion_5_, calificacion_nivel_5 = '$this->calificacion_nivel_5_', calificacion_6 = $this->calificacion_6_, calificacion_nivel_6 = '$this->calificacion_nivel_6_', calificacion_7 = $this->calificacion_7_, calificacion_nivel_7 = '$this->calificacion_nivel_7_', calificacion_8 = $this->calificacion_8_, calificacion_nivel_8 = '$this->calificacion_nivel_8_', calificacion_9 = $this->calificacion_9_, calificacion_nivel_9 = '$this->calificacion_nivel_9_'";  
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_mysql))
               { 
-                  $comando_oracle = "UPDATE " . $this->Ini->nm_tabela . " SET tipo_calificacion_id = $this->tipo_calificacion_id_, calificacion_final = $this->calificacion_final_, calificacion_1 = $this->calificacion_1_, calificacion_nivel_1 = '$this->calificacion_nivel_1_', calificacion_2 = $this->calificacion_2_, calificacion_nivel_2 = '$this->calificacion_nivel_2_', calificacion_3 = $this->calificacion_3_, calificacion_nivel_3 = '$this->calificacion_nivel_3_', calificacion_4 = $this->calificacion_4_, calificacion_nivel_4 = '$this->calificacion_nivel_4_', calificacion_5 = $this->calificacion_5_, calificacion_nivel_5 = '$this->calificacion_nivel_5_', calificacion_6 = $this->calificacion_6_, calificacion_nivel_6 = '$this->calificacion_nivel_6_', calificacion_7 = $this->calificacion_7_, calificacion_nivel_7 = '$this->calificacion_nivel_7_', calificacion_8 = $this->calificacion_8_, calificacion_nivel_8 = '$this->calificacion_nivel_8_', calificacion_9 = $this->calificacion_9_, calificacion_nivel_9 = '$this->calificacion_nivel_9_'";  
+                  $comando_oracle = "UPDATE " . $this->Ini->nm_tabela . " SET calificacion_final = $this->calificacion_final_, calificacion_1 = $this->calificacion_1_, calificacion_nivel_1 = '$this->calificacion_nivel_1_', calificacion_2 = $this->calificacion_2_, calificacion_nivel_2 = '$this->calificacion_nivel_2_', calificacion_3 = $this->calificacion_3_, calificacion_nivel_3 = '$this->calificacion_nivel_3_', calificacion_4 = $this->calificacion_4_, calificacion_nivel_4 = '$this->calificacion_nivel_4_', calificacion_5 = $this->calificacion_5_, calificacion_nivel_5 = '$this->calificacion_nivel_5_', calificacion_6 = $this->calificacion_6_, calificacion_nivel_6 = '$this->calificacion_nivel_6_', calificacion_7 = $this->calificacion_7_, calificacion_nivel_7 = '$this->calificacion_nivel_7_', calificacion_8 = $this->calificacion_8_, calificacion_nivel_8 = '$this->calificacion_nivel_8_', calificacion_9 = $this->calificacion_9_, calificacion_nivel_9 = '$this->calificacion_nivel_9_'";  
               } 
               elseif (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
               { 
-                  $comando_oracle = "UPDATE " . $this->Ini->nm_tabela . " SET tipo_calificacion_id = $this->tipo_calificacion_id_, calificacion_final = $this->calificacion_final_, calificacion_1 = $this->calificacion_1_, calificacion_nivel_1 = '$this->calificacion_nivel_1_', calificacion_2 = $this->calificacion_2_, calificacion_nivel_2 = '$this->calificacion_nivel_2_', calificacion_3 = $this->calificacion_3_, calificacion_nivel_3 = '$this->calificacion_nivel_3_', calificacion_4 = $this->calificacion_4_, calificacion_nivel_4 = '$this->calificacion_nivel_4_', calificacion_5 = $this->calificacion_5_, calificacion_nivel_5 = '$this->calificacion_nivel_5_', calificacion_6 = $this->calificacion_6_, calificacion_nivel_6 = '$this->calificacion_nivel_6_', calificacion_7 = $this->calificacion_7_, calificacion_nivel_7 = '$this->calificacion_nivel_7_', calificacion_8 = $this->calificacion_8_, calificacion_nivel_8 = '$this->calificacion_nivel_8_', calificacion_9 = $this->calificacion_9_, calificacion_nivel_9 = '$this->calificacion_nivel_9_'";  
+                  $comando_oracle = "UPDATE " . $this->Ini->nm_tabela . " SET calificacion_final = $this->calificacion_final_, calificacion_1 = $this->calificacion_1_, calificacion_nivel_1 = '$this->calificacion_nivel_1_', calificacion_2 = $this->calificacion_2_, calificacion_nivel_2 = '$this->calificacion_nivel_2_', calificacion_3 = $this->calificacion_3_, calificacion_nivel_3 = '$this->calificacion_nivel_3_', calificacion_4 = $this->calificacion_4_, calificacion_nivel_4 = '$this->calificacion_nivel_4_', calificacion_5 = $this->calificacion_5_, calificacion_nivel_5 = '$this->calificacion_nivel_5_', calificacion_6 = $this->calificacion_6_, calificacion_nivel_6 = '$this->calificacion_nivel_6_', calificacion_7 = $this->calificacion_7_, calificacion_nivel_7 = '$this->calificacion_nivel_7_', calificacion_8 = $this->calificacion_8_, calificacion_nivel_8 = '$this->calificacion_nivel_8_', calificacion_9 = $this->calificacion_9_, calificacion_nivel_9 = '$this->calificacion_nivel_9_'";  
               } 
               else 
               { 
-                  $comando = "UPDATE " . $this->Ini->nm_tabela . " SET tipo_calificacion_id = $this->tipo_calificacion_id_, calificacion_final = $this->calificacion_final_, calificacion_1 = $this->calificacion_1_, calificacion_nivel_1 = '$this->calificacion_nivel_1_', calificacion_2 = $this->calificacion_2_, calificacion_nivel_2 = '$this->calificacion_nivel_2_', calificacion_3 = $this->calificacion_3_, calificacion_nivel_3 = '$this->calificacion_nivel_3_', calificacion_4 = $this->calificacion_4_, calificacion_nivel_4 = '$this->calificacion_nivel_4_', calificacion_5 = $this->calificacion_5_, calificacion_nivel_5 = '$this->calificacion_nivel_5_', calificacion_6 = $this->calificacion_6_, calificacion_nivel_6 = '$this->calificacion_nivel_6_', calificacion_7 = $this->calificacion_7_, calificacion_nivel_7 = '$this->calificacion_nivel_7_', calificacion_8 = $this->calificacion_8_, calificacion_nivel_8 = '$this->calificacion_nivel_8_', calificacion_9 = $this->calificacion_9_, calificacion_nivel_9 = '$this->calificacion_nivel_9_'";  
+                  $comando = "UPDATE " . $this->Ini->nm_tabela . " SET calificacion_final = $this->calificacion_final_, calificacion_1 = $this->calificacion_1_, calificacion_nivel_1 = '$this->calificacion_nivel_1_', calificacion_2 = $this->calificacion_2_, calificacion_nivel_2 = '$this->calificacion_nivel_2_', calificacion_3 = $this->calificacion_3_, calificacion_nivel_3 = '$this->calificacion_nivel_3_', calificacion_4 = $this->calificacion_4_, calificacion_nivel_4 = '$this->calificacion_nivel_4_', calificacion_5 = $this->calificacion_5_, calificacion_nivel_5 = '$this->calificacion_nivel_5_', calificacion_6 = $this->calificacion_6_, calificacion_nivel_6 = '$this->calificacion_nivel_6_', calificacion_7 = $this->calificacion_7_, calificacion_nivel_7 = '$this->calificacion_nivel_7_', calificacion_8 = $this->calificacion_8_, calificacion_nivel_8 = '$this->calificacion_nivel_8_', calificacion_9 = $this->calificacion_9_, calificacion_nivel_9 = '$this->calificacion_nivel_9_'";  
+              } 
+              if (isset($NM_val_form['tipo_calificacion_id_']) && $NM_val_form['tipo_calificacion_id_'] != $this->nmgp_dados_select['tipo_calificacion_id_']) 
+              { 
+                  if ($SC_ex_update || $SC_tem_cmp_update) 
+                  { 
+                      $comando        .= ","; 
+                      $comando_oracle .= ","; 
+                  } 
+                  $comando        .= " tipo_calificacion_id = $this->tipo_calificacion_id_"; 
+                  $comando_oracle        .= " tipo_calificacion_id = $this->tipo_calificacion_id_"; 
+                  $SC_ex_update = true; 
+                  $SC_ex_upd_or = true; 
               } 
               if (isset($NM_val_form['descripcion_1_']) && $NM_val_form['descripcion_1_'] != $this->nmgp_dados_select['descripcion_1_']) 
               { 
@@ -5754,12 +6054,16 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['db_changed'] = true;
 
               $this->sc_teve_alt = true; 
+              if     (isset($NM_val_form) && isset($NM_val_form['colegio_id_'])) { $this->colegio_id_ = $NM_val_form['colegio_id_']; }
+              elseif (isset($this->colegio_id_)) { $this->nm_limpa_alfa($this->colegio_id_); }
+              if     (isset($NM_val_form) && isset($NM_val_form['periodo_id_'])) { $this->periodo_id_ = $NM_val_form['periodo_id_']; }
+              elseif (isset($this->periodo_id_)) { $this->nm_limpa_alfa($this->periodo_id_); }
+              if     (isset($NM_val_form) && isset($NM_val_form['curso_id_'])) { $this->curso_id_ = $NM_val_form['curso_id_']; }
+              elseif (isset($this->curso_id_)) { $this->nm_limpa_alfa($this->curso_id_); }
               if     (isset($NM_val_form) && isset($NM_val_form['estudiante_id_'])) { $this->estudiante_id_ = $NM_val_form['estudiante_id_']; }
               elseif (isset($this->estudiante_id_)) { $this->nm_limpa_alfa($this->estudiante_id_); }
               if     (isset($NM_val_form) && isset($NM_val_form['asignatura_id_'])) { $this->asignatura_id_ = $NM_val_form['asignatura_id_']; }
               elseif (isset($this->asignatura_id_)) { $this->nm_limpa_alfa($this->asignatura_id_); }
-              if     (isset($NM_val_form) && isset($NM_val_form['tipo_calificacion_id_'])) { $this->tipo_calificacion_id_ = $NM_val_form['tipo_calificacion_id_']; }
-              elseif (isset($this->tipo_calificacion_id_)) { $this->nm_limpa_alfa($this->tipo_calificacion_id_); }
               if     (isset($NM_val_form) && isset($NM_val_form['calificacion_final_'])) { $this->calificacion_final_ = $NM_val_form['calificacion_final_']; }
               elseif (isset($this->calificacion_final_)) { $this->nm_limpa_alfa($this->calificacion_final_); }
               if     (isset($NM_val_form) && isset($NM_val_form['calificacion_1_'])) { $this->calificacion_1_ = $NM_val_form['calificacion_1_']; }
@@ -5806,7 +6110,7 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
               }
 
               $aOldRefresh               = $this->nmgp_refresh_fields;
-              $this->nmgp_refresh_fields = array_diff(array('estudiante_id_', 'asignatura_id_', 'tipo_calificacion_id_', 'calificacion_1_', 'calificacion_nivel_1_', 'calificacion_2_', 'calificacion_nivel_2_', 'calificacion_3_', 'calificacion_nivel_3_', 'calificacion_4_', 'calificacion_nivel_4_', 'calificacion_5_', 'calificacion_nivel_5_', 'calificacion_6_', 'calificacion_nivel_6_', 'calificacion_7_', 'calificacion_nivel_7_', 'calificacion_8_', 'calificacion_nivel_8_', 'calificacion_9_', 'calificacion_nivel_9_', 'calificacion_final_'), $aDoNotUpdate);
+              $this->nmgp_refresh_fields = array_diff(array('estudiante_id_', 'asignatura_id_', 'calificacion_1_', 'calificacion_nivel_1_', 'calificacion_2_', 'calificacion_nivel_2_', 'calificacion_3_', 'calificacion_nivel_3_', 'calificacion_4_', 'calificacion_nivel_4_', 'calificacion_5_', 'calificacion_nivel_5_', 'calificacion_6_', 'calificacion_nivel_6_', 'calificacion_7_', 'calificacion_nivel_7_', 'calificacion_8_', 'calificacion_nivel_8_', 'calificacion_9_', 'calificacion_nivel_9_', 'calificacion_final_', 'colegio_id_', 'periodo_id_', 'curso_id_'), $aDoNotUpdate);
               $this->ajax_return_values();
               $this->nmgp_refresh_fields = $aOldRefresh;
 
@@ -5816,8 +6120,6 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
                   $this->NM_ajax_info['readOnly']['estudiante_id_' . $this->nmgp_refresh_row] = 'on';
 
                   $this->NM_ajax_info['readOnly']['asignatura_id_' . $this->nmgp_refresh_row] = 'on';
-
-                  $this->NM_ajax_info['readOnly']['tipo_calificacion_id_' . $this->nmgp_refresh_row] = 'on';
 
                   $this->NM_ajax_info['readOnly']['calificacion_1_' . $this->nmgp_refresh_row] = 'on';
 
@@ -5856,6 +6158,12 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
                   $this->NM_ajax_info['readOnly']['calificacion_nivel_9_' . $this->nmgp_refresh_row] = 'on';
 
                   $this->NM_ajax_info['readOnly']['calificacion_final_' . $this->nmgp_refresh_row] = 'on';
+
+                  $this->NM_ajax_info['readOnly']['colegio_id_' . $this->nmgp_refresh_row] = 'on';
+
+                  $this->NM_ajax_info['readOnly']['periodo_id_' . $this->nmgp_refresh_row] = 'on';
+
+                  $this->NM_ajax_info['readOnly']['curso_id_' . $this->nmgp_refresh_row] = 'on';
 
 
                   $this->NM_ajax_info['closeLine'] = $this->nmgp_refresh_row;
@@ -6001,7 +6309,6 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
               $this->sc_teve_incl = true; 
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['dados_select'][$sc_seq_vert]['estudiante_id_'] = $this->estudiante_id_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['dados_select'][$sc_seq_vert]['asignatura_id_'] = $this->asignatura_id_;
-              $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['dados_select'][$sc_seq_vert]['tipo_calificacion_id_'] = $this->tipo_calificacion_id_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['dados_select'][$sc_seq_vert]['calificacion_1_'] = $this->calificacion_1_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['dados_select'][$sc_seq_vert]['calificacion_nivel_1_'] = $this->calificacion_nivel_1_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['dados_select'][$sc_seq_vert]['calificacion_2_'] = $this->calificacion_2_;
@@ -6021,6 +6328,9 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['dados_select'][$sc_seq_vert]['calificacion_9_'] = $this->calificacion_9_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['dados_select'][$sc_seq_vert]['calificacion_nivel_9_'] = $this->calificacion_nivel_9_;
               $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['dados_select'][$sc_seq_vert]['calificacion_final_'] = $this->calificacion_final_;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['dados_select'][$sc_seq_vert]['colegio_id_'] = $this->colegio_id_;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['dados_select'][$sc_seq_vert]['periodo_id_'] = $this->periodo_id_;
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['dados_select'][$sc_seq_vert]['curso_id_'] = $this->curso_id_;
               if (!empty($this->sc_force_zero))
               {
                   foreach ($this->sc_force_zero as $i_force_zero => $sc_force_zero_field)
@@ -6036,9 +6346,11 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
                       eval('$this->' . $sc_val_null_field . ' = "";');
                   }
               }
+              if (isset($this->colegio_id_)) { $this->nm_limpa_alfa($this->colegio_id_); }
+              if (isset($this->periodo_id_)) { $this->nm_limpa_alfa($this->periodo_id_); }
+              if (isset($this->curso_id_)) { $this->nm_limpa_alfa($this->curso_id_); }
               if (isset($this->estudiante_id_)) { $this->nm_limpa_alfa($this->estudiante_id_); }
               if (isset($this->asignatura_id_)) { $this->nm_limpa_alfa($this->asignatura_id_); }
-              if (isset($this->tipo_calificacion_id_)) { $this->nm_limpa_alfa($this->tipo_calificacion_id_); }
               if (isset($this->calificacion_final_)) { $this->nm_limpa_alfa($this->calificacion_final_); }
               if (isset($this->calificacion_1_)) { $this->nm_limpa_alfa($this->calificacion_1_); }
               if (isset($this->calificacion_nivel_1_)) { $this->nm_limpa_alfa($this->calificacion_nivel_1_); }
@@ -6064,9 +6376,75 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
                   $this->nm_proc_onload_record($this->nmgp_refresh_row);
                   $this->nm_formatar_campos();
 
-                  $this->NM_ajax_info['fldList']['estudiante_id_' . $this->nmgp_refresh_row]['type']    = 'text';
+                  $aLookup = array();
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+
+   $old_value_calificacion_final_ = $this->calificacion_final_;
+   $old_value_periodo_id_ = $this->periodo_id_;
+   $old_value_curso_id_ = $this->curso_id_;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_calificacion_final_ = $this->calificacion_final_;
+   $unformatted_value_periodo_id_ = $this->periodo_id_;
+   $unformatted_value_curso_id_ = $this->curso_id_;
+
+   $nm_comando = "SELECT estudiante_id, concat(nombres,' ', primer_apellido)  FROM estudiantes  WHERE colegio_id=" . $_SESSION['vglo_colegio'] . " ORDER BY primer_apellido";
+
+   $this->calificacion_final_ = $old_value_calificacion_final_;
+   $this->periodo_id_ = $old_value_periodo_id_;
+   $this->curso_id_ = $old_value_curso_id_;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
+              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
+              $rs->fields[0] = (string)$rs->fields[0];
+              $aLookup[] = array(form_calificaciones_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_calificaciones_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+          $sLabelTemp = '';
+          foreach ($aLookup as $aValData)
+          {
+              if (key($aValData) == form_calificaciones_pack_protect_string(NM_charset_to_utf8($this->estudiante_id_)))
+              {
+                  $sLabelTemp = current($aValData);
+              }
+          }
+          $tmpLabel_estudiante_id_ = $sLabelTemp;
+                  $this->NM_ajax_info['fldList']['estudiante_id_' . $this->nmgp_refresh_row]['type']    = 'select';
                   $this->NM_ajax_info['fldList']['estudiante_id_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->estudiante_id_)));
-                  $this->NM_ajax_info['fldList']['estudiante_id_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_estudiante_id_)));
+                  $this->NM_ajax_info['fldList']['estudiante_id_' . $this->nmgp_refresh_row]['labList'] = array($tmpLabel_estudiante_id_);
 
                   if ((isset($this->Embutida_form) && $this->Embutida_form) && (!isset($this->Embutida_ronly) || !$this->Embutida_ronly))
                   {
@@ -6083,9 +6461,75 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
                       }
                   }
 
-                  $this->NM_ajax_info['fldList']['asignatura_id_' . $this->nmgp_refresh_row]['type']    = 'text';
+                  $aLookup = array();
+ 
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+
+   $old_value_calificacion_final_ = $this->calificacion_final_;
+   $old_value_periodo_id_ = $this->periodo_id_;
+   $old_value_curso_id_ = $this->curso_id_;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_calificacion_final_ = $this->calificacion_final_;
+   $unformatted_value_periodo_id_ = $this->periodo_id_;
+   $unformatted_value_curso_id_ = $this->curso_id_;
+
+   $nm_comando = "SELECT asignatura_id, descripcion  FROM asignaturas  WHERE colegio_id=" . $_SESSION['vglo_colegio'] . " ORDER BY descripcion";
+
+   $this->calificacion_final_ = $old_value_calificacion_final_;
+   $this->periodo_id_ = $old_value_periodo_id_;
+   $this->curso_id_ = $old_value_curso_id_;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
+              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
+              $rs->fields[0] = (string)$rs->fields[0];
+              $aLookup[] = array(form_calificaciones_pack_protect_string(NM_charset_to_utf8($rs->fields[0])) => str_replace('<', '&lt;', form_calificaciones_pack_protect_string(NM_charset_to_utf8($rs->fields[1]))));
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+          $sLabelTemp = '';
+          foreach ($aLookup as $aValData)
+          {
+              if (key($aValData) == form_calificaciones_pack_protect_string(NM_charset_to_utf8($this->asignatura_id_)))
+              {
+                  $sLabelTemp = current($aValData);
+              }
+          }
+          $tmpLabel_asignatura_id_ = $sLabelTemp;
+                  $this->NM_ajax_info['fldList']['asignatura_id_' . $this->nmgp_refresh_row]['type']    = 'select';
                   $this->NM_ajax_info['fldList']['asignatura_id_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->asignatura_id_)));
-                  $this->NM_ajax_info['fldList']['asignatura_id_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_asignatura_id_)));
+                  $this->NM_ajax_info['fldList']['asignatura_id_' . $this->nmgp_refresh_row]['labList'] = array($tmpLabel_asignatura_id_);
 
                   if ((isset($this->Embutida_form) && $this->Embutida_form) && (!isset($this->Embutida_ronly) || !$this->Embutida_ronly))
                   {
@@ -6099,25 +6543,6 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
                       if (!isset($this->NM_ajax_info['readOnly']['asignatura_id_' . $this->nmgp_refresh_row]))
                       {
                           $this->NM_ajax_info['readOnly']['asignatura_id_' . $this->nmgp_refresh_row] = "on";
-                      }
-                  }
-
-                  $this->NM_ajax_info['fldList']['tipo_calificacion_id_' . $this->nmgp_refresh_row]['type']    = 'text';
-                  $this->NM_ajax_info['fldList']['tipo_calificacion_id_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->tipo_calificacion_id_)));
-                  $this->NM_ajax_info['fldList']['tipo_calificacion_id_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_tipo_calificacion_id_)));
-
-                  if ((isset($this->Embutida_form) && $this->Embutida_form) && (!isset($this->Embutida_ronly) || !$this->Embutida_ronly))
-                  {
-                      if (!isset($this->NM_ajax_info['readOnly']['tipo_calificacion_id_' . $this->nmgp_refresh_row]))
-                      {
-                          $this->NM_ajax_info['readOnly']['tipo_calificacion_id_' . $this->nmgp_refresh_row] = "off";
-                      }
-                  }
-                  elseif (isset($this->Embutida_ronly) && $this->Embutida_ronly)
-                  {
-                      if (!isset($this->NM_ajax_info['readOnly']['tipo_calificacion_id_' . $this->nmgp_refresh_row]))
-                      {
-                          $this->NM_ajax_info['readOnly']['tipo_calificacion_id_' . $this->nmgp_refresh_row] = "on";
                       }
                   }
 
@@ -6140,7 +6565,7 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
                       }
                   }
 
-                  $this->NM_ajax_info['fldList']['calificacion_nivel_1_' . $this->nmgp_refresh_row]['type']    = 'text';
+                  $this->NM_ajax_info['fldList']['calificacion_nivel_1_' . $this->nmgp_refresh_row]['type']    = 'label';
                   $this->NM_ajax_info['fldList']['calificacion_nivel_1_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->calificacion_nivel_1_)));
                   $this->NM_ajax_info['fldList']['calificacion_nivel_1_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_calificacion_nivel_1_)));
 
@@ -6178,7 +6603,7 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
                       }
                   }
 
-                  $this->NM_ajax_info['fldList']['calificacion_nivel_2_' . $this->nmgp_refresh_row]['type']    = 'text';
+                  $this->NM_ajax_info['fldList']['calificacion_nivel_2_' . $this->nmgp_refresh_row]['type']    = 'label';
                   $this->NM_ajax_info['fldList']['calificacion_nivel_2_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->calificacion_nivel_2_)));
                   $this->NM_ajax_info['fldList']['calificacion_nivel_2_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_calificacion_nivel_2_)));
 
@@ -6216,7 +6641,7 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
                       }
                   }
 
-                  $this->NM_ajax_info['fldList']['calificacion_nivel_3_' . $this->nmgp_refresh_row]['type']    = 'text';
+                  $this->NM_ajax_info['fldList']['calificacion_nivel_3_' . $this->nmgp_refresh_row]['type']    = 'label';
                   $this->NM_ajax_info['fldList']['calificacion_nivel_3_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->calificacion_nivel_3_)));
                   $this->NM_ajax_info['fldList']['calificacion_nivel_3_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_calificacion_nivel_3_)));
 
@@ -6254,7 +6679,7 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
                       }
                   }
 
-                  $this->NM_ajax_info['fldList']['calificacion_nivel_4_' . $this->nmgp_refresh_row]['type']    = 'text';
+                  $this->NM_ajax_info['fldList']['calificacion_nivel_4_' . $this->nmgp_refresh_row]['type']    = 'label';
                   $this->NM_ajax_info['fldList']['calificacion_nivel_4_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->calificacion_nivel_4_)));
                   $this->NM_ajax_info['fldList']['calificacion_nivel_4_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_calificacion_nivel_4_)));
 
@@ -6292,7 +6717,7 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
                       }
                   }
 
-                  $this->NM_ajax_info['fldList']['calificacion_nivel_5_' . $this->nmgp_refresh_row]['type']    = 'text';
+                  $this->NM_ajax_info['fldList']['calificacion_nivel_5_' . $this->nmgp_refresh_row]['type']    = 'label';
                   $this->NM_ajax_info['fldList']['calificacion_nivel_5_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->calificacion_nivel_5_)));
                   $this->NM_ajax_info['fldList']['calificacion_nivel_5_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_calificacion_nivel_5_)));
 
@@ -6330,7 +6755,7 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
                       }
                   }
 
-                  $this->NM_ajax_info['fldList']['calificacion_nivel_6_' . $this->nmgp_refresh_row]['type']    = 'text';
+                  $this->NM_ajax_info['fldList']['calificacion_nivel_6_' . $this->nmgp_refresh_row]['type']    = 'label';
                   $this->NM_ajax_info['fldList']['calificacion_nivel_6_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->calificacion_nivel_6_)));
                   $this->NM_ajax_info['fldList']['calificacion_nivel_6_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_calificacion_nivel_6_)));
 
@@ -6368,7 +6793,7 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
                       }
                   }
 
-                  $this->NM_ajax_info['fldList']['calificacion_nivel_7_' . $this->nmgp_refresh_row]['type']    = 'text';
+                  $this->NM_ajax_info['fldList']['calificacion_nivel_7_' . $this->nmgp_refresh_row]['type']    = 'label';
                   $this->NM_ajax_info['fldList']['calificacion_nivel_7_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->calificacion_nivel_7_)));
                   $this->NM_ajax_info['fldList']['calificacion_nivel_7_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_calificacion_nivel_7_)));
 
@@ -6406,7 +6831,7 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
                       }
                   }
 
-                  $this->NM_ajax_info['fldList']['calificacion_nivel_8_' . $this->nmgp_refresh_row]['type']    = 'text';
+                  $this->NM_ajax_info['fldList']['calificacion_nivel_8_' . $this->nmgp_refresh_row]['type']    = 'label';
                   $this->NM_ajax_info['fldList']['calificacion_nivel_8_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->calificacion_nivel_8_)));
                   $this->NM_ajax_info['fldList']['calificacion_nivel_8_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_calificacion_nivel_8_)));
 
@@ -6444,7 +6869,7 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
                       }
                   }
 
-                  $this->NM_ajax_info['fldList']['calificacion_nivel_9_' . $this->nmgp_refresh_row]['type']    = 'text';
+                  $this->NM_ajax_info['fldList']['calificacion_nivel_9_' . $this->nmgp_refresh_row]['type']    = 'label';
                   $this->NM_ajax_info['fldList']['calificacion_nivel_9_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->calificacion_nivel_9_)));
                   $this->NM_ajax_info['fldList']['calificacion_nivel_9_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_calificacion_nivel_9_)));
 
@@ -6463,7 +6888,7 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
                       }
                   }
 
-                  $this->NM_ajax_info['fldList']['calificacion_final_' . $this->nmgp_refresh_row]['type']    = 'text';
+                  $this->NM_ajax_info['fldList']['calificacion_final_' . $this->nmgp_refresh_row]['type']    = 'label';
                   $this->NM_ajax_info['fldList']['calificacion_final_' . $this->nmgp_refresh_row]['valList'] = array($this->form_encode_input(NM_charset_to_utf8($this->calificacion_final_)));
                   $this->NM_ajax_info['fldList']['calificacion_final_' . $this->nmgp_refresh_row]['labList'] = array($this->form_encode_input(NM_charset_to_utf8($tmpLabel_calificacion_final_)));
 
@@ -6500,51 +6925,21 @@ else
    $nm_nao_carga = false;
    $nmgp_def_dados = "" ; 
 
-   $old_value_estudiante_id_ = $this->estudiante_id_;
-   $old_value_asignatura_id_ = $this->asignatura_id_;
-   $old_value_tipo_calificacion_id_ = $this->tipo_calificacion_id_;
-   $old_value_calificacion_1_ = $this->calificacion_1_;
-   $old_value_calificacion_2_ = $this->calificacion_2_;
-   $old_value_calificacion_3_ = $this->calificacion_3_;
-   $old_value_calificacion_4_ = $this->calificacion_4_;
-   $old_value_calificacion_5_ = $this->calificacion_5_;
-   $old_value_calificacion_6_ = $this->calificacion_6_;
-   $old_value_calificacion_7_ = $this->calificacion_7_;
-   $old_value_calificacion_8_ = $this->calificacion_8_;
-   $old_value_calificacion_9_ = $this->calificacion_9_;
    $old_value_calificacion_final_ = $this->calificacion_final_;
+   $old_value_periodo_id_ = $this->periodo_id_;
+   $old_value_curso_id_ = $this->curso_id_;
    $this->nm_tira_formatacao();
 
 
-   $unformatted_value_estudiante_id_ = $this->estudiante_id_;
-   $unformatted_value_asignatura_id_ = $this->asignatura_id_;
-   $unformatted_value_tipo_calificacion_id_ = $this->tipo_calificacion_id_;
-   $unformatted_value_calificacion_1_ = $this->calificacion_1_;
-   $unformatted_value_calificacion_2_ = $this->calificacion_2_;
-   $unformatted_value_calificacion_3_ = $this->calificacion_3_;
-   $unformatted_value_calificacion_4_ = $this->calificacion_4_;
-   $unformatted_value_calificacion_5_ = $this->calificacion_5_;
-   $unformatted_value_calificacion_6_ = $this->calificacion_6_;
-   $unformatted_value_calificacion_7_ = $this->calificacion_7_;
-   $unformatted_value_calificacion_8_ = $this->calificacion_8_;
-   $unformatted_value_calificacion_9_ = $this->calificacion_9_;
    $unformatted_value_calificacion_final_ = $this->calificacion_final_;
+   $unformatted_value_periodo_id_ = $this->periodo_id_;
+   $unformatted_value_curso_id_ = $this->curso_id_;
 
    $nm_comando = "SELECT colegio_id, colegio_id FROM colegios ORDER BY colegio_id";
 
-   $this->estudiante_id_ = $old_value_estudiante_id_;
-   $this->asignatura_id_ = $old_value_asignatura_id_;
-   $this->tipo_calificacion_id_ = $old_value_tipo_calificacion_id_;
-   $this->calificacion_1_ = $old_value_calificacion_1_;
-   $this->calificacion_2_ = $old_value_calificacion_2_;
-   $this->calificacion_3_ = $old_value_calificacion_3_;
-   $this->calificacion_4_ = $old_value_calificacion_4_;
-   $this->calificacion_5_ = $old_value_calificacion_5_;
-   $this->calificacion_6_ = $old_value_calificacion_6_;
-   $this->calificacion_7_ = $old_value_calificacion_7_;
-   $this->calificacion_8_ = $old_value_calificacion_8_;
-   $this->calificacion_9_ = $old_value_calificacion_9_;
    $this->calificacion_final_ = $old_value_calificacion_final_;
+   $this->periodo_id_ = $old_value_periodo_id_;
+   $this->curso_id_ = $old_value_curso_id_;
 
    $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
    $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
@@ -7324,7 +7719,6 @@ else
               $this->nm_formatar_campos();
              $this->form_vert_form_calificaciones[$sc_seq_vert]['estudiante_id_'] =  $this->estudiante_id_; 
              $this->form_vert_form_calificaciones[$sc_seq_vert]['asignatura_id_'] =  $this->asignatura_id_; 
-             $this->form_vert_form_calificaciones[$sc_seq_vert]['tipo_calificacion_id_'] =  $this->tipo_calificacion_id_; 
              $this->form_vert_form_calificaciones[$sc_seq_vert]['calificacion_1_'] =  $this->calificacion_1_; 
              $this->form_vert_form_calificaciones[$sc_seq_vert]['calificacion_nivel_1_'] =  $this->calificacion_nivel_1_; 
              $this->form_vert_form_calificaciones[$sc_seq_vert]['calificacion_2_'] =  $this->calificacion_2_; 
@@ -7347,6 +7741,7 @@ else
              $this->form_vert_form_calificaciones[$sc_seq_vert]['colegio_id_'] =  $this->colegio_id_; 
              $this->form_vert_form_calificaciones[$sc_seq_vert]['periodo_id_'] =  $this->periodo_id_; 
              $this->form_vert_form_calificaciones[$sc_seq_vert]['curso_id_'] =  $this->curso_id_; 
+             $this->form_vert_form_calificaciones[$sc_seq_vert]['tipo_calificacion_id_'] =  $this->tipo_calificacion_id_; 
              $this->form_vert_form_calificaciones[$sc_seq_vert]['descripcion_1_'] =  $this->descripcion_1_; 
              $this->form_vert_form_calificaciones[$sc_seq_vert]['publicada_1_'] =  $this->publicada_1_; 
              $this->form_vert_form_calificaciones[$sc_seq_vert]['descripcion_2_'] =  $this->descripcion_2_; 
@@ -7376,9 +7771,6 @@ else
                   $bPagTest = $sc_seq_vert <= $this->sc_max_reg;
               }
           } 
-          if (!$this->NM_ajax_flag || !isset($this->nmgp_refresh_fields)) {
-              $this->nm_proc_onload(false);
-          }
           ksort ($this->form_vert_form_calificaciones); 
           $rs->Close(); 
           $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['reg_qtd'] = $sc_seq_vert + $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['reg_start'] - 1;
@@ -7426,9 +7818,11 @@ else
           } 
           while ($sc_seq_vert <= $this->sc_max_reg_incl) 
           { 
+              $this->colegio_id_ = "";  
+              $this->periodo_id_ = "";  
+              $this->curso_id_ = "";  
               $this->estudiante_id_ = "";  
               $this->asignatura_id_ = "";  
-              $this->tipo_calificacion_id_ = "";  
               $this->calificacion_final_ = "";  
               $this->calificacion_1_ = "";  
               $this->calificacion_nivel_1_ = "";  
@@ -7464,7 +7858,6 @@ else
               $this->nm_formatar_campos();
              $this->form_vert_form_calificaciones[$sc_seq_vert]['estudiante_id_'] =  $this->estudiante_id_; 
              $this->form_vert_form_calificaciones[$sc_seq_vert]['asignatura_id_'] =  $this->asignatura_id_; 
-             $this->form_vert_form_calificaciones[$sc_seq_vert]['tipo_calificacion_id_'] =  $this->tipo_calificacion_id_; 
              $this->form_vert_form_calificaciones[$sc_seq_vert]['calificacion_1_'] =  $this->calificacion_1_; 
              $this->form_vert_form_calificaciones[$sc_seq_vert]['calificacion_nivel_1_'] =  $this->calificacion_nivel_1_; 
              $this->form_vert_form_calificaciones[$sc_seq_vert]['calificacion_2_'] =  $this->calificacion_2_; 
@@ -7487,6 +7880,7 @@ else
              $this->form_vert_form_calificaciones[$sc_seq_vert]['colegio_id_'] =  $this->colegio_id_; 
              $this->form_vert_form_calificaciones[$sc_seq_vert]['periodo_id_'] =  $this->periodo_id_; 
              $this->form_vert_form_calificaciones[$sc_seq_vert]['curso_id_'] =  $this->curso_id_; 
+             $this->form_vert_form_calificaciones[$sc_seq_vert]['tipo_calificacion_id_'] =  $this->tipo_calificacion_id_; 
              $this->form_vert_form_calificaciones[$sc_seq_vert]['descripcion_1_'] =  $this->descripcion_1_; 
              $this->form_vert_form_calificaciones[$sc_seq_vert]['publicada_1_'] =  $this->publicada_1_; 
              $this->form_vert_form_calificaciones[$sc_seq_vert]['descripcion_2_'] =  $this->descripcion_2_; 
@@ -7507,9 +7901,6 @@ else
              $this->form_vert_form_calificaciones[$sc_seq_vert]['publicada_9_'] =  $this->publicada_9_; 
               $sc_seq_vert++; 
           } 
-          if (!$this->NM_ajax_flag || !isset($this->nmgp_refresh_fields)) {
-              $this->nm_proc_onload(false);
-          }
       }  
   }
    function NM_gera_nav_page() 
@@ -8971,6 +9362,216 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
      }
  } // new_date_format
 
+   function Form_lookup_estudiante_id_()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_'] = array(); 
+    }
+
+   $old_value_calificacion_final_ = $this->calificacion_final_;
+   $old_value_periodo_id_ = $this->periodo_id_;
+   $old_value_curso_id_ = $this->curso_id_;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_calificacion_final_ = $this->calificacion_final_;
+   $unformatted_value_periodo_id_ = $this->periodo_id_;
+   $unformatted_value_curso_id_ = $this->curso_id_;
+
+   $nm_comando = "SELECT estudiante_id, concat(nombres,' ', primer_apellido)  FROM estudiantes  WHERE colegio_id=" . $_SESSION['vglo_colegio'] . " ORDER BY primer_apellido";
+
+   $this->calificacion_final_ = $old_value_calificacion_final_;
+   $this->periodo_id_ = $old_value_periodo_id_;
+   $this->curso_id_ = $old_value_curso_id_;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
+              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
+              $rs->fields[0] = (string)$rs->fields[0];
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_estudiante_id_'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
+   function Form_lookup_asignatura_id_()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_'] = array(); 
+    }
+
+   $old_value_calificacion_final_ = $this->calificacion_final_;
+   $old_value_periodo_id_ = $this->periodo_id_;
+   $old_value_curso_id_ = $this->curso_id_;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_calificacion_final_ = $this->calificacion_final_;
+   $unformatted_value_periodo_id_ = $this->periodo_id_;
+   $unformatted_value_curso_id_ = $this->curso_id_;
+
+   $nm_comando = "SELECT asignatura_id, descripcion  FROM asignaturas  WHERE colegio_id=" . $_SESSION['vglo_colegio'] . " ORDER BY descripcion";
+
+   $this->calificacion_final_ = $old_value_calificacion_final_;
+   $this->periodo_id_ = $old_value_periodo_id_;
+   $this->curso_id_ = $old_value_curso_id_;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
+              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
+              $rs->fields[0] = (string)$rs->fields[0];
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_asignatura_id_'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
+   function Form_lookup_colegio_id_()
+   {
+$nmgp_def_dados = "" ; 
+if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_colegio_id_']))
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_colegio_id_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_colegio_id_']); 
+}
+else
+{
+    $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_colegio_id_'] = array(); 
+}
+   if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_ibase))
+   { 
+       $GLOBALS["NM_ERRO_IBASE"] = 1;  
+   } 
+   $nm_nao_carga = false;
+   $nmgp_def_dados = "" ; 
+   if (isset($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_colegio_id_']))
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_colegio_id_'] = array_unique($_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_colegio_id_']); 
+   }
+   else
+   {
+       $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_colegio_id_'] = array(); 
+    }
+
+   $old_value_calificacion_final_ = $this->calificacion_final_;
+   $old_value_periodo_id_ = $this->periodo_id_;
+   $old_value_curso_id_ = $this->curso_id_;
+   $this->nm_tira_formatacao();
+
+
+   $unformatted_value_calificacion_final_ = $this->calificacion_final_;
+   $unformatted_value_periodo_id_ = $this->periodo_id_;
+   $unformatted_value_curso_id_ = $this->curso_id_;
+
+   $nm_comando = "SELECT colegio_id, colegio_id FROM colegios ORDER BY colegio_id";
+
+   $this->calificacion_final_ = $old_value_calificacion_final_;
+   $this->periodo_id_ = $old_value_periodo_id_;
+   $this->curso_id_ = $old_value_curso_id_;
+
+   $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando;
+   $_SESSION['scriptcase']['sc_sql_ult_conexao'] = '';
+   if ($nm_comando != "" && $rs = $this->Db->Execute($nm_comando))
+   {
+       while (!$rs->EOF) 
+       { 
+              $rs->fields[0] = str_replace(',', '.', $rs->fields[0]);
+              $rs->fields[1] = str_replace(',', '.', $rs->fields[1]);
+              $rs->fields[0] = (strpos(strtolower($rs->fields[0]), "e")) ? (float)$rs->fields[0] : $rs->fields[0];
+              $rs->fields[0] = (string)$rs->fields[0];
+              $rs->fields[1] = (strpos(strtolower($rs->fields[1]), "e")) ? (float)$rs->fields[1] : $rs->fields[1];
+              $rs->fields[1] = (string)$rs->fields[1];
+              $nmgp_def_dados .= $rs->fields[1] . "?#?" ; 
+              $nmgp_def_dados .= $rs->fields[0] . "?#?N?@?" ; 
+              $_SESSION['sc_session'][$this->Ini->sc_page]['form_calificaciones']['Lookup_colegio_id_'][] = $rs->fields[0];
+              $rs->MoveNext() ; 
+       } 
+       $rs->Close() ; 
+   } 
+   elseif ($GLOBALS["NM_ERRO_IBASE"] != 1 && $nm_comando != "")  
+   {  
+       $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+       exit; 
+   } 
+   $GLOBALS["NM_ERRO_IBASE"] = 0; 
+   $todox = str_replace("?#?@?#?", "?#?@ ?#?", trim($nmgp_def_dados)) ; 
+   $todo  = explode("?@?", $todox) ; 
+   return $todo;
+
+   }
    function SC_fast_search($field, $arg_search, $data_search)
    {
       if (empty($data_search)) 
@@ -9015,11 +9616,19 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
       }
       if ($field == "SC_all_Cmp") 
       {
-          $this->SC_monta_condicao($comando, "estudiante_id", $arg_search, $data_search);
+          $data_lookup = $this->SC_lookup_estudiante_id_($arg_search, $data_search);
+          if (is_array($data_lookup) && !empty($data_lookup)) 
+          {
+              $this->SC_monta_condicao($comando, "estudiante_id", $arg_search, $data_lookup);
+          }
       }
       if ($field == "SC_all_Cmp") 
       {
-          $this->SC_monta_condicao($comando, "asignatura_id", $arg_search, $data_search);
+          $data_lookup = $this->SC_lookup_asignatura_id_($arg_search, $data_search);
+          if (is_array($data_lookup) && !empty($data_lookup)) 
+          {
+              $this->SC_monta_condicao($comando, "asignatura_id", $arg_search, $data_lookup);
+          }
       }
       if ($field == "SC_all_Cmp") 
       {
@@ -9339,6 +9948,190 @@ $_SESSION['scriptcase']['form_calificaciones']['contr_erro'] = 'off';
        else
        {
            $nm_comando = "SELECT colegio_id, colegio_id FROM colegios WHERE (colegio_id LIKE '%$campo%')" ; 
+       }
+       if ($condicao == "ii")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "LIKE '$campo%'", $nm_comando);
+       }
+       if ($condicao == "df" || $condicao == "np")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "NOT LIKE '%$campo%'", $nm_comando);
+       }
+       if ($condicao == "gt")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "> '$campo'", $nm_comando);
+       }
+       if ($condicao == "ge")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", ">= '$campo'", $nm_comando);
+       }
+       if ($condicao == "lt")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "< '$campo'", $nm_comando);
+       }
+       if ($condicao == "le")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "<= '$campo'", $nm_comando);
+       }
+       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
+       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+       if ($rx = $this->Db->Execute($nm_comando)) 
+       { 
+           $campo = $campo_orig;
+           while (!$rx->EOF) 
+           { 
+               $chave = $rx->fields[1];
+               $label = $rx->fields[0];
+               if ($condicao == "eq" && $campo == $label)
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "ii" && $campo == substr($label, 0, strlen($campo)))
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "qp" && strstr($label, $campo))
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "np" && !strstr($label, $campo))
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "df" && $campo != $label)
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "gt" && $label > $campo )
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "ge" && $label >= $campo)
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "lt" && $label < $campo)
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "le" && $label <= $campo)
+               {
+                   $result[] = $chave;
+               }
+               $rx->MoveNext() ;
+           }  
+           return $result;
+       }  
+       elseif ($GLOBALS["NM_ERRO_IBASE"] != 1)  
+       { 
+           $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+           exit; 
+       } 
+   }
+   function SC_lookup_estudiante_id_($condicao, $campo)
+   {
+       $result = array();
+       $campo_orig = $campo;
+       $campo  = substr($this->Db->qstr($campo), 1, -1);
+       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres) && ($condicao == "eq" || $condicao == "qp" || $condicao == "np" || $condicao == "ii" || $condicao == "df"))
+       {
+           $nm_comando = "SELECT concat(nombres,' ',primer_apellido), estudiante_id FROM estudiantes WHERE (CAST (estudiante_id AS TEXT) LIKE '%$campo%') AND (colegio_id=" . $_SESSION['vglo_colegio'] . ")" ; 
+       }
+       else
+       {
+           $nm_comando = "SELECT concat(nombres,' ',primer_apellido), estudiante_id FROM estudiantes WHERE (concat(nombres,' ',primer_apellido) LIKE '%$campo%') AND (colegio_id=" . $_SESSION['vglo_colegio'] . ")" ; 
+       }
+       if ($condicao == "ii")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "LIKE '$campo%'", $nm_comando);
+       }
+       if ($condicao == "df" || $condicao == "np")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "NOT LIKE '%$campo%'", $nm_comando);
+       }
+       if ($condicao == "gt")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "> '$campo'", $nm_comando);
+       }
+       if ($condicao == "ge")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", ">= '$campo'", $nm_comando);
+       }
+       if ($condicao == "lt")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "< '$campo'", $nm_comando);
+       }
+       if ($condicao == "le")
+       {
+           $nm_comando = str_replace("LIKE '%$campo%'", "<= '$campo'", $nm_comando);
+       }
+       $_SESSION['scriptcase']['sc_sql_ult_comando'] = $nm_comando; 
+       $_SESSION['scriptcase']['sc_sql_ult_conexao'] = ''; 
+       if ($rx = $this->Db->Execute($nm_comando)) 
+       { 
+           $campo = $campo_orig;
+           while (!$rx->EOF) 
+           { 
+               $chave = $rx->fields[1];
+               $label = $rx->fields[0];
+               if ($condicao == "eq" && $campo == $label)
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "ii" && $campo == substr($label, 0, strlen($campo)))
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "qp" && strstr($label, $campo))
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "np" && !strstr($label, $campo))
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "df" && $campo != $label)
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "gt" && $label > $campo )
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "ge" && $label >= $campo)
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "lt" && $label < $campo)
+               {
+                   $result[] = $chave;
+               }
+               if ($condicao == "le" && $label <= $campo)
+               {
+                   $result[] = $chave;
+               }
+               $rx->MoveNext() ;
+           }  
+           return $result;
+       }  
+       elseif ($GLOBALS["NM_ERRO_IBASE"] != 1)  
+       { 
+           $this->Erro->mensagem(__FILE__, __LINE__, "banco", $this->Ini->Nm_lang['lang_errm_dber'], $this->Db->ErrorMsg()); 
+           exit; 
+       } 
+   }
+   function SC_lookup_asignatura_id_($condicao, $campo)
+   {
+       $result = array();
+       $campo_orig = $campo;
+       $campo  = substr($this->Db->qstr($campo), 1, -1);
+       if (in_array(strtolower($this->Ini->nm_tpbanco), $this->Ini->nm_bases_postgres) && ($condicao == "eq" || $condicao == "qp" || $condicao == "np" || $condicao == "ii" || $condicao == "df"))
+       {
+           $nm_comando = "SELECT descripcion, asignatura_id FROM asignaturas WHERE (CAST (asignatura_id AS TEXT) LIKE '%$campo%') AND (colegio_id=" . $_SESSION['vglo_colegio'] . ")" ; 
+       }
+       else
+       {
+           $nm_comando = "SELECT descripcion, asignatura_id FROM asignaturas WHERE (descripcion LIKE '%$campo%') AND (colegio_id=" . $_SESSION['vglo_colegio'] . ")" ; 
        }
        if ($condicao == "ii")
        {

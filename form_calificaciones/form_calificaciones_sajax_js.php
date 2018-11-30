@@ -2610,7 +2610,7 @@ sajax_show_javascript();
   function do_ajax_form_calificaciones_validate_estudiante_id_(iNumLinha)
   {
     var nomeCampo_estudiante_id_ = "estudiante_id_" + iNumLinha;
-    var var_estudiante_id_ = scAjaxGetFieldText(nomeCampo_estudiante_id_);
+    var var_estudiante_id_ = scAjaxGetFieldSelect(nomeCampo_estudiante_id_);
     var var_script_case_init = document.F1.script_case_init.value;
     x_ajax_form_calificaciones_validate_estudiante_id_(var_estudiante_id_, iNumLinha, var_script_case_init, do_ajax_form_calificaciones_validate_estudiante_id__cb);
   } // do_ajax_form_calificaciones_validate_estudiante_id_
@@ -2657,7 +2657,7 @@ sajax_show_javascript();
   function do_ajax_form_calificaciones_validate_asignatura_id_(iNumLinha)
   {
     var nomeCampo_asignatura_id_ = "asignatura_id_" + iNumLinha;
-    var var_asignatura_id_ = scAjaxGetFieldText(nomeCampo_asignatura_id_);
+    var var_asignatura_id_ = scAjaxGetFieldSelect(nomeCampo_asignatura_id_);
     var var_script_case_init = document.F1.script_case_init.value;
     x_ajax_form_calificaciones_validate_asignatura_id_(var_asignatura_id_, iNumLinha, var_script_case_init, do_ajax_form_calificaciones_validate_asignatura_id__cb);
   } // do_ajax_form_calificaciones_validate_asignatura_id_
@@ -2699,53 +2699,6 @@ sajax_show_javascript();
     scAjaxSetMaster();
     scAjaxSetFocus();
   } // do_ajax_form_calificaciones_validate_asignatura_id__cb
-
-  // ---------- Validate tipo_calificacion_id_
-  function do_ajax_form_calificaciones_validate_tipo_calificacion_id_(iNumLinha)
-  {
-    var nomeCampo_tipo_calificacion_id_ = "tipo_calificacion_id_" + iNumLinha;
-    var var_tipo_calificacion_id_ = scAjaxGetFieldText(nomeCampo_tipo_calificacion_id_);
-    var var_script_case_init = document.F1.script_case_init.value;
-    x_ajax_form_calificaciones_validate_tipo_calificacion_id_(var_tipo_calificacion_id_, iNumLinha, var_script_case_init, do_ajax_form_calificaciones_validate_tipo_calificacion_id__cb);
-  } // do_ajax_form_calificaciones_validate_tipo_calificacion_id_
-
-  function do_ajax_form_calificaciones_validate_tipo_calificacion_id__cb(sResp)
-  {
-    oResp = scAjaxResponse(sResp);
-    scAjaxRedir();
-    iLineNumber = scAjaxGetLineNumber();
-    if ("" != iLineNumber)
-    {
-      sFieldValid = "tipo_calificacion_id_" + iLineNumber;
-    }
-    else
-    {
-      sFieldValid = "tipo_calificacion_id_";
-    }
-    scEventControl_onBlur(sFieldValid);
-    scAjaxUpdateFieldErrors(sFieldValid, "valid");
-    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
-    if ("" == sFieldErrors)
-    {
-      var sImgStatus = sc_img_status_ok;
-      scAjaxHideErrorDisplay(sFieldValid);
-      scErrorLineOff(iLineNumber, "tipo_calificacion_id_");
-    }
-    else
-    {
-      var sImgStatus = sc_img_status_err;
-      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
-      scErrorLineOn(iLineNumber, "tipo_calificacion_id_");
-    }
-    var $oImg = $('#id_sc_status_' + sFieldValid);
-    if (0 < $oImg.length)
-    {
-      $oImg.attr('src', sImgStatus).css('display', '');
-    }
-    scAjaxShowDebug();
-    scAjaxSetMaster();
-    scAjaxSetFocus();
-  } // do_ajax_form_calificaciones_validate_tipo_calificacion_id__cb
 
   // ---------- Validate calificacion_1_
   function do_ajax_form_calificaciones_validate_calificacion_1_(iNumLinha)
@@ -2798,7 +2751,7 @@ sajax_show_javascript();
   function do_ajax_form_calificaciones_validate_calificacion_nivel_1_(iNumLinha)
   {
     var nomeCampo_calificacion_nivel_1_ = "calificacion_nivel_1_" + iNumLinha;
-    var var_calificacion_nivel_1_ = scAjaxGetFieldText(nomeCampo_calificacion_nivel_1_);
+    var var_calificacion_nivel_1_ = scAjaxGetFieldHidden(nomeCampo_calificacion_nivel_1_);
     var var_script_case_init = document.F1.script_case_init.value;
     x_ajax_form_calificaciones_validate_calificacion_nivel_1_(var_calificacion_nivel_1_, iNumLinha, var_script_case_init, do_ajax_form_calificaciones_validate_calificacion_nivel_1__cb);
   } // do_ajax_form_calificaciones_validate_calificacion_nivel_1_
@@ -2892,7 +2845,7 @@ sajax_show_javascript();
   function do_ajax_form_calificaciones_validate_calificacion_nivel_2_(iNumLinha)
   {
     var nomeCampo_calificacion_nivel_2_ = "calificacion_nivel_2_" + iNumLinha;
-    var var_calificacion_nivel_2_ = scAjaxGetFieldText(nomeCampo_calificacion_nivel_2_);
+    var var_calificacion_nivel_2_ = scAjaxGetFieldHidden(nomeCampo_calificacion_nivel_2_);
     var var_script_case_init = document.F1.script_case_init.value;
     x_ajax_form_calificaciones_validate_calificacion_nivel_2_(var_calificacion_nivel_2_, iNumLinha, var_script_case_init, do_ajax_form_calificaciones_validate_calificacion_nivel_2__cb);
   } // do_ajax_form_calificaciones_validate_calificacion_nivel_2_
@@ -2986,7 +2939,7 @@ sajax_show_javascript();
   function do_ajax_form_calificaciones_validate_calificacion_nivel_3_(iNumLinha)
   {
     var nomeCampo_calificacion_nivel_3_ = "calificacion_nivel_3_" + iNumLinha;
-    var var_calificacion_nivel_3_ = scAjaxGetFieldText(nomeCampo_calificacion_nivel_3_);
+    var var_calificacion_nivel_3_ = scAjaxGetFieldHidden(nomeCampo_calificacion_nivel_3_);
     var var_script_case_init = document.F1.script_case_init.value;
     x_ajax_form_calificaciones_validate_calificacion_nivel_3_(var_calificacion_nivel_3_, iNumLinha, var_script_case_init, do_ajax_form_calificaciones_validate_calificacion_nivel_3__cb);
   } // do_ajax_form_calificaciones_validate_calificacion_nivel_3_
@@ -3080,7 +3033,7 @@ sajax_show_javascript();
   function do_ajax_form_calificaciones_validate_calificacion_nivel_4_(iNumLinha)
   {
     var nomeCampo_calificacion_nivel_4_ = "calificacion_nivel_4_" + iNumLinha;
-    var var_calificacion_nivel_4_ = scAjaxGetFieldText(nomeCampo_calificacion_nivel_4_);
+    var var_calificacion_nivel_4_ = scAjaxGetFieldHidden(nomeCampo_calificacion_nivel_4_);
     var var_script_case_init = document.F1.script_case_init.value;
     x_ajax_form_calificaciones_validate_calificacion_nivel_4_(var_calificacion_nivel_4_, iNumLinha, var_script_case_init, do_ajax_form_calificaciones_validate_calificacion_nivel_4__cb);
   } // do_ajax_form_calificaciones_validate_calificacion_nivel_4_
@@ -3174,7 +3127,7 @@ sajax_show_javascript();
   function do_ajax_form_calificaciones_validate_calificacion_nivel_5_(iNumLinha)
   {
     var nomeCampo_calificacion_nivel_5_ = "calificacion_nivel_5_" + iNumLinha;
-    var var_calificacion_nivel_5_ = scAjaxGetFieldText(nomeCampo_calificacion_nivel_5_);
+    var var_calificacion_nivel_5_ = scAjaxGetFieldHidden(nomeCampo_calificacion_nivel_5_);
     var var_script_case_init = document.F1.script_case_init.value;
     x_ajax_form_calificaciones_validate_calificacion_nivel_5_(var_calificacion_nivel_5_, iNumLinha, var_script_case_init, do_ajax_form_calificaciones_validate_calificacion_nivel_5__cb);
   } // do_ajax_form_calificaciones_validate_calificacion_nivel_5_
@@ -3268,7 +3221,7 @@ sajax_show_javascript();
   function do_ajax_form_calificaciones_validate_calificacion_nivel_6_(iNumLinha)
   {
     var nomeCampo_calificacion_nivel_6_ = "calificacion_nivel_6_" + iNumLinha;
-    var var_calificacion_nivel_6_ = scAjaxGetFieldText(nomeCampo_calificacion_nivel_6_);
+    var var_calificacion_nivel_6_ = scAjaxGetFieldHidden(nomeCampo_calificacion_nivel_6_);
     var var_script_case_init = document.F1.script_case_init.value;
     x_ajax_form_calificaciones_validate_calificacion_nivel_6_(var_calificacion_nivel_6_, iNumLinha, var_script_case_init, do_ajax_form_calificaciones_validate_calificacion_nivel_6__cb);
   } // do_ajax_form_calificaciones_validate_calificacion_nivel_6_
@@ -3362,7 +3315,7 @@ sajax_show_javascript();
   function do_ajax_form_calificaciones_validate_calificacion_nivel_7_(iNumLinha)
   {
     var nomeCampo_calificacion_nivel_7_ = "calificacion_nivel_7_" + iNumLinha;
-    var var_calificacion_nivel_7_ = scAjaxGetFieldText(nomeCampo_calificacion_nivel_7_);
+    var var_calificacion_nivel_7_ = scAjaxGetFieldHidden(nomeCampo_calificacion_nivel_7_);
     var var_script_case_init = document.F1.script_case_init.value;
     x_ajax_form_calificaciones_validate_calificacion_nivel_7_(var_calificacion_nivel_7_, iNumLinha, var_script_case_init, do_ajax_form_calificaciones_validate_calificacion_nivel_7__cb);
   } // do_ajax_form_calificaciones_validate_calificacion_nivel_7_
@@ -3456,7 +3409,7 @@ sajax_show_javascript();
   function do_ajax_form_calificaciones_validate_calificacion_nivel_8_(iNumLinha)
   {
     var nomeCampo_calificacion_nivel_8_ = "calificacion_nivel_8_" + iNumLinha;
-    var var_calificacion_nivel_8_ = scAjaxGetFieldText(nomeCampo_calificacion_nivel_8_);
+    var var_calificacion_nivel_8_ = scAjaxGetFieldHidden(nomeCampo_calificacion_nivel_8_);
     var var_script_case_init = document.F1.script_case_init.value;
     x_ajax_form_calificaciones_validate_calificacion_nivel_8_(var_calificacion_nivel_8_, iNumLinha, var_script_case_init, do_ajax_form_calificaciones_validate_calificacion_nivel_8__cb);
   } // do_ajax_form_calificaciones_validate_calificacion_nivel_8_
@@ -3550,7 +3503,7 @@ sajax_show_javascript();
   function do_ajax_form_calificaciones_validate_calificacion_nivel_9_(iNumLinha)
   {
     var nomeCampo_calificacion_nivel_9_ = "calificacion_nivel_9_" + iNumLinha;
-    var var_calificacion_nivel_9_ = scAjaxGetFieldText(nomeCampo_calificacion_nivel_9_);
+    var var_calificacion_nivel_9_ = scAjaxGetFieldHidden(nomeCampo_calificacion_nivel_9_);
     var var_script_case_init = document.F1.script_case_init.value;
     x_ajax_form_calificaciones_validate_calificacion_nivel_9_(var_calificacion_nivel_9_, iNumLinha, var_script_case_init, do_ajax_form_calificaciones_validate_calificacion_nivel_9__cb);
   } // do_ajax_form_calificaciones_validate_calificacion_nivel_9_
@@ -3597,7 +3550,7 @@ sajax_show_javascript();
   function do_ajax_form_calificaciones_validate_calificacion_final_(iNumLinha)
   {
     var nomeCampo_calificacion_final_ = "calificacion_final_" + iNumLinha;
-    var var_calificacion_final_ = scAjaxGetFieldText(nomeCampo_calificacion_final_);
+    var var_calificacion_final_ = scAjaxGetFieldHidden(nomeCampo_calificacion_final_);
     var var_script_case_init = document.F1.script_case_init.value;
     x_ajax_form_calificaciones_validate_calificacion_final_(var_calificacion_final_, iNumLinha, var_script_case_init, do_ajax_form_calificaciones_validate_calificacion_final__cb);
   } // do_ajax_form_calificaciones_validate_calificacion_final_
@@ -3640,6 +3593,147 @@ sajax_show_javascript();
     scAjaxSetFocus();
   } // do_ajax_form_calificaciones_validate_calificacion_final__cb
 
+  // ---------- Validate colegio_id_
+  function do_ajax_form_calificaciones_validate_colegio_id_(iNumLinha)
+  {
+    var nomeCampo_colegio_id_ = "colegio_id_" + iNumLinha;
+    var var_colegio_id_ = scAjaxGetFieldSelect(nomeCampo_colegio_id_);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_calificaciones_validate_colegio_id_(var_colegio_id_, iNumLinha, var_script_case_init, do_ajax_form_calificaciones_validate_colegio_id__cb);
+  } // do_ajax_form_calificaciones_validate_colegio_id_
+
+  function do_ajax_form_calificaciones_validate_colegio_id__cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    iLineNumber = scAjaxGetLineNumber();
+    if ("" != iLineNumber)
+    {
+      sFieldValid = "colegio_id_" + iLineNumber;
+    }
+    else
+    {
+      sFieldValid = "colegio_id_";
+    }
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+      scErrorLineOff(iLineNumber, "colegio_id_");
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+      scErrorLineOn(iLineNumber, "colegio_id_");
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_calificaciones_validate_colegio_id__cb
+
+  // ---------- Validate periodo_id_
+  function do_ajax_form_calificaciones_validate_periodo_id_(iNumLinha)
+  {
+    var nomeCampo_periodo_id_ = "periodo_id_" + iNumLinha;
+    var var_periodo_id_ = scAjaxGetFieldText(nomeCampo_periodo_id_);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_calificaciones_validate_periodo_id_(var_periodo_id_, iNumLinha, var_script_case_init, do_ajax_form_calificaciones_validate_periodo_id__cb);
+  } // do_ajax_form_calificaciones_validate_periodo_id_
+
+  function do_ajax_form_calificaciones_validate_periodo_id__cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    iLineNumber = scAjaxGetLineNumber();
+    if ("" != iLineNumber)
+    {
+      sFieldValid = "periodo_id_" + iLineNumber;
+    }
+    else
+    {
+      sFieldValid = "periodo_id_";
+    }
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+      scErrorLineOff(iLineNumber, "periodo_id_");
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+      scErrorLineOn(iLineNumber, "periodo_id_");
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_calificaciones_validate_periodo_id__cb
+
+  // ---------- Validate curso_id_
+  function do_ajax_form_calificaciones_validate_curso_id_(iNumLinha)
+  {
+    var nomeCampo_curso_id_ = "curso_id_" + iNumLinha;
+    var var_curso_id_ = scAjaxGetFieldText(nomeCampo_curso_id_);
+    var var_script_case_init = document.F1.script_case_init.value;
+    x_ajax_form_calificaciones_validate_curso_id_(var_curso_id_, iNumLinha, var_script_case_init, do_ajax_form_calificaciones_validate_curso_id__cb);
+  } // do_ajax_form_calificaciones_validate_curso_id_
+
+  function do_ajax_form_calificaciones_validate_curso_id__cb(sResp)
+  {
+    oResp = scAjaxResponse(sResp);
+    scAjaxRedir();
+    iLineNumber = scAjaxGetLineNumber();
+    if ("" != iLineNumber)
+    {
+      sFieldValid = "curso_id_" + iLineNumber;
+    }
+    else
+    {
+      sFieldValid = "curso_id_";
+    }
+    scEventControl_onBlur(sFieldValid);
+    scAjaxUpdateFieldErrors(sFieldValid, "valid");
+    sFieldErrors = scAjaxListFieldErrors(sFieldValid, false);
+    if ("" == sFieldErrors)
+    {
+      var sImgStatus = sc_img_status_ok;
+      scAjaxHideErrorDisplay(sFieldValid);
+      scErrorLineOff(iLineNumber, "curso_id_");
+    }
+    else
+    {
+      var sImgStatus = sc_img_status_err;
+      scAjaxShowErrorDisplay(sFieldValid, sFieldErrors);
+      scErrorLineOn(iLineNumber, "curso_id_");
+    }
+    var $oImg = $('#id_sc_status_' + sFieldValid);
+    if (0 < $oImg.length)
+    {
+      $oImg.attr('src', sImgStatus).css('display', '');
+    }
+    scAjaxShowDebug();
+    scAjaxSetMaster();
+    scAjaxSetFocus();
+  } // do_ajax_form_calificaciones_validate_curso_id__cb
+
   // ---------- Event onchange calificacion_1_
   function do_ajax_form_calificaciones_event_calificacion_1__onchange(iSeqForm)
   {
@@ -3652,7 +3746,7 @@ sajax_show_javascript();
     var var_calificacion_7_ = scAjaxGetFieldText("calificacion_7_" + iSeqForm);
     var var_calificacion_8_ = scAjaxGetFieldText("calificacion_8_" + iSeqForm);
     var var_calificacion_9_ = scAjaxGetFieldText("calificacion_9_" + iSeqForm);
-    var var_calificacion_final_ = scAjaxGetFieldText("calificacion_final_" + iSeqForm);
+    var var_calificacion_final_ = scAjaxGetFieldHidden("calificacion_final_" + iSeqForm);
     var var_script_case_init = document.F2.script_case_init.value;
     var var_nmgp_refresh_row = iSeqForm;
     scAjaxProcOn(true);
@@ -3714,7 +3808,7 @@ sajax_show_javascript();
     var var_calificacion_7_ = scAjaxGetFieldText("calificacion_7_" + iSeqForm);
     var var_calificacion_8_ = scAjaxGetFieldText("calificacion_8_" + iSeqForm);
     var var_calificacion_9_ = scAjaxGetFieldText("calificacion_9_" + iSeqForm);
-    var var_calificacion_final_ = scAjaxGetFieldText("calificacion_final_" + iSeqForm);
+    var var_calificacion_final_ = scAjaxGetFieldHidden("calificacion_final_" + iSeqForm);
     var var_script_case_init = document.F2.script_case_init.value;
     var var_nmgp_refresh_row = iSeqForm;
     scAjaxProcOn(true);
@@ -3776,7 +3870,7 @@ sajax_show_javascript();
     var var_calificacion_7_ = scAjaxGetFieldText("calificacion_7_" + iSeqForm);
     var var_calificacion_8_ = scAjaxGetFieldText("calificacion_8_" + iSeqForm);
     var var_calificacion_9_ = scAjaxGetFieldText("calificacion_9_" + iSeqForm);
-    var var_calificacion_final_ = scAjaxGetFieldText("calificacion_final_" + iSeqForm);
+    var var_calificacion_final_ = scAjaxGetFieldHidden("calificacion_final_" + iSeqForm);
     var var_script_case_init = document.F2.script_case_init.value;
     var var_nmgp_refresh_row = iSeqForm;
     scAjaxProcOn(true);
@@ -3838,7 +3932,7 @@ sajax_show_javascript();
     var var_calificacion_7_ = scAjaxGetFieldText("calificacion_7_" + iSeqForm);
     var var_calificacion_8_ = scAjaxGetFieldText("calificacion_8_" + iSeqForm);
     var var_calificacion_9_ = scAjaxGetFieldText("calificacion_9_" + iSeqForm);
-    var var_calificacion_final_ = scAjaxGetFieldText("calificacion_final_" + iSeqForm);
+    var var_calificacion_final_ = scAjaxGetFieldHidden("calificacion_final_" + iSeqForm);
     var var_script_case_init = document.F2.script_case_init.value;
     var var_nmgp_refresh_row = iSeqForm;
     scAjaxProcOn(true);
@@ -3900,7 +3994,7 @@ sajax_show_javascript();
     var var_calificacion_7_ = scAjaxGetFieldText("calificacion_7_" + iSeqForm);
     var var_calificacion_8_ = scAjaxGetFieldText("calificacion_8_" + iSeqForm);
     var var_calificacion_9_ = scAjaxGetFieldText("calificacion_9_" + iSeqForm);
-    var var_calificacion_final_ = scAjaxGetFieldText("calificacion_final_" + iSeqForm);
+    var var_calificacion_final_ = scAjaxGetFieldHidden("calificacion_final_" + iSeqForm);
     var var_script_case_init = document.F2.script_case_init.value;
     var var_nmgp_refresh_row = iSeqForm;
     scAjaxProcOn(true);
@@ -3962,7 +4056,7 @@ sajax_show_javascript();
     var var_calificacion_7_ = scAjaxGetFieldText("calificacion_7_" + iSeqForm);
     var var_calificacion_8_ = scAjaxGetFieldText("calificacion_8_" + iSeqForm);
     var var_calificacion_9_ = scAjaxGetFieldText("calificacion_9_" + iSeqForm);
-    var var_calificacion_final_ = scAjaxGetFieldText("calificacion_final_" + iSeqForm);
+    var var_calificacion_final_ = scAjaxGetFieldHidden("calificacion_final_" + iSeqForm);
     var var_script_case_init = document.F2.script_case_init.value;
     var var_nmgp_refresh_row = iSeqForm;
     scAjaxProcOn(true);
@@ -4024,7 +4118,7 @@ sajax_show_javascript();
     var var_calificacion_7_ = scAjaxGetFieldText("calificacion_7_" + iSeqForm);
     var var_calificacion_8_ = scAjaxGetFieldText("calificacion_8_" + iSeqForm);
     var var_calificacion_9_ = scAjaxGetFieldText("calificacion_9_" + iSeqForm);
-    var var_calificacion_final_ = scAjaxGetFieldText("calificacion_final_" + iSeqForm);
+    var var_calificacion_final_ = scAjaxGetFieldHidden("calificacion_final_" + iSeqForm);
     var var_script_case_init = document.F2.script_case_init.value;
     var var_nmgp_refresh_row = iSeqForm;
     scAjaxProcOn(true);
@@ -4086,7 +4180,7 @@ sajax_show_javascript();
     var var_calificacion_7_ = scAjaxGetFieldText("calificacion_7_" + iSeqForm);
     var var_calificacion_8_ = scAjaxGetFieldText("calificacion_8_" + iSeqForm);
     var var_calificacion_9_ = scAjaxGetFieldText("calificacion_9_" + iSeqForm);
-    var var_calificacion_final_ = scAjaxGetFieldText("calificacion_final_" + iSeqForm);
+    var var_calificacion_final_ = scAjaxGetFieldHidden("calificacion_final_" + iSeqForm);
     var var_script_case_init = document.F2.script_case_init.value;
     var var_nmgp_refresh_row = iSeqForm;
     scAjaxProcOn(true);
@@ -4148,7 +4242,7 @@ sajax_show_javascript();
     var var_calificacion_7_ = scAjaxGetFieldText("calificacion_7_" + iSeqForm);
     var var_calificacion_8_ = scAjaxGetFieldText("calificacion_8_" + iSeqForm);
     var var_calificacion_9_ = scAjaxGetFieldText("calificacion_9_" + iSeqForm);
-    var var_calificacion_final_ = scAjaxGetFieldText("calificacion_final_" + iSeqForm);
+    var var_calificacion_final_ = scAjaxGetFieldHidden("calificacion_final_" + iSeqForm);
     var var_script_case_init = document.F2.script_case_init.value;
     var var_nmgp_refresh_row = iSeqForm;
     scAjaxProcOn(true);
@@ -4261,11 +4355,11 @@ sajax_show_javascript();
   // ---------- backup_line
   function do_ajax_form_calificaciones_backup_line(iNumLinha)
   {
-    var var_colegio_id_ = scAjaxGetFieldText("colegio_id_" + iNumLinha);
+    var var_colegio_id_ = scAjaxGetFieldSelect("colegio_id_" + iNumLinha);
     var var_periodo_id_ = scAjaxGetFieldText("periodo_id_" + iNumLinha);
     var var_curso_id_ = scAjaxGetFieldText("curso_id_" + iNumLinha);
-    var var_estudiante_id_ = scAjaxGetFieldText("estudiante_id_" + iNumLinha);
-    var var_asignatura_id_ = scAjaxGetFieldText("asignatura_id_" + iNumLinha);
+    var var_estudiante_id_ = scAjaxGetFieldSelect("estudiante_id_" + iNumLinha);
+    var var_asignatura_id_ = scAjaxGetFieldSelect("asignatura_id_" + iNumLinha);
     var var_nmgp_refresh_row = iNumLinha;
     var var_nm_form_submit = document.F1.nm_form_submit.value;
     var var_script_case_init = document.F1.script_case_init.value;
@@ -4460,28 +4554,30 @@ sajax_show_javascript();
     sc_num_ult_line = iNumLinha;
     sc_num_ult_tr   = indexTR;
     scAjaxHideMessage();
-    var var_estudiante_id_ = scAjaxGetFieldText("estudiante_id_" + iNumLinha);
-    var var_asignatura_id_ = scAjaxGetFieldText("asignatura_id_" + iNumLinha);
-    var var_tipo_calificacion_id_ = scAjaxGetFieldText("tipo_calificacion_id_" + iNumLinha);
+    var var_estudiante_id_ = scAjaxGetFieldSelect("estudiante_id_" + iNumLinha);
+    var var_asignatura_id_ = scAjaxGetFieldSelect("asignatura_id_" + iNumLinha);
     var var_calificacion_1_ = scAjaxGetFieldText("calificacion_1_" + iNumLinha);
-    var var_calificacion_nivel_1_ = scAjaxGetFieldText("calificacion_nivel_1_" + iNumLinha);
+    var var_calificacion_nivel_1_ = scAjaxGetFieldHidden("calificacion_nivel_1_" + iNumLinha);
     var var_calificacion_2_ = scAjaxGetFieldText("calificacion_2_" + iNumLinha);
-    var var_calificacion_nivel_2_ = scAjaxGetFieldText("calificacion_nivel_2_" + iNumLinha);
+    var var_calificacion_nivel_2_ = scAjaxGetFieldHidden("calificacion_nivel_2_" + iNumLinha);
     var var_calificacion_3_ = scAjaxGetFieldText("calificacion_3_" + iNumLinha);
-    var var_calificacion_nivel_3_ = scAjaxGetFieldText("calificacion_nivel_3_" + iNumLinha);
+    var var_calificacion_nivel_3_ = scAjaxGetFieldHidden("calificacion_nivel_3_" + iNumLinha);
     var var_calificacion_4_ = scAjaxGetFieldText("calificacion_4_" + iNumLinha);
-    var var_calificacion_nivel_4_ = scAjaxGetFieldText("calificacion_nivel_4_" + iNumLinha);
+    var var_calificacion_nivel_4_ = scAjaxGetFieldHidden("calificacion_nivel_4_" + iNumLinha);
     var var_calificacion_5_ = scAjaxGetFieldText("calificacion_5_" + iNumLinha);
-    var var_calificacion_nivel_5_ = scAjaxGetFieldText("calificacion_nivel_5_" + iNumLinha);
+    var var_calificacion_nivel_5_ = scAjaxGetFieldHidden("calificacion_nivel_5_" + iNumLinha);
     var var_calificacion_6_ = scAjaxGetFieldText("calificacion_6_" + iNumLinha);
-    var var_calificacion_nivel_6_ = scAjaxGetFieldText("calificacion_nivel_6_" + iNumLinha);
+    var var_calificacion_nivel_6_ = scAjaxGetFieldHidden("calificacion_nivel_6_" + iNumLinha);
     var var_calificacion_7_ = scAjaxGetFieldText("calificacion_7_" + iNumLinha);
-    var var_calificacion_nivel_7_ = scAjaxGetFieldText("calificacion_nivel_7_" + iNumLinha);
+    var var_calificacion_nivel_7_ = scAjaxGetFieldHidden("calificacion_nivel_7_" + iNumLinha);
     var var_calificacion_8_ = scAjaxGetFieldText("calificacion_8_" + iNumLinha);
-    var var_calificacion_nivel_8_ = scAjaxGetFieldText("calificacion_nivel_8_" + iNumLinha);
+    var var_calificacion_nivel_8_ = scAjaxGetFieldHidden("calificacion_nivel_8_" + iNumLinha);
     var var_calificacion_9_ = scAjaxGetFieldText("calificacion_9_" + iNumLinha);
-    var var_calificacion_nivel_9_ = scAjaxGetFieldText("calificacion_nivel_9_" + iNumLinha);
-    var var_calificacion_final_ = scAjaxGetFieldText("calificacion_final_" + iNumLinha);
+    var var_calificacion_nivel_9_ = scAjaxGetFieldHidden("calificacion_nivel_9_" + iNumLinha);
+    var var_calificacion_final_ = scAjaxGetFieldHidden("calificacion_final_" + iNumLinha);
+    var var_colegio_id_ = scAjaxGetFieldSelect("colegio_id_" + iNumLinha);
+    var var_periodo_id_ = scAjaxGetFieldText("periodo_id_" + iNumLinha);
+    var var_curso_id_ = scAjaxGetFieldText("curso_id_" + iNumLinha);
     var var_nm_form_submit = document.F1.nm_form_submit.value;
     var var_nmgp_url_saida = document.F1.nmgp_url_saida.value;
     var var_nmgp_opcao = document.F1.nmgp_opcao.value;
@@ -4514,7 +4610,7 @@ sajax_show_javascript();
 <?php
     }
 ?>
-    x_ajax_form_calificaciones_submit_form(var_estudiante_id_, var_asignatura_id_, var_tipo_calificacion_id_, var_calificacion_1_, var_calificacion_nivel_1_, var_calificacion_2_, var_calificacion_nivel_2_, var_calificacion_3_, var_calificacion_nivel_3_, var_calificacion_4_, var_calificacion_nivel_4_, var_calificacion_5_, var_calificacion_nivel_5_, var_calificacion_6_, var_calificacion_nivel_6_, var_calificacion_7_, var_calificacion_nivel_7_, var_calificacion_8_, var_calificacion_nivel_8_, var_calificacion_9_, var_calificacion_nivel_9_, var_calificacion_final_, var_nmgp_refresh_row, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_calificaciones_submit_form_cb);
+    x_ajax_form_calificaciones_submit_form(var_estudiante_id_, var_asignatura_id_, var_calificacion_1_, var_calificacion_nivel_1_, var_calificacion_2_, var_calificacion_nivel_2_, var_calificacion_3_, var_calificacion_nivel_3_, var_calificacion_4_, var_calificacion_nivel_4_, var_calificacion_5_, var_calificacion_nivel_5_, var_calificacion_6_, var_calificacion_nivel_6_, var_calificacion_7_, var_calificacion_nivel_7_, var_calificacion_8_, var_calificacion_nivel_8_, var_calificacion_9_, var_calificacion_nivel_9_, var_calificacion_final_, var_colegio_id_, var_periodo_id_, var_curso_id_, var_nmgp_refresh_row, var_nm_form_submit, var_nmgp_url_saida, var_nmgp_opcao, var_nmgp_ancora, var_nmgp_num_form, var_nmgp_parms, var_script_case_init, var_csrf_token, do_ajax_form_calificaciones_submit_form_cb);
   } // do_ajax_form_calificaciones_submit_form
 
   function do_ajax_form_calificaciones_submit_form_cb(sResp)
@@ -4609,7 +4705,6 @@ sajax_show_javascript();
       scAjaxHideErrorDisplay("table");
       scAjaxHideErrorDisplay("estudiante_id_" + sc_num_ult_line);
       scAjaxHideErrorDisplay("asignatura_id_" + sc_num_ult_line);
-      scAjaxHideErrorDisplay("tipo_calificacion_id_" + sc_num_ult_line);
       scAjaxHideErrorDisplay("calificacion_1_" + sc_num_ult_line);
       scAjaxHideErrorDisplay("calificacion_nivel_1_" + sc_num_ult_line);
       scAjaxHideErrorDisplay("calificacion_2_" + sc_num_ult_line);
@@ -4629,6 +4724,9 @@ sajax_show_javascript();
       scAjaxHideErrorDisplay("calificacion_9_" + sc_num_ult_line);
       scAjaxHideErrorDisplay("calificacion_nivel_9_" + sc_num_ult_line);
       scAjaxHideErrorDisplay("calificacion_final_" + sc_num_ult_line);
+      scAjaxHideErrorDisplay("colegio_id_" + sc_num_ult_line);
+      scAjaxHideErrorDisplay("periodo_id_" + sc_num_ult_line);
+      scAjaxHideErrorDisplay("curso_id_" + sc_num_ult_line);
 <?php
 if (isset($this->Embutida_form) && $this->Embutida_form) {
 ?>
@@ -4703,7 +4801,6 @@ if (isset($this->Embutida_form) && $this->Embutida_form) {
     {
       scAjaxHideErrorDisplay("estudiante_id_" + iNavForm);
       scAjaxHideErrorDisplay("asignatura_id_" + iNavForm);
-      scAjaxHideErrorDisplay("tipo_calificacion_id_" + iNavForm);
       scAjaxHideErrorDisplay("calificacion_1_" + iNavForm);
       scAjaxHideErrorDisplay("calificacion_nivel_1_" + iNavForm);
       scAjaxHideErrorDisplay("calificacion_2_" + iNavForm);
@@ -4723,6 +4820,9 @@ if (isset($this->Embutida_form) && $this->Embutida_form) {
       scAjaxHideErrorDisplay("calificacion_9_" + iNavForm);
       scAjaxHideErrorDisplay("calificacion_nivel_9_" + iNavForm);
       scAjaxHideErrorDisplay("calificacion_final_" + iNavForm);
+      scAjaxHideErrorDisplay("colegio_id_" + iNavForm);
+      scAjaxHideErrorDisplay("periodo_id_" + iNavForm);
+      scAjaxHideErrorDisplay("curso_id_" + iNavForm);
     }
     var var_colegio_id_ = document.F2.colegio_id_.value;
     var var_periodo_id_ = document.F2.periodo_id_.value;
@@ -4837,8 +4937,6 @@ $sLineInfo = $this->Embutida_form ? '' : ' (linha " + iNumLinha + ")';
     iTotCampos++;
     ajax_field_list[iTotCampos] = "asignatura_id_" + iNumLinha;
     iTotCampos++;
-    ajax_field_list[iTotCampos] = "tipo_calificacion_id_" + iNumLinha;
-    iTotCampos++;
     ajax_field_list[iTotCampos] = "calificacion_1_" + iNumLinha;
     iTotCampos++;
     ajax_field_list[iTotCampos] = "calificacion_nivel_1_" + iNumLinha;
@@ -4877,31 +4975,38 @@ $sLineInfo = $this->Embutida_form ? '' : ' (linha " + iNumLinha + ")';
     iTotCampos++;
     ajax_field_list[iTotCampos] = "calificacion_final_" + iNumLinha;
     iTotCampos++;
-    ajax_error_list["estudiante_id_" + iNumLinha] = {"label": "Estudiante Id<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
-    ajax_error_list["asignatura_id_" + iNumLinha] = {"label": "Asignatura Id<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
-    ajax_error_list["tipo_calificacion_id_" + iNumLinha] = {"label": "Tipo Calificacion Id<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
-    ajax_error_list["calificacion_1_" + iNumLinha] = {"label": "Calificacion 1<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
-    ajax_error_list["calificacion_nivel_1_" + iNumLinha] = {"label": "Calificacion Nivel 1<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
-    ajax_error_list["calificacion_2_" + iNumLinha] = {"label": "Calificacion 2<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
-    ajax_error_list["calificacion_nivel_2_" + iNumLinha] = {"label": "Calificacion Nivel 2<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
-    ajax_error_list["calificacion_3_" + iNumLinha] = {"label": "Calificacion 3<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
-    ajax_error_list["calificacion_nivel_3_" + iNumLinha] = {"label": "Calificacion Nivel 3<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
-    ajax_error_list["calificacion_4_" + iNumLinha] = {"label": "Calificacion 4<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
-    ajax_error_list["calificacion_nivel_4_" + iNumLinha] = {"label": "Calificacion Nivel 4<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
+    ajax_field_list[iTotCampos] = "colegio_id_" + iNumLinha;
+    iTotCampos++;
+    ajax_field_list[iTotCampos] = "periodo_id_" + iNumLinha;
+    iTotCampos++;
+    ajax_field_list[iTotCampos] = "curso_id_" + iNumLinha;
+    iTotCampos++;
+    ajax_error_list["estudiante_id_" + iNumLinha] = {"label": "Estudiante<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
+    ajax_error_list["asignatura_id_" + iNumLinha] = {"label": "Asignatura<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
+    ajax_error_list["calificacion_1_" + iNumLinha] = {"label": "Calificación 1<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
+    ajax_error_list["calificacion_nivel_1_" + iNumLinha] = {"label": "<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
+    ajax_error_list["calificacion_2_" + iNumLinha] = {"label": "Calificación 2<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
+    ajax_error_list["calificacion_nivel_2_" + iNumLinha] = {"label": "<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
+    ajax_error_list["calificacion_3_" + iNumLinha] = {"label": "Calificación 3<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
+    ajax_error_list["calificacion_nivel_3_" + iNumLinha] = {"label": "<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
+    ajax_error_list["calificacion_4_" + iNumLinha] = {"label": "Calificación 4<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
+    ajax_error_list["calificacion_nivel_4_" + iNumLinha] = {"label": "<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
     ajax_error_list["calificacion_5_" + iNumLinha] = {"label": "Calificacion 5<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
-    ajax_error_list["calificacion_nivel_5_" + iNumLinha] = {"label": "Calificacion Nivel 5<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
+    ajax_error_list["calificacion_nivel_5_" + iNumLinha] = {"label": "<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
     ajax_error_list["calificacion_6_" + iNumLinha] = {"label": "Calificacion 6<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
-    ajax_error_list["calificacion_nivel_6_" + iNumLinha] = {"label": "Calificacion Nivel 6<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
+    ajax_error_list["calificacion_nivel_6_" + iNumLinha] = {"label": "<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
     ajax_error_list["calificacion_7_" + iNumLinha] = {"label": "Calificacion 7<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
-    ajax_error_list["calificacion_nivel_7_" + iNumLinha] = {"label": "Calificacion Nivel 7<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
+    ajax_error_list["calificacion_nivel_7_" + iNumLinha] = {"label": "<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
     ajax_error_list["calificacion_8_" + iNumLinha] = {"label": "Calificacion 8<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
-    ajax_error_list["calificacion_nivel_8_" + iNumLinha] = {"label": "Calificacion Nivel 8<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
+    ajax_error_list["calificacion_nivel_8_" + iNumLinha] = {"label": "<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
     ajax_error_list["calificacion_9_" + iNumLinha] = {"label": "Calificacion 9<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
-    ajax_error_list["calificacion_nivel_9_" + iNumLinha] = {"label": "Calificacion Nivel 9<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
+    ajax_error_list["calificacion_nivel_9_" + iNumLinha] = {"label": "<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
     ajax_error_list["calificacion_final_" + iNumLinha] = {"label": "Calificacion Final<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
+    ajax_error_list["colegio_id_" + iNumLinha] = {"label": "Colegio Id<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
+    ajax_error_list["periodo_id_" + iNumLinha] = {"label": "Periodo Id<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
+    ajax_error_list["curso_id_" + iNumLinha] = {"label": "Curso Id<?php echo $sLineInfo; ?>", "valid": new Array(), "onblur": new Array(), "onchange": new Array(), "onclick": new Array(), "onfocus": new Array(), "timeout": 5};
     ajax_field_mult["estudiante_id_"][iNumLinha] = "estudiante_id_" + iNumLinha;
     ajax_field_mult["asignatura_id_"][iNumLinha] = "asignatura_id_" + iNumLinha;
-    ajax_field_mult["tipo_calificacion_id_"][iNumLinha] = "tipo_calificacion_id_" + iNumLinha;
     ajax_field_mult["calificacion_1_"][iNumLinha] = "calificacion_1_" + iNumLinha;
     ajax_field_mult["calificacion_nivel_1_"][iNumLinha] = "calificacion_nivel_1_" + iNumLinha;
     ajax_field_mult["calificacion_2_"][iNumLinha] = "calificacion_2_" + iNumLinha;
@@ -4921,9 +5026,11 @@ $sLineInfo = $this->Embutida_form ? '' : ' (linha " + iNumLinha + ")';
     ajax_field_mult["calificacion_9_"][iNumLinha] = "calificacion_9_" + iNumLinha;
     ajax_field_mult["calificacion_nivel_9_"][iNumLinha] = "calificacion_nivel_9_" + iNumLinha;
     ajax_field_mult["calificacion_final_"][iNumLinha] = "calificacion_final_" + iNumLinha;
+    ajax_field_mult["colegio_id_"][iNumLinha] = "colegio_id_" + iNumLinha;
+    ajax_field_mult["periodo_id_"][iNumLinha] = "periodo_id_" + iNumLinha;
+    ajax_field_mult["curso_id_"][iNumLinha] = "curso_id_" + iNumLinha;
     ajax_field_id["estudiante_id_" + iNumLinha] = new Array("hidden_field_label_estudiante_id_", "hidden_field_data_estudiante_id_" + iNumLinha);
     ajax_field_id["asignatura_id_" + iNumLinha] = new Array("hidden_field_label_asignatura_id_", "hidden_field_data_asignatura_id_" + iNumLinha);
-    ajax_field_id["tipo_calificacion_id_" + iNumLinha] = new Array("hidden_field_label_tipo_calificacion_id_", "hidden_field_data_tipo_calificacion_id_" + iNumLinha);
     ajax_field_id["calificacion_1_" + iNumLinha] = new Array("hidden_field_label_calificacion_1_", "hidden_field_data_calificacion_1_" + iNumLinha);
     ajax_field_id["calificacion_nivel_1_" + iNumLinha] = new Array("hidden_field_label_calificacion_nivel_1_", "hidden_field_data_calificacion_nivel_1_" + iNumLinha);
     ajax_field_id["calificacion_2_" + iNumLinha] = new Array("hidden_field_label_calificacion_2_", "hidden_field_data_calificacion_2_" + iNumLinha);
@@ -4945,7 +5052,6 @@ $sLineInfo = $this->Embutida_form ? '' : ' (linha " + iNumLinha + ")';
     ajax_field_id["calificacion_final_" + iNumLinha] = new Array("hidden_field_label_calificacion_final_", "hidden_field_data_calificacion_final_" + iNumLinha);
     ajax_error_count["estudiante_id_" + iNumLinha] = "off";
     ajax_error_count["asignatura_id_" + iNumLinha] = "off";
-    ajax_error_count["tipo_calificacion_id_" + iNumLinha] = "off";
     ajax_error_count["calificacion_1_" + iNumLinha] = "off";
     ajax_error_count["calificacion_nivel_1_" + iNumLinha] = "off";
     ajax_error_count["calificacion_2_" + iNumLinha] = "off";
@@ -4965,13 +5071,15 @@ $sLineInfo = $this->Embutida_form ? '' : ' (linha " + iNumLinha + ")';
     ajax_error_count["calificacion_9_" + iNumLinha] = "off";
     ajax_error_count["calificacion_nivel_9_" + iNumLinha] = "off";
     ajax_error_count["calificacion_final_" + iNumLinha] = "off";
+    ajax_error_count["colegio_id_" + iNumLinha] = "off";
+    ajax_error_count["periodo_id_" + iNumLinha] = "off";
+    ajax_error_count["curso_id_" + iNumLinha] = "off";
 <?php
 if (!$this->Grid_editavel)
 {
 ?>
     ajax_read_only["estudiante_id_" + iNumLinha] = "on";
     ajax_read_only["asignatura_id_" + iNumLinha] = "on";
-    ajax_read_only["tipo_calificacion_id_" + iNumLinha] = "off";
     ajax_read_only["calificacion_1_" + iNumLinha] = "off";
     ajax_read_only["calificacion_nivel_1_" + iNumLinha] = "off";
     ajax_read_only["calificacion_2_" + iNumLinha] = "off";
@@ -4991,6 +5099,9 @@ if (!$this->Grid_editavel)
     ajax_read_only["calificacion_9_" + iNumLinha] = "off";
     ajax_read_only["calificacion_nivel_9_" + iNumLinha] = "off";
     ajax_read_only["calificacion_final_" + iNumLinha] = "off";
+    ajax_read_only["colegio_id_" + iNumLinha] = "on";
+    ajax_read_only["periodo_id_" + iNumLinha] = "on";
+    ajax_read_only["curso_id_" + iNumLinha] = "on";
 <?php
 }
 else
@@ -4998,7 +5109,6 @@ else
 ?>
     ajax_read_only["estudiante_id_" + iNumLinha] = "on";
     ajax_read_only["asignatura_id_" + iNumLinha] = "on";
-    ajax_read_only["tipo_calificacion_id_" + iNumLinha] = "on";
     ajax_read_only["calificacion_1_" + iNumLinha] = "on";
     ajax_read_only["calificacion_nivel_1_" + iNumLinha] = "on";
     ajax_read_only["calificacion_2_" + iNumLinha] = "on";
@@ -5018,6 +5128,9 @@ else
     ajax_read_only["calificacion_9_" + iNumLinha] = "on";
     ajax_read_only["calificacion_nivel_9_" + iNumLinha] = "on";
     ajax_read_only["calificacion_final_" + iNumLinha] = "on";
+    ajax_read_only["colegio_id_" + iNumLinha] = "on";
+    ajax_read_only["periodo_id_" + iNumLinha] = "on";
+    ajax_read_only["curso_id_" + iNumLinha] = "on";
 <?php
 }
 ?>
@@ -5026,7 +5139,6 @@ else
   {
     ajax_error_list["estudiante_id_" + iNumLinha] = null;
     ajax_error_list["asignatura_id_" + iNumLinha] = null;
-    ajax_error_list["tipo_calificacion_id_" + iNumLinha] = null;
     ajax_error_list["calificacion_1_" + iNumLinha] = null;
     ajax_error_list["calificacion_nivel_1_" + iNumLinha] = null;
     ajax_error_list["calificacion_2_" + iNumLinha] = null;
@@ -5046,6 +5158,9 @@ else
     ajax_error_list["calificacion_9_" + iNumLinha] = null;
     ajax_error_list["calificacion_nivel_9_" + iNumLinha] = null;
     ajax_error_list["calificacion_final_" + iNumLinha] = null;
+    ajax_error_list["colegio_id_" + iNumLinha] = null;
+    ajax_error_list["periodo_id_" + iNumLinha] = null;
+    ajax_error_list["curso_id_" + iNumLinha] = null;
   }
 
   var ajax_error_geral = "";
@@ -5074,7 +5189,6 @@ else
   var ajax_field_mult = {
     "estudiante_id_": new Array(),
     "asignatura_id_": new Array(),
-    "tipo_calificacion_id_": new Array(),
     "calificacion_1_": new Array(),
     "calificacion_nivel_1_": new Array(),
     "calificacion_2_": new Array(),
@@ -5093,7 +5207,10 @@ else
     "calificacion_nivel_8_": new Array(),
     "calificacion_9_": new Array(),
     "calificacion_nivel_9_": new Array(),
-    "calificacion_final_": new Array()
+    "calificacion_final_": new Array(),
+    "colegio_id_": new Array(),
+    "periodo_id_": new Array(),
+    "curso_id_": new Array()
   };
 
   var ajax_field_id = {};
@@ -5122,11 +5239,6 @@ else
       ajax_error_list["asignatura_id_" + iNumLinha]["onchange"] = new Array();
       ajax_error_list["asignatura_id_" + iNumLinha]["onclick"] = new Array();
       ajax_error_list["asignatura_id_" + iNumLinha]["onfocus"] = new Array();
-      ajax_error_list["tipo_calificacion_id_" + iNumLinha]["valid"] = new Array();
-      ajax_error_list["tipo_calificacion_id_" + iNumLinha]["onblur"] = new Array();
-      ajax_error_list["tipo_calificacion_id_" + iNumLinha]["onchange"] = new Array();
-      ajax_error_list["tipo_calificacion_id_" + iNumLinha]["onclick"] = new Array();
-      ajax_error_list["tipo_calificacion_id_" + iNumLinha]["onfocus"] = new Array();
       ajax_error_list["calificacion_1_" + iNumLinha]["valid"] = new Array();
       ajax_error_list["calificacion_1_" + iNumLinha]["onblur"] = new Array();
       ajax_error_list["calificacion_1_" + iNumLinha]["onchange"] = new Array();
@@ -5222,6 +5334,21 @@ else
       ajax_error_list["calificacion_final_" + iNumLinha]["onchange"] = new Array();
       ajax_error_list["calificacion_final_" + iNumLinha]["onclick"] = new Array();
       ajax_error_list["calificacion_final_" + iNumLinha]["onfocus"] = new Array();
+      ajax_error_list["colegio_id_" + iNumLinha]["valid"] = new Array();
+      ajax_error_list["colegio_id_" + iNumLinha]["onblur"] = new Array();
+      ajax_error_list["colegio_id_" + iNumLinha]["onchange"] = new Array();
+      ajax_error_list["colegio_id_" + iNumLinha]["onclick"] = new Array();
+      ajax_error_list["colegio_id_" + iNumLinha]["onfocus"] = new Array();
+      ajax_error_list["periodo_id_" + iNumLinha]["valid"] = new Array();
+      ajax_error_list["periodo_id_" + iNumLinha]["onblur"] = new Array();
+      ajax_error_list["periodo_id_" + iNumLinha]["onchange"] = new Array();
+      ajax_error_list["periodo_id_" + iNumLinha]["onclick"] = new Array();
+      ajax_error_list["periodo_id_" + iNumLinha]["onfocus"] = new Array();
+      ajax_error_list["curso_id_" + iNumLinha]["valid"] = new Array();
+      ajax_error_list["curso_id_" + iNumLinha]["onblur"] = new Array();
+      ajax_error_list["curso_id_" + iNumLinha]["onchange"] = new Array();
+      ajax_error_list["curso_id_" + iNumLinha]["onclick"] = new Array();
+      ajax_error_list["curso_id_" + iNumLinha]["onfocus"] = new Array();
     }
   }
 
@@ -5264,10 +5391,6 @@ else
   $NM_contr_readonly = (isset($this->nmgp_cmp_readonly['asignatura_id_'])) ? $this->nmgp_cmp_readonly['asignatura_id_'] : 'on';
 ?>
     scAjaxFieldRead("asignatura_id_" + iSeq, "<?php echo $NM_contr_readonly ?>");
-<?php
-  $NM_contr_readonly = (isset($this->nmgp_cmp_readonly['tipo_calificacion_id_'])) ? $this->nmgp_cmp_readonly['tipo_calificacion_id_'] : 'off';
-?>
-    scAjaxFieldRead("tipo_calificacion_id_" + iSeq, "<?php echo $NM_contr_readonly ?>");
 <?php
   $NM_contr_readonly = (isset($this->nmgp_cmp_readonly['calificacion_1_'])) ? $this->nmgp_cmp_readonly['calificacion_1_'] : 'off';
 ?>
@@ -5344,13 +5467,24 @@ else
   $NM_contr_readonly = (isset($this->nmgp_cmp_readonly['calificacion_final_'])) ? $this->nmgp_cmp_readonly['calificacion_final_'] : 'off';
 ?>
     scAjaxFieldRead("calificacion_final_" + iSeq, "<?php echo $NM_contr_readonly ?>");
+<?php
+  $NM_contr_readonly = (isset($this->nmgp_cmp_readonly['colegio_id_'])) ? $this->nmgp_cmp_readonly['colegio_id_'] : 'on';
+?>
+    scAjaxFieldRead("colegio_id_" + iSeq, "<?php echo $NM_contr_readonly ?>");
+<?php
+  $NM_contr_readonly = (isset($this->nmgp_cmp_readonly['periodo_id_'])) ? $this->nmgp_cmp_readonly['periodo_id_'] : 'on';
+?>
+    scAjaxFieldRead("periodo_id_" + iSeq, "<?php echo $NM_contr_readonly ?>");
+<?php
+  $NM_contr_readonly = (isset($this->nmgp_cmp_readonly['curso_id_'])) ? $this->nmgp_cmp_readonly['curso_id_'] : 'on';
+?>
+    scAjaxFieldRead("curso_id_" + iSeq, "<?php echo $NM_contr_readonly ?>");
   }
 
   function mdCloseObjects(iSeq)
   {
     scAjaxFieldRead("estudiante_id_" + iSeq, "on");
     scAjaxFieldRead("asignatura_id_" + iSeq, "on");
-    scAjaxFieldRead("tipo_calificacion_id_" + iSeq, "on");
     scAjaxFieldRead("calificacion_1_" + iSeq, "on");
     scAjaxFieldRead("calificacion_nivel_1_" + iSeq, "on");
     scAjaxFieldRead("calificacion_2_" + iSeq, "on");
@@ -5370,6 +5504,9 @@ else
     scAjaxFieldRead("calificacion_9_" + iSeq, "on");
     scAjaxFieldRead("calificacion_nivel_9_" + iSeq, "on");
     scAjaxFieldRead("calificacion_final_" + iSeq, "on");
+    scAjaxFieldRead("colegio_id_" + iSeq, "on");
+    scAjaxFieldRead("periodo_id_" + iSeq, "on");
+    scAjaxFieldRead("curso_id_" + iSeq, "on");
   }
 
   function mdCloseLine()
@@ -5435,13 +5572,12 @@ else
     {
       ajax_error_count[sIdError + iRow] = "on";
     }
-    if (bErrorRow || ("on" == ajax_error_count["estudiante_id_" + iRow] || "on" == ajax_error_count["asignatura_id_" + iRow] || "on" == ajax_error_count["tipo_calificacion_id_" + iRow] || "on" == ajax_error_count["calificacion_1_" + iRow] || "on" == ajax_error_count["calificacion_nivel_1_" + iRow] || "on" == ajax_error_count["calificacion_2_" + iRow] || "on" == ajax_error_count["calificacion_nivel_2_" + iRow] || "on" == ajax_error_count["calificacion_3_" + iRow] || "on" == ajax_error_count["calificacion_nivel_3_" + iRow] || "on" == ajax_error_count["calificacion_4_" + iRow] || "on" == ajax_error_count["calificacion_nivel_4_" + iRow] || "on" == ajax_error_count["calificacion_5_" + iRow] || "on" == ajax_error_count["calificacion_nivel_5_" + iRow] || "on" == ajax_error_count["calificacion_6_" + iRow] || "on" == ajax_error_count["calificacion_nivel_6_" + iRow] || "on" == ajax_error_count["calificacion_7_" + iRow] || "on" == ajax_error_count["calificacion_nivel_7_" + iRow] || "on" == ajax_error_count["calificacion_8_" + iRow] || "on" == ajax_error_count["calificacion_nivel_8_" + iRow] || "on" == ajax_error_count["calificacion_9_" + iRow] || "on" == ajax_error_count["calificacion_nivel_9_" + iRow] || "on" == ajax_error_count["calificacion_final_" + iRow]))
+    if (bErrorRow || ("on" == ajax_error_count["estudiante_id_" + iRow] || "on" == ajax_error_count["asignatura_id_" + iRow] || "on" == ajax_error_count["calificacion_1_" + iRow] || "on" == ajax_error_count["calificacion_nivel_1_" + iRow] || "on" == ajax_error_count["calificacion_2_" + iRow] || "on" == ajax_error_count["calificacion_nivel_2_" + iRow] || "on" == ajax_error_count["calificacion_3_" + iRow] || "on" == ajax_error_count["calificacion_nivel_3_" + iRow] || "on" == ajax_error_count["calificacion_4_" + iRow] || "on" == ajax_error_count["calificacion_nivel_4_" + iRow] || "on" == ajax_error_count["calificacion_5_" + iRow] || "on" == ajax_error_count["calificacion_nivel_5_" + iRow] || "on" == ajax_error_count["calificacion_6_" + iRow] || "on" == ajax_error_count["calificacion_nivel_6_" + iRow] || "on" == ajax_error_count["calificacion_7_" + iRow] || "on" == ajax_error_count["calificacion_nivel_7_" + iRow] || "on" == ajax_error_count["calificacion_8_" + iRow] || "on" == ajax_error_count["calificacion_nivel_8_" + iRow] || "on" == ajax_error_count["calificacion_9_" + iRow] || "on" == ajax_error_count["calificacion_nivel_9_" + iRow] || "on" == ajax_error_count["calificacion_final_" + iRow] || "on" == ajax_error_count["colegio_id_" + iRow] || "on" == ajax_error_count["periodo_id_" + iRow] || "on" == ajax_error_count["curso_id_" + iRow]))
     {
       $("#hidden_field_data_sc_seq" + iRow).addClass("scFormErrorLine");
       $("#hidden_field_data_sc_actions" + iRow).addClass("scFormErrorLine");
       $("#hidden_field_data_estudiante_id_" + iRow).addClass("scFormErrorLine");
       $("#hidden_field_data_asignatura_id_" + iRow).addClass("scFormErrorLine");
-      $("#hidden_field_data_tipo_calificacion_id_" + iRow).addClass("scFormErrorLine");
       $("#hidden_field_data_calificacion_1_" + iRow).addClass("scFormErrorLine");
       $("#hidden_field_data_calificacion_nivel_1_" + iRow).addClass("scFormErrorLine");
       $("#hidden_field_data_calificacion_2_" + iRow).addClass("scFormErrorLine");
@@ -5461,6 +5597,9 @@ else
       $("#hidden_field_data_calificacion_9_" + iRow).addClass("scFormErrorLine");
       $("#hidden_field_data_calificacion_nivel_9_" + iRow).addClass("scFormErrorLine");
       $("#hidden_field_data_calificacion_final_" + iRow).addClass("scFormErrorLine");
+      $("#hidden_field_data_colegio_id_" + iRow).addClass("scFormErrorLine");
+      $("#hidden_field_data_periodo_id_" + iRow).addClass("scFormErrorLine");
+      $("#hidden_field_data_curso_id_" + iRow).addClass("scFormErrorLine");
     }
   }
 
@@ -5475,13 +5614,12 @@ else
     {
       ajax_error_count[sIdError + iRow] = "off";
     }
-    if (bErrorRow || ("off" == ajax_error_count["estudiante_id_" + iRow] && "off" == ajax_error_count["asignatura_id_" + iRow] && "off" == ajax_error_count["tipo_calificacion_id_" + iRow] && "off" == ajax_error_count["calificacion_1_" + iRow] && "off" == ajax_error_count["calificacion_nivel_1_" + iRow] && "off" == ajax_error_count["calificacion_2_" + iRow] && "off" == ajax_error_count["calificacion_nivel_2_" + iRow] && "off" == ajax_error_count["calificacion_3_" + iRow] && "off" == ajax_error_count["calificacion_nivel_3_" + iRow] && "off" == ajax_error_count["calificacion_4_" + iRow] && "off" == ajax_error_count["calificacion_nivel_4_" + iRow] && "off" == ajax_error_count["calificacion_5_" + iRow] && "off" == ajax_error_count["calificacion_nivel_5_" + iRow] && "off" == ajax_error_count["calificacion_6_" + iRow] && "off" == ajax_error_count["calificacion_nivel_6_" + iRow] && "off" == ajax_error_count["calificacion_7_" + iRow] && "off" == ajax_error_count["calificacion_nivel_7_" + iRow] && "off" == ajax_error_count["calificacion_8_" + iRow] && "off" == ajax_error_count["calificacion_nivel_8_" + iRow] && "off" == ajax_error_count["calificacion_9_" + iRow] && "off" == ajax_error_count["calificacion_nivel_9_" + iRow] && "off" == ajax_error_count["calificacion_final_" + iRow]))
+    if (bErrorRow || ("off" == ajax_error_count["estudiante_id_" + iRow] && "off" == ajax_error_count["asignatura_id_" + iRow] && "off" == ajax_error_count["calificacion_1_" + iRow] && "off" == ajax_error_count["calificacion_nivel_1_" + iRow] && "off" == ajax_error_count["calificacion_2_" + iRow] && "off" == ajax_error_count["calificacion_nivel_2_" + iRow] && "off" == ajax_error_count["calificacion_3_" + iRow] && "off" == ajax_error_count["calificacion_nivel_3_" + iRow] && "off" == ajax_error_count["calificacion_4_" + iRow] && "off" == ajax_error_count["calificacion_nivel_4_" + iRow] && "off" == ajax_error_count["calificacion_5_" + iRow] && "off" == ajax_error_count["calificacion_nivel_5_" + iRow] && "off" == ajax_error_count["calificacion_6_" + iRow] && "off" == ajax_error_count["calificacion_nivel_6_" + iRow] && "off" == ajax_error_count["calificacion_7_" + iRow] && "off" == ajax_error_count["calificacion_nivel_7_" + iRow] && "off" == ajax_error_count["calificacion_8_" + iRow] && "off" == ajax_error_count["calificacion_nivel_8_" + iRow] && "off" == ajax_error_count["calificacion_9_" + iRow] && "off" == ajax_error_count["calificacion_nivel_9_" + iRow] && "off" == ajax_error_count["calificacion_final_" + iRow] && "off" == ajax_error_count["colegio_id_" + iRow] && "off" == ajax_error_count["periodo_id_" + iRow] && "off" == ajax_error_count["curso_id_" + iRow]))
     {
       if (bErrorRow)
       {
         ajax_error_count["estudiante_id_" + iRow] = "off";
         ajax_error_count["asignatura_id_" + iRow] = "off";
-        ajax_error_count["tipo_calificacion_id_" + iRow] = "off";
         ajax_error_count["calificacion_1_" + iRow] = "off";
         ajax_error_count["calificacion_nivel_1_" + iRow] = "off";
         ajax_error_count["calificacion_2_" + iRow] = "off";
@@ -5501,13 +5639,15 @@ else
         ajax_error_count["calificacion_9_" + iRow] = "off";
         ajax_error_count["calificacion_nivel_9_" + iRow] = "off";
         ajax_error_count["calificacion_final_" + iRow] = "off";
+        ajax_error_count["colegio_id_" + iRow] = "off";
+        ajax_error_count["periodo_id_" + iRow] = "off";
+        ajax_error_count["curso_id_" + iRow] = "off";
       }
       var sCssLine = scErrorLineCss(iRow);
       $("#hidden_field_data_sc_seq" + iRow).removeClass("scFormErrorLine");
       $("#hidden_field_data_sc_actions" + iRow).removeClass("scFormErrorLine");
       $("#hidden_field_data_estudiante_id_" + iRow).removeClass("scFormErrorLine");
       $("#hidden_field_data_asignatura_id_" + iRow).removeClass("scFormErrorLine");
-      $("#hidden_field_data_tipo_calificacion_id_" + iRow).removeClass("scFormErrorLine");
       $("#hidden_field_data_calificacion_1_" + iRow).removeClass("scFormErrorLine");
       $("#hidden_field_data_calificacion_nivel_1_" + iRow).removeClass("scFormErrorLine");
       $("#hidden_field_data_calificacion_2_" + iRow).removeClass("scFormErrorLine");
@@ -5527,6 +5667,9 @@ else
       $("#hidden_field_data_calificacion_9_" + iRow).removeClass("scFormErrorLine");
       $("#hidden_field_data_calificacion_nivel_9_" + iRow).removeClass("scFormErrorLine");
       $("#hidden_field_data_calificacion_final_" + iRow).removeClass("scFormErrorLine");
+      $("#hidden_field_data_colegio_id_" + iRow).removeClass("scFormErrorLine");
+      $("#hidden_field_data_periodo_id_" + iRow).removeClass("scFormErrorLine");
+      $("#hidden_field_data_curso_id_" + iRow).removeClass("scFormErrorLine");
     }
   }
 
@@ -5560,7 +5703,7 @@ else
     aValue[0] = {"value" : sValue};
     if ("estudiante_id_" == sIndex)
     {
-      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      scAjaxSetFieldSelect(sIndex, aValue, null);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {
@@ -5577,24 +5720,7 @@ else
     }
     if ("asignatura_id_" == sIndex)
     {
-      scAjaxSetFieldText(sIndex, aValue, "", "", true);
-      updateHeaderFooter(sIndex, aValue);
-
-      if ($("#id_sc_field_" + sIndex).length) {
-          $("#id_sc_field_" + sIndex).change();
-      }
-      else if (document.F1.elements[sIndex]) {
-          $(document.F1.elements[sIndex]).change();
-      }
-      else if (document.F1.elements[sFieldName + "[]"]) {
-          $(document.F1.elements[sFieldName + "[]"]).change();
-      }
-
-      return;
-    }
-    if ("tipo_calificacion_id_" == sIndex)
-    {
-      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      scAjaxSetFieldSelect(sIndex, aValue, null);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {
@@ -5628,7 +5754,7 @@ else
     }
     if ("calificacion_nivel_1_" == sIndex)
     {
-      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      scAjaxSetFieldLabel(sIndex, aValue);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {
@@ -5662,7 +5788,7 @@ else
     }
     if ("calificacion_nivel_2_" == sIndex)
     {
-      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      scAjaxSetFieldLabel(sIndex, aValue);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {
@@ -5696,7 +5822,7 @@ else
     }
     if ("calificacion_nivel_3_" == sIndex)
     {
-      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      scAjaxSetFieldLabel(sIndex, aValue);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {
@@ -5730,7 +5856,7 @@ else
     }
     if ("calificacion_nivel_4_" == sIndex)
     {
-      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      scAjaxSetFieldLabel(sIndex, aValue);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {
@@ -5764,7 +5890,7 @@ else
     }
     if ("calificacion_nivel_5_" == sIndex)
     {
-      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      scAjaxSetFieldLabel(sIndex, aValue);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {
@@ -5798,7 +5924,7 @@ else
     }
     if ("calificacion_nivel_6_" == sIndex)
     {
-      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      scAjaxSetFieldLabel(sIndex, aValue);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {
@@ -5832,7 +5958,7 @@ else
     }
     if ("calificacion_nivel_7_" == sIndex)
     {
-      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      scAjaxSetFieldLabel(sIndex, aValue);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {
@@ -5866,7 +5992,7 @@ else
     }
     if ("calificacion_nivel_8_" == sIndex)
     {
-      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      scAjaxSetFieldLabel(sIndex, aValue);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {
@@ -5900,7 +6026,7 @@ else
     }
     if ("calificacion_nivel_9_" == sIndex)
     {
-      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      scAjaxSetFieldLabel(sIndex, aValue);
       updateHeaderFooter(sIndex, aValue);
 
       if ($("#id_sc_field_" + sIndex).length) {
@@ -5916,6 +6042,57 @@ else
       return;
     }
     if ("calificacion_final_" == sIndex)
+    {
+      scAjaxSetFieldLabel(sIndex, aValue);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("colegio_id_" == sIndex)
+    {
+      scAjaxSetFieldSelect(sIndex, aValue, null);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("periodo_id_" == sIndex)
+    {
+      scAjaxSetFieldText(sIndex, aValue, "", "", true);
+      updateHeaderFooter(sIndex, aValue);
+
+      if ($("#id_sc_field_" + sIndex).length) {
+          $("#id_sc_field_" + sIndex).change();
+      }
+      else if (document.F1.elements[sIndex]) {
+          $(document.F1.elements[sIndex]).change();
+      }
+      else if (document.F1.elements[sFieldName + "[]"]) {
+          $(document.F1.elements[sFieldName + "[]"]).change();
+      }
+
+      return;
+    }
+    if ("curso_id_" == sIndex)
     {
       scAjaxSetFieldText(sIndex, aValue, "", "", true);
       updateHeaderFooter(sIndex, aValue);
