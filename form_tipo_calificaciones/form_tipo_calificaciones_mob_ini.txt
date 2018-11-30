@@ -1,0 +1,7 @@
+form_tipo_calificaciones_mob.php
+school_abacus
+form_tipo_calificaciones_mob
+NAO
+form
+form_tipo_calificaciones
+LigMd5
