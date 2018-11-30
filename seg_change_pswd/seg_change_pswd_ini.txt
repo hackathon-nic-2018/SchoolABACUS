@@ -1,0 +1,7 @@
+index.php
+school_abacus
+seg_change_pswd
+NAO
+contr
+seg_change_pswd
+LigMd5
