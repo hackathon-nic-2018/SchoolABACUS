@@ -1515,6 +1515,7 @@ if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
     $original_login = $this->login;
     $original_pswd = $this->pswd;
 }
+if (!isset($this->sc_temp_vglo_nombre_colegio)) {$this->sc_temp_vglo_nombre_colegio = (isset($_SESSION['vglo_nombre_colegio'])) ? $_SESSION['vglo_nombre_colegio'] : "";}
 if (!isset($this->sc_temp_vglo_colegio)) {$this->sc_temp_vglo_colegio = (isset($_SESSION['vglo_colegio'])) ? $_SESSION['vglo_colegio'] : "";}
 if (!isset($this->sc_temp_usr_name)) {$this->sc_temp_usr_name = (isset($_SESSION['usr_name'])) ? $_SESSION['usr_name'] : "";}
 if (!isset($this->sc_temp_usr_login)) {$this->sc_temp_usr_login = (isset($_SESSION['usr_login'])) ? $_SESSION['usr_login'] : "";}
@@ -1590,17 +1591,21 @@ if(!empty($this->rs )){
       } 
 ;
 			$vglo_nombre_colegio = $this->ds[0][0];
-		 if (isset($this->sc_temp_usr_login)) { $_SESSION['usr_login'] = $this->sc_temp_usr_login;}
+	   		 if (isset($vglo_nombre_colegio)) {$this->sc_temp_vglo_nombre_colegio = $vglo_nombre_colegio;}
+; 
+			 if (isset($this->sc_temp_usr_login)) { $_SESSION['usr_login'] = $this->sc_temp_usr_login;}
  if (isset($this->sc_temp_usr_name)) { $_SESSION['usr_name'] = $this->sc_temp_usr_name;}
  if (isset($this->sc_temp_vglo_colegio)) { $_SESSION['vglo_colegio'] = $this->sc_temp_vglo_colegio;}
+ if (isset($this->sc_temp_vglo_nombre_colegio)) { $_SESSION['vglo_nombre_colegio'] = $this->sc_temp_vglo_nombre_colegio;}
  if (!isset($this->Campos_Mens_erro) || empty($this->Campos_Mens_erro))
  {
 $this->nmgp_redireciona_form($this->Ini->path_link . "" . SC_dir_app_name('menu_principal') . "/", $this->nm_location, "", "_self", "ret_self", 440, 630);
  };
+			
 		}else{
 			$vglo_nombre_colegio = "Usuario ROOT";
 		}
-		sc_seg_global($vglo_nombre_colegio);
+		
 	
 	}else{
 		
@@ -1617,6 +1622,7 @@ $this->nmgp_redireciona_form($this->Ini->path_link . "" . SC_dir_app_name('menu_
  if (isset($this->sc_temp_usr_login)) { $_SESSION['usr_login'] = $this->sc_temp_usr_login;}
  if (isset($this->sc_temp_usr_name)) { $_SESSION['usr_name'] = $this->sc_temp_usr_name;}
  if (isset($this->sc_temp_vglo_colegio)) { $_SESSION['vglo_colegio'] = $this->sc_temp_vglo_colegio;}
+ if (isset($this->sc_temp_vglo_nombre_colegio)) { $_SESSION['vglo_nombre_colegio'] = $this->sc_temp_vglo_nombre_colegio;}
     if ($this->NM_ajax_flag)
     {
         $_SESSION['scriptcase']['inicio_sesion']['contr_erro'] = 'off';
@@ -1649,6 +1655,7 @@ $this->nmgp_redireciona_form($this->Ini->path_link . "" . SC_dir_app_name('menu_
  if (isset($this->sc_temp_usr_login)) { $_SESSION['usr_login'] = $this->sc_temp_usr_login;}
  if (isset($this->sc_temp_usr_name)) { $_SESSION['usr_name'] = $this->sc_temp_usr_name;}
  if (isset($this->sc_temp_vglo_colegio)) { $_SESSION['vglo_colegio'] = $this->sc_temp_vglo_colegio;}
+ if (isset($this->sc_temp_vglo_nombre_colegio)) { $_SESSION['vglo_nombre_colegio'] = $this->sc_temp_vglo_nombre_colegio;}
     if ($this->NM_ajax_flag)
     {
         $_SESSION['scriptcase']['inicio_sesion']['contr_erro'] = 'off';
@@ -1669,6 +1676,7 @@ $this->nmgp_redireciona_form($this->Ini->path_link . "" . SC_dir_app_name('menu_
 if (isset($this->sc_temp_usr_login)) { $_SESSION['usr_login'] = $this->sc_temp_usr_login;}
 if (isset($this->sc_temp_usr_name)) { $_SESSION['usr_name'] = $this->sc_temp_usr_name;}
 if (isset($this->sc_temp_vglo_colegio)) { $_SESSION['vglo_colegio'] = $this->sc_temp_vglo_colegio;}
+if (isset($this->sc_temp_vglo_nombre_colegio)) { $_SESSION['vglo_nombre_colegio'] = $this->sc_temp_vglo_nombre_colegio;}
 if (isset($this->NM_ajax_flag) && $this->NM_ajax_flag)
 {
     if (($original_login != $this->login || (isset($bFlagRead_login) && $bFlagRead_login)))
@@ -2426,6 +2434,35 @@ $_SESSION['scriptcase']['inicio_sesion']['contr_erro'] = 'off';
       { 
           $nm_saida_global = $_SESSION['scriptcase']['nm_sc_retorno']; 
       } 
+    if (!$this->NM_ajax_flag || !isset($this->nmgp_refresh_fields)) {
+    $_SESSION['scriptcase']['inicio_sesion']['contr_erro'] = 'on';
+if (!isset($this->sc_temp_vglo_nombre_colegio)) {$this->sc_temp_vglo_nombre_colegio = (isset($_SESSION['vglo_nombre_colegio'])) ? $_SESSION['vglo_nombre_colegio'] : "";}
+if (!isset($this->sc_temp_vglo_colegio)) {$this->sc_temp_vglo_colegio = (isset($_SESSION['vglo_colegio'])) ? $_SESSION['vglo_colegio'] : "";}
+if (!isset($this->sc_temp_usr_name)) {$this->sc_temp_usr_name = (isset($_SESSION['usr_name'])) ? $_SESSION['usr_name'] : "";}
+if (!isset($this->sc_temp_usr_login)) {$this->sc_temp_usr_login = (isset($_SESSION['usr_login'])) ? $_SESSION['usr_login'] : "";}
+  unset($_SESSION['usr_login']);
+ unset($this->sc_temp_usr_login);
+;
+ unset($_SESSION['usr_name']);
+ unset($this->sc_temp_usr_name);
+;
+ unset($_SESSION['vglo_colegio']);
+ unset($this->sc_temp_vglo_colegio);
+;
+ unset($_SESSION['vglo_nombre_colegio']);
+ unset($this->sc_temp_vglo_nombre_colegio);
+;
+if (isset($this->sc_temp_usr_login)) { $_SESSION['usr_login'] = $this->sc_temp_usr_login;}
+if (isset($this->sc_temp_usr_name)) { $_SESSION['usr_name'] = $this->sc_temp_usr_name;}
+if (isset($this->sc_temp_vglo_colegio)) { $_SESSION['vglo_colegio'] = $this->sc_temp_vglo_colegio;}
+if (isset($this->sc_temp_vglo_nombre_colegio)) { $_SESSION['vglo_nombre_colegio'] = $this->sc_temp_vglo_nombre_colegio;}
+$_SESSION['scriptcase']['inicio_sesion']['contr_erro'] = 'off'; 
+    }
+    if (!empty($this->Campos_Mens_erro)) 
+    {
+        $this->Erro->mensagem(__FILE__, __LINE__, "critica", $this->Campos_Mens_erro); 
+    }
+    $this->nm_guardar_campos();
     $this->nm_formatar_campos();
         $this->initFormPages();
     $links = $this->links;
